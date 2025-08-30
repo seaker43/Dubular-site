@@ -1,5 +1,2 @@
-name = "dubular"
-type = "javascript"
-account_id = ""
-workers_dev = true
-pages_build_output_dir = "./out"
+name = "dubular-site"
+compatibility_date = "2025-08-30"
