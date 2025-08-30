@@ -1,1 +1,1 @@
-{ "name": "dubular-web", "version": "1.0.0", "scripts": { "build": "next build" } }
+{"name":"dubular-web","version":"1.0.0","scripts":{"build":"next build"},"dependencies":{"next-export":"^0.1.7"}}
