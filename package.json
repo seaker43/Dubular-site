@@ -1,22 +1,32 @@
 {
   "name": "dubular-beta",
   "version": "1.0.0",
+<<<<<<< HEAD
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "npx @cloudflare/next-on-pages@latest build",
     "start": "next start",
     "lint": "next lint"
+=======
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+>>>>>>> 9607f1c06f2da6cf4dd2fb4f1a4eb1bdbec5dcf3
   },
   "dependencies": {
     "next": "14.1.3",
     "react": "18.2.0",
     "react-dom": "18.2.0"
+<<<<<<< HEAD
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "1.12.0"
   },
   "engines": {
     "node": ">=18"
+=======
+>>>>>>> 9607f1c06f2da6cf4dd2fb4f1a4eb1bdbec5dcf3
   }
 }
