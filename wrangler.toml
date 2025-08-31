@@ -1,5 +1,9 @@
-name = "dubular"
-type = "javascript"
-account_id = ""
-workers_dev = true
-pages_build_output_dir = "./out"
+# Minimal config for Cloudflare Pages Functions
+# (Do NOT include workers_dev/account_id/type/routes/etc)
+name = "dubular-beta"  # optional/ignored by Pages
+compatibility_date = "2025-08-30"
+compatibility_flags = ["nodejs_compat"]
+
+# Optional: define env vars here if needed
+# [vars]
+# MY_ENV = "value"
