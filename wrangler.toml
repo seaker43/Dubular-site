@@ -1,0 +1,5 @@
+name = "dubular"
+type = "javascript"
+account_id = ""
+workers_dev = true
+pages_build_output_dir = "./out"
