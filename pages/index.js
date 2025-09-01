@@ -1,49 +1,48 @@
 // pages/index.js
-import Head from 'next/head';
 import Image from 'next/image';
 
 export default function Home() {
+  const features = [
+    { title: 'Fast', desc: 'Edge-rendered on Cloudflare for speed.' },
+    { title: 'Simple', desc: 'Lightweight Next.js pages router.' },
+    { title: 'Scalable', desc: 'Grows with your product.' },
+  ];
+
   return (
-    <>
-      <Head>
-        <title>Dubular Beta</title>
-      </Head>
-      <main className="container">
-        <header className="header">
-          <div className="logo">Dubular</div>
-          <nav>
-            <a href="#">Home</a>
-            <a href="#">Browse</a>
-            <a href="#">Library</a>
-            <a href="#">Profile</a>
-          </nav>
-        </header>
+    <main className="container">
+      <header className="hero">
+        <h1>Dubular is live</h1>
+        <p className="tagline">
+          The fastest way to ship AI-powered content and tools.
+        </p>
+        <a className="cta" href="#get-started">Get started</a>
+      </header>
 
-        <section className="hero">
-          <h1>Stream. Watch. Connect.</h1>
-          <p>Welcome to the Dubular Beta — your next-gen streaming hub.</p>
-          <button>Start Watching</button>
-        </section>
+      <section className="poster">
+        <Image
+          src="/poster4.jpg"
+          alt="Dubular poster"
+          width={1400}
+          height={800}
+          priority
+          style={{ width: '100%', height: 'auto', borderRadius: '16px' }}
+        />
+      </section>
 
-        <section className="grid">
-          <div className="card">
-            <Image src="/poster1.jpg" alt="Movie 1" width={200} height={300} />
-            <p>Movie 1</p>
+      <section className="grid">
+        {features.map((f) => (
+          <div key={f.title} className="card">
+            <h3>{f.title}</h3>
+            <p>{f.desc}</p>
           </div>
-          <div className="card">
-            <Image src="/poster2.jpg" alt="Movie 2" width={200} height={300} />
-            <p>Movie 2</p>
-          </div>
-          <div className="card">
-            <Image src="/poster3.jpg" alt="Movie 3" width={200} height={300} />
-            <p>Movie 3</p>
-          </div>
-          <div className="card">
-            <Image src="/poster4.jpg" alt="Movie 4" width={200} height={300} />
-            <p>Movie 4</p>
-          </div>
-        </section>
-      </main>
-    </>
+        ))}
+      </section>
+
+      <footer className="footer">
+        <a id="get-started" href="mailto:hello@dubular.live">Contact</a>
+        <span>·</span>
+        <a href="/privacy">Privacy</a>
+      </footer>
+    </main>
   );
 }
