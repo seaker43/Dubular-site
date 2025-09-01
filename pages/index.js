@@ -3,7 +3,6 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import ChatWindow from '../components/ChatWindow';
 import ChatComposer from '../components/ChatComposer';
-import '../styles/beta.css';
 
 export default function Home() {
   const [messages, setMessages] = useState([
