@@ -1,6 +1,6 @@
 // pages/index.js
 import Head from 'next/head';
-import styles from '../styles/beta.css'; // make sure beta.css exists
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -9,8 +9,8 @@ export default function Home() {
         <title>Dubular Beta</title>
       </Head>
       <main className="container">
-        <header>
-          <h1>Dubular</h1>
+        <header className="header">
+          <div className="logo">Dubular</div>
           <nav>
             <a href="#">Home</a>
             <a href="#">Browse</a>
@@ -20,16 +20,28 @@ export default function Home() {
         </header>
 
         <section className="hero">
-          <h2>Stream. Watch. Connect.</h2>
-          <p>Welcome to the beta release of Dubular streaming.</p>
+          <h1>Stream. Watch. Connect.</h1>
+          <p>Welcome to the Dubular Beta — your next-gen streaming hub.</p>
           <button>Start Watching</button>
         </section>
 
         <section className="grid">
-          <div className="card">Movie 1</div>
-          <div className="card">Movie 2</div>
-          <div className="card">Movie 3</div>
-          <div className="card">Movie 4</div>
+          <div className="card">
+            <Image src="/poster1.jpg" alt="Movie 1" width={200} height={300} />
+            <p>Movie 1</p>
+          </div>
+          <div className="card">
+            <Image src="/poster2.jpg" alt="Movie 2" width={200} height={300} />
+            <p>Movie 2</p>
+          </div>
+          <div className="card">
+            <Image src="/poster3.jpg" alt="Movie 3" width={200} height={300} />
+            <p>Movie 3</p>
+          </div>
+          <div className="card">
+            <Image src="/poster4.jpg" alt="Movie 4" width={200} height={300} />
+            <p>Movie 4</p>
+          </div>
         </section>
       </main>
     </>
