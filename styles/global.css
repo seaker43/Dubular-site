@@ -293,3 +293,54 @@ a:hover{ color: var(--dubular-cyan-soft); }
   background: linear-gradient(90deg, #e6fcff 0%, var(--dubular-cyan) 50%, #e6fcff 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
+
+/* DUBULAR THEME START */
+:root{
+  --dubular-bg-0:#0b0f14;
+  --dubular-bg-1:#0a0f1c;
+  --dubular-bg-2:#0a1324;
+  --dubular-cyan:#22d3ee;   /* accent */
+  --dubular-cyan-2:#67e8f9; /* lighter accent */
+  --dubular-ink:#e6fcff;    /* text */
+}
+
+html,body{
+  background:
+    radial-gradient(1000px 500px at 10% -10%, #03212a44 0%, transparent 60%),
+    radial-gradient(1000px 600px at 100% 0%, #0b2a3240 0%, transparent 65%),
+    linear-gradient(180deg, var(--dubular-bg-1) 0%, var(--dubular-bg-2) 100%);
+  color:var(--dubular-ink);
+  min-height:100%;
+}
+
+a{ color:var(--dubular-cyan); text-decoration:none }
+a:hover{ text-decoration:underline }
+
+/* Buttons (replace the old purple look) */
+.btn, .button, button, .cta {
+  background: linear-gradient(180deg, #0f172a 0%, #0b1222 100%);
+  border:1px solid #0b2a35;
+  color:var(--dubular-ink);
+  padding:.6rem 1rem; border-radius:.75rem;
+  box-shadow: 0 0 0 0 rgba(34,211,238,0);
+  transition: box-shadow .2s ease, border-color .2s ease, transform .08s ease;
+}
+.btn:hover, .button:hover, button:hover, .cta:hover {
+  border-color: rgba(34,211,238,.35);
+  box-shadow: 0 0 24px 4px rgba(34,211,238,.18), inset 0 0 12px rgba(34,211,238,.06);
+}
+.btn:active, .button:active, button:active, .cta:active { transform: translateY(1px) }
+
+/* Top navbar underline accent for active link */
+.nav-active::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-8px; height:2px;
+  background: radial-gradient(12px 6px at 50% 50%, var(--dubular-cyan), transparent 70%);
+}
+
+/* Gradient headline helper */
+.dubular-headline{
+  background: linear-gradient(90deg,#e6fcff 0%, var(--dubular-cyan) 50%, #e6fcff 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+/* DUBULAR THEME END */

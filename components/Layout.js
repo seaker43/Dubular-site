@@ -12,7 +12,7 @@ export default function Layout({ children }) {
           <Link href="/wallet">Wallet</Link>
         </nav>
       </header>
-      <main className="container">{children}</main>
+      <main className="app-shell" className="container">{children}</main>
       <footer className="footer">© {new Date().getFullYear()} Dubular</footer>
     </div>
   );
