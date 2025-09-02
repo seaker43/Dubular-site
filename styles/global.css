@@ -47,3 +47,47 @@ body{ padding-bottom: 84px; }
   scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
   padding: 2px 2px 8px;
 }
+/* --- Bottom bar centering overrides --- */
+nav.bottomBar{position:fixed;left:0;right:0;bottom:0;height:72px;background:var(--panel);border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-around;align-items:center;z-index:50}
+nav.bottomBar .shortcut{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:20%;min-width:64px;text-decoration:none}
+nav.bottomBar .shortcutIcon{display:block;font-size:22px;line-height:22px}
+nav.bottomBar .shortcutLabel{display:block;font-size:12px;line-height:14px;text-align:center}
+/* keep content clear of fixed bar */
+body{padding-bottom:84px}
+/* --- Bottom bar centering overrides --- */
+nav.bottomBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 72px;
+  background: var(--panel);
+  border-top: 1px solid rgba(255,255,255,.08);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 50;
+}
+nav.bottomBar .shortcut {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 20%;
+  min-width: 64px;
+  text-decoration: none;
+}
+nav.bottomBar .shortcutIcon {
+  display: block;
+  font-size: 22px;
+  line-height: 22px;
+}
+nav.bottomBar .shortcutLabel {
+  display: block;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+}
+/* keep content clear of fixed bar */
+body { padding-bottom: 84px; }
