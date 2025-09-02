@@ -1,3 +1,11 @@
+/* --- DubUlar global tweaks --- */
+html,body{scroll-behavior:smooth}
+body{padding-bottom:4.25rem}
+ul{list-style:none;padding-left:0;margin:0}
+/* hide mobile scrollbar for rows */
+.horizontal-scroll{scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.horizontal-scroll > *{scroll-snap-align:start}
+
 :root{
   --bg:#0b0c10;
   --panel:#111218;
