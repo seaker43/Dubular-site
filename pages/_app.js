@@ -7,7 +7,7 @@ function AppShell({ children }){
       <header className="nav">
         <div className="container" style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
           <div className="brand">
-            <Link href="/">Dubular</Link>
+            <Link href="/"><span className="logo">dubUlar</span></Link>
           </div>
           <nav className="links" style={{position:"relative"}}>
             <Link href="/streams">Streams</Link>
