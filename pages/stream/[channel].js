@@ -1,4 +1,4 @@
-export const runtime = '''edge''';
+export const runtime = 'edge';
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Layout from "../../components/Layout";
