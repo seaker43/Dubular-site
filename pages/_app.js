@@ -11,17 +11,14 @@ export default function App({ Component, pageProps }) {
         background:'rgba(5,12,18,.92)', position:'sticky', top:0, zIndex:30
       }}>
         <Logo />
-        {/* space for future actions on the right */}
         <span style={{width:28}} />
       </header>
 
-      <main className="container" style={{ paddingBottom:'78px' }}>
+      <main className="container" style={{ paddingBottom:'90px' }}>
         <Component {...pageProps} />
       </main>
 
       <BottomNav />
-
-      <footer className="footer" />
     </div>
   );
 }
