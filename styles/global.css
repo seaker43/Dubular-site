@@ -397,3 +397,12 @@ a{color:inherit;text-decoration:none}
 .tab{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 10px;border-radius:12px;font-size:12px;opacity:.9}
 .tab-ico{font-size:18px;line-height:18px}
 .tab.active{color:var(--cyan-400);text-shadow:0 0 12px rgba(0,213,239,.35)}
+
+/* Fix card sizing for Netflix-like rows */
+.card{min-width:42vw;max-width:46vw;scroll-snap-align:start}
+@media (min-width:460px){.card{min-width:28vw;max-width:32vw}}
+.card-img{border-radius:12px}
+
+/* Ensure row scroll feels like Netflix */
+.rail{display:flex;gap:10px;overflow-x:auto;padding:6px;scroll-snap-type:x mandatory}
+.rail::-webkit-scrollbar{display:none}
