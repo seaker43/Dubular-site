@@ -1,9 +1,9 @@
-export default function StreamCard({ title }) {
+export default function StreamCard({ title, index }) {
   return (
-    <div className="w-40 flex-shrink-0 mx-1">
+    <div className="w-40 flex-shrink-0 mx-2">
       <div className="relative">
         <img
-          src={`https://source.unsplash.com/random/300x200?sig=${title}`}
+          src={`https://picsum.photos/seed/${index}/300/200`}
           alt={title}
           className="rounded-lg object-cover w-full h-24"
         />
