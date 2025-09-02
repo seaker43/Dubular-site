@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+export const config = { runtime: 'experimental-edge' };
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Layout from "../../components/Layout";
