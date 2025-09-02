@@ -2,39 +2,42 @@ import Link from "next/link"
 import "../styles/theme.css"
 import { useRouter } from "next/router"
 
-function AppShell({ children }){
-  const router = useRouter()
-  const active = (path) => router.pathname.startsWith(path)
+function IconSearch(){return (
+  <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+    <path d="M10 3a7 7 0 1 1 0 14 7 7 0 0 1 0-14Zm0 2a5 5 0 1 0 0 10A5 5 0 0 0 10 5Zm9.7 13.3-3.4-3.4-1.4 1.4 3.4 3.4a1 1 0 0 0 1.4-1.4Z"/>
+  </svg>
+)}
+
+function AppChrome({ children }){
+  const r = useRouter()
+  const is = (p) => r.pathname === p || r.pathname.startsWith(p)
 
   return (
     <div className="app">
-      <header className="nav">
-        <div className="container" style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-          <div className="brand">
-            <Link href="/"><span className="logo">dubUlar</span></Link>
-          </div>
-        </div>
-      </header>
+      {/* Top header: logo left, search right */}
+      <div className="topbar">
+        <Link href="/" className="logo-word">dubUlar</Link>
+        <Link href="/search" className="icon-btn" aria-label="Search"><IconSearch/></Link>
+      </div>
 
-      <main className="container" style={{paddingBottom:"70px"}}>
-        {children}
-      </main>
+      <main className="container">{children}</main>
 
+      {/* Bottom navigation */}
       <footer className="bottom-nav">
-        <Link href="/" className={active("/") ? "active" : ""}>
-          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M3 9.75L12 3l9 6.75V21a.75.75 0 0 1-.75.75h-5.25v-6h-6v6H3.75A.75.75 0 0 1 3 21V9.75Z"/></svg>
+        <Link href="/" className={is("/") ? "active": ""}>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 10 12 3l9 7v10a1 1 0 0 1-1 1h-6v-6H10v6H4a1 1 0 0 1-1-1V10Z"/></svg>
           Home
         </Link>
-        <Link href="/streams" className={active("/streams") ? "active" : ""}>
-          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h7v7H4V4Zm0 9h7v7H4v-7Zm9-9h7v7h-7V4Zm0 9h7v7h-7v-7Z"/></svg>
+        <Link href="/streams" className={is("/streams") ? "active": ""}>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h7v7H4V4Zm0 9h7v7H4v-7Zm9-9h7v7h-7V4Zm0 9h7v7h-7v-7Z"/></svg>
           Streams
         </Link>
-        <Link href="/leaderboards" className={active("/leaderboards") ? "active" : ""}>
-          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M9 21H5V9h4v12Zm5-12h-4v12h4V9Zm5 0h-4v12h4V9Z"/></svg>
+        <Link href="/leaderboards" className={is("/leaderboards") ? "active": ""}>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 21H5V9h5v12Zm9 0h-5V5h5v16ZM14 21h-4v-9h4v9Z"/></svg>
           Rankings
         </Link>
-        <Link href="/wallet" className={active("/wallet") ? "active" : ""}>
-          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M3 6a3 3 0 0 1 3-3h15v3H6v12h15v3H6a3 3 0 0 1-3-3V6Zm18 5a2 2 0 1 1 0 4h-4a2 2 0 1 1 0-4h4Z"/></svg>
+        <Link href="/wallet" className={is("/wallet") ? "active": ""}>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 7a3 3 0 0 1 3-3h14v4H6v8h14v4H6a3 3 0 0 1-3-3V7Zm18 6a2 2 0 1 1 0 4h-5a2 2 0 1 1 0-4h5Z"/></svg>
           Wallet
         </Link>
       </footer>
@@ -43,5 +46,5 @@ function AppShell({ children }){
 }
 
 export default function MyApp({ Component, pageProps }){
-  return <AppShell><Component {...pageProps} /></AppShell>
+  return <AppChrome><Component {...pageProps} /></AppChrome>
 }
