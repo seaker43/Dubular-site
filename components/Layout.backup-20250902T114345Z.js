@@ -7,8 +7,9 @@ export default function Layout({ children }) {
       <header className="nav">
         <div className="brand"><Link href="/">Dubular</Link></div>
         <nav className="links">
+          <Link href="/pools">Pools</Link>
             <Link href="/streams" className="mx-3 hover:underline">Streams</Link>
-          <Link href="/leaderboards">Rankings</Link>
+          <Link href="/leaderboards">Leaderboards</Link>
           <Link href="/wallet">Wallet</Link>
         </nav>
       </header>

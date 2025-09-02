@@ -11,7 +11,7 @@ export default function Home(){
   return (
     <Layout>
       <Head>
-        <title>Dubular — Streams, Pools & Rankings</title>
+        <title>Dubular — Streams, Pools & Leaderboards</title>
         <meta name="description" content="Dubular: Watch streams, join pools, and climb leaderboards in a slick dark-cyan UI." />
       </Head>
 
@@ -21,7 +21,7 @@ export default function Home(){
           <nav style={{display:"flex",gap:"1rem",alignItems:"center"}}>
             <Link href="/streams">Streams</Link>
             <Link href="/pools">Pools</Link>
-            <Link href="/leaderboards">Rankings</Link>
+            <Link href="/leaderboards">Leaderboards</Link>
             <Link href="/wallet" className="btn btn-primary">Wallet</Link>
           </nav>
         </div>
@@ -36,7 +36,8 @@ export default function Home(){
           </p>
           <div className="hero-cta">
             <Link href="/streams" className="btn btn-primary">Browse Streams</Link>
-            <Link href="/leaderboards" className="btn">View Rankings</Link>
+            <Link href="/pools" className="btn">Explore Pools</Link>
+            <Link href="/leaderboards" className="btn">View Leaderboards</Link>
           </div>
         </section>
 
@@ -53,7 +54,7 @@ export default function Home(){
               <Link href="/pools" className="btn" style={{marginTop:12}}>Browse Pools</Link>
             </article>
             <article className="card">
-              <h3 style={{marginTop:0, marginBottom:6}}>Rankings</h3>
+              <h3 style={{marginTop:0, marginBottom:6}}>Leaderboards</h3>
               <p className="subhead" style={{marginTop:0}}>See who’s climbing. Filter by game or timeframe.</p>
               <Link href="/leaderboards" className="btn" style={{marginTop:12}}>See Rankings</Link>
             </article>
