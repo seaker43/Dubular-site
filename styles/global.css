@@ -1,4 +1,9 @@
-:root{
+# (scroll to bottom and paste in the CSS fix)
+# CTRL+O, ENTER, CTRL+X to save & exit
+
+git add styles/global.css
+git commit -m "style: fix bottom bar floating and content padding"
+git push origin ui/polish-netflix:root{
   --bg:#0b1114;
   --panel:#0f171c;
   --card:#121a1f;
