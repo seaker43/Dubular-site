@@ -1,11 +1,16 @@
-const path = require('path')
-
-module.exports = {
-  webpack: (config) => {
-    config.resolve.alias = {
-      ...(config.resolve.alias || {}), // keep Next defaults
-      '@': path.resolve(__dirname),   // your custom alias
-    }
-    return config
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    domains: [
+      "images.unsplash.com",
+      "source.unsplash.com",
+      "i.imgur.com",
+      "cdn.dubular.live" // add your CDN if you have one
+    ],
   },
-}
+  experimental: {
+    runtime: "experimental-edge",
+  },
+};
+module.exports = nextConfig;
