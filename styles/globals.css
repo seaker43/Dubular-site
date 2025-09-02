@@ -1,0 +1,23 @@
+/* ---- Global reset & base palette ---- */
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,Apple Color Emoji,Segoe UI Emoji;
+  background:#0a0f14;color:#e6f6ff}
+img,video{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+
+/* Cyan glow palette used across the site */
+:root{
+  --dubular-cyan-300:#7beefb;
+  --dubular-cyan-400:#37e6fa;
+  --dubular-cyan-500:#00d5ef;
+  --dubular-cyan-600:#00b8d0;
+}
+
+.container{padding:10px 12px 72px 12px;}
+h1,h2,h3{margin:0 0 8px; font-weight:700}
+small,.muted{opacity:.7}
+
+.btn{display:inline-block;padding:10px 14px;border-radius:12px;border:1px solid var(--dubular-cyan-500);
+  background:rgba(0,213,239,.12)}
+.btn:active,.btn:hover{background:rgba(0,213,239,.22)}
