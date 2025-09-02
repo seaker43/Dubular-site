@@ -1,69 +1,66 @@
-export const config = { runtime: 'experimental-edge' };
+export const runtime = 'experimental-edge';
+
 import { useRouter } from "next/router";
-import Link from "next/link";
 import Layout from "../../components/Layout";
 import VideoPlayer from "../../components/VideoPlayer";
 import StreamChat from "../../components/StreamChat";
 
+const CHANNELS = {
+  dubular: {
+    title: "Dubular",
+    // Demo HLS sources; replace with your own later
+    hls: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    poster: "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  },
+  starplayer: {
+    title: "Star Player",
+    hls: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
+    poster: "https://images.pexels.com/photos/2816168/pexels-photo-2816168.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  },
+  speedrunner: {
+    title: "Speed Runner",
+    hls: "https://moqthon.bitmovin.com/hls/playlist.m3u8",
+    poster: "https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  },
+};
+
+export default function ChannelPage() {
+  const router = useRouter();
+  const { channel } = router.query;
+  const info = CHANNELS[String(channel || "").toLowerCase()];
+
+  if (!info) {
+    return (
+      <Layout title="Stream not found">
+        <h1>Stream not found</h1>
+        <p>The channel “{channel}” does not exist.</p>
+      </Layout>
+    );
+  }
+
+  return (
+    <Layout title={info.title}>
+      <div className="stream-grid">
+        <div className="stream-main">
+          <VideoPlayer src={info.hls} poster={info.poster} />
+          <h2 className="stream-title">{info.title}</h2>
+        </div>
+        <div className="stream-side">
+          <StreamChat channel={String(channel)} />
+        </div>
+      </div>
+    </Layout>
+  );
+}
+
+// Pre-render a few demo channels
 export async function getStaticPaths() {
-  // Pre-render a few demo channels; others can be fallback
   return {
-    paths: [
-      { params: { channel: "dubular" } },
-      { params: { channel: "starplayer" } },
-      { params: { channel: "speedrunner" } },
-    ],
+    paths: Object.keys(CHANNELS).map((slug) => ({ params: { channel: slug } })),
     fallback: "blocking",
   };
 }
 
-export async function getStaticProps({ params }) {
-  return { props: { channel: params.channel } };
-}
-
-export default function StreamPage({ channel }) {
-  const router = useRouter();
-  const src = typeof router.query.src === "string"
-    ? router.query.src
-    : "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
-
-  return (
-    <Layout>
-      <main className="stream-page">
-        <section>
-          <VideoPlayer src={src} muted={false} />
-          <div className="player-toolbar">
-            <div className="meta">
-              <span className="badge">LIVE</span>
-              <span className="player-title">@{channel}</span>
-              <span>•</span>
-              <span>1,024 viewers</span>
-            </div>
-            <div className="meta">
-              <Link className="btn" href="/pools">Join Stream Pool</Link>
-              <button className="btn">Follow</button>
-              <button className="btn">Subscribe</button>
-            </div>
-          </div>
-
-          <section className="grid" style={{ marginTop: 16 }}>
-            <div className="card">
-              <h3>About</h3>
-              <p>Welcome to @{channel}! This is a demo stream using HLS playback. Replace the <code>?src=</code> URL parameter with your HLS manifest to test your own stream.</p>
-            </div>
-            <div className="card">
-              <h3>Rewards</h3>
-              <p>Earn Dubular Tokens while watching. Tip the streamer using the chat quick buttons.</p>
-            </div>
-            <div className="card">
-              <h3>Leaderboards</h3>
-              <p>See top fans & streamers on the <Link href="/leaderboards">leaderboards</Link>.</p>
-            </div>
-          </section>
-        </section>
-
-        <StreamChat channel={channel} />
-      </main>
-    </Layout>
-  );
+export async function getStaticProps() {
+  return { props: {} , revalidate: 60 };
 }
