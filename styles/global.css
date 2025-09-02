@@ -1,3 +1,6 @@
+.horizontal-scroll{scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.horizontal-scroll>*{scroll-snap-align:start}
+
 /* --- DubUlar global tweaks --- */
 html,body{scroll-behavior:smooth}
 body{padding-bottom:4.25rem}
