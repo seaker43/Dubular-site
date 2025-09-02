@@ -60,3 +60,47 @@ img{max-width:100%;display:block}
 @media (max-width:580px){
   .grid{grid-template-columns:1fr}
 }
+
+/* === Global Accent Theme Refresh === */
+
+/* Navbar links */
+nav a {
+  color: #fff;
+  transition: color 0.2s ease;
+}
+nav a:hover {
+  color: #00c3ff;
+}
+
+/* Card / Panel accents */
+.card, .panel {
+  border: 1px solid #222;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover, .panel:hover {
+  border-color: #00c3ff;
+  box-shadow: 0 0 10px rgba(0,195,255,0.3);
+}
+
+/* Primary buttons */
+.btn--primary {
+  background: #00c3ff;
+  border-color: #00c3ff;
+  color: #000;
+  font-weight: 600;
+}
+.btn--primary:hover {
+  background: #00a7dd;
+  border-color: #00a7dd;
+}
+
+/* Secondary buttons */
+.btn--secondary {
+  background: transparent;
+  border: 1px solid #00c3ff;
+  color: #00c3ff;
+}
+.btn--secondary:hover {
+  background: #00c3ff;
+  color: #000;
+}
