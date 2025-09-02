@@ -104,3 +104,137 @@ nav a:hover {
   background: #00c3ff;
   color: #000;
 }
+
+/* === Dubular Global Background & Theme === */
+
+/* Root palette */
+:root{
+  --dub-bg-1: #0a0f14;     /* deep navy */
+  --dub-bg-2: #05080b;     /* near-black */
+  --dub-cyan:  #00c3ff;
+  --dub-cyan-600: #00a7dd;
+  --dub-text: #e8f0f7;
+  --dub-muted: #9aa8b5;
+}
+
+/* App background: subtle diagonal gradient with a soft cyan vignette */
+html, body, #__next {
+  height: 100%;
+}
+body{
+  margin:0;
+  color: var(--dub-text);
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(0,195,255,0.08), transparent 60%),
+    radial-gradient(900px 500px at -10% 90%, rgba(0,195,255,0.06), transparent 55%),
+    linear-gradient(135deg, var(--dub-bg-1), var(--dub-bg-2));
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Transparent chrome so the bg shows through */
+header, nav, footer, .site-header, .site-footer {
+  background: transparent !important;
+  backdrop-filter: none;
+  box-shadow: none !important;
+}
+
+/* Links & focus rings */
+a{
+  color: var(--dub-text);
+  text-decoration: none;
+  transition: color .2s ease, opacity .2s ease;
+}
+a:hover{
+  color: var(--dub-cyan);
+}
+:focus-visible{
+  outline: 2px solid var(--dub-cyan);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Cards / panels pick up cyan hover */
+.card, .panel, .tile, .stat, .box {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.card:hover, .panel:hover, .tile:hover, .stat:hover, .box:hover{
+  border-color: var(--dub-cyan);
+  box-shadow: 0 0 24px rgba(0,195,255,0.15);
+  transform: translateY(-1px);
+}
+
+/* Navbar links */
+nav a {
+  color: var(--dub-text);
+}
+nav a:hover{
+  color: var(--dub-cyan);
+}
+
+/* Buttons */
+.btn, button, [role="button"]{
+  border-radius: 12px;
+  border: 1px solid transparent;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn--primary{
+  background: var(--dub-cyan);
+  border-color: var(--dub-cyan);
+  color: #001018;
+}
+.btn--primary:hover{
+  background: var(--dub-cyan-600);
+  border-color: var(--dub-cyan-600);
+}
+.btn--secondary{
+  background: transparent;
+  border: 1px solid var(--dub-cyan);
+  color: var(--dub-cyan);
+}
+.btn--secondary:hover{
+  background: var(--dub-cyan);
+  color: #001018;
+}
+
+/* Tables (leaderboards) */
+table{
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+thead th{
+  color: var(--dub-muted);
+  font-weight: 600;
+}
+tbody tr{
+  background: rgba(255,255,255,0.02);
+}
+tbody tr:hover{
+  box-shadow: inset 0 0 0 1px var(--dub-cyan);
+}
+
+/* Inputs */
+input, select, textarea{
+  background: rgba(255,255,255,0.03);
+  color: var(--dub-text);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 0.55rem 0.75rem;
+}
+input:focus, select:focus, textarea:focus{
+  border-color: var(--dub-cyan);
+  box-shadow: 0 0 0 3px rgba(0,195,255,0.15);
+}
+
+/* Stream video frame subtle border */
+.video-frame, .stream-player, video{
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+}
