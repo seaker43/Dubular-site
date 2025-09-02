@@ -1,11 +1,10 @@
-export const runtime = 'experimental-edge';
-
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Link from 'next/link';
-import { supabase } from '../lib/supabaseClient';
+import { getSupabase } from '../lib/supabaseClient';
 import Layout from '../components/Layout';
 
 export default function Login() {
+  const supabase = useMemo(() => getSupabase(), []);
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [loading, setLoading] = useState(false);
@@ -17,20 +16,30 @@ export default function Login() {
   async function onLogin(e) {
     e.preventDefault();
     setErr(null); setMsg(null); setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password: pwd });
-    setLoading(false);
-    if (error) return setErr(error.message);
-    setMsg('Logged in! Redirecting…');
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password: pwd });
+      setLoading(false);
+      if (error) return setErr(error.message);
+      setMsg('Logged in! Redirecting…');
+    } catch (ex) {
+      setLoading(false);
+      setErr(ex.message);
+    }
   }
 
   async function onForgot() {
     setErr(null); setMsg(null); setLoading(true);
-    const { error } = await supabase.auth.resetPasswordForEmail(email || undefined, {
-      redirectTo: typeof window !== 'undefined' ? `${location.origin}/reset` : undefined,
-    });
-    setLoading(false);
-    if (error) return setErr(error.message);
-    setMsg('Reset email sent (check your inbox).');
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email || undefined, {
+        redirectTo: typeof window !== 'undefined' ? `${location.origin}/reset` : undefined,
+      });
+      setLoading(false);
+      if (error) return setErr(error.message);
+      setMsg('Reset email sent (check your inbox).');
+    } catch (ex) {
+      setLoading(false);
+      setErr(ex.message);
+    }
   }
 
   return (
