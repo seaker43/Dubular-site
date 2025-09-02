@@ -5,13 +5,13 @@ export default function CategoryRow({ title }) {
 
   return (
     <div className="mb-6">
-      <div className="flex justify-between px-4 mb-2">
+      <div className="flex justify-between items-center px-4 mb-2">
         <h2 className="text-lg font-bold">{title}</h2>
         <button className="text-sm text-cyan-400">See all ▸</button>
       </div>
-      <div className="flex overflow-x-scroll scrollbar-hide px-2">
+      <div className="flex overflow-x-auto scrollbar-hide px-2 space-x-2">
         {placeholders.map((t, i) => (
-          <StreamCard key={i} title={t} />
+          <StreamCard key={i} title={t} index={i} />
         ))}
       </div>
     </div>
