@@ -1,3 +1,4 @@
+import "../styles/global.css";
 import "../styles/home.css";
 // pages/_app.js
 import '../styles/beta.css';
