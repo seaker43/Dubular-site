@@ -1,5 +1,4 @@
 export const runtime = "edge";
-export const runtime = 'edge';
 
 export default async function handler(req, res) {
   // Minimal health check for Cloudflare Pages

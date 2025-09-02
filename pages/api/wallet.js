@@ -1,5 +1,4 @@
 export const runtime = "edge";
-export const runtime = 'edge';
 
 export default async function handler(req) {
   const wallet = { balance: 15420 };
