@@ -1,3 +1,1 @@
-import BottomNav from "../components/ui/BottomNav";
-export const runtime = "experimental-edge";
-export default function Account(){return(<div className="container"><h1>Account</h1><p>Profile & settings soon.</p><BottomNav/></div>);}
+export default function Account(){ return <div style={{padding:'16px'}}>Account – coming soon.</div>; }

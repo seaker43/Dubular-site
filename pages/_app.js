@@ -1,64 +1,27 @@
-import "../styles/global.css";        // <- bring back your base variables, fonts, link styles
-import "../styles/theme.css";          // <- our new Netflix-style additions
-import Link from "next/link";
-import { useRouter } from "next/router";
+import '../styles/global.css';
+import Logo from '../components/ui/Logo';
+import BottomNav from '../components/ui/BottomNav';
 
-function IconSearch(){return (
-    <header className="flex items-center justify-between p-4 border-b border-gray-800">
-      <Logo />
-    </header>
-
-    {/* Main content */}
-  <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-    <path d="M10 3a7 7 0 1 1 0 14 7 7 0 0 1 0-14Zm0 2a5 5 0 1 0 0 10A5 5 0 0 0 10 5Zm9.7 13.3-3.4-3.4-1.4 1.4 3.4 3.4a1 1 0 0 0 1.4-1.4Z"/>
-  </svg>
-)}
-
-function AppChrome({ children }){
-  const r = useRouter();
-  const is = (p) => r.pathname === p || r.pathname.startsWith(p);
-
+export default function App({ Component, pageProps }) {
   return (
     <div className="app">
-      {/* Top header: logo + search */}
-      <div className="topbar">
-        <Link href="/" className="logo-word">dubUlar</Link>
-        <Link href="/search" className="icon-btn" aria-label="Search"><IconSearch/></Link>
-      </div>
+      <header className="nav" style={{
+        display:'flex', alignItems:'center', justifyContent:'space-between',
+        padding:'12px 14px', borderBottom:'1px solid rgba(255,255,255,.06)',
+        background:'rgba(5,12,18,.92)', position:'sticky', top:0, zIndex:30
+      }}>
+        <Logo />
+        {/* space for future actions on the right */}
+        <span style={{width:28}} />
+      </header>
 
-      <main className="container">{children}</main>
+      <main className="container" style={{ paddingBottom:'78px' }}>
+        <Component {...pageProps} />
+      </main>
 
-      {/* Bottom shortcut menu */}
-      <footer className="bottom-nav">
-        <Link href="/" className={is("/") ? "active": ""}>
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 10 12 3l9 7v10a1 1 0 0 1-1 1h-6v-6H10v6H4a1 1 0 0 1-1-1V10Z"/></svg>
-          Home
-        </Link>
-        <Link href="/streams" className={is("/streams") ? "active": ""}>
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h7v7H4V4Zm0 9h7v7H4v-7Zm9-9h7v7h-7V4Zm0 9h7v7h-7v-7Z"/></svg>
-          Streams
-        </Link>
-        <Link href="/leaderboards" className={is("/leaderboards") ? "active": ""}>
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 21H5V9h5v12Zm9 0h-5V5h5v16ZM14 21h-4v-9h4v9Z"/></svg>
-          Rankings
-        </Link>
-        <Link href="/wallet" className={is("/wallet") ? "active": ""}>
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 7a3 3 0 0 1 3-3h14v4H6v8h14v4H6a3 3 0 0 1-3-3V7Zm18 6a2 2 0 1 1 0 4h-5a2 2 0 1 1 0-4h5Z"/></svg>
-          Wallet
-        </Link>
-      </footer>
+      <BottomNav />
+
+      <footer className="footer" />
     </div>
   );
 }
-
-export default function MyApp({ Component, pageProps }){
-  return <AppChrome><Component {...pageProps} /></AppChrome>;
-}
-    {/* Bottom shortcut nav */}
-    <nav className="fixed bottom-0 left-0 right-0 flex justify-around bg-black border-t border-gray-800 py-2">
-      <button>🏆</button>
-      <button>⭐</button>
-      <button>🔍</button>
-      <button>💳</button>
-      <button>👤</button>
-    </nav>
