@@ -1,10 +1,11 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  // No static export here:
-  // output: 'export',
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
-};
+const path = require('path')
 
-module.exports = nextConfig;
+module.exports = {
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}), // keep Next defaults
+      '@': path.resolve(__dirname),   // your custom alias
+    }
+    return config
+  },
+}
