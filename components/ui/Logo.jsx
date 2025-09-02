@@ -1,20 +1,13 @@
-export default function Logo() {
+import Link from "next/link";
+export default function Logo(){
   return (
-    <div
-      aria-label="Dubular"
-      className="select-none"
-      style={{
-        display: 'inline-block',
-        fontWeight: 800,
-        letterSpacing: '0.06em',
-        fontSize: '20px',
-        color: '#00ffff',
-        filter: 'drop-shadow(0 0 8px rgba(0,255,255,.75)) drop-shadow(0 0 18px rgba(0,204,204,.35))'
-      }}
-    >
-      <span style={{opacity:.95}}>dub</span>
-      <span style={{opacity:1}}>U</span>
-      <span style={{opacity:.95}}>lar</span>
-    </div>
+    <Link href="/" style={{display:"inline-flex",alignItems:"center",gap:"8px"}}>
+      <span style={{
+        fontWeight:800, letterSpacing:"0.5px",
+        textShadow:"0 0 16px rgba(0,230,255,.55), 0 0 4px rgba(0,230,255,.6)"
+      }}>
+        <span style={{color:"#00e6ff"}}>dub</span><span style={{opacity:.95}}>U</span><span style={{color:"#00e6ff"}}>lar</span>
+      </span>
+    </Link>
   );
 }

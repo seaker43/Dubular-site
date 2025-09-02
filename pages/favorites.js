@@ -1,1 +1,3 @@
-export default function Favorites(){ return <div style={{padding:'16px'}}>Favorites – coming soon.</div>; }
+export default function Favorites(){
+  return <div style={{padding:"12px"}}>Your favorites will appear here soon.</div>;
+}
