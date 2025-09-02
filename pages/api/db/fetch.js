@@ -1,3 +1,4 @@
+export const runtime = "edge";
 export const runtime = 'edge';
 // Fetch from D1
 export default async function handler(req, res) {
