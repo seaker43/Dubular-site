@@ -430,3 +430,19 @@ a{color:inherit;text-decoration:none}
 
 /* Give content room above the fixed bar */
 body{ padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+
+/* === Logo styles === */
+.dubular-logo {
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+  background: linear-gradient(90deg, #7af1ff, #0ff 50%, #7af1ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 6px rgba(0,255,255,.45));
+}
+.dubular-logo .cyan {
+  color: #7af1ff;
+  text-shadow: 0 0 10px rgba(0,255,255,0.8);
+}
