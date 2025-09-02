@@ -15,8 +15,14 @@ export default function StreamCard({ href="#", title="Untitled", thumb="/thumbs/
           loading="lazy"
         />
         {live && (
-          <span className="absolute top-2 left-2 text-[10px] px-2 py-[2px] rounded-full"
-                style="background:#ff2d55;color:white;box-shadow:0 0 10px rgba(255,45,85,.4)">
+          <span
+            className="absolute top-2 left-2 text-[10px] px-2 py-[2px] rounded-full"
+            style={{
+              background:"#ff2d55",
+              color:"white",
+              boxShadow:"0 0 10px rgba(255,45,85,.4)"
+            }}
+          >
             LIVE
           </span>
         )}
