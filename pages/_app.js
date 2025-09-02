@@ -1,13 +1,28 @@
-import "../styles/theme-overrides.css";
-import "../styles/theme.css";
-import "../styles/global.css";
-import "../styles/home.css";
-// pages/_app.js
-import '../styles/beta.css';
-import '../styles/global.css';
+import Link from "next/link"
+import "../styles/theme.css"
 
-export default function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+function AppShell({ children }){
+  return (
+    <div className="app">
+      <header className="nav">
+        <div className="container" style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+          <div className="brand">
+            <Link href="/">Dubular</Link>
+          </div>
+          <nav className="links" style={{position:"relative"}}>
+            <Link href="/streams">Streams</Link>
+            <Link href="/leaderboards" style={{marginLeft:18}}>Rankings</Link>
+            <Link href="/wallet" style={{marginLeft:18}}>Wallet</Link>
+            <Link href="/login" style={{marginLeft:18}} className="btn btn-ghost">Login</Link>
+          </nav>
+        </div>
+      </header>
+      <main className="container">{children}</main>
+      <footer className="footer container">© {new Date().getFullYear()} Dubular</footer>
+    </div>
+  )
 }
 
-import "../styles/stream.css";
+export default function MyApp({ Component, pageProps }){
+  return <AppShell><Component {...pageProps} /></AppShell>
+}
