@@ -1,71 +1,48 @@
-import buildInfo from "../lib/build-info.json";
-// pages/index.js
-import Head from "next/head";
-import Link from "next/link";
+export const runtime = 'experimental-edge';
 
-// Prefer site Layout if present
-let Layout;
-try { Layout = require("../components/Layout").default; } catch { Layout = ({children}) => <>{children}</>; }
+import Link from 'next/link';
+import Layout from '../components/Layout';
+import StreamCard from '../components/StreamCard';
 
-export default function Home(){
+const demoStreams = [
+  { slug: 'dubular', title: 'Speedrun Gauntlet', streamer: 'Dubular', viewers: 1240, thumbnailUrl: '/img/streams/dubular.jpg', hot: true },
+  { slug: 'starplayer', title: 'Ranked Push', streamer: 'StarPlayer', viewers: 860, thumbnailUrl: '/img/streams/starplayer.jpg', hot: false },
+  { slug: 'speedrunner', title: 'Any% Practice', streamer: 'SpeedRunner', viewers: 540, thumbnailUrl: '/img/streams/speedrunner.jpg', hot: false },
+];
+
+export default function Home() {
   return (
     <Layout>
-      <Head>
-        <title>Dubular — Streams, Pools & Rankings</title>
-        <meta name="description" content="Dubular: Watch streams, join pools, and climb leaderboards in a slick dark-cyan UI." />
-      </Head>
-
-      <header className="navbar">
-        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:"1rem",padding:"0.9rem 1rem",maxWidth:1100,margin:"0 auto"}}>
-          <Link href="/"><span style={{fontWeight:800, letterSpacing:".3px"}}>Dubular</span></Link>
-          <nav style={{display:"flex",gap:"1rem",alignItems:"center"}}>
-            <Link href="/streams">Streams</Link>
-            <Link href="/pools">Pools</Link>
-            <Link href="/leaderboards">Rankings</Link>
-            <Link href="/wallet" className="btn btn-primary">Wallet</Link>
-          </nav>
+      <section className="rounded-3xl p-8 md:p-10 bg-gradient-to-b from-[#0a1118] to-[#071018] border border-white/5 shadow-[0_0_80px_rgba(0,255,255,0.09)]">
+        <h1 className="dubular-headline text-4xl md:text-5xl leading-tight">Stream. Compete. Go Dubular.</h1>
+        <p className="mt-4 text-white/70">A fast, creator-first platform with leaderboards. Clean dark UI, cyan glow accents — no purple here.</p>
+        <div className="mt-6 flex gap-3">
+          <Link href="/streams" className="btn-cyan">Browse Streams</Link>
+          <Link href="/leaderboards" className="btn-cyan-outline">View Rankings</Link>
         </div>
-      </header>
+      </section>
 
-      <main style={{maxWidth:1100, margin:"0 auto", padding:"clamp(16px,3vw,24px)"}}>
-        <p className="text-sm text-gray-400 mt-2">Deployment check: {new Date(buildInfo.builtAt).toLocaleString()}</p>
-        <section className="hero">
-          <h1 className="dubular-headline">Stream. Compete. <span style={{whiteSpace:"nowrap"}}>Go Dubular.</span></h1>
-          <p className="subhead" style={{marginTop:"10px"}}>
-            A fast, creator-first platform with pools and leaderboards. Clean dark UI, cyan glow accents — no purple here.
-          </p>
-          <div className="hero-cta">
-            <Link href="/streams" className="btn btn-primary">Browse Streams</Link>
-            <Link href="/leaderboards" className="btn">View Rankings</Link>
-          </div>
-        </section>
+      <section className="mt-8">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-xl font-semibold">Live Streams</h2>
+          <Link href="/streams" className="text-[var(--dubular-cyan-300)] hover:underline">See all</Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {demoStreams.map(s => <StreamCard key={s.slug} {...s} />)}
+        </div>
+      </section>
 
-        <section style={{marginTop:"clamp(18px,3vw,24px)"}}>
-          <div className="grid">
-            <article className="card">
-              <h3 style={{marginTop:0, marginBottom:6}}>Live Streams</h3>
-              <p className="subhead" style={{marginTop:0}}>Low-latency HLS player with a clean chat UI.</p>
-              <Link href="/streams" className="btn" style={{marginTop:12}}>Open Streams</Link>
-            </article>
-            <article className="card">
-              <h3 style={{marginTop:0, marginBottom:6}}>Pools</h3>
-              <p className="subhead" style={{marginTop:0}}>Join pools, track entries, and follow outcomes.</p>
-              <Link href="/pools" className="btn" style={{marginTop:12}}>Browse Pools</Link>
-            </article>
-            <article className="card">
-              <h3 style={{marginTop:0, marginBottom:6}}>Rankings</h3>
-              <p className="subhead" style={{marginTop:0}}>See who’s climbing. Filter by game or timeframe.</p>
-              <Link href="/leaderboards" className="btn" style={{marginTop:12}}>See Rankings</Link>
-            </article>
-            <article className="card">
-              <h3 style={{marginTop:0, marginBottom:6}}>Wallet</h3>
-              <p className="subhead" style={{marginTop:0}}>Manage your balance and recent activity.</p>
-              <Link href="/wallet" className="btn" style={{marginTop:12}}>Open Wallet</Link>
-            </article>
-          </div>
-          <p className="footer">© {new Date().getFullYear()} Dubular</p>
-        </section>
-      </main>
+      <section className="mt-8 rounded-2xl p-6 bg-[#0a0f14]/70 border border-white/5">
+        <h3 className="text-lg font-semibold">Rankings</h3>
+        <p className="text-white/60 mt-1">See who’s climbing. Filter by game or timeframe.</p>
+        <Link href="/leaderboards" className="btn-cyan mt-4 inline-block">See Rankings</Link>
+      </section>
+
+      <section className="mt-6 rounded-2xl p-6 bg-[#0a0f14]/70 border border-white/5">
+        <h3 className="text-lg font-semibold">Wallet</h3>
+        <p className="text-white/60 mt-1">Manage your balance and recent activity.</p>
+        <Link href="/wallet" className="btn-cyan mt-4 inline-block">Open Wallet</Link>
+      </section>
     </Layout>
   );
 }
