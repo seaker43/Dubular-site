@@ -457,3 +457,14 @@ body{ padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
   color: #7af1ff;
   text-shadow: 0 0 10px rgba(0,255,255,0.8);
 }
+
+/* --- DubUlar horizontal row niceties --- */
+.hide-scrollbars {
+  scrollbar-width: none;          /* Firefox */
+}
+.hide-scrollbars::-webkit-scrollbar {
+  display: none;                  /* Chrome/Safari */
+}
+body {
+  background: #0b1114;            /* dark base */
+}
