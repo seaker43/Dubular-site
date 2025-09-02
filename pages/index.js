@@ -1,3 +1,4 @@
+import buildInfo from "../lib/build-info.json";
 // pages/index.js
 import Head from "next/head";
 import Link from "next/link";
@@ -27,6 +28,7 @@ export default function Home(){
       </header>
 
       <main style={{maxWidth:1100, margin:"0 auto", padding:"clamp(16px,3vw,24px)"}}>
+        <p className="text-sm text-gray-400 mt-2">Deployment check: {new Date(buildInfo.builtAt).toLocaleString()}</p>
         <section className="hero">
           <h1 className="dubular-headline">Stream. Compete. <span style={{whiteSpace:"nowrap"}}>Go Dubular.</span></h1>
           <p className="subhead" style={{marginTop:"10px"}}>
