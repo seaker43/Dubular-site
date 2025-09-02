@@ -1,37 +1,57 @@
-import Link from "next/link";
-import Row from "../components/ui/Row";
-import StreamCard from "../components/ui/StreamCard";
-import BottomNav from "../components/ui/BottomNav";
+import Head from "next/head";
+import CategoryRow from "../components/home/CategoryRow";
+import StreamCard from "../components/home/StreamCard";
 
-const demo = [
-  { title: "Night Raid Tactics", thumb: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000", href: "/stream/night", live: true },
-  { title: "Creative Build-Off", thumb: "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=1000", href: "/stream/build", live: true },
-  { title: "Speedrun Arena", thumb: "https://images.unsplash.com/photo-1546443046-ed1ce6ffd1dc?q=80&w=1000", href: "/stream/speed" },
-  { title: "Co-op Gauntlet", thumb: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1000", href: "/stream/coop" },
+const rows = [
+  {
+    title: "Trending Now",
+    href: "/streams?sort=trending",
+    items: [
+      { title: "Speedrun Showdown: Any% Madness", thumb: "/thumbs/sample1.jpg", live: true, href: "/stream/channel-1" },
+      { title: "Co-op Chaos: Duo Challenges", thumb: "/thumbs/sample2.jpg", href: "/stream/channel-2" },
+      { title: "Tactics Tuesday | Ranked grind", thumb: "/thumbs/sample3.jpg", href: "/stream/channel-3" },
+      { title: "Community Challenge Night", thumb: "/thumbs/sample4.jpg", live: true, href: "/stream/channel-4" },
+    ],
+  },
+  {
+    title: "Recommended For You",
+    href: "/streams?sort=recommended",
+    items: [
+      { title: "No-Hit Boss Rush", thumb: "/thumbs/sample5.jpg", href: "/stream/channel-5" },
+      { title: "Aim Labs to Ranked", thumb: "/thumbs/sample6.jpg", live: true, href: "/stream/channel-6" },
+      { title: "Variety Night — Chat Picks", thumb: "/thumbs/sample7.jpg", href: "/stream/channel-7" },
+      { title: "Retro Speedruns Marathon", thumb: "/thumbs/sample8.jpg", href: "/stream/channel-8" },
+    ],
+  },
+  {
+    title: "New & Noteworthy",
+    href: "/streams?sort=new",
+    items: [
+      { title: "Day 1: Challenge Ladder", thumb: "/thumbs/sample9.jpg", href: "/stream/channel-9" },
+      { title: "Streamer vs Streamer | Best of 5", thumb: "/thumbs/sample10.jpg", href: "/stream/channel-10" },
+      { title: "Chat-Voted Objectives", thumb: "/thumbs/sample11.jpg", live: true, href: "/stream/channel-11" },
+      { title: "Speed Golf — All Levels", thumb: "/thumbs/sample12.jpg", href: "/stream/channel-12" },
+    ],
+  },
 ];
-
-export const runtime = "experimental-edge";
 
 export default function Home() {
   return (
-    <div className="container">
-      {/* Sticky top bar */}
-      <header className="topbar">
-        <Link href="/" className="brand">dub<span className="brand-accent">U</span>lar</Link>
-        <Link href="/search" className="icon-btn" aria-label="Search">🔍</Link>
-      </header>
+    <>
+      <Head>
+        <title>Dubular</title>
+        <meta name="description" content="Compete, challenge, and stream — together." />
+      </Head>
 
-      {/* Rows */}
-      <Row title="Mobile Streams" seeAllHref="/streams">
-        {demo.map((s, i) => <StreamCard key={i} {...s} />)}
-      </Row>
-
-      <Row title="Top 10 Today" seeAllHref="/rankings">
-        {demo.map((s, i) => <StreamCard key={i} {...s} />)}
-      </Row>
-
-      <div style={{height:"64px"}} /> {/* spacer for nav */}
-      <BottomNav />
-    </div>
+      <div className="pt-2">
+        {rows.map((row) => (
+          <CategoryRow key={row.title} title={row.title} href={row.href}>
+            {row.items.map((it) => (
+              <StreamCard key={it.title} {...it} />
+            ))}
+          </CategoryRow>
+        ))}
+      </div>
+    </>
   );
 }

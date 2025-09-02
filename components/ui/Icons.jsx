@@ -1,25 +1,25 @@
-export const IconRanks = (p)=>(
-  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" {...p}>
-    <path d="M8 19H4a1 1 0 0 1-1-1v-7h5v8ZM20 19h-4V5h4v13ZM15 19h-4V10h4v9Z"/>
+export const IconRanks = (props)=>(
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" {...props}>
+    <path d="M4 14h3v7H4v-7Zm6-5h3v12h-3V9Zm6-7h3v19h-3V2Z"/>
   </svg>
 );
-export const IconFavs = (p)=>(
-  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" {...p}>
-    <path d="M12 21s-7-4.35-7-10a4.5 4.5 0 0 1 8-2.77A4.5 4.5 0 0 1 19 11c0 5.65-7 10-7 10Z"/>
+export const IconFavs = (props)=>(
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" {...props}>
+    <path d="M12 21s-7.2-4.4-9.3-8.4C1.4 9.7 3.1 6 6.9 6c2 0 3.1 1 4 2 1-1 2-2 4-2 3.8 0 5.5 3.7 4.2 6.6C19.2 16.6 12 21 12 21Z"/>
   </svg>
 );
-export const IconSearch = (p)=>(
-  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" {...p}>
-    <path d="M10 4a6 6 0 1 1 0 12 6 6 0 0 1 0-12Zm9.7 14.3-3.4-3.4-1.4 1.4 3.4 3.4a1 1 0 0 0 1.4-1.4Z"/>
+export const IconSearch = (props)=>(
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" {...props}>
+    <path d="M10 3a7 7 0 1 1 0 14 7 7 0 0 1 0-14Zm9.7 13.3-3.4-3.4-1.4 1.4 3.4 3.4a1 1 0 0 0 1.4-1.4Z"/>
   </svg>
 );
-export const IconWallet = (p)=>(
-  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" {...p}>
-    <path d="M3 7a2 2 0 0 1 2-2h12v3h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Zm14 6h3v3h-3v-3Z"/>
+export const IconWallet = (props)=>(
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" {...props}>
+    <path d="M3 6h15a2 2 0 0 1 2 2v2h-4a3 3 0 0 0 0 6h4v2a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Zm15 6h4v4h-4a2 2 0 1 1 0-4Z"/>
   </svg>
 );
-export const IconUser = (p)=>(
-  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" {...p}>
-    <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.42 0-8 2.13-8 4.75V20h16v-1.25C20 16.13 16.42 14 12 14Z"/>
+export const IconUser = (props)=>(
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" {...props}>
+    <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-5 0-9 2.5-9 5v1h18v-1c0-2.5-4-5-9-5Z"/>
   </svg>
 );
