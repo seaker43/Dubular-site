@@ -238,3 +238,58 @@ input:focus, select:focus, textarea:focus{
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.08);
 }
+
+/* === Dubular Cyan Gradient Theme (auto) === */
+:root{
+  --dubular-bg-1:#0b0e13; /* deep charcoal */
+  --dubular-bg-2:#0b1220; /* ink blue */
+  --dubular-cyan:#22d3ee; /* primary accent */
+  --dubular-cyan-soft:#67e8f9; /* soft accent */
+  --dubular-text:#e5f6ff;  /* near-white */
+  --dubular-muted:#a5b4c3; /* slate */
+}
+
+html,body{
+  background: radial-gradient(1200px 600px at 20% -10%, rgba(34,211,238,0.12), transparent 55%),
+              radial-gradient(900px 500px at 110% 10%, rgba(103,232,249,0.10), transparent 60%),
+              linear-gradient(180deg, var(--dubular-bg-1) 0%, var(--dubular-bg-2) 100%);
+  color: var(--dubular-text);
+  min-height: 100%;
+}
+
+a{ color: var(--dubular-cyan); }
+a:hover{ color: var(--dubular-cyan-soft); }
+
+.button, .btn {
+  background: var(--dubular-cyan);
+  color: #001018;
+  border: 0;
+  transition: filter .2s ease, transform .06s ease;
+}
+.button:hover, .btn:hover { filter: brightness(1.05); }
+.button:active, .btn:active { transform: translateY(1px); }
+
+/* Card chrome */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+  border: 1px solid rgba(103,232,249,0.18);
+  box-shadow: 0 0 0 1px rgba(34,211,238,0.10) inset, 0 10px 30px rgba(0,0,0,0.35);
+  border-radius: 12px;
+}
+
+/* Nav underline glow for active items if Tailwind not present */
+.nav-active{
+  position: relative;
+  color: var(--dubular-text);
+}
+.nav-active::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-8px; height:2px;
+  background: radial-gradient(12px 6px at 50% 50%, var(--dubular-cyan), transparent 70%);
+}
+
+/* Headline gradient */
+.dubular-headline{
+  background: linear-gradient(90deg, #e6fcff 0%, var(--dubular-cyan) 50%, #e6fcff 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
