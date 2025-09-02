@@ -1,101 +1,77 @@
 import Link from "next/link"
 
 export default function Home(){
-  const streams = [
+  // Mock feed items — swap to real data later
+  const feed = [
     {
       id: "alpha",
-      title: "Speedrun Inferno",
+      title: "Speedrun Inferno – World Record Attempts Tonight",
+      channel: "AlphaSpeed",
+      views: "3.2K watching",
       game: "Infernum IV",
-      viewers: "3.2k",
-      // “fire ring” vibe image
       img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1400&auto=format&fit=crop",
-      href: "/stream/alpha"
+      href: "/stream/alpha",
+      live: true,
     },
     {
       id: "bravo",
-      title: "Pro Arena Finals",
+      title: "Pro Arena Finals | Semi-Final Match 2",
+      channel: "ArenaX League",
+      views: "8.4K watching",
       game: "Arena X",
-      viewers: "8.4k",
       img: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1400&auto=format&fit=crop",
-      href: "/stream/bravo"
+      href: "/stream/bravo",
+      live: true,
     },
     {
       id: "charlie",
-      title: "Night Raid Tactics",
+      title: "Night Raid Tactics – Stealth Only Run",
+      channel: "Star Siege Ops",
+      views: "1.1K watching",
       game: "Star Siege",
-      viewers: "1.1k",
       img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1400&auto=format&fit=crop",
-      href: "/stream/charlie"
+      href: "/stream/charlie",
+      live: true,
     },
     {
       id: "delta",
-      title: "Creative Build-Off",
+      title: "Creative Build-Off: Neon City in 2 Hours",
+      channel: "VoxelCreators",
+      views: "640 watching",
       game: "VoxelCraft",
-      viewers: "640",
       img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1400&auto=format&fit=crop",
-      href: "/stream/delta"
-    }
+      href: "/stream/delta",
+      live: true,
+    },
   ]
 
   return (
     <div style={{marginTop: 8}}>
-      {/* HERO */}
-      <section className="hero" style={{marginBottom: 20}}>
-        <div className="grid">
-          <div className="col-12">
-            <h1 className="dubular-headline" style={{fontSize: "42px", lineHeight: 1.1, marginBottom: 10}}>
-              Stream. Compete. Go Dubular.
-            </h1>
-            <p style={{opacity:.85, maxWidth: 820, marginBottom: 16}}>
-              A fast, creator-first platform with leaderboards and challenge pools handled in chat.
-              Clean dark UI, cyan glow accents — no purple here.
-            </p>
-            <div style={{display:"flex", gap:12, flexWrap:"wrap"}}>
-              <Link className="btn btn-primary" href="/streams">Browse Streams</Link>
-              <Link className="btn" href="/leaderboards">View Rankings</Link>
+      {/* Mobile-first vertical feed */}
+      <div className="feed">
+        {feed.map(v => (
+          <Link key={v.id} href={v.href} className="feed-card">
+            <div className="thumb16x9">
+              <img src={v.img} alt={v.title} />
+              <div className="thumb-live">
+                {v.live && <span className="chip">● LIVE</span>}
+                <span className="chip">{v.views}</span>
+                <span className="chip">{v.game}</span>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* LIVE STREAMS GRID */}
-      <section className="card" style={{marginBottom: 18}}>
-        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between", marginBottom: 10}}>
-          <h2 style={{fontSize:22}}>Live Streams</h2>
-          <Link className="btn" href="/streams">Open Streams</Link>
-        </div>
-
-        <div className="grid">
-          {streams.map(s => (
-            <div key={s.id} className="col-4">
-              <Link href={s.href} className="thumb">
-                <img src={s.img} alt={s.title}/>
-                <div className="meta">
-                  <span className="badge-live">● LIVE {s.viewers}</span>
-                  <span style={{background:"rgba(0,0,0,.55)", padding:"6px 10px", borderRadius:999, border:"1px solid rgba(255,255,255,.15)"}}>
-                    {s.game}
-                  </span>
+            <div className="meta-row">
+              <div className="avatar" />
+              <div style={{flex:1, minWidth:0}}>
+                <div className="title">{v.title}</div>
+                <div className="subtitle">
+                  {v.channel} • {v.game}
                 </div>
-              </Link>
-              <div style={{marginTop:8, fontWeight:600}}>{s.title}</div>
+              </div>
+              {/* optional overflow/menu icon spot */}
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* RANKINGS TEASER */}
-      <section className="card" style={{marginBottom: 18}}>
-        <h2 style={{fontSize:22, marginBottom:6}}>Rankings</h2>
-        <p style={{opacity:.85, marginBottom:10}}>See who’s climbing. Filter by game or timeframe.</p>
-        <Link className="btn" href="/leaderboards">See Rankings</Link>
-      </section>
-
-      {/* WALLET TEASER */}
-      <section className="card">
-        <h2 style={{fontSize:22, marginBottom:6}}>Wallet</h2>
-        <p style={{opacity:.85, marginBottom:10}}>Manage your balance and recent activity.</p>
-        <Link className="btn" href="/wallet">Open Wallet</Link>
-      </section>
+          </Link>
+        ))}
+      </div>
     </div>
   )
 }
