@@ -1,44 +1,18 @@
-import Link from "next/link";
+import Image from "next/image";
 
-export default function StreamCard({
-  href = "#",
-  title = "Untitled",
-  thumb = "/thumbs/sample1.jpg",
-  live = false
-}) {
-  const safeTitle = typeof title === "string" && title.trim() ? title : "Untitled";
-  const safeThumb = typeof thumb === "string" && thumb.trim() ? thumb : "/thumbs/sample1.jpg";
-
+export default function StreamCard({ title, thumb, badge = "LIVE" }) {
+  const src = thumb || "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop";
   return (
-    <Link href={href} className="block w-[56vw] max-w-[240px] shrink-0">
-      <div className="relative rounded-xl overflow-hidden">
-        <div
-          className="absolute inset-0 rounded-xl"
-          style={{ boxShadow: "0 0 30px rgba(0, 230, 255, .12)" }}
-        />
-        <img
-          src={safeThumb}
-          alt={safeTitle}
-          className="h-[32vw] max-h-[135px] w-full object-cover rounded-xl"
-          style={{ background: "linear-gradient(135deg,#0b1218,#0e171f)" }}
-          loading="lazy"
-        />
-        {live && (
-          <span
-            className="absolute top-2 left-2 text-[10px] px-2 py-[2px] rounded-full"
-            style={{
-              background: "#ff2d55",
-              color: "white",
-              boxShadow: "0 0 10px rgba(255,45,85,.4)"
-            }}
-          >
-            LIVE
+    <div className="w-56 sm:w-64 mr-3 flex-shrink-0">
+      <div className="relative aspect-[16/9] rounded-xl overflow-hidden bg-slate-800/50">
+        <Image src={src} alt={title} fill className="object-cover" sizes="(max-width:768px) 224px, 256px"/>
+        {badge && (
+          <span className="absolute top-2 left-2 text-[10px] px-2 py-0.5 rounded-full bg-red-600 text-white font-semibold">
+            {badge}
           </span>
         )}
       </div>
-      <div className="mt-1.5 text-[12.5px] leading-tight line-clamp-2 opacity-90">
-        {safeTitle}
-      </div>
-    </Link>
+      <div className="mt-2 text-sm text-slate-200 line-clamp-2">{title}</div>
+    </div>
   );
 }

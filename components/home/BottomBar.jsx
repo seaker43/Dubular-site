@@ -1,71 +1,43 @@
 import Link from "next/link";
 
-const itemCls =
-  "flex flex-col items-center justify-center gap-1 flex-1 min-w-0";
-
-const labelCls = "text-[11px] leading-none mt-0.5 truncate";
+const Item = ({ href, label, icon }) => (
+  <li className="flex-1 flex flex-col items-center justify-center text-center">
+    <Link href={href} className="flex flex-col items-center justify-center">
+      {icon}
+      <span className="text-[11px] leading-3 mt-1 text-slate-200">{label}</span>
+    </Link>
+  </li>
+);
 
 export default function BottomBar() {
   return (
-    <nav
-      className="fixed bottom-0 left-0 right-0 z-50
-                 h-16 px-3
-                 bg-[#0b0f14]/95 backdrop-blur
-                 border-t border-white/10
-                 flex items-center"
-      role="navigation"
-      aria-label="Quick actions"
-    >
-      <ul className="w-full flex items-center justify-between gap-1">
-        <li className={itemCls}>
-          <Link href="/ranks" className="flex flex-col items-center">
-            {/* bar chart – yellow */}
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#facc15">
-              <path d="M3 20h18v2H3zM6 10h3v8H6zM11 6h3v12h-3zM16 13h3v5h-3z"/>
-            </svg>
-            <span className={labelCls}>Ranks</span>
-          </Link>
-        </li>
-
-        <li className={itemCls}>
-          <Link href="/favs" className="flex flex-col items-center">
-            {/* heart – red */}
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#ef4444">
-              <path d="M12 21s-7-4.35-9.33-8.24C.42 9.63 2.32 6 5.66 6c1.7 0 3.06.9 3.84 2.14C10.28 6.9 11.64 6 13.34 6c3.34 0 5.24 3.63 3 6.76C19 16.65 12 21 12 21z"/>
-            </svg>
-            <span className={labelCls}>Favs</span>
-          </Link>
-        </li>
-
-        <li className={itemCls}>
-          <Link href="/search" className="flex flex-col items-center">
-            {/* search – neutral */}
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm11 19-5.1-5.1-1.4 1.4L19.6 22 21 20.6Z"/>
-            </svg>
-            <span className={labelCls}>Search</span>
-          </Link>
-        </li>
-
-        <li className={itemCls}>
-          <Link href="/wallet" className="flex flex-col items-center">
-            {/* wallet – green */}
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#22c55e">
-              <path d="M3 6h14a2 2 0 0 1 2 2v1h2v6h-2v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Zm16 5h2v4h-2a2 2 0 0 1-2-2 2 2 0 0 1 2-2Z"/>
-            </svg>
-            <span className={labelCls}>Wallet</span>
-          </Link>
-        </li>
-
-        <li className={itemCls}>
-          <Link href="/account" className="flex flex-col items-center">
-            {/* account – cyan (matches brand accent) */}
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#22d3ee">
-              <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm7 8a7 7 0 0 0-14 0Z"/>
-            </svg>
-            <span className={labelCls}>Account</span>
-          </Link>
-        </li>
+    <nav className="fixed bottom-0 inset-x-0 z-50 h-16 bg-[#0b0f14]/95 backdrop-blur border-t border-white/10 shadow-[0_-6px_12px_-6px_rgba(0,0,0,0.5)]">
+      <ul className="flex items-center justify-around h-full px-2">
+        <Item href="/ranks" label="Ranks" icon={
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#facc15" aria-hidden>
+            <path d="M4 13h3v7H4v-7Zm6-6h3v13h-3V7Zm6 3h3v10h-3V10Z"/>
+          </svg>
+        }/>
+        <Item href="/favs" label="Favs" icon={
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#ef4444" aria-hidden>
+            <path d="M12 21s-7-4.534-9.5-7.5A5.5 5.5 0 0 1 12 5a5.5 5.5 0 0 1 9.5 8.5C19 16.466 12 21 12 21Z"/>
+          </svg>
+        }/>
+        <Item href="/search" label="Search" icon={
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#e5e7eb" aria-hidden>
+            <path d="M10 3a7 7 0 1 1 0 14 7 7 0 0 1 0-14Zm9.7 13.3-3.4-3.4-1.4 1.4 3.4 3.4a1 1 0 0 0 1.4-1.4Z"/>
+          </svg>
+        }/>
+        <Item href="/wallet" label="Wallet" icon={
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#22c55e" aria-hidden>
+            <path d="M3 6h15a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm15 7h-3a2 2 0 1 0 0 4h3a2 2 0 1 0 0-4Z"/>
+          </svg>
+        }/>
+        <Item href="/account" label="Account" icon={
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#06b6d4" aria-hidden>
+            <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5Z"/>
+          </svg>
+        }/>
       </ul>
     </nav>
   );

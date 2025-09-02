@@ -1,18 +1,18 @@
 import Link from "next/link";
+import StreamCard from "./StreamCard";
 
-export default function CategoryRow({ title = "Category", href = "#", children }) {
+export default function CategoryRow({ title, href = "#", items = [] }) {
   return (
-    <section className="mb-6">
-      <div className="px-4 flex items-baseline justify-between gap-3">
-        <h2 className="text-xl font-semibold">{title}</h2>
-        <Link href={href} className="text-sm opacity-80 hover:opacity-100">
-          See all ▸
-        </Link>
+    <section className="mt-6">
+      <div className="flex items-baseline justify-between px-4">
+        <h2 className="text-2xl font-semibold">{title}</h2>
+        <Link href={href} className="text-sm text-cyan-400">See all ▸</Link>
       </div>
-      <div className="mt-3 px-2">
-        {/* horizontal scroll row */}
-        <div className="flex overflow-x-auto gap-3 no-scrollbar px-2">
-          {children}
+      <div className="mt-3 pl-4 overflow-x-auto horizontal-scroll">
+        <div className="flex">
+          {items.map((it, i) => (
+            <StreamCard key={i} title={it.title} thumb={it.thumb}/>
+          ))}
         </div>
       </div>
     </section>
