@@ -14,6 +14,8 @@ export default function Home() {
         </p>
         <div style={{ display: 'grid', gap: 16 }}>
           <Link href="/leaderboards">Leaderboards</Link>
+
+      <p><a href="/streams">Streams</a></p>
           <Link href="/pools">Pools</Link>
           <Link href="/wallet">Wallet</Link>
         </div>
