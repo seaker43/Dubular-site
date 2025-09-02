@@ -1,6 +1,7 @@
-import Link from "next/link"
-import "../styles/theme.css"
-import { useRouter } from "next/router"
+import "../styles/globals.css";        // <- bring back your base variables, fonts, link styles
+import "../styles/theme.css";          // <- our new Netflix-style additions
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 function IconSearch(){return (
   <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
@@ -9,12 +10,12 @@ function IconSearch(){return (
 )}
 
 function AppChrome({ children }){
-  const r = useRouter()
-  const is = (p) => r.pathname === p || r.pathname.startsWith(p)
+  const r = useRouter();
+  const is = (p) => r.pathname === p || r.pathname.startsWith(p);
 
   return (
     <div className="app">
-      {/* Top header: logo left, search right */}
+      {/* Top header: logo + search */}
       <div className="topbar">
         <Link href="/" className="logo-word">dubUlar</Link>
         <Link href="/search" className="icon-btn" aria-label="Search"><IconSearch/></Link>
@@ -22,7 +23,7 @@ function AppChrome({ children }){
 
       <main className="container">{children}</main>
 
-      {/* Bottom navigation */}
+      {/* Bottom shortcut menu */}
       <footer className="bottom-nav">
         <Link href="/" className={is("/") ? "active": ""}>
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 10 12 3l9 7v10a1 1 0 0 1-1 1h-6v-6H10v6H4a1 1 0 0 1-1-1V10Z"/></svg>
@@ -42,9 +43,9 @@ function AppChrome({ children }){
         </Link>
       </footer>
     </div>
-  )
+  );
 }
 
 export default function MyApp({ Component, pageProps }){
-  return <AppChrome><Component {...pageProps} /></AppChrome>
+  return <AppChrome><Component {...pageProps} /></AppChrome>;
 }
