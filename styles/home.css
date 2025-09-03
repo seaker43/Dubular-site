@@ -417,3 +417,28 @@ main > section > .see-all:hover{
   .row .card, .row .item { width: 200px; }
   .row .card img, .row .item img { height: 112px; }
 }
+
+/* ===== Batch 7: section header polish ===== */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0 0 8px;
+  padding: 0 var(--side-pad);
+}
+
+.section-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.section-header a {
+  font-size: 0.95rem;
+  color: #b19cd9;
+  text-decoration: none;
+}
+
+.section-header a:hover {
+  text-decoration: underline;
+}
