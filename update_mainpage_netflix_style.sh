@@ -1,7 +1,7 @@
-<html>
-<head><title>308 Permanent Redirect</title></head>
-<body>
-<center><h1>308 Permanent Redirect</h1></center>
-<hr><center>cloudflare</center>
-</body>
-</html>
+#!/data/data/com.termux/files/usr/bin/bash
+mkdir -p public && cd public
+for i in 1 2 3 4 5; do
+  curl -s -o "trending$i.jpg" "https://placehold.co/300x170?text=Thumbnail+$i"
+done
+cd ..
+git add .
