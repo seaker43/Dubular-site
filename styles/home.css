@@ -1,104 +1,27 @@
-/* Header skeleton */
-.site-header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:12px 16px;background:#000;position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.08)}
-.hdr-side{height:40px}
-.hdr-center{display:flex;justify-content:center}
+/* ---------- Header: center + responsive logo ---------- */
+.header-inner{max-width:1200px;margin:0 auto;padding:8px 12px;display:flex;justify-content:center;align-items:center}
+.header-logo-wrap{display:flex;justify-content:center;align-items:center;padding:6px 0}
+.header-logo-wrap .logo{display:block;width:clamp(160px,42vw,360px);height:auto}
 
-/* Page background + base text */
-.page{background:#0a0f14;color:#eee;min-height:100vh}
+/* ---------- Sections & rows (Netflix-like horizontal scrollers) ---------- */
+.section{padding:18px 0 6px}
+.row{display:flex;gap:14px;align-items:stretch;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;padding:8px 12px 16px}
+.row::-webkit-scrollbar{height:8px}
+.row::-webkit-scrollbar-thumb{background:#2a3444;border-radius:8px}
+.row::-webkit-scrollbar-track{background:transparent}
 
-/* Section headers */
-.row{padding:18px 16px}
-.row-head{display:flex;justify-content:space-between;align-items:baseline;margin:0 4px 8px}
-.row-title{font-size:clamp(22px,3.6vw,36px);font-weight:800;letter-spacing:.2px;margin:0;
-  text-shadow:0 0 14px rgba(0,229,255,.28)}
-.see-all{font-weight:600;text-decoration:none;color:#cbb4ff}
-.see-all:hover{color:#fff}
+/* Cards/items inside rows (robust to various classnames) */
+.row .item,.row .card,.row a,.row > div:not(.row){flex:0 0 82vw;max-width:82vw}
+@media (min-width:480px){.row .item,.row .card,.row a,.row > div:not(.row){flex-basis:68vw;max-width:68vw}}
+@media (min-width:768px){.row .item,.row .card,.row a,.row > div:not(.row){flex-basis:360px;max-width:360px}}
 
-/* Horizontal rail */
-.rail{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 8px;scroll-snap-type:x mandatory}
-.rail::-webkit-scrollbar{height:10px}.rail::-webkit-scrollbar-thumb{background:#222;border-radius:10px}
+/* Thumbnails: fill nicely */
+.row img,.row .thumb img,.row .poster img{width:100%;height:200px;object-fit:cover;display:block;border-radius:14px}
 
-/* Card */
-.card{width:clamp(220px,38vw,320px);flex:0 0 auto;scroll-snap-align:start}
-.thumb-wrap{position:relative;border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.5)}
-.thumb{display:block;width:100%;height:clamp(120px,22vw,180px);object-fit:cover;transition:transform .35s ease}
-.card:hover .thumb{transform:scale(1.04)}
-.badge{position:absolute;left:10px;top:10px;background:linear-gradient(90deg,#ff0080,#ff4dff);color:#fff;font-size:12px;font-weight:800;padding:4px 8px;border-radius:999px;box-shadow:0 0 12px rgba(255,77,255,.6)}
-.card-title{font-size:clamp(14px,2.8vw,16px);font-weight:700;margin:.55rem .25rem 0;color:#f4f4f4}
+/* Kill accidental two-column wrappers some templates add */
+.row > .col{display:contents}
+.row .grid,.row .columns{display:contents}
 
-/* Hide accidental duplicate/fallback thumbs rendered alongside cards */
-.row .aside, .row [data-fallback], .row .thumb--fallback, .row .card + img, .row figure + img { display:none !important; }
-.row .item, .row .card { overflow:hidden; }
-/* Hide duplicate/fallback thumbnails */ 
-.row .aside, .row [data-fallback], .row .thumb--fallback, .row .card + img, .row figure + img { display:none !important; }
-.row .item, .row .card { overflow:hidden; }
-
-/* ===== Header + Neon logo ===== */
-header{position:sticky;top:0;z-index:40;background:#070b12;border-bottom:1px solid rgba(255,255,255,.06)}
-/* content row under header already has its own max-width; the header itself should span full width */
-header .brand, header .header-inner{display:flex;align-items:center;justify-content:center;height:76px}
-header svg[class*="logo"], header svg[data-dubular]{
-  width:clamp(180px,38vw,520px);height:auto;display:block;
-  filter: drop-shadow(0 0 18px rgba(0,245,255,.35)) drop-shadow(0 0 30px rgba(0,245,255,.18));
-  animation: logoGlow 4.5s ease-in-out infinite;
-}
-@keyframes logoGlow{
-  0%,100%{ filter: drop-shadow(0 0 16px rgba(0,245,255,.28)) drop-shadow(0 0 26px rgba(0,245,255,.16)); }
-  50%{    filter: drop-shadow(0 0 24px rgba(0,245,255,.45)) drop-shadow(0 0 44px rgba(0,245,255,.25)); }
-}
-
-/* Make sure header is full-bleed even if a parent has constrained width */
-.site-header, header{width:100%;}
-
-/* ===== Section titles / See all ===== */
-h2.section-title{font-weight:800;letter-spacing:.4px;color:#f4f6ff;text-shadow:0 0 14px rgba(144,238,255,.25)}
-a.section-more{color:#c5a9ff;text-decoration:none;font-weight:700}
-a.section-more:hover{text-decoration:underline;text-underline-offset:3px}
-
-/* ===== Rows & cards polish ===== */
-.row{scroll-snap-type:x mandatory; gap:14px}
-.row .item{position:relative;scroll-snap-align:start}
-.row .card{overflow:hidden;border-radius:18px;background:#0c121b}
-.row .thumb{display:block;width:100%;height:auto;border-radius:16px}
-
-/* Hover pop + neon outline */
-.row .card:hover{transform:translateY(-2px) scale(1.03);transition:transform .18s ease}
-.row .card:hover .thumb{outline:2px solid rgba(0,255,234,.55);box-shadow:0 8px 28px rgba(0, 250, 255,.20);}
-
-/* Hide any accidental duplicate images inside a single item */
-.row .item img:not(:first-of-type){display:none}
-
-/* Small LIVE pill tidy-up if present */
-.badge-live{background:linear-gradient(90deg,#ff33cc,#ff66ff);color:#fff;font-weight:800;padding:.22rem .5rem;border-radius:999px;box-shadow:0 4px 20px rgba(255,80,200,.35)}
-
-/* ===== Row / Card Layout Fix ===== */
-.row {
-  display: flex;
-  flex-wrap: nowrap;       /* single strip */
-  overflow-x: auto;
-  gap: 1rem;
-  scroll-snap-type: x mandatory;
-  padding: .5rem 0 1.5rem;
-}
-.row::-webkit-scrollbar {display:none}
-
-.row .item {
-  flex: 0 0 auto;          /* no wrapping */
-  width: 60vw;             /* mobile width */
-  max-width: 320px;
-  scroll-snap-align: start;
-}
-
-.row .card {
-  background:#0d131b;
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 4px 14px rgba(0,0,0,.35);
-  transition:transform .2s ease;
-}
-.row .card:hover { transform:translateY(-3px) scale(1.04) }
-
-/* Kill extra broken side images completely */
-.row .item img:not(:first-of-type),
-.row .item br,
-.row .item > *:not(.card):not(.badge-live) { display:none!important }
+/* Prevent stretched badges/titles from breaking layout */
+.badge,.pill{line-height:1;white-space:nowrap}
+.card-title,.item-title{margin-top:8px}
