@@ -32,3 +32,41 @@
 /* Hide duplicate/fallback thumbnails */ 
 .row .aside, .row [data-fallback], .row .thumb--fallback, .row .card + img, .row figure + img { display:none !important; }
 .row .item, .row .card { overflow:hidden; }
+
+/* ===== Header + Neon logo ===== */
+header{position:sticky;top:0;z-index:40;background:#070b12;border-bottom:1px solid rgba(255,255,255,.06)}
+/* content row under header already has its own max-width; the header itself should span full width */
+header .brand, header .header-inner{display:flex;align-items:center;justify-content:center;height:76px}
+header svg[class*="logo"], header svg[data-dubular]{
+  width:clamp(180px,38vw,520px);height:auto;display:block;
+  filter: drop-shadow(0 0 18px rgba(0,245,255,.35)) drop-shadow(0 0 30px rgba(0,245,255,.18));
+  animation: logoGlow 4.5s ease-in-out infinite;
+}
+@keyframes logoGlow{
+  0%,100%{ filter: drop-shadow(0 0 16px rgba(0,245,255,.28)) drop-shadow(0 0 26px rgba(0,245,255,.16)); }
+  50%{    filter: drop-shadow(0 0 24px rgba(0,245,255,.45)) drop-shadow(0 0 44px rgba(0,245,255,.25)); }
+}
+
+/* Make sure header is full-bleed even if a parent has constrained width */
+.site-header, header{width:100%;}
+
+/* ===== Section titles / See all ===== */
+h2.section-title{font-weight:800;letter-spacing:.4px;color:#f4f6ff;text-shadow:0 0 14px rgba(144,238,255,.25)}
+a.section-more{color:#c5a9ff;text-decoration:none;font-weight:700}
+a.section-more:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* ===== Rows & cards polish ===== */
+.row{scroll-snap-type:x mandatory; gap:14px}
+.row .item{position:relative;scroll-snap-align:start}
+.row .card{overflow:hidden;border-radius:18px;background:#0c121b}
+.row .thumb{display:block;width:100%;height:auto;border-radius:16px}
+
+/* Hover pop + neon outline */
+.row .card:hover{transform:translateY(-2px) scale(1.03);transition:transform .18s ease}
+.row .card:hover .thumb{outline:2px solid rgba(0,255,234,.55);box-shadow:0 8px 28px rgba(0, 250, 255,.20);}
+
+/* Hide any accidental duplicate images inside a single item */
+.row .item img:not(:first-of-type){display:none}
+
+/* Small LIVE pill tidy-up if present */
+.badge-live{background:linear-gradient(90deg,#ff33cc,#ff66ff);color:#fff;font-weight:800;padding:.22rem .5rem;border-radius:999px;box-shadow:0 4px 20px rgba(255,80,200,.35)}
