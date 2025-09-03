@@ -1,14 +1,15 @@
 import Image from "next/image";
 
-export default function StreamCard({ title, img, live, edgeColor, trending = false }) {
+export default function StreamCard({ title, img, live, trending = false, edgeColor = "#22d3ee" }) {
+  const ringClass = trending ? "flame-ring" : "edge-light";
   return (
     <article
       className={[
-        "bg-zinc-900/80 rounded-xl overflow-hidden ring-1 ring-white/5 transition relative raised",
-        trending ? "flame-ring" : "",
-        edgeColor ? "edge-light" : "",
+        "bg-zinc-900/80 rounded-xl overflow-hidden ring-1 ring-white/5 transition relative",
+        "raised glow-shadow",
+        ringClass,
       ].join(" ")}
-      style={edgeColor ? { ["--edge"]: edgeColor } : undefined}
+      style={!trending ? { ["--edge"]: edgeColor } : undefined}
     >
       <div className="relative aspect-[16/9]">
         {live && (
