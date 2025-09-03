@@ -150,3 +150,38 @@ a.see-all:hover { text-decoration:underline; }
 .card { background:#0f141b; border-radius:16px; overflow:hidden; min-width:clamp(240px,70vw,360px); box-shadow:0 10px 30px #0007; }
 .card img { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; }
 .card:hover { box-shadow:0 14px 36px #000a; transform:translateY(-1px); }
+
+/* --- Batch 2: header, see-all, single-column rows, hide ghost rail --- */
+
+/* Header a touch shorter so hero fits nicely */
+.header-inner { height:72px; }
+.header-logo-wrap .logo { width:clamp(160px,34vw,320px); }
+
+/* Make each homepage section the positioning context */
+main > section { position:relative; padding-top:8px; }
+
+/* Right-align any "See all" link that follows the title */
+main > section > a[href] {
+  position:absolute; right:var(--side-pad); top:6px;
+  font-weight:700; color:#cbb7ff; text-decoration:none;
+}
+main > section > a[href]:hover { text-decoration:underline; }
+
+/* Give headings room so the absolute link doesn’t overlap */
+main > section > h2 { padding-right:110px; }
+
+/* Single-column rows on small screens */
+@media (max-width: 820px) {
+  .row { display:block; overflow:visible; }
+  .row > * { width:100% !important; max-width:100% !important; }
+}
+
+/* Hide obvious right-hand/ghost rails that were duplicating content */
+.row > .right, .row > .rail, .row > .sidebar, .row > .side { display:none !important; }
+/* Fallback: if the 2nd child looks like a slim side rail with images, hide it */
+@supports(selector(:has(*))) {
+  .row > :nth-child(2):has(img) { display:none !important; }
+}
+
+/* Card spacing polish so lone cards don’t feel cramped */
+.card { margin-bottom:18px; }
