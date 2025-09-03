@@ -1,14 +1,16 @@
-import React from "react";
-import CategoryRow from "../components/home/CategoryRow";
-
-export const config = { runtime: "experimental-edge" };
-
-export default function Home(){
+export default function Home() {
   return (
-    <>
-      <CategoryRow title="Trending Now" />
-      <CategoryRow title="Esports" />
-      <CategoryRow title="Mobile Streams" />
-    </>
+    <iframe
+      src="/index.html"
+      style={{
+        width: '100%',
+        height: '100vh',
+        border: 'none',
+        margin: 0,
+        padding: 0,
+        overflow: 'hidden',
+      }}
+      title="Netflix UI"
+    ></iframe>
   );
 }
