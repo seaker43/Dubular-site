@@ -5,7 +5,7 @@ export default function StreamCard({ title, img, live, trending = false, edgeCol
   return (
     <div
       className={[
-        "card-shell glow-shadow",           // outer shell hosts rings & glow (no clipping)
+        "card-shell glow-shadow",
         ringClass,
         "raised"
       ].join(" ")}

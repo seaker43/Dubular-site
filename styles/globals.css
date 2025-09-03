@@ -106,3 +106,43 @@
   -webkit-mask-composite: xor; mask-composite: exclude; padding:5px;
 }
 /* === /UI-GLOWS v2 === */
+
+/* === UI-GLOWS v3 === */
+.hide-scrollbar { -ms-overflow-style:none; scrollbar-width:none; }
+.hide-scrollbar::-webkit-scrollbar { display:none; }
+
+.card-shell { position: relative; border-radius: 14px; overflow: visible; isolation: isolate; }
+.card-inner { border-radius: 14px; overflow: hidden; background: rgba(24,24,27,.85); box-shadow: 0 10px 30px rgba(0,0,0,.5); }
+.raised { transition: transform .20s ease, box-shadow .20s ease; }
+.raised:hover { transform: translateY(-2px); }
+.glow-shadow { box-shadow: 0 0 28px rgba(34,211,238,.25), 0 12px 28px rgba(0,0,0,.5); }
+
+/* Neon perimeter (non-trending) */
+@keyframes neon-spin { to { transform: rotate(360deg); } }
+.neon-ring::before {
+  content:""; position:absolute; inset:-3px; border-radius:16px; pointer-events:none; z-index:0;
+  background: conic-gradient(from 0deg at 50% 50%, var(--edge,#22d3ee), transparent 12%, transparent 30%, var(--edge,#22d3ee) 45%, transparent 60%, transparent 80%, var(--edge,#22d3ee));
+  animation: neon-spin 5s linear infinite;
+  filter: blur(7px) brightness(1.15) drop-shadow(0 0 16px var(--edge,#22d3ee));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude; padding:4px;
+}
+
+/* Flame ring (Trending) */
+@keyframes flame-rotate { to { transform: rotate(360deg); } }
+@keyframes flame-flicker { 0%,100% { filter: blur(12px) brightness(1.2);} 50% { filter: blur(16px) brightness(1);} }
+.flame-ring::before {
+  content:""; position:absolute; inset:-4px; border-radius:16px; pointer-events:none; z-index:0;
+  background: conic-gradient(#ffea00,#ffb300,#ff7b00,#ff3b00,#ff7b00,#ffea00);
+  mix-blend-mode: screen;
+  animation: flame-rotate 6s linear infinite, flame-flicker 1.6s ease-in-out infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude; padding:5px;
+}
+
+/* Neon pink "See all" links */
+.see-all-link {
+  color: #ff2bb3;
+  text-shadow: 0 0 6px #ff2bb3, 0 0 12px #ff2bb3;
+}
+.see-all-link:hover { color: #fff; background: #ff2bb3; }
