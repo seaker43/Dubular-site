@@ -5,7 +5,7 @@ export default function App({ Component, pageProps }) {
     <>
       {/* Top logo header */}
       <header className="sticky top-0 z-40 h-16 flex items-center px-6 bg-[#080c11]/95 backdrop-blur border-b border-white/10">
-        <div className="logo-font logo-wrap select-none">
+        <div className="logo-graffiti select-none">
           <span className="logo-cyan text-3xl">dub</span>
           <span className="logo-pinkU text-4xl">U</span>
           <span className="logo-cyan text-3xl">lar</span>
@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }) {
 
       <Component {...pageProps} />
 
-      {/* Fixed BottomBar shortcuts (unchanged) */}
+      {/* Fixed BottomBar shortcuts (left as-is) */}
       <nav className="fixed bottom-0 left-0 right-0 h-14 bg-[#080c11]/95 border-t border-white/10 flex justify-around items-center text-xs text-white z-40">
         {[
           { label: "Ranks", href: "/ranks" },

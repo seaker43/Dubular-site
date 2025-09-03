@@ -5,9 +5,8 @@ export default function StreamCard({ title, img, live, trending = false, edgeCol
   return (
     <div
       className={[
-        "card-shell glow-shadow",
-        ringClass,
-        "raised"
+        "card-shell glow-shadow raised pressable",
+        ringClass
       ].join(" ")}
       style={!trending ? { ["--edge"]: edgeColor } : undefined}
     >
