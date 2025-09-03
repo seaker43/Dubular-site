@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function StreamCard({ title, img, live=false, flame=false, edgeColor="#22d3ee" }) {
   return (
-    <article className={`relative ${flame ? "flame-wrap" : "edge-neon"}`} style={{"--edge-color": edgeColor}}>
+    <article className={`relative ${flame ? "flame" : "edge-frame"}`} style={{"--edge-color": edgeColor}}>
       {live && (
         <span className="absolute top-2 left-2 z-20 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">LIVE</span>
       )}
