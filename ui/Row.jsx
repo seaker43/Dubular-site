@@ -1,6 +1,6 @@
 import StreamCard from "./StreamCard";
 
-export default function Row({ title, items, seeAllHref = "#" }) {
+export default function Row({ title, items, seeAllHref = "#", trending = false }) {
   return (
     <section className="mb-12">
       <div className="flex items-center justify-between mb-6">
@@ -13,13 +13,12 @@ export default function Row({ title, items, seeAllHref = "#" }) {
         </a>
       </div>
 
-      {/* Horizontal carousel */}
       <div className="relative">
         <div className="overflow-x-auto hide-scrollbar scroll-smooth">
           <div className="flex gap-4 pr-4">
             {items.map((v) => (
               <div key={v.title} className="w-64 shrink-0">
-                <StreamCard {...v} />
+                <StreamCard {...v} trending={trending} />
               </div>
             ))}
           </div>
