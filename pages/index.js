@@ -13,7 +13,7 @@ export default function Home() {
 
         <div style={{ display: 'flex', gap: '12px', marginTop: '16px', overflowX: 'auto' }}>
           <div style={{ minWidth: '200px', backgroundColor: '#1c1c1c', borderRadius: '8px', overflow: 'hidden', position: 'relative' }}>
-            <img src="https://i.imgur.com/jS1b6Rn.jpg" alt="Thumbnail" style={{ width: '100%', display: 'block' }} />
+            <img src="https://images.unsplash.com/photo-1526925539332-aa3b66e35444?fit=crop&w=500&q=80" alt="Stream 1" style={{ width: '100%', display: 'block' }} />
             <div style={{ position: 'absolute', top: '8px', left: '8px', backgroundColor: 'red', color: '#fff', fontSize: '12px', fontWeight: 'bold', padding: '2px 6px', borderRadius: '4px' }}>
               LIVE
             </div>
@@ -21,7 +21,7 @@ export default function Home() {
           </div>
 
           <div style={{ minWidth: '200px', backgroundColor: '#1c1c1c', borderRadius: '8px', overflow: 'hidden', position: 'relative' }}>
-            <img src="https://i.imgur.com/m3QTP9M.jpg" alt="Thumbnail" style={{ width: '100%', display: 'block' }} />
+            <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?fit=crop&w=500&q=80" alt="Stream 2" style={{ width: '100%', display: 'block' }} />
             <div style={{ position: 'absolute', top: '8px', left: '8px', backgroundColor: 'red', color: '#fff', fontSize: '12px', fontWeight: 'bold', padding: '2px 6px', borderRadius: '4px' }}>
               LIVE
             </div>
@@ -29,7 +29,7 @@ export default function Home() {
           </div>
 
           <div style={{ minWidth: '200px', backgroundColor: '#1c1c1c', borderRadius: '8px', overflow: 'hidden', position: 'relative' }}>
-            <img src="https://i.imgur.com/9JMYk9r.jpg" alt="Thumbnail" style={{ width: '100%', display: 'block' }} />
+            <img src="https://images.unsplash.com/photo-1602526216079-47fba3b8c9df?fit=crop&w=500&q=80" alt="Stream 3" style={{ width: '100%', display: 'block' }} />
             <div style={{ position: 'absolute', top: '8px', left: '8px', backgroundColor: 'red', color: '#fff', fontSize: '12px', fontWeight: 'bold', padding: '2px 6px', borderRadius: '4px' }}>
               LIVE
             </div>
