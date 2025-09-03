@@ -1,5 +1,4 @@
 import "../styles/global.css";
-import BottomBar from "../components/home/BottomBar";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -14,7 +13,6 @@ export default function App({ Component, pageProps }) {
       <Component {...pageProps} />
 
       {/* Fixed bottom shortcuts */}
-      <BottomBar />
     </>
   );
 }
