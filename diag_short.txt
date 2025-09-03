@@ -1,0 +1,36 @@
+=== SHORT NEXT.JS DIAG (Wed Sep  3 03:49:29 EDT 2025) ===
+
+## Router check
+Has /pages router
+
+## next.config.js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    domains: [
+      "images.unsplash.com",
+      "source.unsplash.com",
+      "i.imgur.com",
+      "cdn.dubular.live" // add your CDN if you have one
+    ],
+  },
+  experimental: {
+    runtime: "experimental-edge",
+  },
+};
+module.exports = nextConfig;
+
+## Duplicate Home exports
+
+## Multiple layout components
+
+## Scripts from package.json
+{
+  "dev": "next dev",
+  "start": "next start",
+  "lint": "next lint",
+  "build": "next build"
+}
+
+=== END ===
