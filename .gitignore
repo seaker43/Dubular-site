@@ -4,3 +4,17 @@ node_modules/
 export/
 *.zip
 .backups/
+
+# Custom ignores
+*.bak
+*.backup-*
+*.zip
+.DS_Store
+Thumbs.db
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.next/
+out/
+dist/
+.vercel/
