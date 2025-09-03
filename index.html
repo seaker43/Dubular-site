@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>dubUlar</title>
+  <style>
+    body { margin: 0; background-color: #0d0d0d; font-family: Arial, sans-serif; color: #fff; }
+    .header { padding: 16px; font-size: 24px; font-weight: bold; }
+    .section { margin: 20px 0; }
+    .section-header { display: flex; justify-content: space-between; align-items: center; padding: 0 16px; }
+    .section-header h2 { font-size: 20px; }
+    .section-header button { background-color: #1a1a1a; color: cyan; border: 1px solid cyan; border-radius: 6px; padding: 6px 12px; font-size: 14px; cursor: pointer; }
+    .carousel { display: flex; overflow-x: auto; padding: 16px; }
+    .stream-card { position: relative; flex: 0 0 auto; width: 180px; height: 100px; margin-right: 16px; border-radius: 10px; background-size: cover; background-position: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+    .live-badge { position: absolute; top: 8px; left: 8px; background-color: cyan; color: black; font-weight: bold; font-size: 12px; padding: 2px 8px; border-radius: 4px; }
+    .stream-title { position: absolute; bottom: 8px; left: 8px; font-size: 14px; background-color: rgba(0,0,0,0.6); padding: 2px 6px; border-radius: 4px; }
+    .stream-title a { color: white; text-decoration: none; font-weight: bold; }
+    .stream-title a:hover { color: cyan; }
+  </style>
+</head>
+<body>
+  <div class="header">dubUlar</div>
+  <div class="section">
+    <div class="section-header">
+      <h2>Trending Now</h2>
+      <button>See all ></button>
+    </div>
+    <div class="carousel">
+      <div class="stream-card" style="background-image: url('https://i.imgur.com/jS1b6Rn.jpg');">
+        <div class="live-badge">LIVE</div>
+        <div class="stream-title"><a href="#">Night Raid Tactics #1</a></div>
+      </div>
+      <div class="stream-card" style="background-image: url('https://i.imgur.com/m3QTP9M.jpg');">
+        <div class="live-badge">LIVE</div>
+        <div class="stream-title"><a href="#">DJ Krillz Party</a></div>
+      </div>
+      <div class="stream-card" style="background-image: url('https://i.imgur.com/9JMYk9r.jpg');">
+        <div class="live-badge">LIVE</div>
+        <div class="stream-title"><a href="#">Urban Exploration IRL</a></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
