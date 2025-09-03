@@ -97,3 +97,90 @@
   filter: drop-shadow(0 0 8px rgba(34,211,238,.75))
           drop-shadow(0 0 16px rgba(34,211,238,.35));
 }
+
+/* ===== Spray-paint graffiti treatment for the logo ===== */
+.logo-spray { position: relative; display:inline-flex; gap:.15rem; line-height: 1; filter: url(#spray-rough); }
+.logo-spray .logo-cyan { color:#22d3ee; }
+.logo-spray .logo-pinkU { color:#ff4dff; }
+
+/* Overspray cloud behind letters (bloom like real spray) */
+.logo-spray::before{
+  content:""; position:absolute; inset:-18px -24px -20px; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(60% 70% at 28% 45%, rgba(34,211,238,.28) 0 45%, transparent 70%),
+    radial-gradient(58% 68% at 66% 52%, rgba(255,77,255,.30) 0 45%, transparent 72%),
+    radial-gradient(70% 80% at 50% 40%, rgba(34,211,238,.20) 0 42%, transparent 72%);
+  filter: blur(18px) saturate(1.05);
+}
+
+/* Grainy edge/halo to mimic spray pattern */
+.logo-spray .logo-cyan,
+.logo-spray .logo-pinkU{
+  position:relative; z-index:1;
+  text-shadow:
+    0 0 1px currentColor,
+    0 0 2px currentColor,
+    0 0 4px currentColor,
+    0 0 8px color-mix(in oklab, currentColor 70%, black),
+    0 0 16px color-mix(in oklab, currentColor 55%, black);
+}
+
+/* Subtle handstyle jitter so it feels tagged */
+@keyframes tag-wobble { 0%,100%{ transform: rotate(-.5deg) translateY(.2px) } 50%{ transform: rotate(.6deg) translateY(-.2px) } }
+.logo-spray { animation: tag-wobble 4.6s ease-in-out infinite; }
+
+/* Paint drips (tiny accents) */
+.logo-drip{
+  position:absolute; bottom:-10px; width:7px; height:22px; border-radius:10px;
+  filter: blur(.6px) saturate(1.1); opacity:.85; z-index:0;
+}
+.logo-drip.cyan  { left: 18%; background: linear-gradient(#22d3ee 0 60%, transparent); box-shadow: 0 0 8px #22d3eeaa; }
+.logo-drip.pink  { left: 48%; background: linear-gradient(#ff4dff 0 65%, transparent); box-shadow: 0 0 8px #ff4dffaa; }
+.logo-drip.cyan2 { left: 76%; width:6px; height:18px; background: linear-gradient(#22d3ee 0 55%, transparent); box-shadow: 0 0 7px #22d3ee88; }
+
+/* Keep your previous logo color glows */
+.logo-graffiti { letter-spacing:.5px; }
+.logo-cyan  { text-shadow: 0 0 12px #00e5ff, 0 0 26px #00e5ff66; }
+.logo-pinkU { text-shadow: 0 0 16px #ff4dff, 0 0 30px #ff4dff99; }
+
+/* ====== Animated perimeter edge light (rotating conic gradient) ====== */
+.edge-anim{
+  position:absolute; inset:-1px; border-radius:12px; z-index:5;
+}
+.edge-anim::before{
+  content:""; position:absolute; inset:0; padding:2px; border-radius:inherit;
+  /* rotating ring */
+  background:
+    conic-gradient(from 0deg,
+      var(--edge-color, #22d3ee) 0deg,
+      transparent 110deg 250deg,
+      var(--edge-color, #22d3ee) 360deg);
+  animation: edge-spin 4.5s linear infinite;
+  /* carve to a border only */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+.edge-anim::after{
+  content:""; position:absolute; inset:-6px; border-radius:inherit; z-index:-1;
+  background: radial-gradient(50% 60% at 50% 50%, color-mix(in oklab, var(--edge-color, #22d3ee) 65%, black) 0%, transparent 60%);
+  filter: blur(10px); opacity:.65;
+}
+
+@keyframes edge-spin { to { transform: rotate(360deg); } }
+
+/* Flame ring for trending (already used elsewhere; keep subtle outer glow) */
+.flame-ring{
+  position:absolute; inset:-1px; border-radius:12px; z-index:6; pointer-events:none;
+  box-shadow:
+    0 0 0 2px rgba(255,165,0,.45) inset,
+    0 0 16px 6px rgba(255,95,0,.35),
+    0 0 28px 10px rgba(255,0,0,.25);
+}
+
+/* Thin mobile scrollbars (Android Chrome/WebKit) */
+.scrollbar-thin::-webkit-scrollbar{ height:8px; }
+.scrollbar-thin::-webkit-scrollbar-thumb{ background-color:rgba(100,116,139,.4); border-radius:8px; }
+.scrollbar-thin::-webkit-scrollbar-track{ background:transparent; }
