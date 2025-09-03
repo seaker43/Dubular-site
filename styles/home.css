@@ -50,3 +50,103 @@
   flex: 0 0 auto;
   scroll-snap-align: start;
 }
+
+/* ====== Page frame ====== */
+:root { --page-max: 1152px; --side-pad: 16px; }
+body { background:#0b0f14; color:#e7e7ea; }
+main, .page, .home, .home-root {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding-inline: var(--side-pad);
+}
+
+/* ====== Header / Logo ====== */
+.header, header { background: linear-gradient(180deg,#0b0f14,#0b0f1400); }
+.header-inner { position:relative; display:flex; justify-content:center; align-items:center; height:84px; }
+.header-logo-wrap { display:flex; align-items:center; justify-content:center; height:100%; }
+.header-logo-wrap .logo svg, .header-logo-wrap .logo { display:block; width: clamp(160px, 34vw, 320px); height:auto; }
+
+/* ====== Section headings + See all ====== */
+.section, section { position:relative; }
+.section-title, h2 {
+  font-size: clamp(22px, 3.6vw, 34px);
+  line-height: 1.1;
+  margin: 18px 0 10px;
+  letter-spacing:.4px;
+  color:#f4f5f9;
+  text-shadow: 0 0 18px #9feaff22;
+}
+a.see-all {
+  position:absolute; right: var(--side-pad); top: 0;
+  transform: translateY(4px);
+  font-weight:600; color:#cbb7ff; text-decoration:none;
+}
+a.see-all:hover { text-decoration:underline; }
+
+/* ====== Rows: horizontal scroll with snap ====== */
+.row {
+  display:flex; flex-direction:row; gap: 14px;
+  overflow-x:auto; overflow-y:hidden; padding: 6px 0 12px;
+  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  scrollbar-width:none;
+}
+.row::-webkit-scrollbar { display:none; }
+.row > * { flex:0 0 auto; scroll-snap-align:start; }
+
+/* ====== Cards ====== */
+.card, .stream-card, .tile {
+  background:#0f141b; border-radius:16px; overflow:hidden;
+  box-shadow: 0 10px 30px #0007;
+  min-width: clamp(240px, 70vw, 360px);
+}
+.card:hover { box-shadow: 0 14px 36px #000a; transform: translateY(-1px); }
+
+.card img, .thumb, .tile img {
+  width:100%; aspect-ratio: 16/9; object-fit: cover; display:block;
+  background:#0b0f14;
+}
+.card .title, .tile .title { padding: 10px 12px 14px; font-weight:700; }
+
+/* LIVE pill */
+.pill-live, .live-pill {
+  position:absolute; left:12px; top:12px; z-index:2;
+  background:linear-gradient(180deg,#ff66ff,#ff33aa);
+  color:white; font-weight:800; border-radius:999px; padding:6px 10px; font-size:12px;
+  box-shadow:0 8px 18px #ff2dcc44;
+}
+
+/* ====== Layout: hide right rail on mobile, allow two columns on wide ====== */
+.page-grid, .grid, .content {
+  display:grid; grid-template-columns: 1fr; gap: 28px;
+}
+.right-rail, .aside, .col-right { display:none; }
+@media (min-width: 1024px) {
+  .page-grid, .grid, .content { grid-template-columns: 1fr 320px; align-items:start; }
+  .right-rail, .aside, .col-right { display:block; }
+}
+
+/* Tidy any accidental overflow */
+.row .item, .row .card { overflow:hidden; border-radius:16px; }
+
+/* Extra breathing room at page bottom */
+main { padding-bottom: 64px; }
+
+/* --- UI polish batch --- */
+:root { --page-max:1152px; --side-pad:16px; }
+body { background:#0b0f14; color:#e7e7ea; }
+main { max-width:var(--page-max); margin:0 auto; padding-inline:var(--side-pad); padding-bottom:64px; }
+
+.header-inner { display:flex; justify-content:center; align-items:center; height:84px; }
+.header-logo-wrap .logo { width:clamp(160px,34vw,320px); height:auto; }
+
+.section-title { font-size:clamp(22px,3.6vw,34px); margin:18px 0 10px; color:#f4f5f9; text-shadow:0 0 18px #9feaff22; }
+a.see-all { position:absolute; right:var(--side-pad); top:0; font-weight:600; color:#cbb7ff; text-decoration:none; }
+a.see-all:hover { text-decoration:underline; }
+
+.row { display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+.row::-webkit-scrollbar { display:none; }
+.row > * { flex:0 0 auto; scroll-snap-align:start; }
+
+.card { background:#0f141b; border-radius:16px; overflow:hidden; min-width:clamp(240px,70vw,360px); box-shadow:0 10px 30px #0007; }
+.card img { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; }
+.card:hover { box-shadow:0 14px 36px #000a; transform:translateY(-1px); }
