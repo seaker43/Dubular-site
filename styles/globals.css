@@ -2,93 +2,115 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Optional font for graffiti look */
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
 
-/* --- Global dark theme --- */
-:root { color-scheme: dark; }
-html, body, #__next { height: 100%; }
-body {
-  background: #0b0f14;          /* deep navy */
-  color: rgb(229 231 235);      /* Tailwind zinc-200 */
+:root{
+  --bg: #0b0f14;
+  --text: 232 234 237;              /* zinc-200 */
+  --neon1: #22d3ee;                 /* cyan */
+  --neon2: #ff2ea6;                 /* pink */
+  --lime: #a3ff3f;                  /* not used for headings now */
 }
+html,body,#__next{height:100%}
+body{background:var(--bg); color:rgb(var(--text));}
 
-/* ====== Animated perimeter edge light (rotating conic gradient) ====== */
-.edge-anim{
-  position:absolute; inset:-1px; border-radius:12px; z-index:5;
-}
-.edge-anim::before{
-  content:""; position:absolute; inset:0; padding:2px; border-radius:inherit;
-  background:
-    conic-gradient(from 0deg,
-      var(--edge-color, #22d3ee) 0deg,
-      transparent 110deg 250deg,
-      var(--edge-color, #22d3ee) 360deg);
-  animation: edge-spin 4.5s linear infinite;
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-}
-.edge-anim::after{
-  content:""; position:absolute; inset:-6px; border-radius:inherit; z-index:-1;
-  background: radial-gradient(50% 60% at 50% 50%, color-mix(in oklab, var(--edge-color, #22d3ee) 65%, black) 0%, transparent 60%);
-  filter: blur(10px); opacity:.65;
-}
-@keyframes edge-spin { to { transform: rotate(360deg); } }
+.graffiti{font-family:"Permanent Marker",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+.graffiti{color:#00e5ff;text-shadow:0 0 6px #00e5ff,0 0 12px #00e5ff,2px 2px 0 #000}
+.graffiti .u{color:#ff2ea6;font-size:1.15em;text-shadow:0 0 6px #ff2ea6,0 0 14px #ff2ea6,2px 2px 0 #000}
+.graffiti::before{content:"";position:absolute;inset:-10px -14px -12px -14px;background:
+  radial-gradient(circle at 20% 30%,rgba(255,255,255,.18) 0%,transparent 35%) repeat,
+  radial-gradient(circle at 70% 60%,rgba(255,255,255,.20) 0%,transparent 40%) repeat;
+background-size:12px 12px,14px 14px;filter:blur(6px);opacity:.25;z-index:-1}
 
-/* Flame ring for Trending */
-.flame-ring{
-  position:absolute; inset:-1px; border-radius:12px; z-index:6; pointer-events:none;
-  box-shadow:
-    0 0 0 2px rgba(255,165,0,.45) inset,
-    0 0 16px 6px rgba(255,95,0,.35),
-    0 0 28px 10px rgba(255,0,0,.25);
-}
+@layer components{
 
-/* --- Graffiti logo styles (spray paint vibe) --- */
-.graffiti {
-  font-family: "Permanent Marker", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 2rem;
-  letter-spacing: 1px;
-  display: inline-block;
-  position: relative;
-  color: #00e5ff; /* cyan */
-  text-shadow:
-    0 0 6px #00e5ff,
-    0 0 12px #00e5ff,
-    2px 2px 0 #000;
-}
-.graffiti .u {
-  color: #ff2ea6;              /* neon pink U */
-  font-size: 2.3rem;
-  text-shadow:
-    0 0 6px #ff2ea6,
-    0 0 14px #ff2ea6,
-    2px 2px 0 #000;
-}
-/* Spray noise / overspray halo */
-.graffiti::before {
-  content: "";
-  position: absolute;
-  inset: -10px -14px -12px -14px;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.18) 0%, transparent 35%) repeat,
-    radial-gradient(circle at 70% 60%, rgba(255,255,255,0.2) 0%, transparent 40%) repeat;
-  background-size: 12px 12px, 14px 14px;
-  filter: blur(6px);
-  opacity: .25;
-  z-index: -1;
-}
-/* A couple subtle drips */
-.graffiti::after {
-  content: "";
-  position: absolute;
-  bottom: -8px; left: 22%;
-  width: 6px; height: 16px;
-  background: currentColor;
-  border-radius: 50%;
-  filter: blur(1px);
-  opacity: .75;
+  /* Section heading: cyan with glow */
+  .heading-cyan{
+    @apply text-3xl sm:text-4xl font-semibold mb-3;
+    color: var(--neon1);
+    text-shadow: 0 0 8px color-mix(in oklab, var(--neon1) 65%, black);
+  }
+
+  /* Neon edge frame (cyan -> pink), subtle outer bloom */
+  .edge-neon{
+    position: relative;
+    border-radius: 14px;
+    box-shadow:
+      0 8px 18px rgba(0,0,0,.45),
+      0 0 24px rgba(34,211,238,.18); /* ambient bloom */
+    overflow: hidden;
+    background: rgba(15,23,42,.58); /* slate-900/60 fallback under image caption bar */
+  }
+  .edge-neon::before{
+    content:"";
+    position:absolute; inset:-2px; border-radius: inherit;
+    background:
+      conic-gradient(from 0deg at 50% 50%,
+        var(--neon1) 0deg, var(--neon1) 120deg,
+        transparent 160deg 200deg,
+        var(--neon2) 240deg, var(--neon2) 360deg);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    padding: 2px;
+    animation: edge-rotate 6s linear infinite;
+    filter: drop-shadow(0 0 8px color-mix(in oklab, var(--neon1) 65%, black))
+            drop-shadow(0 0 10px color-mix(in oklab, var(--neon2) 55%, black));
+  }
+  @keyframes edge-rotate { to { transform: rotate(360deg); } }
+
+  /* Outer glow backdrop */
+  .edge-neon::after{
+    content:"";
+    position:absolute; inset:-10px; border-radius: inherit; z-index:-1;
+    background: radial-gradient(60% 60% at 50% 50%, rgba(34,211,238,.35), transparent 60%);
+    filter: blur(18px); opacity:.9;
+  }
+
+  /* Trending flame aura inspired by your reference */
+  .flame-wrap{
+    position: relative; border-radius:14px; overflow:hidden;
+    box-shadow: 0 10px 22px rgba(0,0,0,.55);
+  }
+  .flame-wrap::before{
+    content:"";
+    position:absolute; inset:-6px; border-radius:18px; pointer-events:none;
+    background:
+      radial-gradient(120px 120px at 20% 80%, rgba(255,210,64,.75), transparent 60%),
+      radial-gradient(140px 140px at 80% 20%, rgba(255,120,32,.85), transparent 55%),
+      radial-gradient(220px 220px at 50% 0%, rgba(255,70,20,.75), transparent 60%),
+      conic-gradient(from 0deg at 50% 50%, rgba(255,200,0,.9), rgba(255,120,0,.9), rgba(255,0,0,.9), rgba(255,120,0,.9), rgba(255,200,0,.9));
+    mix-blend-mode: screen;
+    filter: blur(8px);
+    animation: flame-flicker 1.8s ease-in-out infinite alternate;
+    mask:
+      radial-gradient(closest-side, transparent 62%, #000 63% 100%); /* keeps inside bright, edges flamey */
+  }
+  .flame-wrap::after{
+    content:"";
+    position:absolute; inset:-2px; border-radius:18px; pointer-events:none;
+    box-shadow:
+      0 0 10px 2px rgba(255,160,0,.75) inset,
+      0 0 28px 10px rgba(255,90,0,.35),
+      0 0 44px 14px rgba(255,0,0,.25);
+    animation: flame-breathe 2.4s ease-in-out infinite;
+  }
+  @keyframes flame-flicker{
+    0% { filter: blur(7px) brightness(1); transform: rotate(0deg) scale(1); }
+    100%{ filter: blur(10px) brightness(1.15); transform: rotate(3deg) scale(1.02); }
+  }
+  @keyframes flame-breathe{
+    0% { opacity:.65 }
+    100%{ opacity:.9 }
+  }
+
+  /* Pink neon button ring for "See all" */
+  .seeall{
+    @apply inline-flex items-center justify-center rounded-md px-3 py-1 text-sm;
+    color: var(--neon2);
+    border: 1px solid color-mix(in oklab, var(--neon2) 70%, #000);
+    box-shadow: 0 0 10px color-mix(in oklab, var(--neon2) 65%, #000);
+  }
 }
