@@ -70,3 +70,35 @@ a.section-more:hover{text-decoration:underline;text-underline-offset:3px}
 
 /* Small LIVE pill tidy-up if present */
 .badge-live{background:linear-gradient(90deg,#ff33cc,#ff66ff);color:#fff;font-weight:800;padding:.22rem .5rem;border-radius:999px;box-shadow:0 4px 20px rgba(255,80,200,.35)}
+
+/* ===== Row / Card Layout Fix ===== */
+.row {
+  display: flex;
+  flex-wrap: nowrap;       /* single strip */
+  overflow-x: auto;
+  gap: 1rem;
+  scroll-snap-type: x mandatory;
+  padding: .5rem 0 1.5rem;
+}
+.row::-webkit-scrollbar {display:none}
+
+.row .item {
+  flex: 0 0 auto;          /* no wrapping */
+  width: 60vw;             /* mobile width */
+  max-width: 320px;
+  scroll-snap-align: start;
+}
+
+.row .card {
+  background:#0d131b;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 4px 14px rgba(0,0,0,.35);
+  transition:transform .2s ease;
+}
+.row .card:hover { transform:translateY(-3px) scale(1.04) }
+
+/* Kill extra broken side images completely */
+.row .item img:not(:first-of-type),
+.row .item br,
+.row .item > *:not(.card):not(.badge-live) { display:none!important }
