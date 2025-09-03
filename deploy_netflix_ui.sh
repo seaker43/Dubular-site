@@ -1,0 +1,133 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+mkdir -p public
+echo '<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>dubUlar</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+    }
+    .header {
+      font-size: 2rem;
+      font-weight: bold;
+      padding: 20px;
+      color: cyan;
+    }
+    .section {
+      padding: 0 20px 40px 20px;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .section-header h2 {
+      font-size: 1.5rem;
+    }
+    .section-header button {
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #444;
+      padding: 6px 12px;
+      border-radius: 4px;
+    }
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 12px;
+    }
+    .stream-card {
+      flex: 0 0 auto;
+      width: 160px;
+      height: 90px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 8px;
+      position: relative;
+      background-color: #222;
+    }
+    .stream-info {
+      margin-top: 5px;
+      font-weight: bold;
+      color: cyan;
+    }
+    .live-badge {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background-color: red;
+      color: white;
+      padding: 2px 6px;
+      font-size: 0.7rem;
+      border-radius: 3px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">dubUlar</div>
+
+  <!-- Trending Now -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Trending Now</h2>
+      <button>See all ></button>
+    </div>
+    <div class="carousel">
+      <div>
+        <div class="stream-card" style="background-image: url('\''https://i.imgur.com/ZQZSwRk.jpg'\'');">
+          <div class="live-badge">LIVE</div>
+        </div>
+        <div class="stream-info">Night Raid Tactics</div>
+      </div>
+      <div>
+        <div class="stream-card" style="background-image: url('\''https://i.imgur.com/k37D7YF.jpg'\'');">
+          <div class="live-badge">LIVE</div>
+        </div>
+        <div class="stream-info">DJ Krillz Party</div>
+      </div>
+      <div>
+        <div class="stream-card" style="background-image: url('\''https://i.imgur.com/q1zQYb3.jpg'\'');">
+          <div class="live-badge">LIVE</div>
+        </div>
+        <div class="stream-info">IRL Tokyo Walk</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Picks -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Top Picks for You</h2>
+      <button>See all ></button>
+    </div>
+    <div class="carousel">
+      <div>
+        <div class="stream-card" style="background-image: url('\''https://i.imgur.com/EFyygnT.jpg'\'');"></div>
+        <div class="stream-info">Retro Gaming Zone</div>
+      </div>
+      <div>
+        <div class="stream-card" style="background-image: url('\''https://i.imgur.com/1H1bPoU.jpg'\'');"></div>
+        <div class="stream-info">Cooking w/ Camille</div>
+      </div>
+      <div>
+        <div class="stream-card" style="background-image: url('\''https://i.imgur.com/KZrBlWw.jpg'\'');"></div>
+        <div class="stream-info">Sports Recap</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+' > public/index.html
+
+git add public/index.html
+git commit -m "feat: full Netflix-style homepage mockup"
+git push origin main
