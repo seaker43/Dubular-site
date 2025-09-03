@@ -24,3 +24,10 @@
 /* Titles & badges */
 .card-title,.item-title{margin-top:6px;font-size:0.95rem}
 .badge,.pill{line-height:1;white-space:nowrap}
+
+/* ---- Snap scrolling (mobile friendly) ---- */
+.row{scroll-snap-type:x mandatory;scroll-padding:0 12px}
+.row > *{scroll-snap-align:start}
+@media (hover:none){
+  .row{scroll-behavior:smooth}
+}
