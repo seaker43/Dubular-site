@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build": "npx @cloudflare/next-on-pages@latest"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.56.1",
