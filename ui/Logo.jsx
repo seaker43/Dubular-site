@@ -1,9 +1,18 @@
-export default function Logo(){ 
+import styles from "../styles/logo.module.css";
+
+export default function Logo(){
   return (
-    <div className="logo-wrap" aria-label="DUBULAR">
-      <span className="logo-text">DUB</span>
-      <span className="logo-u" aria-hidden="true">U</span>
-      <span className="logo-text">LAR</span>
+    <div className={`${styles.wrap} ${styles.jitter} select-none`}>
+      {/* overspray backdrop */}
+      <i className={styles.overspray} aria-hidden />
+      {/* text */}
+      <span className={`${styles.cyan} text-3xl`}>dub</span>
+      <span className={`${styles.pink} text-4xl`}>U</span>
+      <span className={`${styles.cyan} text-3xl`}>lar</span>
+      {/* tiny drips */}
+      <i className={`${styles.drip} ${styles.d1}`} aria-hidden />
+      <i className={`${styles.drip} ${styles.d2}`} aria-hidden />
+      <i className={`${styles.drip} ${styles.d3}`} aria-hidden />
     </div>
   );
 }
