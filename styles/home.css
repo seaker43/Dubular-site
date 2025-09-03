@@ -335,3 +335,51 @@ main > section > .see-all:hover{
 }
 
 /* Keep previous card polish intact */
+
+/* ===== Batch 5: restore horizontal rows + card grid ===== */
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 10px var(--side-pad) 20px;
+  scroll-snap-type: x mandatory;
+}
+.row::-webkit-scrollbar { display: none; }
+
+.row .card, .row .item {
+  flex: 0 0 auto;
+  width: 240px;
+  border-radius: 12px;
+  background: #101820;
+  box-shadow: 0 2px 10px rgba(0,0,0,.35);
+  overflow: hidden;
+  scroll-snap-align: start;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.row .card:hover, .row .item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.55);
+}
+.row .card img, .row .item img {
+  width: 100%;
+  height: 135px;
+  object-fit: cover;
+  display: block;
+}
+.row .card h3, .row .item h3 {
+  padding: 8px 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+}
+.row .card .badge-live {
+  position: absolute;
+  top: 8px; left: 8px;
+  background: #ff2d8b;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
