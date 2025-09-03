@@ -146,3 +146,45 @@
   text-shadow: 0 0 6px #ff2bb3, 0 0 12px #ff2bb3;
 }
 .see-all-link:hover { color: #fff; background: #ff2bb3; }
+
+/* === UI-POPS v1: stronger hovers + animated logo === */
+
+/* Lift & intensity on hover */
+.raised { transition: transform .22s ease, box-shadow .22s ease, filter .22s ease; }
+.raised:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.55); filter: saturate(1.08); }
+
+/* Make perimeter effects brighten on hover */
+.card-shell:hover.neon-ring::before { filter: blur(6px) brightness(1.4) drop-shadow(0 0 22px var(--edge,#22d3ee)); }
+.card-shell:hover.flame-ring::before { filter: blur(15px) brightness(1.35); }
+
+/* ===== Animated dubUlar logo ===== */
+/* Keep Bubblegum Sans scoped only to the logo if you imported it */
+.logo-font { font-family: "Bubblegum Sans", cursive; }
+
+/* Wrapper: slight floating + shine sweep overlay */
+@keyframes logo-float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-2px) } }
+.logo-wrap { position: relative; display: inline-flex; gap:.125rem; animation: logo-float 4.5s ease-in-out infinite; }
+
+/* Shine sweep (subtle) */
+@keyframes shine-sweep { from { transform: translateX(-120%); } to { transform: translateX(120%); } }
+.logo-wrap::before {
+  content:"";
+  position:absolute; inset:-4px 0; pointer-events:none; border-radius: 12px;
+  background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.14), transparent 60%);
+  animation: shine-sweep 3.6s ease-in-out infinite;
+  filter: blur(6px); opacity:.55; mix-blend-mode: screen;
+}
+
+/* Cyan parts (dub / lar) with soft pulsing glow */
+@keyframes cyan-glow { 0%,100% { text-shadow: 0 0 10px #00e5ff, 0 0 22px #00e5ff33; } 50% { text-shadow: 0 0 14px #00e5ff, 0 0 28px #00e5ff55; } }
+.logo-cyan { color:#22d3ee; animation: cyan-glow 2.8s ease-in-out infinite; }
+
+/* Neon pink U: slightly larger, neon pulse + halo */
+@keyframes pink-neon { 0%,100% { text-shadow: 0 0 12px #ff4dff, 0 0 24px #ff4dff66; } 50% { text-shadow: 0 0 18px #ff4dff, 0 0 36px #ff4dffaa; } }
+.logo-pinkU { color:#ff4dff; animation: pink-neon 2.2s ease-in-out infinite; position:relative; }
+.logo-pinkU::after {
+  content:""; position:absolute; inset:-4px -3px -6px -3px; border-radius: 10px; pointer-events:none;
+  background: radial-gradient(60% 70% at 50% 35%, rgba(255,77,255,.55), transparent 70%);
+  filter: blur(10px); opacity:.85; z-index:-1;
+}
+/* === /UI-POPS v1 === */
