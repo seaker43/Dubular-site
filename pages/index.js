@@ -1,48 +1,55 @@
-import Row from "../ui/Row";
-import BottomBar from "../ui/BottomBar";
+export default function Home(){
+  const card = (t, img, flame=false) => (
+    <article className={"card relative bg-[#0c1218] rounded-2xl overflow-hidden " + (flame? "flame":"edge-frame")}>
+      <div className="aspect-[16/9] w-full overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={img} alt={t} className="w-full h-full object-cover" />
+      </div>
+      <div className="p-4">
+        <h3 className="text-cyan-300 font-semibold">{t}</h3>
+      </div>
+      <span className="absolute left-3 top-3 bg-red-600 text-white text-[10px] px-2 py-1 rounded">LIVE</span>
+    </article>
+  );
 
-const featured = [
-  { title: "Pro Caster — Night Ops", img: "https://images.unsplash.com/photo-1581276879432-15e50521f95e" },
-  { title: "Studio Session", img: "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2" },
-];
-const watched = [
-  { title: "Retro Arcade Vibes", img: "https://images.unsplash.com/photo-1549924231-f129b911e442" },
-  { title: "Lo-Fi Study Session", img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f" },
-];
-const trending = [
-  { title: "Night Raid Tactics #1", img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470", live:true },
-  { title: "Street Battle 9", img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d", live:true },
-  { title: "DJ Krillz Party", img: "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2", live:true },
-  { title: "Dubular Presents", img: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131" },
-  { title: "Tech Live Coding", img: "https://images.unsplash.com/photo-1518770660439-4636190af475", live:true },
-];
-const recommended = [
-  { title: "AI Coding Jam", img: "https://images.unsplash.com/photo-1581093588401-22a3d7848d3f" },
-  { title: "Lo-Fi Study Session", img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f" },
-];
-const music = [
-  { title: "Dubular Presents", img: "https://images.unsplash.com/photo-1485579149621-3123dd979885" },
-  { title: "Live DJ Set", img: "https://images.unsplash.com/photo-1487180144351-b8472da7d491" },
-];
-const irl = [
-  { title: "Travel IRL", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e" },
-];
-const gaming = [
-  { title: "Battle Royale Grind", img: "https://images.unsplash.com/photo-1511512578047-9f6c0c9be2a2", live:true },
-  { title: "Retro Randomizer", img: "https://images.unsplash.com/photo-1580128636036-3d6b7a3e3d58" },
-];
+  const Row = ({title, flame=false, items}) => (
+    <section className="mb-10">
+      <div className="flex items-center justify-between mb-4 px-1">
+        <h2 className="text-cyan-300 heading-neon">{title}</h2>
+        <a href="/all" className="neon-link px-3 py-1 rounded">See all &gt;</a>
+      </div>
+      <div className="grid grid-flow-col auto-cols-[78%] xs:auto-cols-[62%] sm:auto-cols-[46%] md:auto-cols-[32%] lg:auto-cols-[28%] gap-4 overflow-x-auto snap-x snap-mandatory pb-2">
+        {items.map((v,i)=>(
+          <div key={i} className="snap-start">{card(v.title, v.img, flame)}</div>
+        ))}
+      </div>
+    </section>
+  );
 
-export default function Home() {
+  const featured = [
+    { title: "Studio Session", img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop" },
+    { title: "Coder Cam 24/7", img: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop" }
+  ];
+  const trending = [
+    { title: "Night Raid Tactics #1", img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop" },
+    { title: "Street Battle 9", img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop" }
+  ];
+
   return (
-    <main className="min-h-screen bg-neutral-950 text-white pb-20">
-      <Row title="Featured Streamers" items={featured} seeAllHref="/featured" />
-      <Row title="Previously Watched" items={watched} seeAllHref="/history" />
-      <Row title="Trending" items={trending} seeAllHref="/trending" trending />
-      <Row title="Recommended" items={recommended} seeAllHref="/recommended" />
-      <Row title="Music" items={music} seeAllHref="/music" />
-      <Row title="IRL" items={irl} seeAllHref="/irl" />
-      <Row title="Gaming" items={gaming} seeAllHref="/gaming" />
-      <BottomBar />
+    <main className="min-h-screen bg-[#0a0f14] text-white px-4 py-6 space-y-12">
+      <Row title="Featured Streamers" items={featured} />
+      <Row title="Trending" items={trending} flame />
+      {/* Fixed bottom bar (simple) */}
+      <nav className="fixed bottom-0 inset-x-0 z-40 bg-black/60 backdrop-blur border-t border-white/10">
+        <ul className="flex justify-around py-3 text-cyan-300 text-sm">
+          <li><a href="#ranks" className="opacity-90">Ranks</a></li>
+          <li><a href="#favs" className="opacity-90">Favs</a></li>
+          <li><a href="#search" className="opacity-90">Search</a></li>
+          <li><a href="#wallet" className="opacity-90">Wallet</a></li>
+          <li><a href="#account" className="opacity-90">Account</a></li>
+        </ul>
+      </nav>
+      <div className="h-16" />
     </main>
   );
 }
