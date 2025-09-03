@@ -5,7 +5,7 @@ export default function Row({ title, items = [], seeAllHref = "#", trending = fa
     <section className="mb-10">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-semibold">{title}</h2>
-        <a href={seeAllHref} className="text-sm border border-white/20 px-3 py-1 rounded hover:bg-white hover:text-black transition">
+        <a href={seeAllHref} className="see-all-link text-sm border border-pink-500/30 px-3 py-1 rounded transition">
           See all &gt;
         </a>
       </div>
