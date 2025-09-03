@@ -1,22 +1,2 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    "./pages/**/*.{js,jsx,ts,tsx}",
-    "./ui/**/*.{js,jsx,ts,tsx}",
-    "./components/**/*.{js,jsx,ts,tsx}",
-    "./styles/**/*.{css}"
-  ],
-  safelist: [
-    "heading-neon","neon-link","neon-link:hover",
-    "card","edge-frame","flame"
-  ],
-  theme: {
-    extend: {
-      colors: {
-        brand: { cyan: "#00e5ff", pink: "#ff4fd8", lime: "#b3ff3b" }
-      },
-      borderRadius: { "2xl": "1rem" }
-    }
-  },
-  plugins: []
-};
+/** @type {import("tailwindcss").Config} */
+module.exports={content:["./pages/**/*.{js,jsx,ts,tsx}","./ui/**/*.{js,jsx,ts,tsx}","./components/**/*.{js,jsx,ts,tsx}","./styles/**/*.css"],theme:{extend:{colors:{brand:{cyan:"#00e5ff",pink:"#ff4dfd",lime:"#b3ff3b"}},borderRadius:{"2xl":"1rem"}}},plugins:[]};
