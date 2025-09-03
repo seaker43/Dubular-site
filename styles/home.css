@@ -25,3 +25,10 @@
 .card:hover .thumb{transform:scale(1.04)}
 .badge{position:absolute;left:10px;top:10px;background:linear-gradient(90deg,#ff0080,#ff4dff);color:#fff;font-size:12px;font-weight:800;padding:4px 8px;border-radius:999px;box-shadow:0 0 12px rgba(255,77,255,.6)}
 .card-title{font-size:clamp(14px,2.8vw,16px);font-weight:700;margin:.55rem .25rem 0;color:#f4f4f4}
+
+/* Hide accidental duplicate/fallback thumbs rendered alongside cards */
+.row .aside, .row [data-fallback], .row .thumb--fallback, .row .card + img, .row figure + img { display:none !important; }
+.row .item, .row .card { overflow:hidden; }
+/* Hide duplicate/fallback thumbnails */ 
+.row .aside, .row [data-fallback], .row .thumb--fallback, .row .card + img, .row figure + img { display:none !important; }
+.row .item, .row .card { overflow:hidden; }
