@@ -1,35 +1,46 @@
-import CardGrid from '../ui/CardGrid'
-import StreamCard from '../ui/StreamCard'
+import Image from "next/image";
 
 export default function Home() {
   const trending = [
-    { title: 'Night Raid Tactics #1', img: '/trending1.jpg', live: true },
-    { title: 'DJ Krillz Party', img: '/trending2.jpg', live: true },
-    { title: 'Street Battle 9', img: '/trending3.jpg', live: true },
-    { title: 'Dubular Presents', img: '/trending4.jpg', live: false },
-    { title: 'Tech Live Coding', img: '/trending5.jpg', live: true },
-  ]
+    { title: "Night Raid Tactics #1", img: "https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=1200&q=75&auto=format", live: true },
+    { title: "DJ Krillz Party",       img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1200&q=75&auto=format", live: true },
+    { title: "Street Battle 9",       img: "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?w=1200&q=75&auto=format", live: true },
+    { title: "Dubular Presents",      img: "https://images.unsplash.com/photo-1510771463146-e89e6e86560e?w=1200&q=75&auto=format", live: false },
+    { title: "Tech Live Coding",      img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=75&auto=format", live: true },
+  ];
 
   return (
-    <main className="bg-black min-h-screen text-white px-6 py-8">
+    <main className="min-h-screen px-6 py-8">
       <section className="mb-12">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold">Trending Now</h2>
-          <a
-            href="#"
-            className="text-sm border border-white px-3 py-1 rounded hover:bg-white hover:text-black transition"
-          >
+          <h2 className="text-3xl sm:text-4xl">Trending Now</h2>
+          <a href="#" className="text-sm border border-white/30 px-3 py-1 rounded hover:bg-white hover:text-black transition">
             See all &gt;
           </a>
         </div>
-
-        {/* Use CardGrid with StreamCard children */}
-        <CardGrid>
-          {trending.map((video, i) => (
-            <StreamCard key={i} {...video} />
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+          {trending.map((v, i) => (
+            <article key={v.title} className="bg-zinc-900/80 rounded-xl overflow-hidden shadow-md ring-1 ring-white/5 hover:ring-cyan-400/30 transition">
+              <div className="relative aspect-[16/9]">
+                {v.live && (
+                  <span className="absolute top-2 left-2 z-10 bg-red-600 text-xs px-2 py-1 rounded-md">LIVE</span>
+                )}
+                <Image
+                  src={v.img}
+                  alt={v.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 20vw"
+                  priority={i < 2}
+                />
+              </div>
+              <div className="p-3">
+                <h3 className="text-cyan-400 font-medium text-sm line-clamp-2">{v.title}</h3>
+              </div>
+            </article>
           ))}
-        </CardGrid>
+        </div>
       </section>
     </main>
-  )
+  );
 }
