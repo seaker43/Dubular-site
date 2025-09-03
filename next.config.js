@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+/** @type {import("next").NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -6,11 +6,8 @@ const nextConfig = {
       "images.unsplash.com",
       "source.unsplash.com",
       "i.imgur.com",
-      "cdn.dubular.live" // add your CDN if you have one
-    ],
-  },
-  experimental: {
-    runtime: "experimental-edge",
-  },
+      "cdn.dubular.live"
+    ]
+  }
 };
 module.exports = nextConfig;
