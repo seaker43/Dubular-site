@@ -91,3 +91,9 @@
 }
 @keyframes tag-jitter { 0%,100% { transform: rotate(-.6deg) skewX(-.6deg) translateY(0px); } 50% { transform: rotate(.6deg) skewX(.6deg) translateY(-1px); } }
 .logo-graffiti { animation: tag-jitter 3.6s ease-in-out infinite; }
+
+/* Icon neon glow */
+.icon-glow {
+  filter: drop-shadow(0 0 8px rgba(34,211,238,.75))
+          drop-shadow(0 0 16px rgba(34,211,238,.35));
+}
