@@ -4,10 +4,7 @@ export default function StreamCard({ title, img, live, trending = false, edgeCol
   const ringClass = trending ? "flame-ring" : "neon-ring";
   return (
     <div
-      className={[
-        "card-shell glow-shadow raised pressable",
-        ringClass
-      ].join(" ")}
+      className={["card-shell halo", ringClass, "raised pressable"].join(" ")}
       style={!trending ? { ["--edge"]: edgeColor } : undefined}
     >
       <article className="card-inner ring-1 ring-white/5 relative z-10">
