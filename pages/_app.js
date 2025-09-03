@@ -4,17 +4,17 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       {/* Top logo header */}
-      <header className="sticky top-0 z-40 h-14 flex items-center px-6 bg-[#080c11]/95 backdrop-blur border-b border-white/10">
-        <div className="flex items-center gap-1 font-extrabold tracking-wide">
-          <span className="text-cyan-400 text-3xl drop-shadow-[0_0_12px_#00e5ff] font-[bubblegum-sans]">dub</span>
-          <span className="text-pink-500 text-4xl drop-shadow-[0_0_15px_#ff4dff] font-[bubblegum-sans]">U</span>
-          <span className="text-cyan-400 text-3xl drop-shadow-[0_0_12px_#00e5ff] font-[bubblegum-sans]">lar</span>
+      <header className="sticky top-0 z-40 h-16 flex items-center px-6 bg-[#080c11]/95 backdrop-blur border-b border-white/10">
+        <div className="logo-font logo-wrap select-none">
+          <span className="logo-cyan text-3xl">dub</span>
+          <span className="logo-pinkU text-4xl">U</span>
+          <span className="logo-cyan text-3xl">lar</span>
         </div>
       </header>
 
       <Component {...pageProps} />
 
-      {/* Fixed BottomBar shortcuts */}
+      {/* Fixed BottomBar shortcuts (unchanged) */}
       <nav className="fixed bottom-0 left-0 right-0 h-14 bg-[#080c11]/95 border-t border-white/10 flex justify-around items-center text-xs text-white z-40">
         {[
           { label: "Ranks", href: "/ranks" },
