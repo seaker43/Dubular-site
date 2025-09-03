@@ -31,3 +31,22 @@
 @media (hover:none){
   .row{scroll-behavior:smooth}
 }
+
+/* ---- Row horizontal scrolling ---- */
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+}
+.row::-webkit-scrollbar { display: none; }
+
+/* Each card snaps cleanly */
+.row > * {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
