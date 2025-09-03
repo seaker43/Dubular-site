@@ -1,13 +1,16 @@
-import Card from "./Card";
-export default function Row({title, items, seeAllHref="#", variant="edge"}){
+import StreamCard from "./StreamCard";
+
+export default function Row({ title, link = "#", items = [] }) {
   return (
-    <section className="container" style={{paddingTop:10,paddingBottom:18}}>
-      <div className="hrow">
-        <h2 className="h-title">{title}</h2>
-        <a className="neon-link" href={seeAllHref}><span>See all</span> &gt;</a>
+    <section className="row">
+      <div className="row-head">
+        <h2 className="row-title">{title}</h2>
+        <a className="see-all" href={link}>See all &gt;</a>
       </div>
-      <div className="hscroll">
-        {items.map((v,i)=>(<Card key={i} v={v} variant={variant}/>))}
+      <div className="rail" role="list">
+        {items.map((it) => (
+          <StreamCard key={it.id} item={it} />
+        ))}
       </div>
     </section>
   );

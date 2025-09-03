@@ -1,62 +1,27 @@
-/* Layout helpers */
-.section{margin:2.25rem 0}
-.section__head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:.75rem}
-.section__head h2{font-size:1.4rem}
+/* Header skeleton */
+.site-header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:12px 16px;background:#000;position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.08)}
+.hdr-side{height:40px}
+.hdr-center{display:flex;justify-content:center}
 
-/* Hero */
-.home-hero{display:grid;grid-template-columns:1.4fr 1fr;gap:1.25rem;align-items:center;margin:1rem 0 2rem}
-.home-hero__title{font-size:2.8rem;line-height:1.05;margin:0 0 .5rem}
-.home-hero__subtitle{opacity:.9;max-width:46ch;margin:.25rem 0 1rem}
-.home-hero__deploy{opacity:.6;margin-top:.75rem;font-size:.9rem}
-.home-hero__media{display:flex;justify-content:center}
-.home-hero__video-shell{aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid #222;background:#000;max-width:720px;width:100%}
-.home-hero__video-shell video{width:100%;height:100%;object-fit:cover;filter:saturate(1.05)}
-.home-hero__cta{display:flex;gap:.6rem;margin:.25rem 0}
-.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:10px;padding:.65rem .95rem;border:1px solid #2a2a2a;text-decoration:none}
-.btn--primary{background:#00c3ff;color:#fff;border-color:#00c3ff}
-.btn--ghost{background:transparent}
+/* Page background + base text */
+.page{background:#0a0f14;color:#eee;min-height:100vh}
 
-/* Cards */
-.card-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:.8rem}
-.card{grid-column:span 4;background:#101010;border:1px solid #202020;border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .15s ease,border-color .15s ease}
-.card:hover{transform:translateY(-2px);border-color:#00c3ff}
-.card__media{background:#0a0a0a center/cover no-repeat;aspect-ratio:16/9}
-.card__body{padding:.75rem}
-.card__title{margin:0 0 .25rem;font-size:1.05rem}
-.card__desc{margin:0;opacity:.8;font-size:.95rem}
+/* Section headers */
+.row{padding:18px 16px}
+.row-head{display:flex;justify-content:space-between;align-items:baseline;margin:0 4px 8px}
+.row-title{font-size:clamp(22px,3.6vw,36px);font-weight:800;letter-spacing:.2px;margin:0;
+  text-shadow:0 0 14px rgba(0,229,255,.28)}
+.see-all{font-weight:600;text-decoration:none;color:#cbb4ff}
+.see-all:hover{color:#fff}
 
-/* Feature list */
-.feature-list{display:grid;grid-template-columns:repeat(12,1fr);gap:.8rem}
-.feature{grid-column:span 3;background:#101010;border:1px solid #202020;border-radius:12px;padding:1rem}
-.feature h3{margin:.1rem 0 .25rem;font-size:1.05rem}
-.feature p{margin:0;opacity:.85;font-size:.95rem}
+/* Horizontal rail */
+.rail{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 8px;scroll-snap-type:x mandatory}
+.rail::-webkit-scrollbar{height:10px}.rail::-webkit-scrollbar-thumb{background:#222;border-radius:10px}
 
-@media (max-width:1100px){
-  .home-hero{grid-template-columns:1fr}
-  .card{grid-column:span 6}
-  .feature{grid-column:span 6}
-}
-@media (max-width:680px){
-  .card{grid-column:span 12}
-  .feature{grid-column:span 12}
-  .home-hero__title{font-size:2.2rem}
-}
-
-/* Accent color refresh */
-.btn--primary {
-  background: #00c3ff;
-  border-color: #00c3ff;
-  color: #000; /* text on cyan */
-  font-weight: 600;
-}
-.btn--primary:hover {
-  background: #00a7dd;
-  border-color: #00a7dd;
-}
-
-a {
-  color: #00c3ff;
-}
-a:hover {
-  color: #00a7dd;
-}
+/* Card */
+.card{width:clamp(220px,38vw,320px);flex:0 0 auto;scroll-snap-align:start}
+.thumb-wrap{position:relative;border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.thumb{display:block;width:100%;height:clamp(120px,22vw,180px);object-fit:cover;transition:transform .35s ease}
+.card:hover .thumb{transform:scale(1.04)}
+.badge{position:absolute;left:10px;top:10px;background:linear-gradient(90deg,#ff0080,#ff4dff);color:#fff;font-size:12px;font-weight:800;padding:4px 8px;border-radius:999px;box-shadow:0 0 12px rgba(255,77,255,.6)}
+.card-title{font-size:clamp(14px,2.8vw,16px);font-weight:700;margin:.55rem .25rem 0;color:#f4f4f4}
