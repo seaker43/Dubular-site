@@ -188,3 +188,61 @@
   filter: blur(10px); opacity:.85; z-index:-1;
 }
 /* === /UI-POPS v1 === */
+
+/* === UI-FIX v4: static rings + stronger interactions + graffiti logo + lime titles === */
+
+/* Carousels */
+.hide-scrollbar { -ms-overflow-style:none; scrollbar-width:none; }
+.hide-scrollbar::-webkit-scrollbar { display:none; }
+
+/* Card shells & content */
+.card-shell { position: relative; border-radius: 14px; overflow: visible; isolation: isolate; }
+.card-inner { border-radius: 14px; overflow: hidden; background: rgba(24,24,27,.88); box-shadow: 0 10px 30px rgba(0,0,0,.55); }
+
+/* Hover/tap pop — transform only (no layout shift) */
+.raised { transition: transform .22s ease, box-shadow .22s ease, filter .22s ease; }
+.raised:hover { transform: translateY(-5px); box-shadow: 0 18px 46px rgba(0,0,0,.6); filter: saturate(1.1); }
+.pressable:active { transform: translateY(-2px) scale(.995); }
+
+/* Visible cyan glow shadow behind thumbnails */
+.glow-shadow { box-shadow: 0 0 28px rgba(34,211,238,.25), 0 12px 28px rgba(0,0,0,.55); }
+
+/* STATIC neon perimeter (non-trending) — no animation */
+.neon-ring::before {
+  content:""; position:absolute; inset:-3px; border-radius:16px; pointer-events:none; z-index:0;
+  background: conic-gradient(from 0deg at 50% 50%, var(--edge,#22d3ee), transparent 16%, transparent 36%, var(--edge,#22d3ee) 52%, transparent 68%, transparent 84%, var(--edge,#22d3ee));
+  filter: blur(7px) brightness(1.15) drop-shadow(0 0 16px var(--edge,#22d3ee));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude; padding:4px;
+}
+/* Intensify on hover/tap */
+.card-shell:hover.neon-ring::before,
+.card-shell:active.neon-ring::before {
+  filter: blur(7px) brightness(1.5) drop-shadow(0 0 24px var(--edge,#22d3ee));
+}
+
+/* STATIC flame ring (Trending) — no idle rotation, brighter flicker removed */
+.flame-ring::before {
+  content:""; position:absolute; inset:-4px; border-radius:16px; pointer-events:none; z-index:0;
+  background: conic-gradient(#ffea00,#ffb300,#ff7b00,#ff3b00,#ff7b00,#ffea00);
+  mix-blend-mode: screen;
+  filter: blur(14px) brightness(1.2);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude; padding:5px;
+}
+/* Intensify on hover/tap */
+.card-shell:hover.flame-ring::before,
+.card-shell:active.flame-ring::before { filter: blur(16px) brightness(1.45); }
+
+/* Lime green glowing section titles */
+.row-title-lime { color:#a3e635; /* lime-400 */ text-shadow: 0 0 8px rgba(163,230,53,.6), 0 0 16px rgba(163,230,53,.35); }
+
+/* Neon pink "See all" */
+.see-all-link { color:#ff2bb3; text-shadow: 0 0 6px #ff2bb3, 0 0 12px #ff2bb3; border-color: rgba(255,43,179,.35); }
+.see-all-link:hover { color:#000; background:#ff2bb3; }
+
+/* Graffiti logo font (scoped only to logo), keep color/size/casing same */
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint&display=swap");
+.logo-graffiti { font-family: "Rubik Spray Paint", system-ui, sans-serif; letter-spacing:.5px; }
+.logo-cyan { color:#22d3ee; text-shadow: 0 0 12px #00e5ff, 0 0 24px #00e5ff55; }
+.logo-pinkU { color:#ff4dff; text-shadow: 0 0 14px #ff4dff, 0 0 28px #ff4dff88; }
