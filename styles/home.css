@@ -383,3 +383,37 @@ main > section > .see-all:hover{
   padding: 2px 6px;
   border-radius: 6px;
 }
+
+/* ===== Batch 6: desktop density for rows ===== */
+.row {
+  -webkit-overflow-scrolling: touch;
+  scroll-padding-inline: var(--side-pad);
+  /* soft fade at edges on capable browsers */
+  mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+}
+
+/* Base (phones): ~2 cards visible (already) */
+.row .card, .row .item { width: 240px; }
+.row .card img, .row .item img { height: 135px; }
+
+/* Tablets: ~4–5 cards visible */
+@media (min-width: 768px) {
+  .row { gap: 18px; }
+  .row .card, .row .item { width: 220px; }
+  .row .card img, .row .item img { height: 124px; }
+}
+
+/* Desktop/laptop: ~5–7 cards visible */
+@media (min-width: 1024px) {
+  .page { max-width: 1200px; }
+  .row { gap: 20px; }
+  .row .card, .row .item { width: 210px; }
+  .row .card img, .row .item img { height: 118px; }
+}
+
+/* Large desktop: push to 6–8 cards if space allows */
+@media (min-width: 1400px) {
+  .page { max-width: 1400px; }
+  .row .card, .row .item { width: 200px; }
+  .row .card img, .row .item img { height: 112px; }
+}
