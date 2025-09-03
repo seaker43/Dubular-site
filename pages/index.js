@@ -1,6 +1,5 @@
 import React from "react";
 import CategoryRow from "../components/home/CategoryRow";
-import BottomBar from "../components/home/BottomBar";
 
 export const config = { runtime: "experimental-edge" };
 
@@ -10,7 +9,6 @@ export default function Home(){
       <CategoryRow title="Trending Now" />
       <CategoryRow title="Esports" />
       <CategoryRow title="Mobile Streams" />
-      <BottomBar />
     </>
   );
 }
