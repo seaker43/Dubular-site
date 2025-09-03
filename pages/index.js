@@ -2,15 +2,15 @@ export default function Home() {
   const cards = [
     {
       title: 'Night Raid Tactics #1',
-      image: 'https://cdn.pixabay.com/photo/2020/03/31/08/31/stream-4989263_1280.jpg'
+      image: 'https://cdn.pixabay.com/photo/2016/11/29/01/21/spotlight-1869445_1280.jpg'
     },
     {
       title: 'DJ Krillz Party',
-      image: 'https://cdn.pixabay.com/photo/2017/10/19/10/55/concert-2861055_1280.jpg'
+      image: 'https://cdn.pixabay.com/photo/2016/03/27/19/42/dj-1284507_1280.jpg'
     },
     {
       title: 'Urban Exploration IRL',
-      image: 'https://cdn.pixabay.com/photo/2021/02/04/11/10/urban-5979797_1280.jpg'
+      image: 'https://cdn.pixabay.com/photo/2018/02/28/15/00/building-3189695_1280.jpg'
     }
   ];
 
