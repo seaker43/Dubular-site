@@ -2,170 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+:root { color-scheme: dark; }
+html, body, #__next { height: 100%; }
+body { @apply bg-[#0a0f14] text-white antialiased; }
 
-:root{
-  --bg: #0b0f14;
-  --text: 232 234 237;              /* zinc-200 */
-  --neon1: #22d3ee;                 /* cyan */
-  --neon2: #ff2ea6;                 /* pink */
-  --lime: #a3ff3f;                  /* not used for headings now */
+.heading-neon { 
+  @apply text-3xl md:text-4xl font-extrabold text-cyan-300;
+  text-shadow: 0 0 14px rgba(0,229,255,.45), 0 0 30px rgba(0,229,255,.25);
 }
-html,body,#__next{height:100%}
-body{background:var(--bg); color:rgb(var(--text));}
 
-.graffiti{font-family:"Permanent Marker",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
-.graffiti{color:#00e5ff;text-shadow:0 0 6px #00e5ff,0 0 12px #00e5ff,2px 2px 0 #000}
-.graffiti .u{color:#ff2ea6;font-size:1.15em;text-shadow:0 0 6px #ff2ea6,0 0 14px #ff2ea6,2px 2px 0 #000}
-.graffiti::before{content:"";position:absolute;inset:-10px -14px -12px -14px;background:
-  radial-gradient(circle at 20% 30%,rgba(255,255,255,.18) 0%,transparent 35%) repeat,
-  radial-gradient(circle at 70% 60%,rgba(255,255,255,.20) 0%,transparent 40%) repeat;
-background-size:12px 12px,14px 14px;filter:blur(6px);opacity:.25;z-index:-1}
+.neon-link {
+  @apply text-pink-400 font-semibold px-3 py-1 rounded border border-pink-400/30;
+  box-shadow: 0 0 14px rgba(255,79,216,.35);
+}
+.neon-link:hover { 
+  @apply bg-pink-500 text-black;
+  box-shadow: 0 0 24px rgba(255,79,216,.65);
+}
 
-@layer components{
+.card {
+  @apply rounded-2xl overflow-hidden bg-[#0f151c] shadow-xl border border-white/5 transition-transform;
+  box-shadow: 0 6px 28px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.03);
+}
+.card:hover { transform: translateY(-2px); }
 
-  /* Section heading: cyan with glow */
-  .heading-cyan{
-    @apply text-3xl sm:text-4xl font-semibold mb-3;
-    color: var(--neon1);
-    text-shadow: 0 0 8px color-mix(in oklab, var(--neon1) 65%, black);
-  }
+.edge-frame { position: relative; }
+.edge-frame::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: 1rem;
+  padding: 2px; background: linear-gradient(90deg, #00e5ff, #9b5cff, #ff4fd8, #00e5ff);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  filter: drop-shadow(0 0 12px rgba(0,229,255,.55));
+}
 
-  /* Neon edge frame (cyan -> pink), subtle outer bloom */
-  .edge-neon{
-    position: relative;
-    border-radius: 14px;
-    box-shadow:
-      0 8px 18px rgba(0,0,0,.45),
-      0 0 24px rgba(34,211,238,.18); /* ambient bloom */
-    overflow: hidden;
-    background: rgba(15,23,42,.58); /* slate-900/60 fallback under image caption bar */
-  }
-  .edge-neon::before{
-    content:"";
-    position:absolute; inset:-2px; border-radius: inherit;
-    background:
-      conic-gradient(from 0deg at 50% 50%,
-        var(--neon1) 0deg, var(--neon1) 120deg,
-        transparent 160deg 200deg,
-        var(--neon2) 240deg, var(--neon2) 360deg);
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    padding: 2px;
-    animation: edge-rotate 6s linear infinite;
-    filter: drop-shadow(0 0 8px color-mix(in oklab, var(--neon1) 65%, black))
-            drop-shadow(0 0 10px color-mix(in oklab, var(--neon2) 55%, black));
-  }
-  @keyframes edge-rotate { to { transform: rotate(360deg); } }
-
-  /* Outer glow backdrop */
-  .edge-neon::after{
-    content:"";
-    position:absolute; inset:-10px; border-radius: inherit; z-index:-1;
-    background: radial-gradient(60% 60% at 50% 50%, rgba(34,211,238,.35), transparent 60%);
-    filter: blur(18px); opacity:.9;
-  }
-
-  /* Trending flame aura inspired by your reference */
-  .flame-wrap{
-    position: relative; border-radius:14px; overflow:hidden;
-    box-shadow: 0 10px 22px rgba(0,0,0,.55);
-  }
-  .flame-wrap::before{
-    content:"";
-    position:absolute; inset:-6px; border-radius:18px; pointer-events:none;
-    background:
-      radial-gradient(120px 120px at 20% 80%, rgba(255,210,64,.75), transparent 60%),
-      radial-gradient(140px 140px at 80% 20%, rgba(255,120,32,.85), transparent 55%),
-      radial-gradient(220px 220px at 50% 0%, rgba(255,70,20,.75), transparent 60%),
-      conic-gradient(from 0deg at 50% 50%, rgba(255,200,0,.9), rgba(255,120,0,.9), rgba(255,0,0,.9), rgba(255,120,0,.9), rgba(255,200,0,.9));
-    mix-blend-mode: screen;
-    filter: blur(8px);
-    animation: flame-flicker 1.8s ease-in-out infinite alternate;
-    mask:
-      radial-gradient(closest-side, transparent 62%, #000 63% 100%); /* keeps inside bright, edges flamey */
-  }
-  .flame-wrap::after{
-    content:"";
-    position:absolute; inset:-2px; border-radius:18px; pointer-events:none;
-    box-shadow:
-      0 0 10px 2px rgba(255,160,0,.75) inset,
-      0 0 28px 10px rgba(255,90,0,.35),
-      0 0 44px 14px rgba(255,0,0,.25);
-    animation: flame-breathe 2.4s ease-in-out infinite;
-  }
-  @keyframes flame-flicker{
-    0% { filter: blur(7px) brightness(1); transform: rotate(0deg) scale(1); }
-    100%{ filter: blur(10px) brightness(1.15); transform: rotate(3deg) scale(1.02); }
-  }
-  @keyframes flame-breathe{
-    0% { opacity:.65 }
-    100%{ opacity:.9 }
-  }
-
-  /* Pink neon button ring for "See all" */
-  .seeall{
-    @apply inline-flex items-center justify-center rounded-md px-3 py-1 text-sm;
-    color: var(--neon2);
-    border: 1px solid color-mix(in oklab, var(--neon2) 70%, #000);
-    box-shadow: 0 0 10px color-mix(in oklab, var(--neon2) 65%, #000);
-  }
+.flame { position: relative; }
+.flame::after {
+  content:""; position:absolute; inset:-6px; border-radius:1rem;
+  background: radial-gradient(120% 120% at 20% 0%, rgba(255,200,0,.35) 0 40%, transparent 41%),
+              conic-gradient(from 0turn, #ff7a00, #ff3b3b, #ffd100, #ff7a00);
+  filter: blur(8px) saturate(1.2);
+  opacity:.9; pointer-events:none;
+  animation: lick 2.4s ease-in-out infinite alternate;
 }
-/* DUBULAR LOGO START */
-:root{
-  --logo-u-start:#22d3ee; /* cyan */
-  --logo-u-mid:#25e6d6;   /* aqua */
-  --logo-u-end:#7dfb5f;   /* neon green */
-  --logo-text:#a7f3ff;    /* light cyan for DUB/LAR */
+@keyframes lick {
+  from { transform: scale(1.01) rotate(-.6deg); }
+  to   { transform: scale(1.035) rotate(.6deg); }
 }
-.logo-wrap{
-  display:flex; align-items:flex-end; gap:.18em; line-height:1; user-select:none;
-  filter: drop-shadow(0 6px 24px rgba(0,255,220,.18)) drop-shadow(0 0 28px rgba(0,255,200,.10));
-}
-.logo-text{
-  font-weight:900; letter-spacing:.02em; font-size: clamp(26px, 5.2vw, 44px);
-  color: var(--logo-text);
-  text-shadow:
-    0 0 6px rgba(90,245,255,.65),
-    0 0 14px rgba(60,220,255,.45),
-    0 2px 0 rgba(0,0,0,.35);
-}
-.logo-u{
-  position:relative; display:inline-block;
-  font-weight:900; letter-spacing:.01em;
-  font-size: clamp(36px, 7.2vw, 72px); /* bigger U */
-  line-height:.85; padding:0 .05em .05em .05em;
-  color: transparent;
-  -webkit-text-stroke: 10px transparent; /* for the glow silhouette */
-}
-.logo-u::before{
-  /* solid U face with vertical neon gradient like the reference */
-  content:"U"; position:absolute; inset:0;
-  background: linear-gradient(180deg,
-    var(--logo-u-start) 0%,
-    var(--logo-u-mid) 45%,
-    var(--logo-u-end) 100%);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-  filter: brightness(1.1);
-}
-.logo-u::after{
-  /* inner tube + outer bloom giving that tube-sign look */
-  content:"U"; position:absolute; inset:0;
-  -webkit-text-stroke: 6px rgba(255,255,255,.35);
-  color: transparent;
-  text-shadow:
-    0 0 10px rgba(45,240,255,.85),
-    0 0 22px rgba(45,240,255,.55),
-    0 0 36px rgba(40,255,140,.45),
-    0 0 68px rgba(40,255,140,.35);
-  filter: drop-shadow(0 10px 24px rgba(20,255,190,.25));
-  animation: u-pulse 2.8s ease-in-out infinite;
-}
-@keyframes u-pulse{
-  0%,100%{ filter: drop-shadow(0 10px 24px rgba(20,255,190,.22)); opacity:.96 }
-  50%     { filter: drop-shadow(0 14px 34px rgba(20,255,190,.35)); opacity:1 }
-}
-/* DUBULAR LOGO END */
