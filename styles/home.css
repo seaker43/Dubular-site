@@ -269,3 +269,69 @@ main > section > h2 {
 /* Prevent odd double-column ghost rails from reappearing */
 .row > .right, .row > .rail, .row > .sidebar, .row > .side { display:none !important; }
 
+
+/* ===== Batch 4: page container, sticky header, logo sizing, See-all alignment ===== */
+
+/* Page container + base padding */
+:root{
+  --page-max: 1120px;
+  --side-pad: 16px;
+}
+body{ background:#0b1015; color:#e8f4ff; }
+.page, main{
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 0 var(--side-pad);
+}
+
+/* Sticky translucent header */
+header, .header{
+  position: sticky; top: 0; z-index: 1000;
+  background: linear-gradient(180deg, rgba(6,10,14,.82), rgba(6,10,14,.68) 55%, rgba(6,10,14,.50) 100%);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.header-inner{
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 10px var(--side-pad);
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Neon logo size/fit */
+.header .logo, .header-logo-wrap{ display:flex; align-items:center; justify-content:center; }
+.header .logo svg{ height: 52px; width:auto; display:block; }
+@media (max-width: 480px){ .header .logo svg{ height: 44px; } }
+@media (min-width: 1024px){ .header .logo svg{ height: 60px; } }
+
+/* Section heading + See all on the right */
+main > section{ position: relative; }
+main > section > h2{
+  margin: 18px 0 8px;
+  padding-left: var(--side-pad);
+  font-weight: 800;
+  text-shadow: 0 0 14px rgba(170,220,255,.22);
+}
+
+/* Anchor immediately after the H2 OR a dedicated .see-all */
+main > section > h2 + a,
+main > section > .see-all{
+  position: absolute;
+  right: var(--side-pad);
+  top: 18px;
+  font-weight: 700;
+  color: #cdb8ff;
+  text-decoration: none;
+}
+main > section > h2 + a:hover,
+main > section > .see-all:hover{
+  text-decoration: underline;
+}
+
+/* Ensure rows respect the new container padding */
+.row{
+  padding-left: var(--side-pad);
+  padding-right: var(--side-pad);
+}
+
+/* Keep previous card polish intact */
