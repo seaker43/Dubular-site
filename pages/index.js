@@ -1,5 +1,4 @@
-import CardGrid from "../ui/CardGrid";
-import StreamCard from "../ui/StreamCard";
+import Row from "../ui/Row";
 
 const trending = [
   { title: "Night Raid Tactics #1", img: "https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=1200&q=75&auto=format", live: true },
@@ -20,23 +19,8 @@ const recommended = [
 export default function Home() {
   return (
     <main className="min-h-screen px-6 py-8">
-      {/* Trending */}
-      <section className="mb-12">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl sm:text-4xl">Trending Now</h2>
-          <a href="#" className="text-sm border border-white/30 px-3 py-1 rounded hover:bg-white hover:text-black transition">See all &gt;</a>
-        </div>
-        <CardGrid>{trending.map((v) => <StreamCard key={v.title} {...v} />)}</CardGrid>
-      </section>
-
-      {/* Recommended */}
-      <section className="mb-12">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl">Recommended for You</h2>
-          <a href="#" className="text-sm border border-white/30 px-3 py-1 rounded hover:bg-white hover:text-black transition">See all &gt;</a>
-        </div>
-        <CardGrid>{recommended.map((v) => <StreamCard key={v.title} {...v} />)}</CardGrid>
-      </section>
+      <Row title="Trending Now" items={trending} seeAllHref="#" />
+      <Row title="Recommended for You" items={recommended} seeAllHref="#" />
     </main>
   );
 }
