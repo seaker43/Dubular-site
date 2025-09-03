@@ -1,3 +1,4 @@
+import "../styles/home.css";
 import "../styles/globals.css";
 import DubularMark from "../ui/DubularMark";
 

@@ -1,5 +1,4 @@
 import Row from "../components/Row";
-import "../styles/home.css";
 
 const demo = (n, prefix) =>
   Array.from({ length: n }).map((_, i) => ({
