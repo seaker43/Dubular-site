@@ -81,3 +81,47 @@ html,body{background:var(--bg);color:var(--text);}
 .sub{
   color:var(--muted); font-size:14px; opacity:.95;
 }
+
+/* === add/override colors === */
+:root{
+  --cyan:#7df9ff;          /* titles */
+  --pink:#ff5ad4;          /* See all + accents */
+}
+
+/* titles cyan */
+.h2{ color:var(--cyan); text-shadow:0 0 10px rgba(125,249,255,.25); }
+
+/* See all neon pink */
+.seeall{ color:var(--pink); text-shadow:0 0 8px rgba(255,90,212,.35); }
+
+/* leave existing .main but ensure space for bottom bar */
+.main{ padding-bottom:96px; }
+
+/* === Bottom Nav === */
+.bottom-nav{
+  position:fixed; left:0; right:0; bottom:0; z-index:60;
+  display:flex; justify-content:space-around; gap:4px;
+  padding:10px 10px calc(10px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg, rgba(10,15,22,.6) 0%, rgba(10,15,22,.9) 50%, rgba(10,15,22,.98) 100%);
+  backdrop-filter: blur(10px);
+  border-top:1px solid var(--stroke);
+  box-shadow:0 -8px 24px rgba(0,0,0,.45);
+}
+
+.bn-item{
+  --ico: #cfe6ff;
+  flex:1; display:flex; flex-direction:column; align-items:center; gap:6px;
+  text-decoration:none; color:#cfe6ff; font-size:11px; font-weight:700; letter-spacing:.3px;
+  opacity:.9;
+}
+.bn-item svg{ width:22px; height:22px; fill:var(--ico); filter: drop-shadow(0 2px 6px rgba(0,0,0,.35)); }
+.bn-item span{ text-transform:uppercase; }
+
+/* active / hover */
+.bn-item.active, .bn-item:active{
+  color:var(--cyan);
+}
+.bn-item.active svg, .bn-item:active svg{
+  fill:var(--cyan);
+  filter: drop-shadow(0 0 10px rgba(125,249,255,.45));
+}
