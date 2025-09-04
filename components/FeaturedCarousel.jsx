@@ -39,7 +39,7 @@ export default function FeaturedCarousel(){
               <span style={{
                 position:"absolute", top:10, left:10, padding:"4px 8px",
                 borderRadius:999, fontSize:12, fontWeight:700,
-                color:"#001318", background:"linear-gradient(90deg,#34d399,#22d3ee)", boxShadow:"0 0 16px rgba(0,255,200,.35)"
+                color:"#001318", background:"linear-gradient(90deg,#34d399,#18e27a)", boxShadow:"0 0 16px rgba(0,255,200,.35)"
               }}>LIVE</span>
             </div>
             <div style={{padding:"10px 6px 4px"}}>

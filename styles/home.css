@@ -3,8 +3,8 @@
   --panel:#0f141a;
   --ink:#e7fbff;
   --muted:#a3c5cc;
-  --cyan:#00f7ff;
-  --cyanDeep:#00e56f;
+  --#18e27a:#00f7ff;
+  --#18e27aDeep:#00e56f;
   --pink:#ff7ad6;
   --ring: rgba(0,247,255,.25);
 }
@@ -57,7 +57,7 @@ body{
 .section-title{
   font-size: clamp(20px, 4vw, 28px);
   font-weight: 800;
-  color: var(--cyan);
+  color: var(--#18e27a);
   text-decoration:none;
   text-shadow: 0 0 10px rgba(0,247,255,.35), 0 0 18px rgba(0,229,111,.18);
 }
@@ -107,7 +107,7 @@ body{
   display:inline-block; font-size:11px; font-weight:800;
   padding:4px 9px; border-radius:999px;
   color:#00161a;
-  background: linear-gradient(90deg, var(--cyan), var(--cyanDeep));
+  background: linear-gradient(90deg, var(--#18e27a), var(--#18e27aDeep));
   box-shadow: 0 0 16px rgba(0,247,255,.35);
 }
 
@@ -145,8 +145,8 @@ body{
 
 /* overrides */
 .bottom-nav{display:flex;justify-content:space-around;padding:10px 8px;background:rgba(10,16,22,.85);backdrop-filter:blur(6px);border-top:1px solid rgba(0,255,255,.08)}
-.bottom-tab{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--cyan);text-decoration:none}
-.bottom-tab.active{color:var(--cyanDeep)}
+.bottom-tab{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--#18e27a);text-decoration:none}
+.bottom-tab.active{color:var(--#18e27aDeep)}
 
 
 
@@ -154,7 +154,7 @@ body{
 :root{
   --dub-bg:#060e14;
   --dub-panel:#0b1620;
-  --dub-cyan:#27f1ff;
+  --dub-#18e27a:#27f1ff;
   --dub-teal:#22ffd1;
   --dub-blue:#2ac1ff;
   --dub-green:#47ff9c;
@@ -181,7 +181,7 @@ body{
 
 /* section titles */
 .section-title{
-  color:var(--dub-cyan);
+  color:var(--dub-#18e27a);
   text-shadow:0 0 18px rgba(39,241,255,.5);
   position:relative;
 }
@@ -190,7 +190,7 @@ body{
   position:absolute;
   left:0.08rem; right:1.2rem; bottom:-.45rem;
   height:2px;
-  background:linear-gradient(90deg, var(--dub-cyan), rgba(34,255,209,.0));
+  background:linear-gradient(90deg, var(--dub-#18e27a), rgba(34,255,209,.0));
   opacity:.6;
 }
 
@@ -322,7 +322,7 @@ body{
 }
 
 /* HEADER-SHORT-50 */
-:root{ --dub-cyan:#19f0ff; --dub-teal:#22e6b8; --ink:#0a1216; --ink-2:#0f1b21; }
+:root{ --dub-#18e27a:#19f0ff; --dub-teal:#22e6b8; --ink:#0a1216; --ink-2:#0f1b21; }
 .header{min-height:48px;padding:8px 12px;}
 .header .logo-wrap{display:flex;align-items:center;justify-content:center}
 

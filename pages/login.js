@@ -11,7 +11,7 @@ export default function Login() {
   const [msg, setMsg] = useState(null);
   const [err, setErr] = useState(null);
 
-  const cyanBtn = 'px-5 py-3 rounded-xl font-medium bg-[var(--dubular-cyan-600)]/15 border border-[var(--dubular-cyan-500)]/30 hover:bg-[var(--dubular-cyan-600)]/25 shadow-[0_0_24px_rgba(0,255,255,0.15)] transition';
+  const #18e27aBtn = 'px-5 py-3 rounded-xl font-medium bg-[var(--dubular-#18e27a-600)]/15 border border-[var(--dubular-#18e27a-500)]/30 hover:bg-[var(--dubular-#18e27a-600)]/25 shadow-[0_0_24px_rgba(0,255,255,0.15)] transition';
 
   async function onLogin(e) {
     e.preventDefault();
@@ -50,18 +50,18 @@ export default function Login() {
           <label className="block">
             <span className="text-sm text-white/70">Email</span>
             <input type="email" required value={email} onChange={e=>setEmail(e.target.value)}
-              className="mt-1 w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3 outline-none focus:border-[var(--dubular-cyan-500)]"/>
+              className="mt-1 w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3 outline-none focus:border-[var(--dubular-#18e27a-500)]"/>
           </label>
           <label className="block">
             <span className="text-sm text-white/70">Password</span>
             <input type="password" required value={pwd} onChange={e=>setPwd(e.target.value)}
-              className="mt-1 w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3 outline-none focus:border-[var(--dubular-cyan-500)]"/>
+              className="mt-1 w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3 outline-none focus:border-[var(--dubular-#18e27a-500)]"/>
           </label>
           {err && <p className="text-red-400 text-sm">{err}</p>}
           {msg && <p className="text-emerald-300 text-sm">{msg}</p>}
           <div className="flex items-center justify-between">
-            <button disabled={loading} className={cyanBtn} type="submit">{loading ? 'Working…' : 'Login'}</button>
-            <button type="button" onClick={onForgot} className="text-[var(--dubular-cyan-300)] hover:underline">Forgot password?</button>
+            <button disabled={loading} className={#18e27aBtn} type="submit">{loading ? 'Working…' : 'Login'}</button>
+            <button type="button" onClick={onForgot} className="text-[var(--dubular-#18e27a-300)] hover:underline">Forgot password?</button>
           </div>
         </form>
       </div>
