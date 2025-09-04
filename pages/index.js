@@ -19,13 +19,13 @@ export default function Home() {
     <main className="page">
       <Hero />
 
-      <h2 className="section-title" style={{marginTop:12}}>Trending Now</h2>
+      
       <CarouselRow title="Trending Now" items={demo(trending)} />
 
-      <h2 className="section-title" style={{marginTop:2}}>My Favs</h2>
+      
       <CarouselRow title="My Favs" items={demo(favs)} />
 
-      <h2 className="section-title" style={{marginTop:2}}>Recommended</h2>
+      
       <CarouselRow title="Recommended" items={demo(recommended)} />
     </main>
   );
