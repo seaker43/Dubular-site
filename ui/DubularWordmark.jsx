@@ -8,27 +8,27 @@ export default function DubularWordmark(){return(<svg height="54" viewBox="0 0 5
     <filter id="soft" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.2"/></filter>
   </defs>
 
-  <!-- subtle header pill bg -->
+  {/*  subtle header pill bg  */}
   <rect x="0" y="0" width="520" height="110" rx="22" fill="url(#bg)" opacity=".85"/>
 
-  <!-- DUB (slightly overlaps U) -->
+  {/*  DUB (slightly overlaps U)  */}
   <g transform="translate(52,68)" fill="url(#wht)" filter="url(#soft)" opacity=".95" style={{letterSpacing:2.2}}>
     <text x="0" y="0" fontFamily="system-ui,Segoe UI,Arial" fontWeight="800" fontSize="44" fill="url(#wht)" opacity=".92">DUB</text>
   </g>
 
-  <!-- BIG U -->
+  {/*  BIG U  */}
   <g transform="translate(240,22)">
-    <!-- breathing scale for the U -->
+    {/*  breathing scale for the U  */}
     <g id="bigU" transform="scale(1)">
       <animateTransform attributeName="transform" attributeType="XML" type="scale" values="1;1.03;1" dur="3.2s" repeatCount="indefinite"/>
-      <!-- inner neon stroke -->
+      {/*  inner neon stroke  */}
       <path d="M20,10 v42 a24,24 0 0 0 48,0 v-42" fill="none" stroke="url(#cy)" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round"/>
-      <!-- outer glow -->
+      {/*  outer glow  */}
       <path d="M20,10 v42 a24,24 0 0 0 48,0 v-42" fill="none" stroke="url(#cy)" strokeWidth="20" strokeLinecap="round" strokeLinejoin="round" filter="url(#uGlow)" opacity=".45"/>
     </g>
   </g>
 
-  <!-- LAR to the right of U -->
+  {/*  LAR to the right of U  */}
   <g transform="translate(340,68)" fill="url(#wht)" filter="url(#soft)" opacity=".95" style={{letterSpacing:2.2}}>
     <text x="0" y="0" fontFamily="system-ui,Segoe UI,Arial" fontWeight="800" fontSize="44" fill="url(#wht)" opacity=".92">LAR</text>
   </g>
