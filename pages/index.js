@@ -1,4 +1,3 @@
-import DubularMark from "../ui/DubularMark";
 import Head from "next/head";
 
 import Image from "next/image";
