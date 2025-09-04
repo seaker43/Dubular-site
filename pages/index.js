@@ -19,7 +19,7 @@ export default function Home(){
           boxShadow:"inset 0 0 60px rgba(0,255,220,.08), 0 10px 40px rgba(0,0,0,.45)",
           display:"flex", justifyContent:"center"
         }}>
-          <div style={{transform:"scale(.88)"}}><DubularLogo size={64}/></div>
+          
         </div>
       </div>
 
