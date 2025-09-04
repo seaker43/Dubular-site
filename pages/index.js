@@ -1,4 +1,6 @@
 import Head from "next/head";
+
+import DubularMark from "../ui/DubularMark.jsx";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -58,8 +60,8 @@ export default function Home(){
       <header className="header">
         <div className="header-inner">
           <div className="header-logo-wrap">
-            {/* Logo is inserted from _app header container */}
-          </div>
+     <DubularMark className="logo" />
+   </div>
         </div>
       </header>
       <main className="main">
