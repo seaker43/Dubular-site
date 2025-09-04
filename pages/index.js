@@ -1,3 +1,4 @@
+import DubularLogo from '../components/DubularLogo';
 import Hero from "../ui/Hero";
 import CarouselRow from "../ui/CarouselRow";
 
