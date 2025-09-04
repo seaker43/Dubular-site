@@ -1,534 +1,74 @@
-/* ---- Header: centered neon logo ---- */
-.header-inner{display:flex;justify-content:center;align-items:center;padding:10px 0}
-.header-logo-wrap{display:flex;justify-content:center;align-items:center}
-.header-logo-wrap .logo{display:block;width:clamp(180px,40vw,340px);height:auto}
-
-/* ---- Section headings ---- */
-.section{padding:18px 12px 6px}
-.section h2{font-size:1.25rem;margin-bottom:10px}
-
-/* ---- Netflix-style horizontal rows ---- */
-.row{display:flex;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;gap:14px;padding:4px 12px 16px}
-.row::-webkit-scrollbar{height:6px}
-.row::-webkit-scrollbar-thumb{background:#2a3444;border-radius:6px}
-.row::-webkit-scrollbar-track{background:transparent}
-
-/* Force all children into row, even if wrapped in grid/col */
-.row > *{flex:0 0 auto}
-.row .col,.row .grid,.row .columns{display:contents}
-
-/* ---- Cards ---- */
-.row .item,.row .card,.row a,.row > div:not(.row){width:220px;max-width:220px;flex:0 0 auto}
-.row img{width:100%;height:130px;object-fit:cover;border-radius:12px;display:block}
-
-/* Titles & badges */
-.card-title,.item-title{margin-top:6px;font-size:0.95rem}
-.badge,.pill{line-height:1;white-space:nowrap}
-
-/* ---- Snap scrolling (mobile friendly) ---- */
-.row{scroll-snap-type:x mandatory;scroll-padding:0 12px}
-.row > *{scroll-snap-align:start}
-@media (hover:none){
-  .row{scroll-behavior:smooth}
-}
-
-/* ---- Row horizontal scrolling ---- */
-.row {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 0.5rem 0;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none; /* Firefox */
-}
-.row::-webkit-scrollbar { display: none; }
-
-/* Each card snaps cleanly */
-.row > * {
-  flex: 0 0 auto;
-  scroll-snap-align: start;
-}
-
-/* ====== Page frame ====== */
-:root { --page-max: 1152px; --side-pad: 16px; }
-body { background:#0b0f14; color:#e7e7ea; }
-main, .page, .home, .home-root {
-  max-width: var(--page-max);
-  margin: 0 auto;
-  padding-inline: var(--side-pad);
-}
-
-/* ====== Header / Logo ====== */
-.header, header { background: linear-gradient(180deg,#0b0f14,#0b0f1400); }
-.header-inner { position:relative; display:flex; justify-content:center; align-items:center; height:84px; }
-.header-logo-wrap { display:flex; align-items:center; justify-content:center; height:100%; }
-.header-logo-wrap .logo svg, .header-logo-wrap .logo { display:block; width: clamp(160px, 34vw, 320px); height:auto; }
-
-/* ====== Section headings + See all ====== */
-.section, section { position:relative; }
-.section-title, h2 {
-  font-size: clamp(22px, 3.6vw, 34px);
-  line-height: 1.1;
-  margin: 18px 0 10px;
-  letter-spacing:.4px;
-  color:#f4f5f9;
-  text-shadow: 0 0 18px #9feaff22;
-}
-a.see-all {
-  position:absolute; right: var(--side-pad); top: 0;
-  transform: translateY(4px);
-  font-weight:600; color:#cbb7ff; text-decoration:none;
-}
-a.see-all:hover { text-decoration:underline; }
-
-/* ====== Rows: horizontal scroll with snap ====== */
-.row {
-  display:flex; flex-direction:row; gap: 14px;
-  overflow-x:auto; overflow-y:hidden; padding: 6px 0 12px;
-  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
-  scrollbar-width:none;
-}
-.row::-webkit-scrollbar { display:none; }
-.row > * { flex:0 0 auto; scroll-snap-align:start; }
-
-/* ====== Cards ====== */
-.card, .stream-card, .tile {
-  background:#0f141b; border-radius:16px; overflow:hidden;
-  box-shadow: 0 10px 30px #0007;
-  min-width: clamp(240px, 70vw, 360px);
-}
-.card:hover { box-shadow: 0 14px 36px #000a; transform: translateY(-1px); }
-
-.card img, .thumb, .tile img {
-  width:100%; aspect-ratio: 16/9; object-fit: cover; display:block;
-  background:#0b0f14;
-}
-.card .title, .tile .title { padding: 10px 12px 14px; font-weight:700; }
-
-/* LIVE pill */
-.pill-live, .live-pill {
-  position:absolute; left:12px; top:12px; z-index:2;
-  background:linear-gradient(180deg,#ff66ff,#ff33aa);
-  color:white; font-weight:800; border-radius:999px; padding:6px 10px; font-size:12px;
-  box-shadow:0 8px 18px #ff2dcc44;
-}
-
-/* ====== Layout: hide right rail on mobile, allow two columns on wide ====== */
-.page-grid, .grid, .content {
-  display:grid; grid-template-columns: 1fr; gap: 28px;
-}
-.right-rail, .aside, .col-right { display:none; }
-@media (min-width: 1024px) {
-  .page-grid, .grid, .content { grid-template-columns: 1fr 320px; align-items:start; }
-  .right-rail, .aside, .col-right { display:block; }
-}
-
-/* Tidy any accidental overflow */
-.row .item, .row .card { overflow:hidden; border-radius:16px; }
-
-/* Extra breathing room at page bottom */
-main { padding-bottom: 64px; }
-
-/* --- UI polish batch --- */
-:root { --page-max:1152px; --side-pad:16px; }
-body { background:#0b0f14; color:#e7e7ea; }
-main { max-width:var(--page-max); margin:0 auto; padding-inline:var(--side-pad); padding-bottom:64px; }
-
-.header-inner { display:flex; justify-content:center; align-items:center; height:84px; }
-.header-logo-wrap .logo { width:clamp(160px,34vw,320px); height:auto; }
-
-.section-title { font-size:clamp(22px,3.6vw,34px); margin:18px 0 10px; color:#f4f5f9; text-shadow:0 0 18px #9feaff22; }
-a.see-all { position:absolute; right:var(--side-pad); top:0; font-weight:600; color:#cbb7ff; text-decoration:none; }
-a.see-all:hover { text-decoration:underline; }
-
-.row { display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
-.row::-webkit-scrollbar { display:none; }
-.row > * { flex:0 0 auto; scroll-snap-align:start; }
-
-.card { background:#0f141b; border-radius:16px; overflow:hidden; min-width:clamp(240px,70vw,360px); box-shadow:0 10px 30px #0007; }
-.card img { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; }
-.card:hover { box-shadow:0 14px 36px #000a; transform:translateY(-1px); }
-
-/* --- Batch 2: header, see-all, single-column rows, hide ghost rail --- */
-
-/* Header a touch shorter so hero fits nicely */
-.header-inner { height:72px; }
-.header-logo-wrap .logo { width:clamp(160px,34vw,320px); }
-
-/* Make each homepage section the positioning context */
-main > section { position:relative; padding-top:8px; }
-
-/* Right-align any "See all" link that follows the title */
-main > section > a[href] {
-  position:absolute; right:var(--side-pad); top:6px;
-  font-weight:700; color:#cbb7ff; text-decoration:none;
-}
-main > section > a[href]:hover { text-decoration:underline; }
-
-/* Give headings room so the absolute link doesn’t overlap */
-main > section > h2 { padding-right:110px; }
-
-/* Single-column rows on small screens */
-@media (max-width: 820px) {
-  .row { display:block; overflow:visible; }
-  .row > * { width:100% !important; max-width:100% !important; }
-}
-
-/* Hide obvious right-hand/ghost rails that were duplicating content */
-.row > .right, .row > .rail, .row > .sidebar, .row > .side { display:none !important; }
-/* Fallback: if the 2nd child looks like a slim side rail with images, hide it */
-@supports(selector(:has(*))) {
-  .row > :nth-child(2):has(img) { display:none !important; }
-}
-
-/* Card spacing polish so lone cards don’t feel cramped */
-.card { margin-bottom:18px; }
-
-/* --- Batch 3: mobile carousels, desktop grid, card polish --- */
-
-/* Section spacing */
-main > section { margin-top: 28px; }
-
-/* Headings glow lighter for readability */
-main > section > h2 {
-  text-shadow: 0 0 18px rgba(170, 220, 255, 0.25);
-}
-
-/* ===== Mobile: horizontal carousels with snap ===== */
-@media (max-width: 820px) {
-  .row {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 6px var(--side-pad) 12px;
-    scroll-snap-type: x mandatory;
-  }
-  .row > * {
-    flex: 0 0 82%;
-    max-width: 82%;
-    scroll-snap-align: start;
-  }
-}
-
-/* ===== Tablet/Desktop: responsive grid ===== */
-@media (min-width: 821px) {
-  .row {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 18px;
-    overflow: visible;
-    padding: 8px var(--side-pad) 4px;
-  }
-  .row > * { max-width: 100%; }
-}
-
-/* Card look & feel */
-.card {
-  background: #0f1a22;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.06);
-  box-shadow: 0 8px 26px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.02);
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-}
-.card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(0,255,200,0.25);
-  box-shadow: 0 14px 34px rgba(0, 240, 210, 0.08), 0 8px 28px rgba(0,0,0,0.35);
-}
-
-/* Make the whole card a comfy tap target if an <a> wraps it */
-.card a, .card a:visited { color: inherit; text-decoration: none; }
-
-/* Thumbnail aspect ratio + rounding */
-.card img, .card .thumb {
-  width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
-  display: block; border-top-left-radius: 12px; border-top-right-radius: 12px;
-  background: #0a0f14;
-}
-
-/* Title spacing */
-.card .title { margin: 10px 12px 14px; font-weight: 700; line-height: 1.2; }
-
-/* LIVE pill */
-.badge-live, .live, .pill-live {
-  display: inline-block;
-  margin: 10px 12px 6px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 12px; font-weight: 800; letter-spacing: .4px;
-  background: linear-gradient(90deg, #ff4d9d, #ff7ac1);
-  color: #fff; box-shadow: 0 6px 16px rgba(255, 80, 160, .35);
-}
-
-/* If a secondary description exists, give it some space */
-.card .meta, .card .desc { margin: 0 12px 12px; color: #c9d6e0; opacity: .85; }
-
-/* Prevent odd double-column ghost rails from reappearing */
-.row > .right, .row > .rail, .row > .sidebar, .row > .side { display:none !important; }
-
-
-/* ===== Batch 4: page container, sticky header, logo sizing, See-all alignment ===== */
-
-/* Page container + base padding */
 :root{
-  --page-max: 1120px;
-  --side-pad: 16px;
+  --bg:#0b0f13;
+  --panel:#0f141a;
+  --text:#e8eef5;
+  --muted:#a5b4d6;
+  --accent:#b7a7ff; /* See all > */
+  --card:#0e1319;
+  --live:#ff4dd2;
+  --ring:#1a2533;
 }
-body{ background:#0b1015; color:#e8f4ff; }
-.page, main{
-  max-width: var(--page-max);
-  margin: 0 auto;
-  padding: 0 var(--side-pad);
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  background:radial-gradient(1200px 500px at 50% -150px,#0f1621,#0b0f13 60%);
+  color:var(--text);
 }
 
-/* Sticky translucent header */
-header, .header{
-  position: sticky; top: 0; z-index: 1000;
-  background: linear-gradient(180deg, rgba(6,10,14,.82), rgba(6,10,14,.68) 55%, rgba(6,10,14,.50) 100%);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(255,255,255,.06);
+/* Header */
+header{
+  position:sticky; top:0; z-index:50;
+  background:linear-gradient(#06090caa,#06090c00);
+  backdrop-filter:saturate(140%) blur(6px);
 }
 .header-inner{
-  max-width: var(--page-max);
-  margin: 0 auto;
-  padding: 10px var(--side-pad);
-  display: flex; align-items: center; justify-content: center;
+  max-width:1100px; margin:0 auto; padding:18px 16px 12px;
+  display:flex; align-items:center; justify-content:center;
+}
+.header-logo-wrap{width:760px; max-width:92vw;}
+.logo{display:block; height:auto}
+
+/* Sections */
+main{max-width:1100px; margin:0 auto; padding:0 12px 80px}
+.section{margin:18px 0 26px}
+.section-head{
+  display:flex; align-items:baseline; justify-content:space-between;
+  padding:2px 6px 10px;
+}
+.section h2{
+  margin:0; font-size:28px; letter-spacing:.5px;
+  text-shadow:0 2px 16px #000;
+}
+.seeall{
+  color:var(--accent); text-decoration:none; font-weight:600; font-size:18px;
 }
 
-/* Neon logo size/fit */
-.header .logo, .header-logo-wrap{ display:flex; align-items:center; justify-content:center; }
-.header .logo svg{ height: 52px; width:auto; display:block; }
-@media (max-width: 480px){ .header .logo svg{ height: 44px; } }
-@media (min-width: 1024px){ .header .logo svg{ height: 60px; } }
-
-/* Section heading + See all on the right */
-main > section{ position: relative; }
-main > section > h2{
-  margin: 18px 0 8px;
-  padding-left: var(--side-pad);
-  font-weight: 800;
-  text-shadow: 0 0 14px rgba(170,220,255,.22);
-}
-
-/* Anchor immediately after the H2 OR a dedicated .see-all */
-main > section > h2 + a,
-main > section > .see-all{
-  position: absolute;
-  right: var(--side-pad);
-  top: 18px;
-  font-weight: 700;
-  color: #cdb8ff;
-  text-decoration: none;
-}
-main > section > h2 + a:hover,
-main > section > .see-all:hover{
-  text-decoration: underline;
-}
-
-/* Ensure rows respect the new container padding */
+/* Horizontal rows */
 .row{
-  padding-left: var(--side-pad);
-  padding-right: var(--side-pad);
+  display:flex; gap:14px; padding:6px 4px 6px; margin-left:2px;
+  overflow-x:auto; scroll-snap-type:x mandatory;
 }
+.row::-webkit-scrollbar{height:8px}
+.row::-webkit-scrollbar-thumb{background:#1b2230; border-radius:999px}
 
-/* Keep previous card polish intact */
-
-/* ===== Batch 5: restore horizontal rows + card grid ===== */
-.row {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 16px;
-  overflow-x: auto;
-  padding: 10px var(--side-pad) 20px;
-  scroll-snap-type: x mandatory;
-}
-.row::-webkit-scrollbar { display: none; }
-
-.row .card, .row .item {
-  flex: 0 0 auto;
-  width: 240px;
-  border-radius: 12px;
-  background: #101820;
-  box-shadow: 0 2px 10px rgba(0,0,0,.35);
-  overflow: hidden;
-  scroll-snap-align: start;
-  transition: transform .25s ease, box-shadow .25s ease;
-}
-.row .card:hover, .row .item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 18px rgba(0,0,0,.55);
-}
-.row .card img, .row .item img {
-  width: 100%;
-  height: 135px;
-  object-fit: cover;
-  display: block;
-}
-.row .card h3, .row .item h3 {
-  padding: 8px 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-}
-.row .card .badge-live {
-  position: absolute;
-  top: 8px; left: 8px;
-  background: #ff2d8b;
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 2px 6px;
-  border-radius: 6px;
-}
-
-/* ===== Batch 6: desktop density for rows ===== */
-.row {
-  -webkit-overflow-scrolling: touch;
-  scroll-padding-inline: var(--side-pad);
-  /* soft fade at edges on capable browsers */
-  mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
-}
-
-/* Base (phones): ~2 cards visible (already) */
-.row .card, .row .item { width: 240px; }
-.row .card img, .row .item img { height: 135px; }
-
-/* Tablets: ~4–5 cards visible */
-@media (min-width: 768px) {
-  .row { gap: 18px; }
-  .row .card, .row .item { width: 220px; }
-  .row .card img, .row .item img { height: 124px; }
-}
-
-/* Desktop/laptop: ~5–7 cards visible */
-@media (min-width: 1024px) {
-  .page { max-width: 1200px; }
-  .row { gap: 20px; }
-  .row .card, .row .item { width: 210px; }
-  .row .card img, .row .item img { height: 118px; }
-}
-
-/* Large desktop: push to 6–8 cards if space allows */
-@media (min-width: 1400px) {
-  .page { max-width: 1400px; }
-  .row .card, .row .item { width: 200px; }
-  .row .card img, .row .item img { height: 112px; }
-}
-
-/* ===== Batch 7: section header polish ===== */
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin: 0 0 8px;
-  padding: 0 var(--side-pad);
-}
-
-.section-header h2 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #fff;
-}
-
-.section-header a {
-  font-size: 0.95rem;
-  color: #b19cd9;
-  text-decoration: none;
-}
-
-.section-header a:hover {
-  text-decoration: underline;
-}
-
-/* === Dubular: header + rows polish =========================== */
-.header { position: sticky; top: 0; z-index: 40; background:#0b0f14; }
-.header-inner { max-width: 1200px; margin:0 auto; padding:14px 16px 10px; }
-.header .logo { display:block; margin:0 auto; max-width:560px; width:88vw;
-  filter: drop-shadow(0 0 18px rgba(0,255,209,.25)) drop-shadow(0 0 28px rgba(17,177,255,.18));
-}
-
-/* Section head */
-.section { padding:20px 0 8px; }
-.section-head { display:flex; align-items:baseline; justify-content:space-between; gap:12px; padding:0 16px; }
-.section-head h2 { margin:0; font-size:28px; letter-spacing:.3px; }
-.seeall { color:#bba7ff; text-decoration:none; font-weight:600; }
-
-/* Horizontal rows — support multiple common classnames */
-.section .row,
-.section .items,
-.section .cards {
-  display:grid;
-  grid-auto-flow:column;
-  grid-auto-columns:76%;
-  gap:14px;
-  overflow-x:auto;
-  overscroll-behavior-x:contain;
-  scroll-snap-type:x mandatory;
-  padding:12px 16px 22px;
-}
-@media (min-width:520px){
-  .section .row, .section .items, .section .cards { grid-auto-columns:56%; }
-}
-@media (min-width:820px){
-  .section .row, .section .items, .section .cards { grid-auto-columns:33%; }
-}
-
-/* Scrollbar (webkit) */
-.section .row::-webkit-scrollbar,
-.section .items::-webkit-scrollbar,
-.section .cards::-webkit-scrollbar { height:8px; }
-.section .row::-webkit-scrollbar-thumb,
-.section .items::-webkit-scrollbar-thumb,
-.section .cards::-webkit-scrollbar-thumb { background:#1e2733; border-radius:4px; }
-
-/* Cards — support .item and/or .card */
-.section .item,
-.section .card {
+/* Card */
+.card{
   scroll-snap-align:start;
-  background:#0e131a;
-  border-radius:16px;
-  overflow:hidden;
-  box-shadow:0 6px 16px rgba(0,0,0,.35);
-  border:1px solid rgba(255,255,255,.05);
-  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  text-decoration:none;
+  background:var(--card); border:1px solid var(--ring);
+  border-radius:14px; width:320px; min-width:320px; color:inherit; text-decoration:none;
+  overflow:hidden; box-shadow:0 6px 24px rgba(0,0,0,.35);
+  transition:transform .15s ease, box-shadow .15s ease;
 }
-.section .item:hover,
-.section .card:hover {
-  transform:translateY(-2px);
-  box-shadow:0 10px 22px rgba(0,0,0,.45);
-  border-color:rgba(0,255,209,.22);
+.card:active, .card:hover{transform:translateY(-2px); box-shadow:0 10px 28px rgba(0,0,0,.45)}
+.thumb{position:relative; aspect-ratio:16/9; overflow:hidden; background:#0c1117}
+.thumb img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.05)}
+.live{
+  position:absolute; top:10px; left:10px; padding:6px 10px; border-radius:999px;
+  background:var(--live); color:white; font-weight:800; font-size:12px;
+  box-shadow:0 6px 14px rgba(255,77,210,.4);
 }
-
-/* Thumbnail + LIVE badge */
-.section .thumb { position:relative; aspect-ratio:16/9; background:#0a0f14; }
-.section .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
-.section .thumb::after {
-  content:""; position:absolute; inset:0;
-  background: radial-gradient(60% 60% at 50% 20%, rgba(0,255,209,.08), transparent 60%),
-              linear-gradient(to top, rgba(10,14,20,.55), rgba(10,14,20,0) 55%);
-}
-.section .live {
-  position:absolute; top:10px; left:10px;
-  background:linear-gradient(180deg,#ff49a6,#ff2d89);
-  color:#fff; font-weight:800; font-size:12px;
-  padding:6px 10px; border-radius:999px;
-  box-shadow:0 6px 12px rgba(255,45,137,.35);
-}
-
-/* Meta */
-.section .meta { padding:12px 12px 14px; }
-.section .title {
-  color:#e7eef7; font-weight:700; line-height:1.25;
-  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
-}
-
-/* Page padding */
-main { padding-bottom:40px; }
-
-/* Hide any legacy side-rail column on mobile */
-@media (max-width:999px){ .side-rail{ display:none !important; } }
-
+.meta{padding:12px 14px 14px}
+.title{font-weight:700; font-size:18px; line-height:1.2}
+.sub{margin-top:6px; color:var(--muted); font-size:14px}
