@@ -8,8 +8,12 @@ export default function DubularWordmark(){
         </linearGradient>
         <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
+      <style>{`
+        .pulseU { animation: pulse 2.5s infinite ease-in-out; transform-origin:center; }
+        @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.15); } }
+      `}</style>
       <text x="40" y="90" fontFamily="Arial Black, sans-serif" fontSize="64" fill="url(#grad_cyan)" filter="url(#glow)">DUB</text>
-      <text x="200" y="108" fontFamily="Arial Black, sans-serif" fontSize="110" fill="url(#grad_cyan)" filter="url(#glow)">U</text>
+      <text x="200" y="108" fontFamily="Arial Black, sans-serif" fontSize="110" fill="url(#grad_cyan)" filter="url(#glow)" className="pulseU">U</text>
       <text x="340" y="90" fontFamily="Arial Black, sans-serif" fontSize="64" fill="url(#grad_cyan)" filter="url(#glow)">LAR</text>
     </svg>
   );
