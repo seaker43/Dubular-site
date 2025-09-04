@@ -1,6 +1,5 @@
-import "../styles/home.css";
-import BottomBar from "../ui/BottomBar";
 import DubularWordmark from "../ui/DubularWordmark";
+import BottomBar from "../ui/BottomBar";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -8,7 +7,7 @@ export default function App({ Component, pageProps }) {
       <header className="header">
         <div className="header-inner" style={{justifyContent:"center"}}>
           <DubularWordmark />
-        </div>
+          </div>
       </header>
       <Component {...pageProps} />
       <BottomBar />
