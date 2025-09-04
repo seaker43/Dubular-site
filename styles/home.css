@@ -253,3 +253,4 @@ html,body{background:var(--bg);color:var(--text);}
   .edge-light::before{ animation: none; background: linear-gradient(90deg, var(--edge-cyan), var(--edge-pink)); }
 }
 
+body{padding-bottom:76px}

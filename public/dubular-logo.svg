@@ -1,26 +1,15 @@
-<svg width="920" height="260" viewBox="0 0 920 260" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="96" viewBox="0 0 320 96">
   <defs>
-    <linearGradient id="g-cyan" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#8AE8FF"/>
-      <stop offset="100%" stop-color="#0FE0FF"/>
+    <linearGradient id="grad_cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f7ff"/>
+      <stop offset="100%" stop-color="#00ffa2"/>
     </linearGradient>
-    <linearGradient id="g-U" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#12E8FF"/>
-      <stop offset="100%" stop-color="#5AF26B"/>
-    </linearGradient>
-    <filter id="f-glow-cyan" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="6" result="b1"/>
-      <feGaussianBlur in="b1" stdDeviation="12" result="b2"/>
-      <feMerge><feMergeNode in="b2"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <filter id="outerGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <filter id="f-U"><feGaussianBlur stdDeviation="3" result="g1"/><feGaussianBlur stdDeviation="10" in="g1" result="g2"/><feMerge><feMergeNode in="g2"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <style><![CDATA[@keyframes pulse{0%,100%{opacity:1}50%{opacity:.85}}.pulse{animation:pulse 2.8s ease-in-out infinite}.txt{font:900 144px "Poppins","Montserrat",system-ui,sans-serif;letter-spacing:4px}]]></style>
   </defs>
-  <g transform="translate(20,188)" fill="url(#g-cyan)" filter="url(#f-glow-cyan)"><text class="txt">DUB</text></g>
-  <g class="pulse" transform="translate(380,30)">
-    <rect x="0" y="0" width="160" height="200" rx="48" fill="none" stroke="url(#g-U)" stroke-width="24" filter="url(#f-U)"/>
-    <rect x="0" y="0" width="160" height="200" rx="48" fill="none" stroke="white" stroke-opacity="0.9" stroke-width="6"/>
-    <rect x="24" y="24" width="112" height="152" rx="32" fill="rgba(0,0,0,0)"/>
-  </g>
-  <g transform="translate(565,188)" fill="url(#g-cyan)" filter="url(#f-glow-cyan)"><text class="txt">LAR</text></g>
+  <text x="20" y="68" font-size="54" font-family="Arial Black, sans-serif" fill="url(#grad_cyan)" filter="url(#outerGlow)">DUB</text>
+  <text x="150" y="68" font-size="54" font-family="Arial Black, sans-serif" fill="url(#grad_cyan)" filter="url(#outerGlow)">U</text>
+  <text x="220" y="68" font-size="54" font-family="Arial Black, sans-serif" fill="url(#grad_cyan)" filter="url(#outerGlow)">LAR</text>
 </svg>
