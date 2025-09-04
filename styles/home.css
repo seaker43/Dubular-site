@@ -189,3 +189,67 @@ html,body{background:var(--bg);color:var(--text);}
   .edge-light::before{ animation: none; background: linear-gradient(90deg, var(--edge-cyan), var(--edge-pink)); }
 }
 
+
+/* === Edge lighting around cards === */
+:root{
+  --edge-cyan: #7df9ff;
+  --edge-pink: #ff5ad4;
+  --edge-speed: 4s;         /* tweak speed here */
+  --edge-thickness: 2.5px;  /* visible border thickness */
+  --edge-radius: 18px;      /* should match .card radius */
+}
+
+/* keep the lighting above the image but below text */
+.edge-light{ position:relative; }
+.edge-light::before,
+.edge-light::after{
+  content:"";
+  position:absolute; inset:0;
+  border-radius: var(--edge-radius);
+  pointer-events:none;
+}
+
+/* visible chasing stroke (masked to a ring) */
+.edge-light::before{
+  padding: var(--edge-thickness);
+  /* Bright segment that spins around the box */
+  background:
+    conic-gradient(from var(--edge-angle, 0deg),
+      transparent 0,
+      var(--edge-cyan) 6%,
+      transparent 12%,
+      transparent 45%,
+      var(--edge-pink) 51%,
+      transparent 57%,
+      transparent 100%
+    );
+  /* Show only the ring, not the fill */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  filter:
+    drop-shadow(0 0 6px rgba(125,249,255,.55))
+    drop-shadow(0 0 10px rgba(255,90,212,.35));
+  animation: edge-spin var(--edge-speed) linear infinite;
+}
+
+/* soft outer glow for more neon vibe */
+.edge-light::after{
+  box-shadow:
+    0 0 18px rgba(125,249,255,.15),
+    0 0 28px rgba(255,90,212,.12);
+}
+
+/* Spin driver */
+@keyframes edge-spin{
+  to { --edge-angle: 360deg; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .edge-light::before{ animation: none; background: linear-gradient(90deg, var(--edge-cyan), var(--edge-pink)); }
+}
+
