@@ -1,47 +1,26 @@
+import React from "react";
+
 export default function DubularLogo() {
   return (
     <div style={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: "6px",
-      fontFamily: "Arial Black, sans-serif",
-      fontWeight: "900",
-      textTransform: "uppercase"
+      display:"flex",
+      justifyContent:"center",
+      alignItems:"center",
+      height:"120px"
     }}>
-      <span style={{
-        fontSize: "2rem",
-        background: "linear-gradient(90deg,#00f7ff,#00e5ff)",
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-        textShadow: "0 0 12px #00e5ff, 0 0 24px #00f7ff"
+      <h1 style={{
+        fontFamily:"Poppins, sans-serif",
+        fontWeight:"900",
+        fontSize:"clamp(32px,6vw,72px)",
+        letterSpacing:"2px",
+        textAlign:"center",
+        background:"linear-gradient(90deg,#00f7ff,#007bff,#00e56f)",
+        WebkitBackgroundClip:"text",
+        WebkitTextFillColor:"transparent",
+        textShadow:"0 0 20px rgba(0,247,255,0.75),0 0 40px rgba(0,123,255,0.6),0 0 60px rgba(0,229,111,0.5)"
       }}>
-        DUB
-      </span>
-      <span style={{
-        fontSize: "6rem",
-        lineHeight: "1",
-        color: "#00f7ff",
-        textShadow: "0 0 18px #00e5ff, 0 0 36px #00f7ff, 0 0 60px #00f7ff",
-        animation: "pulse 2s infinite ease-in-out"
-      }}>
-        U
-      </span>
-      <span style={{
-        fontSize: "2rem",
-        background: "linear-gradient(90deg,#00e5ff,#00f7ff)",
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-        textShadow: "0 0 12px #00e5ff, 0 0 24px #00f7ff"
-      }}>
-        LAR
-      </span>
-      <style jsx>{`
-        @keyframes pulse {
-          0%, 100% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.1); opacity: 0.9; }
-        }
-      `}</style>
+        DUB<span style={{fontSize:"1.4em"}}>U</span>LAR
+      </h1>
     </div>
   );
 }
