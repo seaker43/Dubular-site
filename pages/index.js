@@ -19,7 +19,7 @@ export default function Home() {
     <main className="page">
       <div className="featured-wrap">
         <div className="featured-card">
-          <div className="logo"><img src="/logo-hero.svg" alt="Dubular"/></div>
+          <div className="logo"><DubularLogo /></div>
         </div>
       </div>
     
