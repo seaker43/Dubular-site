@@ -19,7 +19,7 @@ export default function DubularWordmark(){return(<svg height="54" viewBox="0 0 5
   {/*  BIG U  */}
   <g transform="translate(240,22)">
     {/*  breathing scale for the U  */}
-    <g id="bigU" transform="scale(1)">
+    <g id="bigU" transform="scale(1.10)">
       <animateTransform attributeName="transform" attributeType="XML" type="scale" values="1;1.03;1" dur="3.2s" repeatCount="indefinite"/>
       {/*  inner neon stroke  */}
       <path d="M20,10 v42 a24,24 0 0 0 48,0 v-42" fill="none" stroke="url(#cy)" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round"/>
