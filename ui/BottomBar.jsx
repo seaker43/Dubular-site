@@ -28,7 +28,6 @@ const Account=()=>(
 );
 const tabs=[
   {label:"Ranks",  icon:<BarIcon/>,   href:"#"},
-  {label:"Favs",   icon:<Star/>,     href:"#"},
   {label:"Search", icon:<Search/>,   href:"#"},
   {label:"Wallet", icon:<DCoin/>,    href:"/wallet"},
   {label:"Account",icon:<Account/>,  href:"/account"},
