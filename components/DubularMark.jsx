@@ -4,7 +4,7 @@ export default function DubularMark(){
     <div style={{display:"inline-flex",gap:8,alignItems:"flex-end",lineHeight:1}} role="img" aria-label="dubUlar neon logo">
       {/* DUB */}
       <span style={{
-        color:"var(--cyan)", fontWeight:900, fontSize:28,
+        color:"var(--#18e27a)", fontWeight:900, fontSize:28,
         textShadow:"0 0 10px rgba(0,229,255,.85), 0 0 20px rgba(0,229,255,.35)"
       }}>dub</span>
 
@@ -12,7 +12,7 @@ export default function DubularMark(){
       <svg width="86" height="64" viewBox="0 0 86 64" xmlns="http://www.w3.org/2000/svg" style={{display:"block"}}>
         <defs>
           <linearGradient id="uGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"  stopColor="#22d3ee"/>
+            <stop offset="0%"  stopColor="#18e27a"/>
             <stop offset="48%" stopColor="#25e6d6"/>
             <stop offset="100%" stopColor="#7dfb5f"/>
           </linearGradient>
@@ -91,7 +91,7 @@ export default function DubularMark(){
 
       {/* LAR */}
       <span style={{
-        color:"var(--cyan)", fontWeight:900, fontSize:28,
+        color:"var(--#18e27a)", fontWeight:900, fontSize:28,
         textShadow:"0 0 10px rgba(0,229,255,.85), 0 0 20px rgba(0,229,255,.35)"
       }}>lar</span>
     </div>

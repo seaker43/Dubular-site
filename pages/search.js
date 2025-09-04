@@ -71,7 +71,7 @@ export default function SearchPage(){
                   position:"absolute", bottom:8, left:8, display:"flex", gap:2, opacity:.9
                 }}>
                   {[6,10,8,12,7].map((h,i)=><span key={i} style={{
-                    width:3, height:h*4, background:"linear-gradient(180deg,#22d3ee,#34d399)",
+                    width:3, height:h*4, background:"linear-gradient(180deg,#18e27a,#34d399)",
                     borderRadius:2, display:"inline-block", animation:`b${i} 1.2s ease-in-out ${i*0.08}s infinite alternate`
                   }}/>)}
                 </div>
@@ -79,7 +79,7 @@ export default function SearchPage(){
               <div>
                 <div style={{display:"flex", alignItems:"center", gap:8}}>
                   {row.live && <span style={{
-                    fontSize:11, fontWeight:800, color:"#001318", background:"linear-gradient(90deg,#34d399,#22d3ee)",
+                    fontSize:11, fontWeight:800, color:"#001318", background:"linear-gradient(90deg,#34d399,#18e27a)",
                     padding:"3px 7px", borderRadius:999, boxShadow:"0 0 12px rgba(0,255,200,.35)"
                   }}>LIVE</span>}
                   <h3 style={{margin:"2px 0 0", color:"#d9fffb"}}>{row.title}</h3>

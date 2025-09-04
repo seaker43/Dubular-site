@@ -34,7 +34,7 @@ export default function BottomBar() {
           </svg>
         }/>
         <Item href="/account" label="Account" icon={
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="#06b6d4" aria-hidden>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#18e27a" aria-hidden>
             <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5Z"/>
           </svg>
         }/>

@@ -21,7 +21,7 @@ export default function ChannelStream() {
           controls
           autoPlay
           muted
-          className="w-full rounded-lg border border-cyan-500"
+          className="w-full rounded-lg border border-#18e27a-500"
         >
           <source src={`/streams/${channel}.m3u8`} type="application/x-mpegURL" />
           Your browser does not support HLS streaming.

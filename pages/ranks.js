@@ -40,7 +40,7 @@ export default function RanksPage(){
                 cursor:"pointer",
                 padding:"8px 12px", borderRadius:999,
                 border:"1px solid rgba(0,255,220,.18)",
-                background: tab===t.key ? "linear-gradient(90deg,#22d3ee,#34d399)" : "rgba(0,30,36,.7)",
+                background: tab===t.key ? "linear-gradient(90deg,#18e27a,#34d399)" : "rgba(0,30,36,.7)",
                 color: tab===t.key ? "#001318" : "#cafffb",
                 fontWeight:800, letterSpacing:.2, boxShadow: tab===t.key ? "0 0 16px rgba(0,255,220,.35)" : "none"
               }}>
