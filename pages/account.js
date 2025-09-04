@@ -1,3 +1,8 @@
 export default function Account(){
-  return <div style={{padding:"12px"}}>Account settings coming soon.</div>;
+  return (
+    <main className="main" style={{paddingTop:16}}>
+      <h1 style={{fontWeight:900,color:"#7efcff",fontSize:"clamp(28px,6vw,42px)"}}>Account</h1>
+      <p style={{color:"#b7c0d8",marginTop:10}}>Manage your profile, security, and preferences.</p>
+    </main>
+  );
 }
