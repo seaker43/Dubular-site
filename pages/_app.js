@@ -1,3 +1,4 @@
+import '../styles/home.css';
 import DubularWordmark from "../ui/DubularWordmark";
 import BottomBar from "../ui/BottomBar";
 
