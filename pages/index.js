@@ -34,3 +34,37 @@ export default function Home() {
     </div>
   );
 }
+
+// --- Demo row injection (Trending Now) ---
+export default function Home() {
+  return (
+    <main>
+      <section className="section">
+        <div className="section-head">
+          <h2>Trending Now</h2>
+          <a href="#" className="seeall">See all &gt;</a>
+        </div>
+        <div className="row">
+          <a className="card" href="#">
+            <div className="thumb">
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800" alt="AI Coding Jam"/>
+              <span className="live">LIVE</span>
+            </div>
+            <div className="meta">
+              <div className="title">AI Coding Jam</div>
+            </div>
+          </a>
+          <a className="card" href="#">
+            <div className="thumb">
+              <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800" alt="Lo-Fi Study"/>
+              <span className="live">LIVE</span>
+            </div>
+            <div className="meta">
+              <div className="title">Lo-Fi Study Session</div>
+            </div>
+          </a>
+        </div>
+      </section>
+    </main>
+  )
+}
