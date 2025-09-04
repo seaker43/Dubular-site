@@ -11,6 +11,12 @@ const recommended = [
   { img:"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1400&auto=format", title:"Tactics Arena", tags:"strat • ranked" },
   { img:"https://images.unsplash.com/photo-1495567720989-cebdbdd97913?q=80&w=1400&auto=format", title:"Retro Racer", tags:"arcade • drift" },
 ];
+
+const favs = ([]).concat(typeof trending!=="undefined"?trending:[])
+  .concat(typeof recommended!=="undefined"?recommended:[])
+  .map((it,i)=>({ ...it, watched: it.watched ?? (1000 - i*37) }))
+  .sort((a,b)=>(b.watched||0)-(a.watched||0));
+
 export default function Home(){
   return (
     <main className="page">
