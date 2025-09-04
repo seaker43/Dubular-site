@@ -3,6 +3,7 @@ import DubularMark from "../ui/DubularMark.jsx";
 
 import Image from "next/image";
 import Link from "next/link";
+import BottomBar from "../ui/BottomBar.jsx";
 
 const demo = {
   trending: [
@@ -71,6 +72,7 @@ export default function Home(){
         <Shelf title="Live Channels" href="#" items={demo.live}/>
         <Shelf title="Popular Now" href="#" items={demo.popular}/>
       </main>
+      <BottomBar />
     </>
   );
 }
