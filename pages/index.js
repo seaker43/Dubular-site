@@ -1,7 +1,6 @@
 import DubularMark from "../ui/DubularMark";
 import Head from "next/head";
 
-import DubularMark from "../ui/DubularMark.jsx";
 import Image from "next/image";
 import Link from "next/link";
 
