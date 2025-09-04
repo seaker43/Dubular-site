@@ -1,10 +1,84 @@
-/* Smaller Homepage Styles */ 
-.h2{font-size:clamp(18px,3vw,24px);}
-.seeall{font-size:clamp(12px,2.5vw,14px);}
-.item{min-width:70%;max-width:70%;}
-@media(min-width:520px){.item{min-width:300px;max-width:300px;}}
-@media(min-width:900px){.item{min-width:380px;max-width:380px;}}
-.title{font-size:clamp(14px,2.5vw,18px);}
-.sub{font-size:12px;}
-.header-inner{padding:10px 12px;}
-.main{padding:8px;}
+:root{
+  --bg:#0b0f14;--panel:#101820;--cyan:#00f7ff;--cyanDeep:#00e56f;--ink:#e7fbff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{
+  background:radial-gradient(1200px 700px at 50% -10%, rgba(0,247,255,.06), transparent),
+             radial-gradient(900px 600px at 90% 10%, rgba(0,229,111,.05), transparent),
+             var(--bg);
+  color:var(--ink);
+  font-family:ui-sans-serif,Inter,system-ui,Segoe UI,Arial;
+}
+
+.page{padding:8px 14px 90px}
+
+/* Titles (smaller + glow) */
+.section-title{
+  font-size: clamp(22px, 4.2vw, 32px);
+  margin: 10px 0 8px;
+  font-weight: 800;
+  letter-spacing:.3px;
+  color: var(--cyan);
+  text-shadow: 0 0 10px rgba(0,247,255,.35), 0 0 22px rgba(0,229,111,.18);
+  text-decoration: none;
+  display:inline-block;
+}
+
+/* Horizontal carousel */
+.h-scroll{
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns: 66%;
+  gap:12px;
+  overflow-x:auto;
+  padding:6px 2px 2px 2px;
+  scroll-snap-type:x mandatory;
+}
+@media (min-width:480px){ .h-scroll{ grid-auto-columns:44%; } }
+@media (min-width:768px){ .h-scroll{ grid-auto-columns:32%; } }
+
+.card{
+  background: rgba(16,24,32,.65);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow: 0 10px 28px rgba(0,0,0,.35);
+  scroll-snap-align:start;
+}
+.thumb{
+  height:170px; background:#0c141a center/cover no-repeat;
+}
+.card_meta{
+  padding:10px 12px 12px;
+}
+.pill{
+  display:inline-block;
+  background: linear-gradient(90deg, var(--cyan), var(--cyanDeep));
+  color:#00161a;
+  padding:3px 8px;
+  border-radius:999px;
+  font-size:11px; font-weight:800;
+  box-shadow: 0 0 14px rgba(0,247,255,.35);
+  margin: 0 0 6px 0;
+}
+.card_title{
+  font-size: clamp(16px,3.5vw,20px);
+  margin:2px 0 4px;
+  text-shadow: 0 0 8px rgba(0,247,255,.25);
+}
+.card_sub{
+  opacity:.8;
+  font-size:12px;
+}
+
+/* Bottom bar (icon a bit smaller) */
+.bottom-nav{
+  position:fixed;left:0;right:0;bottom:0;
+  display:flex;justify-content:space-around;align-items:center;
+  padding:8px 10px;
+  background: rgba(10,16,22,.80);
+  border-top:1px solid rgba(255,255,255,.07);
+  backdrop-filter: blur(6px);
+}
+.bottom-tab .label{font-size:11px}
