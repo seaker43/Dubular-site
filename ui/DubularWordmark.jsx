@@ -1,20 +1,9 @@
 export default function DubularWordmark(){
   return (
-    <svg viewBox="0 0 700 140" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="grad_cyan" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#00f5ff"/>
-          <stop offset="100%" stopColor="#00ffa3"/>
-        </linearGradient>
-        <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-      </defs>
-      <style>{`
-        .pulseU { animation: pulse 2.5s infinite ease-in-out; transform-origin:center; }
-        @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.15); } }
-      `}</style>
-      <text x="40" y="90" fontFamily="Arial Black, sans-serif" fontSize="64" fill="url(#grad_cyan)" filter="url(#glow)">DUB</text>
-      <text x="200" y="108" fontFamily="Arial Black, sans-serif" fontSize="110" fill="url(#grad_cyan)" filter="url(#glow)" className="pulseU">U</text>
-      <text x="340" y="90" fontFamily="Arial Black, sans-serif" fontSize="64" fill="url(#grad_cyan)" filter="url(#glow)">LAR</text>
-    </svg>
+    <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:"6px",fontFamily:"Orbitron,sans-serif",fontWeight:800,color:"#00fff7",textShadow:"0 0 12px #00fff7"}}>
+      <span style={{fontSize:"clamp(26px,5vw,40px)",marginRight:"-10px"}}>DUB</span>
+      <span style={{fontSize:"clamp(38px,8vw,60px)",lineHeight:1}}>U</span>
+      <span style={{fontSize:"clamp(26px,5vw,40px)",marginLeft:"-8px"}}>LAR</span>
+    </div>
   );
 }
