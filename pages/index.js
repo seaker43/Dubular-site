@@ -1,3 +1,4 @@
+import DubularMark from "../ui/DubularMark";
 import Head from "next/head";
 
 import DubularMark from "../ui/DubularMark.jsx";
@@ -60,6 +61,7 @@ export default function Home(){
       <header className="header">
         <div className="header-inner">
           <div className="header-logo-wrap">
+        <DubularMark size={220} />
      <DubularMark className="logo" />
    </div>
         </div>
