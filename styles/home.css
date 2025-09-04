@@ -254,3 +254,5 @@ html,body{background:var(--bg);color:var(--text);}
 }
 
 body{padding-bottom:76px}
+body{background-color:#0a0a0a;color:#fff;margin:0;font-family:system-ui,sans-serif}
+.header{background:transparent;display:flex;justify-content:center;align-items:center;padding:12px 0}
