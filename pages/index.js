@@ -1,4 +1,3 @@
-import "../styles/home.css";
 import Hero from "../ui/Hero";
 import CarouselRow from "../ui/CarouselRow";
 
