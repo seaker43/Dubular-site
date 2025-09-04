@@ -1,4 +1,5 @@
 import '../styles/home.css';
+import DubularLogo from "../ui/DubularLogo";
 import BottomBar from "../ui/BottomBar";
 
 export default function App({ Component, pageProps }) {
