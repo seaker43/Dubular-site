@@ -10,7 +10,7 @@ export default function StreamCard({ title, img, live=false, flame=false, edgeCo
         <Image src={img} alt={title} fill className="object-cover" sizes="(max-width:640px) 92vw, 33vw" priority />
       </div>
       <div className="p-3">
-        <h3 className="text-cyan-300 font-semibold">{title}</h3>
+        <h3 className="text-#18e27a-300 font-semibold">{title}</h3>
       </div>
     </article>
   );
