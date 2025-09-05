@@ -78,7 +78,7 @@ export default function BottomBar() {
   ];
 
   return (
-    <nav
+    <nav className="bottom-bar"
       role="navigation"
       aria-label="Primary"
       style={{
