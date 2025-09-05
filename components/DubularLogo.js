@@ -1,1 +1,0 @@
-import Image from "next/image";export default function DubularLogo(){return(<div style={{padding:"6px 0",display:"flex",justifyContent:"center"}}><Image src="/Dubular.jpg" alt="Dubular Logo" width={400} height={180} priority/></div>);}
