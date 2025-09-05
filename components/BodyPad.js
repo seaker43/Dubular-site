@@ -1,0 +1,1 @@
+import { useEffect } from 'react'; export default function BodyPad({ children }){ useEffect(()=>{ document.body.classList.add('has-bottom-bar'); return ()=>document.body.classList.remove('has-bottom-bar'); },[]); return children; }
