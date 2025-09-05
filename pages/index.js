@@ -28,7 +28,7 @@ export default function Home(){
       {/* Trending etc. Existing sections will continue below */}
       <section style={{padding:"8px 14px 100px"}}>
         <div style={{display:"flex",alignItems:"center",gap:12,margin:"8px 6px 12px"}}>
-          <h2 style={{margin:0, fontSize:22, color:"#7fffea"}}>Trending Now</h2>
+          <h2 style={{margin:0, fontSize:22, color:"#18e27a"}}>Trending Now</h2>
           <div style={{flex:1, height:2, background:"linear-gradient(90deg, rgba(0,255,220,.3), rgba(0,200,255,0))"}}/>
         </div>
         {/* Your existing Trending grid/cards render here (placeholder container) */}

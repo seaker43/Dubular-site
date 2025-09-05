@@ -11,7 +11,7 @@ export default function Login() {
   const [msg, setMsg] = useState(null);
   const [err, setErr] = useState(null);
 
-  const greenBtn = 'px-5 py-3 rounded-xl font-medium bg-[#18e27a]/15 border border-[#18e27a]/30 hover:bg-[#18e27a]/25 shadow-[0_0_24px_rgba(0,255,255,0.15)] transition';
+  const greenBtn = 'px-5 py-3 rounded-xl font-medium bg-[#18e27a]/15 border border-[#18e27a]/30 hover:bg-[#18e27a]/25 shadow-[0_0_24px_rgba(24,226,122,0.15)] transition';
 
   async function onLogin(e) {
     e.preventDefault();
@@ -44,7 +44,7 @@ export default function Login() {
 
   return (
     <Layout>
-      <div className="max-w-md mx-auto mt-16 p-6 rounded-2xl bg-[#0c1218]/70 border border-white/5 shadow-[0_0_60px_rgba(0,255,255,0.08)]">
+      <div className="max-w-md mx-auto mt-16 p-6 rounded-2xl bg-[#0c1218]/70 border border-white/5 shadow-[0_0_60px_rgba(24,226,122,0.08)]">
         <h1 className="text-3xl dubular-headline mb-6">Login</h1>
         <form onSubmit={onLogin} className="space-y-4">
           <label className="block">

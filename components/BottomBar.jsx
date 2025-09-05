@@ -55,7 +55,7 @@ export default function BottomBar(){
       }}>
         {items.map((it, i)=>{
           const active = pathname === it.href || (it.href === "/" && pathname === "/index");
-          const accent = active ? "#7fffea" : "rgba(180,250,240,.8)";
+          const accent = active ? "#18e27a" : "rgba(180,250,240,.8)";
           const glow = active ? "0 0 18px rgba(0,255,220,.35)" : "none";
           return (
             <li key={i} style={{textAlign:"center", flex:"1 1 0"}}>

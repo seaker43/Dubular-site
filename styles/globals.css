@@ -6,7 +6,7 @@
 html, body, #__next { height: 100%; }
 body { @apply bg-[#0a0f14] text-white; }
 .hero{min-height:80dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:48px 20px;text-align:center}
-.hero .logo{width:min(840px,90vw);height:auto;display:block;filter:drop-shadow(0 0 24px rgba(0,255,255,.25)) drop-shadow(0 0 40px rgba(0,255,180,.18))}
+.hero .logo{width:min(840px,90vw);height:auto;display:block;filter:drop-shadow(0 0 24px rgba(24,226,122,.25)) drop-shadow(0 0 40px rgba(0,255,180,.18))}
 .hero .tag{letter-spacing:.38em;color:#d6e7ff;opacity:.9;margin-top:6px;text-shadow:0 0 14px rgba(160,220,255,.35)}
 .signup{display:flex;gap:12px;align-items:center;background:#0f1722;padding:10px;border-radius:14px;border:1px solid rgba(255,255,255,.06)}
 .email{width:min(56ch,70vw);background:transparent;color:#cfe9ff;border:none;outline:none;padding:14px 16px;font-size:16px}
@@ -15,7 +15,7 @@ body { @apply bg-[#0a0f14] text-white; }
 .social{display:flex;gap:22px;font-size:22px;color:#8abfff;margin-top:8px}
 .social a{text-decoration:none;color:inherit;filter:drop-shadow(0 0 10px rgba(60,160,255,.35))}
 .hero{min-height:80dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:48px 20px;text-align:center}
-.hero .logo{width:min(840px,90vw);height:auto;display:block;filter:drop-shadow(0 0 24px rgba(0,255,255,.25)) drop-shadow(0 0 40px rgba(0,255,180,.18))}
+.hero .logo{width:min(840px,90vw);height:auto;display:block;filter:drop-shadow(0 0 24px rgba(24,226,122,.25)) drop-shadow(0 0 40px rgba(0,255,180,.18))}
 .hero .tag{letter-spacing:.38em;color:#d6e7ff;opacity:.9;margin-top:6px;text-shadow:0 0 14px rgba(160,220,255,.35)}
 .signup{display:flex;gap:12px;align-items:center;background:#0f1722;padding:10px;border-radius:14px;border:1px solid rgba(255,255,255,.06)}
 .email{width:min(56ch,70vw);background:transparent;color:#cfe9ff;border:none;outline:none;padding:14px 16px;font-size:16px}

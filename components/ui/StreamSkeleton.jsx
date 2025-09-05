@@ -14,7 +14,7 @@ export function LivePill() {
       display:"inline-flex", alignItems:"center", gap:8,
       background:"rgba(0,255,200,0.10)", border:"1px solid rgba(0,255,200,0.25)",
       padding:"6px 10px", borderRadius:999, fontWeight:700, letterSpacing:1,
-      color:"#7fffea", fontSize:12
+      color:"#18e27a", fontSize:12
     }}>
       <span style={{
         width:8, height:8, borderRadius:999,

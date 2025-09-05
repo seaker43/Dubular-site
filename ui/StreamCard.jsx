@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function StreamCard({ title, img, live=false, flame=false, edgeColor="#22d3ee" }) {
+export default function StreamCard({ title, img, live=false, flame=false, edgeColor="#18e27a" }) {
   return (
     <article className={`relative ${flame ? "flame" : "edge-frame"}`} style={{"--edge-color": edgeColor}}>
       {live && (

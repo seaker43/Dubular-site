@@ -15,7 +15,7 @@ s = s.replace(/<header[\s\S]*?<\/header>/,`
 if(!/Featured Streamers/.test(s)){
   s = s.replace(/<main[^>]*>/, m => m + `
     <section style={{padding:"12px"}}>
-      <h2 style={{color:"#7fffea",margin:"0 0 10px"}}>Featured Streamers</h2>
+      <h2 style={{color:"#18e27a",margin:"0 0 10px"}}>Featured Streamers</h2>
       <div style={{display:"flex",gap:12,overflowX:"auto",paddingBottom:6}}>
         {[{
           id:"f1", title:"AI Coding Jam", tags:["coding","synthwave"], img:"https://storage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg"
@@ -31,7 +31,7 @@ if(!/Featured Streamers/.test(s)){
               <span style={{
                 position:"absolute",top:6,left:6,
                 fontSize:11,fontWeight:800,color:"#001318",
-                background:"linear-gradient(90deg,#34d399,#22d3ee)",
+                background:"linear-gradient(90deg,#34d399,#18e27a)",
                 padding:"2px 6px",borderRadius:999
               }}>LIVE</span>
             </div>
