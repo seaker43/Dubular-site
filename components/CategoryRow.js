@@ -1,1 +1,19 @@
-import { useEffect, useRef } from "react";export default function CategoryRow({ title, items=[] }){ const railRef=useRef(null); const data=[...items,...items,...items]; useEffect(()=>{ const el=railRef.current; if(!el) return; let isDown=false,startX=0,scrollStart=0; const down=e=>{isDown=true;startX=(e.touches?e.touches[0].pageX:e.pageX);scrollStart=el.scrollLeft;el.classList.add("dragging")}; const move=e=>{if(!isDown) return; const x=(e.touches?e.touches[0].pageX:e.pageX); el.scrollLeft=scrollStart-(x-startX)}; const up=()=>{isDown=false;el.classList.remove("dragging")}; const loop=()=>{const w=el.scrollWidth/3;if(el.scrollLeft>=w)el.scrollLeft-=w;if(el.scrollLeft<=0)el.scrollLeft+=w}; el.addEventListener("mousedown",down); el.addEventListener("touchstart",down,{passive:true}); window.addEventListener("mousemove",move,{passive:false}); window.addEventListener("touchmove",move,{passive:false}); window.addEventListener("mouseup",up); window.addEventListener("touchend",up); el.addEventListener("scroll",loop); requestAnimationFrame(()=>{el.scrollLeft=el.scrollWidth/6}); return()=>{el.removeEventListener("mousedown",down);el.removeEventListener("touchstart",down);window.removeEventListener("mousemove",move);window.removeEventListener("touchmove",move);window.removeEventListener("mouseup",up);window.removeEventListener("touchend",up);el.removeEventListener("scroll",loop)}} ,[]); return (<section className="cat-row"><h2 className="cat-title">{title}</h2><div className="rail" ref={railRef}>{data.map((it,idx)=>(<a key={idx} className="card" href="#"><div className="thumb" style={{backgroundImage:"url("+(it.thumb||`https://picsum.photos/seed/${encodeURIComponent(title)}-${idx}/400/225`)+")"}}/><div className="meta"><div className="name">{it.title}</div><div className="tags">{(it.tags||[]).join(" • ")}</div></div></a>))}</div></section>) }
+export default function CategoryRow({ title, items }) {
+  return (
+    <section className="cat-row">
+      <h2 className="cat-title">{title}</h2>
+      <div className="rail">
+        {items.map((it, idx) => (
+          <a key={idx} className="card" href="#">
+            <div className="thumb" style={{backgroundImage:`url(${it.thumb})`}}></div>
+            <div className="meta">
+              {it.live && <span className="live-badge">LIVE</span>}
+              <div className="name">{it.title}</div>
+              <div className="tags">{(it.tags||[]).join(" • ")}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )
+}
