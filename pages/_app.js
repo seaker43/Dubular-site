@@ -1,3 +1,4 @@
+import BodyPad from "../components/BodyPad";
 import './bottom-pad.css'
 import BodyPad from "./components/BodyPad"
 import "../styles/globals.css";
@@ -21,7 +22,7 @@ export default function App({ Component, pageProps }) {
       </header>
 
       <main>
-        <Component {...pageProps} />
+        <BodyPad><Component {...pageProps} /></BodyPad>
       </main>
 
       <BottomBar />
