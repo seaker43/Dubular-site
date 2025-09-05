@@ -2,7 +2,6 @@ import BodyPad from "../components/BodyPad";
 import '../styles/bottom-pad.css'
 import "../styles/globals.css";
 import BottomBar from "../components/BottomBar";
-import DubularLogo from "../components/DubularLogo";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -15,7 +14,6 @@ export default function App({ Component, pageProps }) {
       }}>
         <div style={{display:"flex",justifyContent:"center"}}>
           <div style={{transform:"scale(.78)"}}>
-            <DubularLogo size={54}/>
           </div>
         </div>
       </header>

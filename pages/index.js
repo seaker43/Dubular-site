@@ -1,4 +1,3 @@
-import DubularLogo from "../components/DubularLogo";
 import CategoryRow from "../components/CategoryRow";
 
 export default function Home() {
@@ -8,7 +7,6 @@ export default function Home() {
 
   return (
     <div className="page">
-      <DubularLogo/>
       <CategoryRow title="Trending Now" items={mostWatched}/>
       <CategoryRow title="Most Liked" items={mostLiked}/>
       <CategoryRow title="Biggest Grinders" items={biggestGrinders}/>
