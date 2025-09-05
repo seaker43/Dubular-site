@@ -1,5 +1,6 @@
 import Head from "next/head";
 import HorizontalCarousel from "../components/HorizontalCarousel";
+import "../styles/home.css";
 const thumbs = (n) => `/thumbs/${n}.jpg`;
 const featured=[{id:"f1",title:"AI Coding Jam",category:"coding",tagline:"synthwave",thumb:thumbs("1"),live:true},{id:"f2",title:"Lo-Fi Chill",category:"music",tagline:"lofi",thumb:thumbs("2"),live:true},{id:"f3",title:"Speedrun Vault",category:"gaming",tagline:"any%",thumb:thumbs("3"),live:false}];
 const trending=[{id:"t1",title:"Pixel Painter",category:"art",tagline:"retro",thumb:thumbs("4"),live:true},{id:"t2",title:"Crypto Charts",category:"finance",tagline:"alpha",thumb:thumbs("5"),live:false},{id:"t3",title:"Night Jazz",category:"music",tagline:"smooth",thumb:thumbs("6"),live:true}];
