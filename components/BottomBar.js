@@ -30,7 +30,7 @@ export default function BottomBar() {
   const { pathname } = useRouter();
 
   const baseIcon = (d) => (
-    <svg width="22" height="22" viewBox="0 0 24 24"
+    <svg className="glow" width="22" height="22" viewBox="0 0 24 24"
          fill="none" stroke="currentColor" strokeWidth="2"
          strokeLinecap="round" strokeLinejoin="round"
          style={{ opacity: .95 }}>
