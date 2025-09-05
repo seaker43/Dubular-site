@@ -1,3 +1,4 @@
+import BodyPad from "./components/BodyPad"
 import "../styles/globals.css";
 import BottomBar from "../components/BottomBar";
 import DubularLogo from "../components/DubularLogo";
