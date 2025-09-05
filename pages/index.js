@@ -9,7 +9,6 @@ export default function Home() {
   return (
     <div className="page">
       <DubularLogo/>
-      <h1 className="title">Featured Streamers</h1>
       <CategoryRow title="Trending Now" items={mostWatched}/>
       <CategoryRow title="Most Liked" items={mostLiked}/>
       <CategoryRow title="Biggest Grinders" items={biggestGrinders}/>
