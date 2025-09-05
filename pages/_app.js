@@ -1,5 +1,5 @@
 import BodyPad from "../components/BodyPad";
-import './bottom-pad.css'
+import '../styles/bottom-pad.css'
 import "../styles/globals.css";
 import BottomBar from "../components/BottomBar";
 import DubularLogo from "../components/DubularLogo";
