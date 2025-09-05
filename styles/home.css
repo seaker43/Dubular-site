@@ -1,7 +1,7 @@
 .cat-row{margin:28px 0}
 .cat-title{font-size:28px;font-weight:800;color:#18e27a;text-shadow:0 0 10px rgba(24,226,122,.45)}
 .rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 6px 18px;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent 100%);-webkit-overflow-scrolling:touch}
-.rail.dragging{cursor:grabbing}
+.rail::-webkit-scrollbar{display:none}
 .card{min-width:70vw;max-width:70vw;scroll-snap-align:start;background:#071612;border:1px solid rgba(24,226,122,.18);border-radius:14px;box-shadow:0 0 18px rgba(24,226,122,.25);overflow:hidden}
 .thumb{width:100%;aspect-ratio:16/9;background-size:cover;background-position:center;filter:drop-shadow(0 0 6px rgba(24,226,122,.35))}
 .meta{padding:10px 12px}
