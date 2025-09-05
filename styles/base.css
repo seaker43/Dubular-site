@@ -1,7 +1,7 @@
 /* ---------- design tokens ---------- */
 :root{
   --bg:#0a0f14; --panel:#0f151d; --ink:#e8f3ff; --muted:#9fb1c1;
-  --#18e27a:#00e5ff; --pink:#ff4dfd; --lime:#a3ff3b; --warn:#ff7a18;
+  --#18ff3c:#00e5ff; --pink:#ff4dfd; --lime:#a3ff3b; --warn:#ff7a18;
   --radius:16px; --ring:2px;
 }
 *{box-sizing:border-box}
@@ -17,8 +17,8 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,Sego
 .hscroll::-webkit-scrollbar{height:8px}.hscroll::-webkit-scrollbar-thumb{background:#233;border-radius:999px}
 
 /* headings + links */
-.kicker{color:var(--#18e27a);text-shadow:0 0 12px #00e5ff80}
-.h-title{font-weight:800;letter-spacing:.3px;font-size:clamp(20px,4vw,28px);color:var(--#18e27a);text-shadow:0 0 14px #00e5ff66,0 0 26px #00e5ff33}
+.kicker{color:var(--#18ff3c);text-shadow:0 0 12px #00e5ff80}
+.h-title{font-weight:800;letter-spacing:.3px;font-size:clamp(20px,4vw,28px);color:var(--#18ff3c);text-shadow:0 0 14px #00e5ff66,0 0 26px #00e5ff33}
 .neon-link{display:inline-flex;gap:6px;align-items:center;color:var(--pink);text-decoration:none;border:1px solid #ff4dfd55;border-radius:999px;padding:6px 10px;box-shadow:0 0 14px #ff4dfd55 inset,0 0 14px #ff4dfd55}
 .neon-link:hover{background:var(--pink);color:#000;box-shadow:0 0 22px #ff4dfd}
 
@@ -29,7 +29,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,Sego
 .badge{position:absolute;left:10px;top:10px;background:#ff2a2a;color:#fff;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:700;box-shadow:0 0 14px #ff2a2a}
 
 /* moving edge-light ring (all but Trending) */
-.edge{--c1:var(--#18e27a);--c2:#7618ff;--th:2px}
+.edge{--c1:var(--#18ff3c);--c2:#7618ff;--th:2px}
 .edge::after{
   content:"";position:absolute;inset:0;border-radius:inherit;padding:var(--th);
   background:conic-gradient(from var(--rot,0deg),var(--c1),var(--c2),var(--c1));
@@ -55,4 +55,4 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,Sego
 .bbtn{display:flex;flex-direction:column;align-items:center;gap:6px;color:#b9c9d8;text-decoration:none}
 .bbtn .ic{width:22px;height:22px;filter:drop-shadow(0 0 10px #00e5ff44)}
 .bbtn span{font-size:12px}
-.bbtn.active{color:var(--#18e27a);text-shadow:0 0 12px #00e5ff80}
+.bbtn.active{color:var(--#18ff3c);text-shadow:0 0 12px #00e5ff80}

@@ -6,7 +6,7 @@ const Item = ({ href, label, icon, active }) => (
     <a
       style={{
         textDecoration: "none",
-        color: active ? "#18e27a" : "rgba(223,255,250,.85)",
+        color: active ? "#18ff3c" : "rgba(223,255,250,.85)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
