@@ -1,9 +1,9 @@
 :root{
   --dubular-bg-start:#0b0f14;
   --dubular-bg-end:#0a0d12;
-  --dubular-#18e27a:#18e27a;          /* #18e27a */
-  --dubular-#18e27a-600:#18e27a;      /* hover */
-  --dubular-#18e27a-700:#0e7490;      /* active */
+  --dubular-#18ff3c:#18ff3c;          /* #18ff3c */
+  --dubular-#18ff3c-600:#18ff3c;      /* hover */
+  --dubular-#18ff3c-700:#0e7490;      /* active */
   --dubular-text:#e6fcff;
 }
 
@@ -21,7 +21,7 @@ html,body,#__next{
   border-radius: 14px;
   padding: 12px 18px;
   font-weight: 600;
-  background: linear-gradient(180deg,var(--dubular-#18e27a),var(--dubular-#18e27a-600));
+  background: linear-gradient(180deg,var(--dubular-#18ff3c),var(--dubular-#18ff3c-600));
   color: #031418 !important;
   box-shadow:
     0 0 0 1px rgba(34,211,238,.25) inset,
@@ -38,15 +38,15 @@ html,body,#__next{
 }
 .btn:active, .button:active, a.btn:active, button:active, .cta:active{
   transform: translateY(1px);
-  background: linear-gradient(180deg,var(--dubular-#18e27a-600),var(--dubular-#18e27a-700));
+  background: linear-gradient(180deg,var(--dubular-#18ff3c-600),var(--dubular-#18ff3c-700));
 }
 .nav-active::after{
   content:"";
   position:absolute; left:0; right:0; bottom:-8px; height:2px;
-  background: radial-gradient(12px 6px at 50% 50%, var(--dubular-#18e27a), transparent 70%);
+  background: radial-gradient(12px 6px at 50% 50%, var(--dubular-#18ff3c), transparent 70%);
 }
 /* Gradient headline utility if used */
 .dubular-headline{
-  background: linear-gradient(90deg, #e6fcff 0%, var(--dubular-#18e27a) 55%, #e6fcff 100%);
+  background: linear-gradient(90deg, #e6fcff 0%, var(--dubular-#18ff3c) 55%, #e6fcff 100%);
   -webkit-background-clip:text; background-clip:text; color: transparent;
 }
