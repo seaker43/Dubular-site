@@ -23,3 +23,4 @@ body { @apply bg-[#0a0f14] text-white; }
 .social a{text-decoration:none;color:inherit;filter:drop-shadow(0 0 10px rgba(60,160,255,.35))}
 .glow{color:#18ff3c;text-shadow:0 0 8px #18ff3c,0 0 16px #18ff3c,0 0 24px #18ff3c;} .glow-bg{box-shadow:0 0 12px #18ff3c,0 0 24px #18ff3c,0 0 36px #18ff3c;}
 .glow{color:#18ff3c;text-shadow:0 0 8px #18ff3c,0 0 16px #18ff3c,0 0 24px #18ff3c;} .glow-bg{box-shadow:0 0 12px #18ff3c,0 0 24px #18ff3c,0 0 36px #18ff3c;}
+.logo-slot{width:100%;height:120px;display:flex;align-items:center;justify-content:center;}
