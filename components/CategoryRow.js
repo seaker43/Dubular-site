@@ -4,14 +4,14 @@ export default function CategoryRow({ title, items }) {
       <h2 className="cat-title">{title}</h2>
       <div className="rail">
         {items.map((it, idx) => (
-          <a key={idx} className="card" href="#">
-            <div className="thumb" style={{backgroundImage:`url(${it.thumb})`}}></div>
+          <div key={idx} className="card">
+            <div className="thumb" style={{backgroundImage:`url(${it.thumb||"/demo/placeholder.jpg"})`}}></div>
             <div className="meta">
               {it.live && <span className="live-badge">LIVE</span>}
               <div className="name">{it.title}</div>
               <div className="tags">{(it.tags||[]).join(" • ")}</div>
             </div>
-          </a>
+          </div>
         ))}
       </div>
     </section>
