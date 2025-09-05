@@ -1,3 +1,4 @@
+import '../styles/bottom-bar.css';
 import BodyPad from "../components/BodyPad";
 import '../styles/bottom-pad.css'
 import "../styles/globals.css";
