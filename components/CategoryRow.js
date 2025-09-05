@@ -15,14 +15,22 @@ export default function CategoryRow({ title, items }) {
         ))}
       </div>
       <style jsx>{`
-        .category-title { color:#18e27a; font-size:1.3rem; font-weight:600; margin:1rem 0; text-shadow:0 0 10px #18e27a; }
-        .scroll-row { display:flex; overflow-x:auto; gap:1rem; padding-bottom:0.5rem; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; }
-        .card { flex:0 0 auto; min-width:180px; max-width:200px; background:#111; border-radius:12px; padding:0.5rem; scroll-snap-align:start; box-shadow:0 0 12px rgba(24,226,122,0.4); }
-        .thumb-wrap { position:relative; }
-        .thumb { width:100%; border-radius:8px; }
-        .live-badge { position:absolute; top:8px; left:8px; background:#18e27a; color:#000; font-size:0.7rem; padding:2px 6px; border-radius:6px; font-weight:600; box-shadow:0 0 8px #18e27a; }
-        .card-title { color:#fff; font-size:1rem; margin:0.5rem 0 0.25rem; }
-        .card-tags { color:#aaa; font-size:0.8rem; }
+        .category-title{color:#18e27a;font-size:1.3rem;font-weight:600;margin:1rem 0;text-shadow:0 0 10px #18e27a;}
+        .scroll-row{
+          display:flex;gap:1rem;overflow-x:auto;padding:0 0 0.5rem 0.25rem;
+          scroll-snap-type:x mandatory;scroll-snap-stop:always;scroll-behavior:smooth;
+          -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;
+          scrollbar-width:none;
+          mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.9) 12px,rgba(0,0,0,.9) calc(100% - 12px),transparent 100%);
+        }
+        .scroll-row::-webkit-scrollbar{display:none}
+        .card{flex:0 0 auto;min-width:180px;max-width:200px;background:#111;border-radius:12px;padding:0.5rem;
+          scroll-snap-align:start;box-shadow:0 0 12px rgba(24,226,122,.35);}
+        .thumb-wrap{position:relative}
+        .thumb{width:100%;border-radius:8px}
+        .live-badge{position:absolute;top:8px;left:8px;background:#18e27a;color:#000;font-size:.7rem;padding:2px 6px;border-radius:6px;font-weight:700;box-shadow:0 0 8px #18e27a}
+        .card-title{color:#fff;font-size:1rem;margin:.5rem 0 .25rem}
+        .card-tags{color:#aaa;font-size:.8rem}
       `}</style>
     </div>
   );
