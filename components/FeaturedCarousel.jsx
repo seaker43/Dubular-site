@@ -10,7 +10,7 @@ export default function FeaturedCarousel(){
   return (
     <section style={{padding:"16px 14px 10px"}}>
       <div style={{display:"flex", alignItems:"center", gap:12, margin:"0 6px 10px"}}>
-        <h2 style={{margin:0, fontSize:22, color:"#7fffea", textShadow:"0 0 12px rgba(0,255,220,.3)"}}>Featured Streamers</h2>
+        <h2 style={{margin:0, fontSize:22, color:"#18e27a", textShadow:"0 0 12px rgba(0,255,220,.3)"}}>Featured Streamers</h2>
         <div style={{flex:1, height:2, background:"linear-gradient(90deg, rgba(0,255,220,.3), rgba(0,200,255,0))"}}/>
       </div>
 

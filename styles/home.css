@@ -144,7 +144,7 @@ body{
 }
 
 /* overrides */
-.bottom-nav{display:flex;justify-content:space-around;padding:10px 8px;background:rgba(10,16,22,.85);backdrop-filter:blur(6px);border-top:1px solid rgba(0,255,255,.08)}
+.bottom-nav{display:flex;justify-content:space-around;padding:10px 8px;background:rgba(10,16,22,.85);backdrop-filter:blur(6px);border-top:1px solid rgba(24,226,122,.08)}
 .bottom-tab{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--#18e27a);text-decoration:none}
 .bottom-tab.active{color:var(--#18e27aDeep)}
 
