@@ -16,8 +16,8 @@ export default function CategoryRow({ title, items }) {
       </div>
       <style jsx>{`
         .category-title { color:#18e27a; font-size:1.3rem; font-weight:600; margin:1rem 0; text-shadow:0 0 10px #18e27a; }
-        .scroll-row { display:flex; overflow-x:auto; gap:1rem; padding-bottom:0.5rem; }
-        .card { min-width:200px; background:#111; border-radius:12px; padding:0.5rem; box-shadow:0 0 12px rgba(24,226,122,0.4); }
+        .scroll-row { display:flex; overflow-x:auto; gap:1rem; padding-bottom:0.5rem; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; }
+        .card { flex:0 0 auto; min-width:180px; max-width:200px; background:#111; border-radius:12px; padding:0.5rem; scroll-snap-align:start; box-shadow:0 0 12px rgba(24,226,122,0.4); }
         .thumb-wrap { position:relative; }
         .thumb { width:100%; border-radius:8px; }
         .live-badge { position:absolute; top:8px; left:8px; background:#18e27a; color:#000; font-size:0.7rem; padding:2px 6px; border-radius:6px; font-weight:600; box-shadow:0 0 8px #18e27a; }
