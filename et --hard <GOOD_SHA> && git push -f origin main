@@ -1,0 +1,10 @@
+[33m3f404381[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;33mtag: [m[1;33mcp-main-20250905-102210-3f404381[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Revert "fix: move global CSS import to _app.js per Next.js rules"
+[33m9adcaa85[m[33m ([m[1;33mtag: [m[1;33mcp-main-20250905-100310-9adcaa85[m[33m)[m fix: move global CSS import to _app.js per Next.js rules
+[33m02af0887[m[33m ([m[1;33mtag: [m[1;33mcp-main-20250905-095152-02af0887[m[33m)[m feat(home): restore carousels + neon green theme
+[33mc7f485a2[m[33m ([m[1;33mtag: [m[1;33mcp-main-20250905-094701-c7f485a2[m[33m)[m fix: update logo to Dubular.jpg and swap cyan to neon green (#18e27a)
+[33m69972df7[m[33m ([m[1;33mtag: [m[1;33mcp-main-20250905-073139-69972df7[m[33m)[m chore: add Dubular.jpg alias
+[33me54e6137[m[33m ([m[1;33mtag: [m[1;33mcp-main-20250905-071523-e54e6137[m[33m)[m chore: swap logo asset to Dubular.jpg
+[33m9712d965[m[33m ([m[1;33mtag: [m[1;33mcp-main-20250905-061920-9712d965[m[33m)[m fix: add graffiti logo and update DubularLogo component
+[33mf0010014[m[33m ([m[1;33mtag: [m[1;33mcp-main-20250905-060713-f0010014[m[33m)[m chore: replace DubularLogo with graffiti version
+[33m0274ba1d[m[33m ([m[1;33mtag: [m[1;33mcp-main-20250905-012039-0274ba1d[m[33m)[m fix(login): rename #18e27aBtn -> greenBtn; replace invalid CSS var tokens
+[33m6b74fa5c[m[33m ([m[1;33mtag: [m[1;33mcp-main-20250905-011543-6b74fa5c[m[33m)[m feat(pages): add Search & Ranks (wire only)
