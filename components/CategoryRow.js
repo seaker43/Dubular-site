@@ -11,7 +11,7 @@ export default function CategoryRow({ title, items }) {
           >
             <img
               src={it.img}
-              alt=""
+              alt={it.title || "thumbnail"}
               loading="lazy"
               className="h-36 w-full object-cover"
             />
