@@ -1,80 +1,49 @@
-export default function CategoryRow({ title, items }) {
-</div>
+export default function CategoryRow({ title, items = [] }) {
   return (
-</div>
-    <section className="mb-8">
-</div>
-      <h2 className="mb-3 text-2xl font-bold text-emerald-300">{title}</h2>
-</div>
-      <div className="flex snap-x gap-4 overflow-x-auto pb-3">
-</div>
+    <section className="mb-10">
+      <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white drop-shadow-[0_0_18px_rgba(16,185,129,0.35)] mb-4">
+        {title}
+      </h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {items.map((it, idx) => (
-</div>
-          <a
-</div>
-            key={idx}
-</div>
-            href="#"
-</div>
-            className="group active:scale-[.98] relative w-64 flex-shrink-0 snap-start overflow-hidden rounded-lg bg-neutral-900 ring-1 ring-neutral-800 hover:scale-[1.03] hover:ring-emerald-400/60 transition-all duration-300"
-</div>
-          >
-</div>
-            <img
-</div>
-              src={it.img}
-</div>
-              alt={it.title || "thumbnail"}
-</div>
-              loading="lazy"
-</div>
-              className="h-36 w-full object-cover"
-</div>
-            />
-</div>
-            <div className="p-3">
-</div>
-              <div className="flex items-center gap-2">
-</div>
-                {it.live && (
-</div>
-                  <span className="inline-flex items-center rounded px-1.5 py-0.5 text-[11px] font-bold bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-400/40 shadow-[0_0_6px_#34d399,0_0_12px_#34d399] shadow-[0_0_6px_#34d399,0_0_12px_#34d399]">
-</div>
-                    LIVE
-</div>
-                  </span>
-</div>
-                )}
-</div>
-                <span className="text-lg font-semibold leading-tight text-gray-100 group-hover:text-emerald-300 transition-colors">
-</div>
-                  {it.title}
-</div>
-                </span>
-</div>
-              </div>
-</div>
-              {it.tags && it.tags.length > 0 && (
-</div>
-                <p className="mt-1 text-sm text-gray-400">
-</div>
-                  {it.tags.join(" • ")}
-</div>
-                </p>
-</div>
-              )}
-</div>
+          <a key={idx} href="#" className="group block">
+            {/* Thumbnail */}
+            <div
+              className={`aspect-video w-full overflow-hidden rounded-md shadow-sm ring-1 ring-white/10
+                          transition duration-300 ease-out will-change-transform
+                          ${it?.live ? "ring-red-500/80 animate-livePulse" : "group-hover:ring-emerald-400/80"}`}
+            >
+              <img
+                src={it?.img || it?.thumb}
+                alt=""
+                className="h-full w-full object-cover
+                           transition duration-300 ease-out will-change-transform
+                           group-hover:scale-105 group-hover:brightness-110
+                           rounded-md shadow-sm"
+                loading="lazy"
+              />
             </div>
-</div>
+
+            {/* Meta */}
+            <div className="mt-2">
+              <div className="flex items-center gap-2">
+                {it?.live && (
+                  <span className="mr-1 px-2 py-0.5 text-xs font-bold text-white bg-red-600 rounded shadow-lg animate-livePulse">
+                    LIVE
+                  </span>
+                )}
+                <span className="text-lg font-semibold text-violet-300 transition-colors group-hover:text-violet-200">
+                  {it?.title}
+                </span>
+              </div>
+              <div className="text-sm text-violet-300/75">
+                {(it?.tags || []).join(" • ")}
+              </div>
+            </div>
           </a>
-</div>
         ))}
-</div>
       </div>
-</div>
     </section>
-</div>
   );
-</div>
 }
-</div>
