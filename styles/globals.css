@@ -2,25 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* neon helpers */
-.glow-neon{box-shadow:0 0 24px rgba(24,226,122,0.45)}
-.text-neon{color:#18e27a;text-shadow:0 0 18px rgba(24,226,122,0.45)}
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Neon helpers + base reset */
-@layer base {
-  html,body{ @apply bg-black text-white; }
-  a{ @apply no-underline text-white hover:text-emerald-300; }
-}
-.section-title{ @apply mx-4 mb-3 text-4xl font-extrabold text-emerald-300 drop-shadow; }
-.row{ @apply my-8; }
-.rail{ @apply mx-4 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2; }
-.rail>*{ @apply snap-start; }
-.card{ @apply min-w-[70%] sm:min-w-[46%] md:min-w-[32%] bg-[#071612] rounded-2xl border border-emerald-900/40 shadow-[0_0_24px_rgba(24,226,122,.25)] overflow-hidden; }
-.thumb{ @apply w-full aspect-[16/9] object-cover; }
-.meta{ @apply p-3; }
-.name{ @apply text-lg font-semibold; }
-.tags{ @apply text-sm opacity-70; }
-.badge{ @apply absolute left-2 top-2 text-xs font-bold bg-emerald-400 text-black px-2 py-0.5 rounded; }
+/* minimal base so we can see it working */
+:root{--bb-h:64px}
+html,body,#__next{height:100%}
+body{background:#0b0f14;color:#e5e7eb}
+a{color:#a78bfa}
