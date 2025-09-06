@@ -29,3 +29,10 @@ body{padding-bottom:calc(var(--bb-h) + env(safe-area-inset-bottom));}
 .glow-neon { filter: drop-shadow(0 0 14px rgba(16,185,129,.45)); }
 .glow-red  { filter: drop-shadow(0 0 14px rgba(239,68,68,.55)); }
 @media (prefers-reduced-motion: reduce) { .animate-pulse { animation: none !important; } }
+
+/* dubular-neon-helpers */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.glow-neon { filter: drop-shadow(0 0 14px rgba(16,185,129,.45)); }
+.glow-red  { filter: drop-shadow(0 0 14px rgba(239,68,68,.55)); }
+@media (prefers-reduced-motion: reduce) { .animate-pulse { animation: none !important; } }

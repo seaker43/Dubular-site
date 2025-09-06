@@ -41,6 +41,8 @@ export default function Home() {
       </div>
       <div className="h-16"></div>
   <BottomBar />
+  <div className="h-16"></div>
+  <BottomBar />
 </main>
   );
 }
