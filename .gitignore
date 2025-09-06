@@ -18,3 +18,4 @@ yarn-error.log*
 out/
 dist/
 .vercel/
+dubular-site.tar.gz
