@@ -1,1 +1,1 @@
-git add . && git commit -m "$1" && git push origin main
+git add . && git commit -m "update: auto deploy" && git push origin main
