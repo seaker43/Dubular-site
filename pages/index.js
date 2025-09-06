@@ -1,5 +1,6 @@
 import CategoryRow from "../components/CategoryRow";
 export default function Home(){
+<h1 className="text-red-500">TAILWIND CHECK</h1>
   const mostWatched=Array.from({length:8},(_,i)=>({
     title:"LoFi #"+(i+1), tags:["music","lofi"], live:true, thumb:"https://picsum.photos/seed/lofi"+i+"/800/450"
   }));
