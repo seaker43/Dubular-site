@@ -1,27 +1,29 @@
-export default function CategoryRow({ title, items }) {
+export default function CategoryRow({ title, items=[] }) {
   return (
-    <section className="mb-7">
-      <h2 className="text-2xl font-extrabold mb-3 text-white drop-shadow-[0_0_10px_rgba(24,226,122,.45)]">{title}</h2>
-      <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-1 pb-2 [-webkit-overflow-scrolling:touch]">
-        {items.map(function (it, idx) {
-          return (
-            <a key={idx} href="#" className="snap-start min-w-[72vw] sm:min-w-[260px] bg-[#071612] border border-[rgba(24,226,122,.18)] rounded-xl shadow-[0_0_18px_rgba(24,226,122,.25)] text-white no-underline overflow-hidden">
-              <div
-                className="w-full aspect-[16/9] bg-center bg-cover"
-                style={{ backgroundImage: "url(" + it.thumb + ")" }}
-              />
-              <div className="p-3">
-                <div className="flex items-center gap-2">
-                  {it.live ? <span className="text-[11px] px-2 py-[2px] rounded-full bg-[rgba(24,226,122,.12)] border border-[rgba(24,226,122,.35)] text-[#8eff8e]">LIVE</span> : null}
-                  <div className="font-semibold">{it.title}</div>
-                </div>
-                {Array.isArray(it.tags) && it.tags.length > 0 ? (
-                  <div className="opacity-70 text-sm mt-1">{it.tags.join(" • ")}</div>
-                ) : null}
-              </div>
-            </a>
-          );
-        })}
+    <section className="my-8">
+      <h2 className="px-4 text-2xl font-extrabold tracking-wide text-[#18e27a] drop-shadow-[0_0_18px_rgba(24,226,122,0.45)]">
+        {title}
+      </h2>
+      <div className="mt-4 flex gap-4 px-4 overflow-x-auto snap-x snap-mandatory pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {items.map((it, idx) => (
+          <a key={idx} href="#"
+             className="snap-start shrink-0 w-[72vw] sm:w-[240px] group rounded-2xl border border-white/10 bg-neutral-900/70 shadow-[0_0_24px_rgba(24,226,122,0.18)] ring-1 ring-white/5 backdrop-blur hover:shadow-[0_0_32px_rgba(24,226,122,0.35)] transition-all">
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-t-2xl bg-neutral-800"
+                 style={{backgroundImage:`url(${it.thumb||""})`, backgroundSize:"cover", backgroundPosition:"center"}}>
+              {it.live && (
+                <span className="absolute left-2 top-2 rounded-md bg-[#18e27a] px-2 py-0.5 text-[11px] font-black text-black shadow-[0_0_16px_rgba(24,226,122,0.6)]">
+                  LIVE
+                </span>
+              )}
+            </div>
+            <div className="p-3">
+              <div className="text-[15px] font-semibold leading-tight">{it.title}</div>
+              {!!(it.tags && it.tags.length) && (
+                <div className="mt-1 text-[12px] opacity-75">{it.tags.join(" • ")}</div>
+              )}
+            </div>
+          </a>
+        ))}
       </div>
     </section>
   );
