@@ -1,20 +1,54 @@
+# Node.js dependencies
 node_modules/
-.next/
-.beta/
-export/
-*.zip
-.backups/
-
-# Custom ignores
-*.bak
-*.backup-*
-*.zip
-.DS_Store
-Thumbs.db
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.next/
-out/
-dist/
+
+# Build outputs
 .vercel/
+.next/
+dist/
+out/
+build/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Logs
+*.log
+logs/
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Archives / Dumps
+*.tar
+*.tar.gz
+*.zip
+*.7z
+*.rar
+dump_*
+
+# Cache
+.cache/
+.npm/
+.eslintcache
+.stylelintcache
+
+# IDE settings
+.vscode/
+.idea/
+*.iml
+
+# Custom project ignores
+dubular-site.tar.gz
+dubular-beta.zip
