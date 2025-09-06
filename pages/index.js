@@ -2,17 +2,17 @@ export default function Home() {
   const mostWatched   = Array.from({ length: 8 }, (_, i) => ({
     live: true, live: true, live: true, title: "LoFi #" + (i + 1),
     tags: ["music","lofi"],
-    img: "https://picsum.photos/seed/lofi-" + (i + 1) + "/800/450"
+    live: i % 2 === 0, img: "https://picsum.photos/seed/lofi-" + (i + 1) + "/800/450"
   }));
   const mostLiked     = Array.from({ length: 8 }, (_, i) => ({
     live: true, live: true, live: true, title: "Pixel Art #" + (i + 1),
     tags: ["art","pixel"],
-    img: "https://picsum.photos/seed/art-" + (i + 1) + "/800/450"
+    live: i % 2 === 0, img: "https://picsum.photos/seed/art-" + (i + 1) + "/800/450"
   }));
   const biggestGrinds = Array.from({ length: 8 }, (_, i) => ({
     live: true, live: true, live: true, title: "Streamer" + (i + 1),
     tags: ["hours:" + (100 + i * 5)],
-    img: "https://picsum.photos/seed/var-" + (i + 1) + "/800/450"
+    live: i % 2 === 0, img: "https://picsum.photos/seed/var-" + (i + 1) + "/800/450"
   }));
 
   const CategoryRow = ({ title, items }) => (
