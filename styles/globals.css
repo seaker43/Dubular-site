@@ -7,3 +7,7 @@
 html,body,#__next{height:100%}
 body{background:#0b0f14;color:#e5e7eb}
 a{color:#a78bfa}
+/* __TAILWIND_BB__ */
+:root{--bb-h:72px}
+html,body,#__next{min-height:100svh}
+body{padding-bottom:calc(var(--bb-h) + env(safe-area-inset-bottom));}
