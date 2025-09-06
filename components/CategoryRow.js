@@ -7,7 +7,7 @@ export default function CategoryRow({title,items=[]}) {
   },[]);
   return (
     <section className="row">
-      <h2 className="section-title">{title}</h2>
+      <h2 className="drop-shadow-neon section-title">{title}</h2>
       <div ref={railRef} className="rail">
         {items.map((it,idx)=>(
           <a key={idx} href="#" className="card">
