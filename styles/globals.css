@@ -24,3 +24,36 @@ body { @apply bg-[#0a0f14] text-white; }
 .glow{color:#18ff3c;text-shadow:0 0 8px #18ff3c,0 0 16px #18ff3c,0 0 24px #18ff3c;} .glow-bg{box-shadow:0 0 12px #18ff3c,0 0 24px #18ff3c,0 0 36px #18ff3c;}
 .glow{color:#18ff3c;text-shadow:0 0 8px #18ff3c,0 0 16px #18ff3c,0 0 24px #18ff3c;} .glow-bg{box-shadow:0 0 12px #18ff3c,0 0 24px #18ff3c,0 0 36px #18ff3c;}
 .logo-slot{width:100%;height:120px;display:flex;align-items:center;justify-content:center;}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{--bottom-bar-h:64px}
+
+/* helpers */
+.glow-neon{box-shadow:0 0 24px rgba(24,226,122,.45)}
+.text-neon{color:#18e27a}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{--bottom-bar-h:64px}
+
+.glow-neon{box-shadow:0 0 24px rgba(24,226,122,.45)}
+.text-neon{color:#18e27a}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{--bottom-bar-h:64px}
+
+.glow-neon{box-shadow:0 0 24px rgba(24,226,122,.45)}
+.text-neon{color:#18e27a}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{--bottom-bar-h:64px}
+
+.glow-neon{box-shadow:0 0 24px rgba(24,226,122,.45)}
+.text-neon{color:#18e27a}
