@@ -18,7 +18,7 @@ export default function CategoryRow({ title, items }) {
             <div className="p-3">
               <div className="flex items-center gap-2">
                 {it.live && (
-                  <span className="inline-flex items-center rounded px-1.5 py-0.5 text-[11px] font-bold bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-400/40 shadow-[0_0_6px_#34d399,0_0_12px_#34d399]">
+                  <span className="inline-flex items-center rounded px-1.5 py-0.5 text-[11px] font-bold bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-400/40 shadow-[0_0_6px_#34d399,0_0_12px_#34d399] shadow-[0_0_6px_#34d399,0_0_12px_#34d399]">
                     LIVE
                   </span>
                 )}
