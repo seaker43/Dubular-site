@@ -25,6 +25,6 @@ export default function BottomBar() {
           <Item href="/account"emoji="👤" label="Account" />
         </div>
       </div>
-    </nav>
+    <span className="ml-2 text-[10px] text-neutral-500/70">build: {process.env.NEXT_PUBLIC_BUILD_ID || (typeof window!=="undefined" ? "" : "")}</span></nav>
   );
 }
