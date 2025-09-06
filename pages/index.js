@@ -1,3 +1,4 @@
+import BottomBar from "../components/BottomBar";
 import CategoryRow from "../components/CategoryRow";
 
 export default function Home() {
@@ -38,6 +39,8 @@ export default function Home() {
           <a href="#" className="text-white/80 hover:text-white">Profile</a>
         </div>
       </div>
-    </main>
+      <div className="h-16"></div>
+  <BottomBar />
+</main>
   );
 }
