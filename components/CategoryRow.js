@@ -7,7 +7,7 @@ export default function CategoryRow({ title, items }) {
           <a
             key={idx}
             href="#"
-            className="group relative w-64 flex-shrink-0 snap-start overflow-hidden rounded-lg bg-neutral-900 ring-1 ring-neutral-800 hover:scale-[1.03] hover:ring-emerald-400/60 transition-all duration-300"
+            className="group active:scale-[.98] relative w-64 flex-shrink-0 snap-start overflow-hidden rounded-lg bg-neutral-900 ring-1 ring-neutral-800 hover:scale-[1.03] hover:ring-emerald-400/60 transition-all duration-300"
           >
             <img
               src={it.img}
