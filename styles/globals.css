@@ -57,3 +57,6 @@ body { @apply bg-[#0a0f14] text-white; }
 
 .glow-neon{box-shadow:0 0 24px rgba(24,226,122,.45)}
 .text-neon{color:#18e27a}
+
+:root{ --bb-h:72px; }
+body.pb-safe{ padding-bottom: calc(var(--bb-h) + env(safe-area-inset-bottom,0px)); }
