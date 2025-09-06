@@ -16,7 +16,7 @@ export default function CategoryRow({title,items=[]}) {
               <img src={it.thumb} alt="" className="thumb" />
             </div>
             <div className="meta">
-              <div className="name">{it.title}</div>
+              <div className="name">{it.live {it.title}{it.title} <span className="mr-1 px-2 py-0.5 text-xs font-bold text-black bg-emerald-400 rounded glow-neon">LIVE</span>}{it.title}</div>
               <div className="tags">{(it.tags||[]).join(" • ")}</div>
             </div>
           </a>
