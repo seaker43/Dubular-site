@@ -1,7 +1,19 @@
 export default function Home() {
-  const mostWatched   = Array.from({ length: 8 }, (_, i) => ({ title: \`LoFi #\${i+1}\`,  tags:["music","lofi"],  img:\`https://picsum.photos/seed/lofi-\${i+1}/800/450\` }));
-  const mostLiked     = Array.from({ length: 8 }, (_, i) => ({ title: \`Pixel Art #\${i+1}\`, tags:["art","pixel"], img:\`https://picsum.photos/seed/art-\${i+1}/800/450\` }));
-  const biggestGrinds = Array.from({ length: 8 }, (_, i) => ({ title: \`Streamer\${i+1}\`,   tags:[\`hours:\${100+i*5}\`], img:\`https://picsum.photos/seed/var-\${i+1}/800/450\` }));
+  const mostWatched   = Array.from({ length: 8 }, (_, i) => ({
+    title: "LoFi #" + (i + 1),
+    tags: ["music","lofi"],
+    img: "https://picsum.photos/seed/lofi-" + (i + 1) + "/800/450"
+  }));
+  const mostLiked     = Array.from({ length: 8 }, (_, i) => ({
+    title: "Pixel Art #" + (i + 1),
+    tags: ["art","pixel"],
+    img: "https://picsum.photos/seed/art-" + (i + 1) + "/800/450"
+  }));
+  const biggestGrinds = Array.from({ length: 8 }, (_, i) => ({
+    title: "Streamer" + (i + 1),
+    tags: ["hours:" + (100 + i * 5)],
+    img: "https://picsum.photos/seed/var-" + (i + 1) + "/800/450"
+  }));
 
   const CategoryRow = ({ title, items }) => (
     <section className="px-4 sm:px-6 md:px-8 my-6">
@@ -29,7 +41,6 @@ export default function Home() {
       <CategoryRow title="Most Liked"     items={mostLiked} />
       <CategoryRow title="Biggest Grinders" items={biggestGrinds} />
 
-      {/* Inline fixed bottom bar (safe-area aware) */}
       <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-emerald-500/30 bg-neutral-900/80 backdrop-blur supports-[backdrop-filter]:bg-neutral-900/60">
         <div className="mx-auto max-w-screen-md">
           <div className="grid grid-cols-5 gap-1 p-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))]">
