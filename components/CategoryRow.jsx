@@ -1,21 +1,47 @@
-export default function CategoryRow({ title, items = [] }) {
+export default function CategoryRow({ title, items=[] }) {
   return (
-    <section className="my-6">
-      <h2 className="mb-3 pl-2 text-2xl font-extrabold text-green-300 drop-shadow-[0_0_10px_rgba(34,197,94,0.45)]">{title}</h2>
-      <div className="mask-hfade overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none]">
-        <div className="flex gap-3 pb-2 pr-3 snap-x snap-mandatory">
-          {items.map((it, idx) => (
-            <a key={idx} href="#" className="snap-start shrink-0 w-[72vw] max-w-[320px] sm:w-[280px] rounded-2xl border border-green-400/20 bg-neutral-900/70 p-3 text-green-100 shadow-[0_0_18px_rgba(34,197,94,0.25)] hover:shadow-[0_0_24px_rgba(34,197,94,0.35)]">
-              <div className="aspect-[16/9] w-full rounded-xl bg-neutral-800/70 mb-2 flex items-center justify-center text-neutral-400 text-sm">
-                thumb
-              </div>
-              <div className="text-lg font-semibold">{it.title}</div>
-              {it.tags?.length ? (
-                <div className="text-xs text-neutral-400 mt-1">{it.tags.join(" • ")}</div>
+    <section className="mb-8">
+      <div className="flex items-center gap-2 mb-3">
+        <h2 className="text-[clamp(16px,3.6vw,20px)] font-semibold tracking-wide text-[color:#18e27a] drop-shadow-[0_0_10px_rgba(24,226,122,.45)]">
+          {title}
+        </h2>
+        <div className="h-px flex-1 bg-[linear-gradient(90deg,rgba(24,226,122,.35),transparent)]" />
+      </div>
+
+      <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-pb-2 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {items.map((it, i) => (
+          <article key={i} className="min-w-[68%] xs:min-w-[58%] sm:min-w-[42%] md:min-w-[320px] snap-start shrink-0">
+            <div className="relative aspect-video overflow-hidden rounded-xl shadow-[0_0_24px_rgba(24,226,122,.12)] ring-1 ring-[rgba(24,226,122,.22)] bg-black/40">
+              <img
+                src={it.img}
+                alt={it.title}
+                loading="lazy"
+                className="h-full w-full object-cover transition duration-300 hover:scale-[1.03]"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_40%,rgba(24,226,122,.12),transparent_70%)]" />
+              <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/65 to-transparent" />
+            </div>
+
+            <div className="mt-2 flex items-center gap-2">
+              <h3 className="text-[clamp(14px,3.2vw,18px)] font-medium text-white/95 truncate">{it.title}</h3>
+              {it.live ? (
+                <span
+                  aria-label="live now"
+                  className="inline-flex items-center gap-1 rounded-full border border-[rgba(24,226,122,.35)] bg-[rgba(24,226,122,.12)] px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-[color:#18e27a] shadow-[0_0_14px_rgba(24,226,122,.25)]"
+                >
+                  <span className="h-2 w-2 rounded-full bg-[color:#18e27a] shadow-[0_0_10px_rgba(24,226,122,.8)]" />
+                  LIVE
+                </span>
               ) : null}
-            </a>
-          ))}
-        </div>
+            </div>
+
+            {it.tags?.length ? (
+              <p className="mt-1 text-[12px] text-white/55 truncate">
+                {it.tags.join(" • ")}
+              </p>
+            ) : null}
+          </article>
+        ))}
       </div>
     </section>
   );
