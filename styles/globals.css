@@ -11,3 +11,14 @@ a{color:#a78bfa}
 :root{--bb-h:72px}
 html,body,#__next{min-height:100svh}
 body{padding-bottom:calc(var(--bb-h) + env(safe-area-inset-bottom));}
+@layer utilities {
+  @keyframes livePulse {
+    0%   { box-shadow: 0 0 0px rgba(239,68,68,0.40); transform: scale(1); }
+    50%  { box-shadow: 0 0 22px rgba(239,68,68,0.75); transform: scale(1.01); }
+    100% { box-shadow: 0 0 0px rgba(239,68,68,0.40); transform: scale(1); }
+  }
+  .animate-livePulse { animation: livePulse 1.5s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-livePulse { animation: none !important; }
+  }
+}
