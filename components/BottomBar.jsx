@@ -1,32 +1,5 @@
 import Link from "next/link";
-import { Trophy, Heart, Home, Wallet, User } from "lucide-react";
-
-export default function BottomBar() {
-  const links = [
-    { href: "/rank", label: "Rank", icon: Trophy },
-    { href: "/favs", label: "Favs", icon: Heart },
-    { href: "/", label: "Home", icon: Home },
-    { href: "/wallet", label: "Wallet", icon: Wallet, badge: "D" },
-    { href: "/account", label: "Account", icon: User },
-  ];
-
-  return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-black/80 border-t border-neon flex justify-around items-center h-16 z-50">
-      {links.map(({ href, label, icon: Icon, badge }) => (
-        <Link
-          key={href}
-          href={href}
-          className="flex flex-col items-center justify-center text-gray-400 hover:text-neon transition-colors relative"
-        >
-          <Icon className="h-6 w-6" />
-          {badge && (
-            <span className="absolute -top-1 right-2 bg-neon text-black text-xs font-bold px-1.5 py-0.5 rounded-full shadow-[0_0_8px_var(--neon)]">
-              {badge}
-            </span>
-          )}
-          <span className="text-xs mt-1">{label}</span>
-        </Link>
-      ))}
-    </nav>
-  );
-}
+import { useRouter } from "next/router";
+import { Home, Trophy, Heart, User } from "lucide-react";
+const items=[{href:"/rank",label:"Rank",icon:Trophy},{href:"/favs",label:"Favs",icon:Heart},{href:"/",label:"Home",icon:Home},{href:"/account",label:"Account",icon:User}];
+export default function BottomBar(){const router=useRouter();return(<div className="pointer-events-auto fixed bottom-0 left-1/2 z-50 w-full max-w-3xl -translate-x-1/2 px-4 pb-[max(env(safe-area-inset-bottom),0.5rem)]"><nav className="rounded-3xl bg-[#0b0f11]/92 backdrop-blur-md shadow-[0_0_40px_rgba(57,255,20,0.08)] ring-1 ring-white/5"><ul className="grid grid-cols-4">{items.map(({href,label,icon:Icon})=>{const active=href==="/" ? router.pathname==="/" : router.pathname.startsWith(href);return(<li key={href} className="flex"><Link href={href} className={["relative mx-auto flex h-20 w-full max-w-[100px] flex-col items-center justify-center gap-1","text-zinc-300/80 transition-colors",active?"text-[var(--neon)]":"hover:text-zinc-200"].join(" ")}><span aria-hidden className={["absolute inset-0 -z-10 rounded-3xl opacity-0 transition-opacity",active?"opacity-100 shadow-[0_0_18px_4px_rgba(57,255,20,0.35),0_0_40px_6px_rgba(57,255,20,0.18)]":""].join(" ")}/><Icon className={["h-6 w-6",active?"drop-shadow-[0_0_8px_rgba(57,255,20,0.55)]":""].join(" ")} strokeWidth={active?2.4:2}/><span className="text-[11px] font-medium tracking-wide">{label}</span></Link></li>);})}</ul></nav></div>);}
