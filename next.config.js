@@ -1,14 +1,3 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  async redirects() {
-    return [
-      {
-        source: '/stream/:channel',
-        destination: '/streams/:channel',
-        permanent: true,
-      },
-    ];
-  },
-};
-module.exports = nextConfig;
+/** @type {import("next").NextConfig} */
+const nextConfig={images:{domains:["images.unsplash.com","cdn.pixabay.com","i.ytimg.com","image.tmdb.org"]}};
+module.exports=nextConfig;
