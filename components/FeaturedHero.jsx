@@ -3,24 +3,21 @@ import Image from "next/image";
 
 export default function FeaturedHero() {
   return (
-    <section className="relative w-full max-w-6xl mx-auto mb-10">
-      {/* Featured video/image */}
-      <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-[0_0_40px_10px_var(--neon)]">
+    <section className="relative w-full max-w-7xl mx-auto mb-8">
+      <div className="relative w-full aspect-[1/1] overflow-hidden rounded-2xl shadow-[0_0_25px_rgba(57,255,20,0.8)]">
         <Image
           src="/thumbs/featured/featured-1.jpg"
           alt="Featured Content"
-          fill
-          className="object-cover"
+          layout="fill"
+          objectFit="cover"
           priority
         />
-        {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-        {/* Title + play button */}
-        <div className="absolute bottom-6 left-6">
-          <h2 className="text-3xl md:text-5xl font-extrabold text-neon drop-shadow-lg">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+        <div className="absolute bottom-6 left-6 text-white">
+          <h2 className="text-3xl md:text-4xl font-bold drop-shadow-lg">
             Featured Content
           </h2>
-          <button className="mt-3 px-6 py-3 bg-neon text-black font-semibold rounded-lg shadow-[0_0_15px_var(--neon)] hover:scale-105 transition-transform">
+          <button className="mt-3 px-6 py-3 bg-neon text-black font-semibold rounded-lg shadow-[0_0_15px_rgba(57,255,20,0.8)] hover:shadow-[0_0_25px_rgba(57,255,20,1)] transition">
             ▶ Play
           </button>
         </div>
