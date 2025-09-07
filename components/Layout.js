@@ -1,21 +1,17 @@
 import Head from "next/head";
-import Navbar from "./Navbar";
+import BottomBar from "./BottomBar";
 
 export default function Layout({ title = "Dubular", children }) {
-  const pageTitle = title ? `${title} • Dubular` : "Dubular";
   return (
     <>
       <Head>
-        <title>{pageTitle}</title>
-        <meta name="theme-color" content="#00FF66" />
+        <title>{title}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-
-      {/* page chrome */}
-      <div className="min-h-screen bg-[rgb(8,10,12)] text-zinc-100">
-        <main className="pb-[96px]">{children}</main>
-      </div>
-
-      <Navbar />
+      <main className="min-h-screen bg-black text-white pb-20">
+        {children}
+      </main>
+      <BottomBar />
     </>
   );
 }
