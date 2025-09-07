@@ -1,20 +1,21 @@
-import buildInfo from "../lib/build-info.json";
-import Link from "next/link";
+import Head from "next/head";
+import Navbar from "./Navbar";
 
-export default function Layout({ children }) {
+export default function Layout({ title = "Dubular", children }) {
+  const pageTitle = title ? `${title} • Dubular` : "Dubular";
   return (
-    <div className="app">
-      <header className="nav">
-        <div className="brand"><Link href="/">Dubular</Link></div>
-        <nav className="links">
-            <Link href="/streams" className="mx-3 hover:underline">Streams</Link>
-          <Link href="/leaderboards">Rankings</Link>
-          <Link href="/wallet">Wallet</Link>
-        </nav>
-      </header>
-      <main className="app-shell" className="container">{children}</main>
-        <div style={{fontSize:"12px",opacity:.6,marginTop:"6px"}}>Deployment check: {new Date(buildInfo.builtAt).toLocaleString()}</div>
-      <footer className="footer">© {new Date().getFullYear()} Dubular</footer>
-    </div>
+    <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta name="theme-color" content="#00FF66" />
+      </Head>
+
+      {/* page chrome */}
+      <div className="min-h-screen bg-[rgb(8,10,12)] text-zinc-100">
+        <main className="pb-[96px]">{children}</main>
+      </div>
+
+      <Navbar />
+    </>
   );
 }
