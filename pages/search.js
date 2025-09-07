@@ -2,55 +2,71 @@
 import Head from "next/head";
 import MediaRow from "../components/MediaRow";
 
-const makeItems = (base, cat, tag, n = 8) =>
-  Array.from({ length: n }).map((_, i) => ({
-    title: `${base} #${i + 1}`,
-    category: cat,
-    tags: [tag],
-    // put your real thumbs in /public/thumbs/*.jpg|png
-    thumb: `/thumbs/${cat.toLowerCase()}-${(i % 6) + 1}.jpg`,
-    live: i === 0 && (cat === "Music" || cat === "IRL"),
-  }));
-
-export default function SearchPage() {
-  const rows = [
-    { title: "Music", href: "/music", items: makeItems("LoFi", "Music", "lofi") },
-    { title: "Art", href: "/art", items: makeItems("Pixel Art", "Art", "pixel") },
-    { title: "Gaming", href: "/gaming", items: makeItems("Gameplay", "Gaming", "fps") },
-    { title: "Podcasts", href: "/podcasts", items: makeItems("Talk", "Podcasts", "chat") },
-    { title: "IRL", href: "/irl", items: makeItems("Live IRL", "IRL", "live") },
-    { title: "Coding", href: "/coding", items: makeItems("Dev Stream", "Coding", "js") },
-    { title: "Sports", href: "/sports", items: makeItems("Match", "Sports", "highlights") },
-    { title: "News", href: "/news", items: makeItems("Update", "News", "daily") },
-  ];
-
+export default function Search() {
   return (
     <>
-      <Head><title>Find • Dubular</title></Head>
-      <main className="px-4 pb-24 max-w-6xl mx-auto">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-neon tracking-tight mb-6">Find</h1>
+      <Head>
+        <title>Find | Dubular</title>
+      </Head>
 
-        {/* (optional) quick search UI stub — wire up later */}
-        <div className="mb-6">
-          <div className="relative">
-            <input
-              aria-label="Search"
-              placeholder="Search creators, streams, tags…"
-              className="w-full rounded-xl bg-neutral-900/70 border border-neutral-800 px-4 py-3 text-neutral-200 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[var(--neon)]"
-            />
-          </div>
+      <main className="px-4 pb-24">
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-6 text-neon">
+          Find
+        </h1>
+
+        {/* Search input */}
+        <div className="mb-8">
+          <input
+            type="text"
+            placeholder="Search creators, streams, tags..."
+            className="w-full rounded-lg bg-neutral-900 border border-neutral-800 px-4 py-3 text-gray-200 focus:outline-none focus:ring-2 focus:ring-neon placeholder-gray-500"
+          />
         </div>
 
-        {rows.map((row) => (
-          <MediaRow
-            key={row.title}
-            title={row.title}
-            href={row.href}
-            items={row.items}
-            cols={{ base: 2, md: 3, lg: 4 }}   // more cards per row on larger screens
-            loop                                    // infinite loop carousel
-          />
-        ))}
+        {/* Music */}
+        <MediaRow
+          title="Music"
+          href="/find/music"
+          items={[
+            { title: "LoFi #1", category: "music • lofi", image: "/thumbs/music/lofi-1.jpg", live: true },
+            { title: "LoFi #2", category: "music • lofi", image: "/thumbs/music/lofi-2.jpg" },
+            { title: "LoFi #3", category: "music • lofi", image: "/thumbs/music/lofi-3.jpg" },
+            { title: "LoFi #4", category: "music • lofi", image: "/thumbs/music/lofi-4.jpg" },
+          ]}
+        />
+
+        {/* Art */}
+        <MediaRow
+          title="Art"
+          href="/find/art"
+          items={[
+            { title: "Pixel Art #1", category: "art • pixel", image: "/thumbs/art/pixel-1.jpg" },
+            { title: "Pixel Art #2", category: "art • pixel", image: "/thumbs/art/pixel-2.jpg" },
+            { title: "Pixel Art #3", category: "art • pixel", image: "/thumbs/art/pixel-3.jpg" },
+          ]}
+        />
+
+        {/* Gaming */}
+        <MediaRow
+          title="Gaming"
+          href="/find/gaming"
+          items={[
+            { title: "FPS Stream #1", category: "gaming • fps", image: "/thumbs/gaming/fps-1.jpg" },
+            { title: "RPG Stream #1", category: "gaming • rpg", image: "/thumbs/gaming/rpg-1.jpg" },
+            { title: "MOBA Stream #1", category: "gaming • moba", image: "/thumbs/gaming/moba-1.jpg" },
+          ]}
+        />
+
+        {/* Independent Media */}
+        <MediaRow
+          title="Independent Media"
+          href="/find/independent"
+          items={[
+            { title: "Indie News #1", category: "media • news", image: "/thumbs/independent/indie-1.jpg" },
+            { title: "Indie Doc #1", category: "media • doc", image: "/thumbs/independent/indie-2.jpg" },
+            { title: "Indie Talk #1", category: "media • talk", image: "/thumbs/independent/indie-3.jpg" },
+          ]}
+        />
       </main>
     </>
   );
