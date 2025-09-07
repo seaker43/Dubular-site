@@ -1,56 +1,50 @@
 // pages/index.js
 import Head from "next/head";
+import FeaturedHero from "../components/FeaturedHero";
 import MediaRow from "../components/MediaRow";
-import FeaturedHero from "../components/FeaturedHero"; // ✅ add this
 
 export default function Home() {
   return (
     <>
       <Head>
         <title>Dubular</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <main className="homepage px-4 pb-24">
-        {/* ✅ Featured content autoplay block */}
+      <main className="homepage px-4 pb-24 pt-4">
+        {/* Featured block (image or .mp4). Make sure the asset exists. */}
         <FeaturedHero
-          src="/thumbnails/trending/trending1.jpg"
           title="Featured Content"
-          autoplay
-          muted
-          loop
+          src="/thumbnails/trending1.jpg"     // or "/videos/feature.mp4"
+          poster="/thumbnails/trending1.jpg"
         />
 
+        {/* Rows — these arrays must not be empty or you'll just see headers */}
         <MediaRow
           title="Trending Now"
           href="/trending"
-          category="trending"
           items={[
-            { file: "trending1.jpg", title: "LoFi #1", tags: ["music", "lofi"], live: true },
-            { file: "trending2.jpg", title: "LoFi #2", tags: ["music", "lofi"] },
-            { file: "trending3.jpg", title: "LoFi #3", tags: ["music", "lofi"] },
-            { file: "trending4.jpg", title: "LoFi #4", tags: ["music", "lofi"] },
-            { file: "trending5.jpg", title: "LoFi #5", tags: ["music", "lofi"] },
+            { file: "trending1.jpg", title: "LoFi #1" },
+            { file: "trending2.jpg", title: "LoFi #2" },
+            { file: "trending1.jpg", title: "LoFi #3" },
           ]}
         />
 
         <MediaRow
           title="Art"
           href="/art"
-          category="art"
           items={[
-            { file: "art1.jpg", title: "Pixel Art #1", tags: ["art", "pixel"] },
-            { file: "art2.jpg", title: "Pixel Art #2", tags: ["art", "pixel"] },
-            { file: "art3.jpg", title: "Pixel Art #3", tags: ["art", "pixel"] },
+            { file: "art1.jpg", title: "Art Drop" },
+            { file: "trending2.jpg", title: "Sketches" },
           ]}
         />
 
         <MediaRow
           title="Independent Media"
           href="/independent"
-          category="independent"
           items={[
-            { file: "independent1.jpg", title: "Indie Film #1", tags: ["indie", "film"] },
-            { file: "independent2.jpg", title: "Indie Film #2", tags: ["indie", "film"] },
+            { file: "indie1.jpg", title: "Indie #1" },
+            { file: "trending1.jpg", title: "Indie #2" },
           ]}
         />
       </main>
