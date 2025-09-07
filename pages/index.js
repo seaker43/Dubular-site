@@ -3,7 +3,6 @@ import FeaturedHero from "@/components/FeaturedHero";
 import MediaRow from "@/components/MediaRow";
 
 export default function Home() {
-  // Live-only items for the home row
   const liveItems = [
     {
       id: "live-1",
@@ -22,10 +21,9 @@ export default function Home() {
   return (
     <Layout title="dubUlar">
       <div className="px-4 md:px-6 pt-4 pb-2">
-        <FeaturedHero title="Featured Content" />
+        <FeaturedHero title="Featured Content" fullHeight /> {/* 👈 homepage only */}
       </div>
 
-      {/* Only LIVE category below featured */}
       <MediaRow title="Live" items={liveItems} href="/find#live" />
     </Layout>
   );
