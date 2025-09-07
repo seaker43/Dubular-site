@@ -1,6 +1,6 @@
-// components/Layout.js
 import Head from "next/head";
 import BottomBar from "./BottomBar";
+import Header from "./Header";
 
 export default function Layout({ children, title }) {
   return (
@@ -10,9 +10,12 @@ export default function Layout({ children, title }) {
         <meta name="theme-color" content="#09182a" />
       </Head>
 
-      <div className="min-h-screen bg-[#0b0f1a]">
+      <Header />
+
+      {/* push content below fixed header */}
+      <main className="min-h-screen bg-[#0b0f1a] pt-14 pb-20">
         {children}
-      </div>
+      </main>
 
       <BottomBar />
     </>
