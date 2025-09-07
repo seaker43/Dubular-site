@@ -2,40 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---------------- Base ---------------- */
-html, body { overflow-x: hidden; }
+/* === Base guardrails === */
+html, body {
+  overflow-x: hidden; /* kill accidental horizontal scroll */
+}
 body {
   @apply bg-neutral-950 text-white;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 }
 
-/* --------- Hide horizontal scrollers (keep scroll working) --------- */
+/* Hide scrollbars for carousels (without disabling scroll) */
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 
-/* ---------------- Homepage ---------------- */
-.homepage h2 { @apply text-white text-xl md:text-2xl font-bold mb-2; }
+/* ===== App-specific components kept minimal & explicit ===== */
+@layer components {
+  /* Featured hero */
+  .featured-hero { @apply relative w-full h-[60vh] sm:h-[70vh] lg:h-[80vh] bg-black rounded-xl overflow-hidden shadow-lg; }
+  .featured-hero video, .featured-hero img { @apply w-full h-full object-cover; }
+  .featured-hero-overlay { @apply absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent; }
+  .featured-hero-title { @apply text-white text-3xl sm:text-4xl font-bold; }
 
-/* Featured Hero */
-.featured-hero { @apply relative w-full h-[60vh] md:h-[70vh] bg-black rounded-xl overflow-hidden shadow-lg; }
-.featured-hero video { @apply w-full h-full object-cover; }
-.featured-hero-overlay { @apply absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent; }
-.featured-hero-overlay h1 { @apply text-white text-3xl md:text-4xl font-extrabold; }
+  /* Homepage section titles */
+  .homepage h2 { @apply text-white text-xl sm:text-2xl font-bold mb-2; }
 
-/* ---------------- Thumbnails ---------------- */
-.thumbnail-card { @apply relative rounded-lg overflow-hidden bg-neutral-900 shadow-lg; }
-.thumbnail-card img { @apply w-full h-auto aspect-video object-cover will-change-transform; }
-.thumbnail-title { @apply absolute bottom-0 left-0 w-full px-2 py-1 text-sm md:text-base text-white bg-black/60; }
-.live-badge { @apply absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded; }
+  /* Thumbnail card (rectangular 16:9 with bottom title + live badge) */
+  .thumbnail-card { @apply relative rounded-lg overflow-hidden bg-neutral-900 shadow-lg; }
+  .thumbnail-media { @apply w-full h-auto aspect-video object-cover; }
+  .thumbnail-title { @apply absolute bottom-0 left-0 w-full px-2 py-1 text-sm text-white bg-black/60; }
+  .live-badge { @apply absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded; }
 
-/* Horizontal media row (snap + smooth + hidden bar) */
-.media-row { @apply relative; }
-.media-row-track { scroll-snap-type: x mandatory; scroll-behavior: smooth; }
-.media-row-track > * { scroll-snap-align: start; }
+  /* Media row: horizontal snap carousel, bounce-less, no visible scrollbar */
+  .media-row {
+    @apply relative w-full overflow-x-auto whitespace-nowrap scrollbar-hide;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .media-row-item {
+    @apply inline-block align-top mr-3 last:mr-0;
+    scroll-snap-align: start;
+  }
 
-/* ---------------- Bottom bar ---------------- */
-.bottom-bar { @apply fixed bottom-0 left-0 right-0 z-50 bg-black/70 backdrop-blur border-t border-neutral-800; }
-.bottom-bar nav { @apply mx-auto max-w-screen-md; }
-.bottom-bar a { @apply flex flex-col items-center justify-center py-2 px-4 text-xs text-neutral-300; }
-.bottom-bar a[aria-current="page"] { @apply text-white; text-shadow: 0 0 6px rgba(255,255,255,0.35); }
+  /* Bottom bar (thin, centered content) */
+  .bottom-bar {
+    @apply fixed bottom-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-md border-t border-white/10;
+    height: 56px; /* thin */
+  }
+  .bottom-bar-inner {
+    @apply max-w-screen-md mx-auto h-full flex items-center justify-around;
+  }
+  .bottom-bar-item {
+    @apply flex flex-col items-center justify-center text-[10px] leading-none opacity-80 transition;
+  }
+  .bottom-bar-item .icon { @apply text-xl; }
+  .bottom-bar-item.active { @apply opacity-100 text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.7)]; } /* white glow when active */
+}
