@@ -1,38 +1,53 @@
-/* styles/globals.css */
-
-/* Tailwind layers */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Base look & feel */
-@layer base {
-  html, body, #__next {
-    height: 100%;
-  }
-  body {
-    @apply bg-neutral-950 text-zinc-100 antialiased;
-  }
-  a {
-    @apply text-cyan-400 hover:text-cyan-300 underline-offset-2;
-  }
-  h1, h2, h3 {
-    @apply font-bold tracking-tight;
-  }
+/* ---------- Theme base ---------- */
+:root {
+  --accent: #22d3ee; /* cyan-400 */
 }
 
-/* Helpful utilities */
-@layer utilities {
-  .page {
-    @apply min-h-screen mx-auto max-w-6xl px-4 sm:px-6 md:px-8 pb-24;
-  }
-  .section-title {
-    @apply text-3xl md:text-4xl mt-6 mb-4;
-  }
-  .glow {
-    text-shadow:
-      0 0 2px rgba(34,211,238,.7),
-      0 0 6px rgba(34,211,238,.6),
-      0 0 14px rgba(34,211,238,.4);
-  }
+html, body {
+  height: 100%;
+}
+
+body {
+  @apply bg-neutral-950 text-white antialiased;
+}
+
+/* ---------- Typography ---------- */
+.section-title {
+  @apply text-xl font-semibold mb-3;
+}
+
+.glow {
+  color: var(--accent);
+  text-shadow:
+    0 0 8px rgba(34, 211, 238, 0.35),
+    0 0 18px rgba(34, 211, 238, 0.2);
+}
+
+/* ---------- Components ---------- */
+.live-badge {
+  @apply absolute top-2 left-2 text-[10px] font-black px-2 py-1 rounded-md;
+  background: #ef4444;          /* red-500 */
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.25);
+  animation: neonIdle 1.8s infinite;
+}
+
+/* Horizontal scroller aesthetics */
+::-webkit-scrollbar {
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #0b1520;
+  border-radius: 9999px;
+}
+
+/* ---------- Neon idle pulse ---------- */
+@keyframes neonIdle {
+  0%   { box-shadow: 0 0 2px #ef4444, 0 0 6px #ef4444;   }
+  50%  { box-shadow: 0 0 4px #ef4444, 0 0 14px #ef4444;  }
+  100% { box-shadow: 0 0 2px #ef4444, 0 0 6px #ef4444;   }
 }
