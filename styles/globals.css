@@ -1,38 +1,19 @@
+/* Tailwind base (make sure these exist at the top of your globals) */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* minimal base so we can see it working */
-:root{--bb-h:64px}
-html,body,#__next{height:100%}
-body{background:#0b0f14;color:#e5e7eb}
-a{color:#a78bfa}
-/* __TAILWIND_BB__ */
-:root{--bb-h:72px}
-html,body,#__next{min-height:100svh}
-body{padding-bottom:calc(var(--bb-h) + env(safe-area-inset-bottom));}
-@layer utilities {
-  @keyframes livePulse {
-    0%   { box-shadow: 0 0 0px rgba(239,68,68,0.40); transform: scale(1); }
-    50%  { box-shadow: 0 0 22px rgba(239,68,68,0.75); transform: scale(1.01); }
-    100% { box-shadow: 0 0 0px rgba(239,68,68,0.40); transform: scale(1); }
-  }
-  .animate-livePulse { animation: livePulse 1.5s ease-in-out infinite; }
-  @media (prefers-reduced-motion: reduce) {
-    .animate-livePulse { animation: none !important; }
-  }
+/* Subtle neon pulses for badges / accents */
+@keyframes neonPulse {
+  0% { box-shadow: 0 0 0px rgba(255, 59, 59, 0.0); }
+  50% { box-shadow: 0 0 18px rgba(255, 59, 59, 0.65); }
+  100% { box-shadow: 0 0 0px rgba(255, 59, 59, 0.0); }
+}
+@keyframes neonIdle {
+  0%   { filter: drop-shadow(0 0 0px #10b981); }
+  50%  { filter: drop-shadow(0 0 8px #10b981); }
+  100% { filter: drop-shadow(0 0 0px #10b981); }
 }
 
-/* dubular-neon-helpers */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-.glow-neon { filter: drop-shadow(0 0 14px rgba(16,185,129,.45)); }
-.glow-red  { filter: drop-shadow(0 0 14px rgba(239,68,68,.55)); }
-@media (prefers-reduced-motion: reduce) { .animate-pulse { animation: none !important; } }
-
-/* dubular-neon-helpers */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-.glow-neon { filter: drop-shadow(0 0 14px rgba(16,185,129,.45)); }
-.glow-red  { filter: drop-shadow(0 0 14px rgba(239,68,68,.55)); }
-@media (prefers-reduced-motion: reduce) { .animate-pulse { animation: none !important; } }
+.animate-neon       { animation: neonPulse 1.25s ease-in-out infinite; }
+.animate-neon-idle  { animation: neonIdle 1.8s ease-in-out infinite; }
