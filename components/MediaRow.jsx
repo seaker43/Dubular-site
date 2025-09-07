@@ -1,129 +1,78 @@
-import { useEffect, useMemo, useRef } from "react";
-import MediaCard from "./MediaCard";
+// components/MediaRow.jsx
+import { useMemo } from "react";
+import Link from "next/link";
 
-/**
- * MediaRow
- * - Shows 12 cards by cycling the provided `items`
- * - Renders 2x list for seamless loop
- * - Keeps scroll anchored when crossing the midpoint
- */
+const DEFAULT_ITEMS = [
+  { title: "LoFi #1", src: "/thumbnails/lofi1.jpg", tags: ["music", "lofi"], live: true },
+  { title: "LoFi #2", src: "/thumbnails/lofi2.jpg", tags: ["music", "lofi"] },
+  { title: "Pixel Art #1", src: "/thumbnails/pixel1.jpg", tags: ["art", "pixel"] },
+  { title: "Pixel Art #2", src: "/thumbnails/pixel2.jpg", tags: ["art", "pixel"] },
+];
+
 export default function MediaRow({
-  title = "",
-  items = [],
-  hrefPrefix = "",
-  showLive = false,
+  title = "Trending Now",
+  items = DEFAULT_ITEMS,
+  href = "/streams",
 }) {
-  const base = items?.length ? items : Array.from({ length: 6 }, (_, i) => ({
-    id: `ph-${i + 1}`,
-    title: `Item #${i + 1}`,
-    category: "art",
-    tag: "pixel",
-    thumbnail: "/images/placeholder-16x9.jpg",
-    live: i % 3 === 0,
-  }));
-
-  // We want 12 visible “unique” cards; cycle the base list
-  const dozen = useMemo(() => {
-    const out = [];
-    const need = 12;
-    for (let i = 0; i < need; i++) out.push(base[i % base.length]);
-    return out;
-  }, [base]);
-
-  // Duplicate once for the looping illusion
-  const loopList = useMemo(() => [...dozen, ...dozen], [dozen]);
-
-  const scrollerRef = useRef(null);
-
-  // Keep scroll anchored when crossing midpoint
-  useEffect(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const mid = el.scrollWidth / 2;
-
-    const onScroll = () => {
-      if (el.scrollLeft >= mid) {
-        el.scrollLeft -= mid;
-      } else if (el.scrollLeft < 1) {
-        // If the user flicks back to the start, jump to the "same index" in 2nd half
-        el.scrollLeft += mid;
-      }
-    };
-    el.addEventListener("scroll", onScroll, { passive: true });
-    // Start in the first half (natural)
-    el.scrollLeft = 0;
-    return () => el.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const nudge = (dir = 1) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    // one “card” ~ 280px including gap; adjust if your card width changes
-    const step = 280 * 2;
-    el.scrollBy({ left: dir * step, behavior: "smooth" });
-  };
+  // Duplicate the list to create a loop-back feel
+  const renderItems = useMemo(() => [...items, ...items], [items]);
 
   return (
-    <section className="relative">
-      <div className="mb-3 flex items-end justify-between">
-        <h2 className="neon-title">{title}</h2>
-        <div className="hidden sm:flex gap-2 pr-2">
-          <button
-            aria-label="Prev"
-            onClick={() => nudge(-1)}
-            className="btn-chrome"
-          >
-            ‹
-          </button>
-          <button
-            aria-label="Next"
-            onClick={() => nudge(1)}
-            className="btn-chrome"
-          >
-            ›
-          </button>
+    <section className="mb-10">
+      <div className="flex items-end justify-between px-4 sm:px-6">
+        <h2 className="neon-heading">{title}</h2>
+        <Link href={href} className="text-sm text-muted hover:text-neon transition-colors">
+          View all
+        </Link>
+      </div>
+
+      <div className="relative mt-4">
+        {/* fade edges */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-bg to-transparent rounded-l-xl" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-bg to-transparent rounded-r-xl" />
+
+        <div
+          className="grid snap-x snap-mandatory auto-cols-[82%] sm:auto-cols-[46%] lg:auto-cols-[32%] grid-flow-col gap-4 px-4 sm:px-6 overflow-x-auto scroll-smooth scrollbar-hidden"
+          aria-label={title}
+        >
+          {renderItems.map((item, idx) => (
+            <Card key={`${item.title}-${idx}`} {...item} />
+          ))}
         </div>
-      </div>
-
-      {/* edge fades */}
-      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-10 bg-gradient-to-r from-[rgb(8,10,12)] to-transparent" />
-      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-10 bg-gradient-to-l from-[rgb(8,10,12)] to-transparent" />
-
-      <div
-        ref={scrollerRef}
-        className="no-scrollbar relative z-0 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 py-1"
-      >
-        {loopList.map((item, idx) => (
-          <div key={`${item.id ?? idx}-${idx}`} className="snap-start shrink-0">
-            <MediaCard
-              item={item}
-              href={`${hrefPrefix}${item.id ?? idx}`}
-              showLive={showLive}
-            />
-          </div>
-        ))}
-      </div>
-
-      {/* mobile nudge buttons floating */}
-      <div className="sm:hidden">
-        <button
-          aria-label="Prev"
-          onClick={() => nudge(-1)}
-          className="btn-fab left-2"
-        >
-          ‹
-        </button>
-        <button
-          aria-label="Next"
-          onClick={() => nudge(1)}
-          className="btn-fab right-2"
-        >
-          ›
-        </button>
       </div>
     </section>
   );
 }
 
-/* Utility classes (piggyback on globals) */
-/* If you prefer, move to globals.css */
+function Card({ title, src, tags = [], live = false }) {
+  return (
+    <article className="group relative rounded-2xl overflow-hidden bg-card ring-1 ring-white/5 shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
+      <div className="aspect-[16/9] w-full overflow-hidden">
+        {/* Using plain <img> keeps it simple and works with CF Pages static export */}
+        <img
+          src={src}
+          alt={title}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          loading="lazy"
+        />
+      </div>
+
+      {/* bottom overlay */}
+      <div className="absolute inset-x-0 bottom-0">
+        <div className="h-24 bg-gradient-to-t from-black/70 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-3">
+          <div>
+            <h3 className="text-neon-strong text-lg leading-tight">{title}</h3>
+            {tags.length > 0 && (
+              <p className="mt-1 text-xs text-muted">{tags.join(" • ")}</p>
+            )}
+          </div>
+          {live && <span className="live-pill">LIVE</span>}
+        </div>
+      </div>
+
+      {/* subtle outer glow */}
+      <div className="pointer-events-none absolute inset-0 rounded-2xl shadow-[0_0_120px_-30px_var(--neon)]" />
+    </article>
+  );
+}
