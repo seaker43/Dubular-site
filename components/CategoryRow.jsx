@@ -1,35 +1,44 @@
-export default function CategoryRow({ title, items }) {
+// components/CategoryRow.jsx
+export default function CategoryRow({ title, items = [] }) {
   return (
-    <section className="mb-8">
-      <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white drop-shadow-[0_0_26px_rgba(16,185,129,0.45)] mt-10 mb-6">
+    <section className="mt-8">
+      <h2 className="mb-3 text-3xl font-extrabold tracking-tight text-slate-100 neon-text">
         {title}
       </h2>
-      <div className="flex space-x-4 overflow-x-auto snap-x">
-        {items.map((it, idx) => (
-          <a key={idx} href="#" className="group snap-start w-64 flex-shrink-0">
-            <div className="aspect-video w-full overflow-hidden rounded-md shadow-sm ring-1 ring-white/10 transition duration-300 group-hover:scale-105 group-hover:brightness-110 group-hover:shadow-lg">
+
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {items.map((v, idx) => (
+          <a
+            key={idx}
+            href="#"
+            className="group block rounded-xl bg-slate-900/50 ring-1 ring-slate-800 hover:bg-slate-900 hover:ring-2 hover:ring-[#10b981] transition-all duration-200"
+          >
+            <div className="relative overflow-hidden rounded-t-xl">
               <img
-                src={it.img}
-                alt={it.title}
-                className="w-full h-full object-cover rounded-md"
+                src={v.img}
+                alt={v.title}
+                className="h-44 w-full object-cover group-hover:scale-[1.02] transition-transform duration-200"
+                loading="lazy"
               />
+
+              {v.live ? (
+                <span className="absolute left-2 top-2 rounded-full bg-rose-600 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-white shadow-lg animate-pulse-live">
+                  Live
+                </span>
+              ) : (
+                <span className="absolute left-2 top-2 rounded-full bg-emerald-600/90 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-white shadow-lg animate-pulse-idle">
+                  Ready
+                </span>
+              )}
             </div>
-            <div className="mt-2">
-              <div className="flex items-center gap-2">
-                <span className="text-white font-semibold">{it.title}</span>
-                {it.live ? (
-                  <span className="px-2 py-0.5 text-xs font-bold text-white bg-red-600 rounded shadow-lg animate-pulse">
-                    LIVE
-                  </span>
-                ) : (
-                  <span className="px-2 py-0.5 text-xs font-bold text-emerald-400 rounded shadow-md animate-pulse">
-                    ●
-                  </span>
-                )}
-              </div>
-              <div className="text-sm text-white/60">
-                {(it.tags || []).join(" • ")}
-              </div>
+
+            <div className="p-3">
+              <h3 className="line-clamp-1 text-[15px] font-semibold text-slate-100">
+                {v.title}
+              </h3>
+              <p className="mt-1 line-clamp-1 text-xs text-slate-400">
+                {v.tags.join(" • ")}
+              </p>
             </div>
           </a>
         ))}
