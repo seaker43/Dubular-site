@@ -1,6 +1,48 @@
+// components/BottomBar.jsx
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Trophy, Heart, Home, Search, User } from "lucide-react";
-const NEON = "var(--neon)";
-const items=[{href:"/rank",label:"Rank",Icon:Trophy},{href:"/favorites",label:"Favs",Icon:Heart},{href:"/",label:"Home",Icon:Home},{href:"/search",label:"Find",Icon:Search},{href:"/account",label:"Account",Icon:User},];
-export default function BottomBar(){const {pathname}=useRouter();return(<nav className={["fixed z-50 left-1/2 -translate-x-1/2","bottom-[env(safe-area-inset-bottom)]","w-[92%] max-w-xl h-14","rounded-2xl border border-white/10","bg-black/60 backdrop-blur-md","shadow-[0_8px_40px_rgba(0,255,120,0.18)]",].join(" ")} role="navigation" aria-label="Bottom"><ul className="grid grid-cols-5 h-full">{items.map(({href,label,Icon})=>{const active=pathname===href||(href!=="/"&&pathname.startsWith(href));return(<li key={href} className="flex items-center justify-center"><Link href={href} className={["flex flex-col items-center justify-center","gap-1 w-16 h-12","transition-all duration-200",active?"text-[color:var(--neon)]":"text-white/70 hover:text-white",].join(" ")}><span className={["grid place-items-center rounded-full","w-9 h-9",active?"bg-[color:rgba(0,255,120,0.12)] ring-1 ring-[color:var(--neon)] shadow-[0_0_14px_rgba(0,255,120,0.65)]":"bg-transparent",].join(" ")} aria-hidden="true" style={active?{boxShadow:`0 0 14px ${NEON}`} : undefined}><Icon size={22} strokeWidth={2}/></span><span className={["text-[11px] leading-none font-medium tracking-wide",active?"drop-shadow-[0_0_8px_var(--neon)]":"",].join(" ")}>{label}</span></Link></li>);})}</ul></nav>);}
+import { Home, Search, Star, User, Trophy } from "lucide-react";
+
+const navItems = [
+  { href: "/rank", label: "Rank", icon: Trophy },
+  { href: "/favs", label: "Favs", icon: Star },
+  { href: "/", label: "Home", icon: Home },
+  { href: "/search", label: "Find", icon: Search }, // 🔍 New search page
+  { href: "/account", label: "Account", icon: User },
+];
+
+export default function BottomBar() {
+  const router = useRouter();
+
+  return (
+    <nav className="fixed bottom-0 left-0 right-0 bg-black/80 border-t border-neutral-800 backdrop-blur-md z-50">
+      <ul className="flex justify-center items-center">
+        {navItems.map(({ href, label, icon: Icon }) => {
+          const active = router.pathname === href;
+          return (
+            <li key={href} className="flex-1">
+              <Link href={href} className="flex flex-col items-center py-2">
+                <Icon
+                  className={`h-6 w-6 ${
+                    active
+                      ? "text-neon-green drop-shadow-[0_0_8px_#00FF00]"
+                      : "text-gray-400"
+                  }`}
+                />
+                <span
+                  className={`text-xs ${
+                    active
+                      ? "text-neon-green drop-shadow-[0_0_6px_#00FF00]"
+                      : "text-gray-400"
+                  }`}
+                >
+                  {label}
+                </span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
+}
