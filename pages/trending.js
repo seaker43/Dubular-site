@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import CategoryRow from "../components/CategoryRow";
 
 export default function TrendingPage() {
@@ -19,3 +20,8 @@ export default function TrendingPage() {
     </main>
   );
 }
+=======
+import Link from "next/link";
+import CarouselRow from "../components/CategoryRow";
+export default function Trending(){const items=globalThis.__TRENDING__||[];return(<main className="page"><h2 className="section-title glow"><Link href="/trending">Trending Now</Link></h2><CarouselRow title="Trending Now" items={items}/></main>);} 
+>>>>>>> 63785215 (fix(pages): replace ../components/CategoryRow with components/CategoryRow everywhere)

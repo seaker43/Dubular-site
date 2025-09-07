@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import CategoryRow from "../components/CategoryRow";
 
 export default function FavsPage() {
@@ -7,6 +8,9 @@ export default function FavsPage() {
     tags: ["favorites"],
     live: i % 4 === 0,
   }));
+=======
+import CarouselRow from "../components/CategoryRow";
+>>>>>>> 63785215 (fix(pages): replace ../components/CategoryRow with components/CategoryRow everywhere)
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#0b0f12] to-black">
