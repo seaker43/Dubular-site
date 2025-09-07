@@ -1,41 +1,35 @@
-// components/BottomBar.jsx
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Home, Search, Star, User, Trophy } from "lucide-react";
+import { Trophy, Heart, Home, Search, User } from "lucide-react";
 
-const navItems = [
-  { href: "/rank", label: "Rank", icon: Trophy },
-  { href: "/favs", label: "Favs", icon: Star },
-  { href: "/", label: "Home", icon: Home },
-  { href: "/search", label: "Find", icon: Search }, // 🔍 New search page
-  { href: "/account", label: "Account", icon: User },
+const tabs = [
+  { href: "/ranks",  label: "Rank",   icon: Trophy },
+  { href: "/favs",   label: "Favs",   icon: Heart  },
+  { href: "/",       label: "Home",   icon: Home   },
+  { href: "/search", label: "Find",   icon: Search },
+  { href: "/account",label: "Account",icon: User   },
 ];
 
 export default function BottomBar() {
-  const router = useRouter();
+  const { pathname } = useRouter();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-black/80 border-t border-neutral-800 backdrop-blur-md z-50">
-      <ul className="flex justify-center items-center">
-        {navItems.map(({ href, label, icon: Icon }) => {
-          const active = router.pathname === href;
+    <nav className="bottom-bar fixed bottom-0 left-0 right-0 z-50">
+      <ul className="mx-auto flex w-full max-w-4xl items-center justify-around">
+        {tabs.map(({ href, label, icon: Icon }) => {
+          const active = pathname === href;
           return (
-            <li key={href} className="flex-1">
-              <Link href={href} className="flex flex-col items-center py-2">
+            <li key={href}>
+              <Link
+                href={href}
+                className={`nav-item ${active ? "active" : ""}`}
+                aria-label={label}
+              >
                 <Icon
-                  className={`h-6 w-6 ${
-                    active
-                      ? "text-neon-green drop-shadow-[0_0_8px_#00FF00]"
-                      : "text-gray-400"
-                  }`}
+                  className={`nav-icon ${active ? "icon-gold-glow" : ""}`}
+                  size={20}
                 />
-                <span
-                  className={`text-xs ${
-                    active
-                      ? "text-neon-green drop-shadow-[0_0_6px_#00FF00]"
-                      : "text-gray-400"
-                  }`}
-                >
+                <span className={`nav-label text-[11px] leading-none ${active ? "gold-glow" : "text-neutral-300"}`}>
                   {label}
                 </span>
               </Link>
