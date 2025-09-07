@@ -1,52 +1,25 @@
-:root{
-  --dubular-bg-start:#0b0f14;
-  --dubular-bg-end:#0a0d12;
-  --dubular-#18ff3c:#18ff3c;          /* #18ff3c */
-  --dubular-#18ff3c-600:#18ff3c;      /* hover */
-  --dubular-#18ff3c-700:#0e7490;      /* active */
-  --dubular-text:#e6fcff;
+/* Neon pulse for LIVE */
+@keyframes neonPulse {
+  0%, 100% {
+    text-shadow: 0 0 6px #ef4444, 0 0 12px #ef4444, 0 0 24px #ef4444;
+  }
+  50% {
+    text-shadow: 0 0 2px #ef4444, 0 0 6px #ef4444, 0 0 12px #ef4444;
+  }
+}
+.animate-pulse-live {
+  animation: neonPulse 1.2s infinite;
 }
 
-/* Global dark gradient */
-html,body,#__next{
-  background:
-    radial-gradient(40% 30% at 10% 10%, rgba(34,211,238,.06), transparent 60%),
-    radial-gradient(35% 25% at 90% 15%, rgba(34,211,238,.04), transparent 60%),
-    linear-gradient(180deg, var(--dubular-bg-start), var(--dubular-bg-end));
-  color: var(--dubular-text);
+/* Neon pulse for idle (green) */
+@keyframes neonIdle {
+  0%, 100% {
+    text-shadow: 0 0 6px #10b981, 0 0 12px #10b981, 0 0 24px #10b981;
+  }
+  50% {
+    text-shadow: 0 0 2px #10b981, 0 0 6px #10b981, 0 0 12px #10b981;
+  }
 }
-
-/* Kill any remaining purple utility look by overriding a generic .btn and common anchors */
-.btn, .button, a.btn, button, .cta{
-  border-radius: 14px;
-  padding: 12px 18px;
-  font-weight: 600;
-  background: linear-gradient(180deg,var(--dubular-#18ff3c),var(--dubular-#18ff3c-600));
-  color: #031418 !important;
-  box-shadow:
-    0 0 0 1px rgba(34,211,238,.25) inset,
-    0 8px 24px rgba(34,211,238,.18),
-    0 0 24px rgba(34,211,238,.25);
-  transition: transform .08s ease, box-shadow .15s ease, filter .15s ease;
-}
-.btn:hover, .button:hover, a.btn:hover, button:hover, .cta:hover{
-  filter: brightness(1.02);
-  box-shadow:
-    0 0 0 1px rgba(34,211,238,.35) inset,
-    0 10px 28px rgba(34,211,238,.25),
-    0 0 32px rgba(34,211,238,.34);
-}
-.btn:active, .button:active, a.btn:active, button:active, .cta:active{
-  transform: translateY(1px);
-  background: linear-gradient(180deg,var(--dubular-#18ff3c-600),var(--dubular-#18ff3c-700));
-}
-.nav-active::after{
-  content:"";
-  position:absolute; left:0; right:0; bottom:-8px; height:2px;
-  background: radial-gradient(12px 6px at 50% 50%, var(--dubular-#18ff3c), transparent 70%);
-}
-/* Gradient headline utility if used */
-.dubular-headline{
-  background: linear-gradient(90deg, #e6fcff 0%, var(--dubular-#18ff3c) 55%, #e6fcff 100%);
-  -webkit-background-clip:text; background-clip:text; color: transparent;
+.animate-pulse-idle {
+  animation: neonIdle 1.8s infinite;
 }
