@@ -2,30 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Prevent accidental horizontal scroll */
+/* --- Base styles --- */
 html, body {
-  overflow-x: hidden;
-  background-color: #0a0a0a; /* dark bg for consistency */
-  color: #ffffff; /* default text white */
+  overflow-x: hidden;                 /* prevent accidental horizontal scroll */
+  background-color: #0a0a0a;          /* consistent dark bg */
+  color: #ffffff;                     /* default text white */
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 }
 
-/* Utility: hide scrollbars */
-.scrollbar-hide {
-  -ms-overflow-style: none; /* IE/Edge */
-  scrollbar-width: none; /* Firefox */
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
-}
-
-/* Homepage section titles */
+/* --- Homepage section titles --- */
 .homepage h2 {
   @apply text-white text-xl font-bold mb-2;
 }
 
-/* Featured Hero block */
+/* --- Featured Hero block --- */
 .featured-hero {
   @apply relative w-full h-[60vh] bg-black rounded-xl overflow-hidden shadow-lg;
 }
@@ -39,27 +30,34 @@ html, body {
   @apply text-white text-3xl font-bold;
 }
 
-/* Thumbnails */
-.thumbnail-card {
-  @apply relative rounded-lg overflow-hidden bg-neutral-900 shadow-lg transition-transform duration-300;
+/* --- Thumbnail cards --- */
+.thumb-glow {
+  position: relative;
+  isolation: isolate;                 /* keep glow behind */
+  filter: drop-shadow(0 8px 20px rgba(0,255,170,0.12));
+  will-change: transform;
+  transform: translateZ(0);           /* prevent flicker */
+  backface-visibility: hidden;
 }
-.thumbnail-card img {
-  @apply w-full h-auto aspect-video object-cover;
-}
-
-/* Neon green glow behind thumbnails */
-.thumbnail-card::before {
+.thumb-glow::before {
   content: "";
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: 0 0 25px rgba(0, 255, 0, 0.55);
+  inset: -8%;
   z-index: -1;
+  border-radius: 18px;
+  background:
+    radial-gradient(60% 60% at 50% 100%,
+      rgba(0,255,170,0.28) 0%,
+      rgba(0,255,170,0.10) 55%,
+      rgba(0,255,170,0.00) 100%);
+  opacity: 0.9;
+  filter: blur(20px);
+  transition: opacity .2s ease, filter .2s ease, transform .2s ease;
 }
-
-/* Title overlay */
-.thumbnail-title {
-  @apply absolute bottom-0 left-0 w-full px-2 py-1 text-sm text-white bg-black/60;
+.thumb-glow:hover::before {
+  opacity: 1;
+  filter: blur(24px);
+  transform: scale(1.02);
 }
 
 /* Live badge */
@@ -69,5 +67,14 @@ html, body {
 
 /* Bottom bar */
 nav {
-  font-size: 0.75rem;
+  font-size: 0.75rem; /* smaller text for bottom bar labels */
+}
+
+/* --- Scrollbar fixes --- */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;    /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;            /* Chrome/Safari */
 }
