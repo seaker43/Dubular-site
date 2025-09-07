@@ -1,47 +1,47 @@
 // components/ThumbnailCard.jsx
-import Image from "next/image";
 import Link from "next/link";
 
-export default function ThumbnailCard({ title, category, tags = [], thumb, live = false }) {
+export default function ThumbnailCard({
+  href = "#",
+  title = "Untitled",
+  subtitle = "",
+  src = "/thumbs/placeholder-16x9.jpg",
+  badge,
+}) {
   return (
-    <Link
-      href="#"
-      className="
-        group relative overflow-hidden rounded-2xl
-        bg-neutral-950 border border-neutral-800
-        hover:border-[var(--neon)]/50 transition
-        shadow-[0_0_0_0_rgba(0,0,0,0)]
-        hover:shadow-[0_0_24px_0_var(--neon-soft)]
-        w-72 md:w-80   /* bigger cards */
-      "
-    >
-      {/* Thumb: strict 16:9 */}
-      <div className="relative w-full aspect-video">
-        <Image
-          src={thumb || "/thumbs/placeholder.jpg"}
-          alt={title || "Untitled"}
-          fill
-          sizes="(max-width:768px) 70vw, (max-width:1200px) 30vw, 25vw"
-          className="object-cover"
-          priority={live}
+    <Link href={href} className="group block focus:outline-none">
+      <div
+        className={[
+          "relative w-full overflow-hidden rounded-2xl",
+          "bg-[#0b1311] ring-1 ring-white/5",
+          "shadow-[0_0_0_1px_rgba(0,0,0,0.2),0_40px_60px_-20px_rgba(0,0,0,0.5),inset_0_0_80px_-20px_rgba(12,255,0,0.12)]",
+        ].join(" ")}
+        style={{ aspectRatio: "16 / 9" }}
+      >
+        {/* use <img> so CF Pages doesn’t need special next/image handling */}
+        <img
+          src={src}
+          alt={title}
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+          loading="lazy"
+          decoding="async"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-black/0" />
-        {live && (
-          <span className="absolute bottom-2 right-2 text-xs font-bold px-2 py-1 rounded-full
-                           bg-[var(--neon)] text-black shadow-[0_0_12px_var(--neon)]">
-            LIVE
+        {badge && (
+          <span className="absolute right-3.5 bottom-3.5 rounded-full bg-neon px-3 py-1 text-xs font-bold text-black shadow-[0_0_20px_rgba(10,235,50,0.6)]">
+            {badge}
           </span>
         )}
+        {/* soft neon rim */}
+        <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-[#0AFF32]/20"></div>
       </div>
 
-      {/* Meta */}
-      <div className="p-3">
-        <h3 className="text-lg font-extrabold text-neutral-100 truncate">
-          {title || "Untitled"}
-        </h3>
-        <p className="mt-1 text-sm text-neutral-400">
-          {(category || "genre").toLowerCase()} {tags.length ? "• " + tags[0] : ""}
-        </p>
+      <div className="mt-2">
+        <div className="text-lg font-extrabold tracking-wide text-[#a8ffb0] drop-shadow-[0_0_14px_rgba(10,255,50,0.25)]">
+          {title}
+        </div>
+        {subtitle && (
+          <div className="text-sm text-white/65">{subtitle}</div>
+        )}
       </div>
     </Link>
   );
