@@ -1,31 +1,47 @@
 // components/ThumbnailCard.jsx
-import Image from "next/image";
+import Link from "next/link";
 
-export default function ThumbnailCard({ src, title, category, live }) {
+export default function ThumbnailCard({
+  href = "#",
+  title = "Untitled",
+  src = "/thumbnails/sample.jpg",
+  live = false,
+}) {
   return (
-    <div className="thumbnail-card relative rounded-lg overflow-hidden bg-neutral-900 shadow-lg hover:scale-105 hover:shadow-xl transition-transform duration-200 ease-in-out">
-      {/* Thumbnail image */}
-      <Image
-        src={src}
-        alt={title}
-        width={400}
-        height={225}
-        className="w-full h-auto aspect-video object-cover"
-        unoptimized
-      />
+    <Link
+      href={href}
+      className="group block thumbnail-card thumb-glow"
+      aria-label={title}
+    >
+      <div className="relative w-full overflow-hidden rounded-xl">
+        {/* Glow layer lives behind the image */}
+        <div
+          className="pointer-events-none absolute inset-0 -z-10 opacity-60 blur-2xl transition duration-300 group-hover:opacity-90"
+          aria-hidden
+        />
+        {/* 16:9 aspect ratio box */}
+        <div className="pt-[56.25%]" />
+        <img
+          src={src}
+          alt={title}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover will-change-transform transition-transform duration-300 group-hover:scale-[1.02]"
+        />
 
-      {/* LIVE badge */}
-      {live && (
-        <span className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded shadow-md">
-          LIVE
-        </span>
-      )}
-
-      {/* Title + category */}
-      <div className="absolute bottom-0 left-0 w-full px-3 py-2 bg-black/60">
-        <h3 className="text-white font-semibold truncate">{title}</h3>
-        {category && <p className="text-xs text-gray-300">{category}</p>}
+        {/* Title + Live badge */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-2">
+          <div className="flex items-center gap-2">
+            {live && (
+              <span className="live-badge inline-flex h-5 items-center justify-center rounded bg-red-600 px-2 text-[10px] font-bold leading-none">
+                LIVE
+              </span>
+            )}
+            <span className="thumbnail-title line-clamp-2 text-sm font-semibold text-white/95 drop-shadow">
+              {title}
+            </span>
+          </div>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }
