@@ -1,38 +1,47 @@
+// components/ThumbnailCard.jsx
+import Image from "next/image";
 import Link from "next/link";
 
-export default function ThumbnailCard({ item }) {
-  const {
-    id,
-    title = "Untitled",
-    live = false,
-    thumb = "/thumbs/placeholder.jpg",
-    href = "#",
-  } = item || {};
-
+export default function ThumbnailCard({ title, category, tags = [], thumb, live = false }) {
   return (
     <Link
-      href={href}
-      className="group block rounded-xl overflow-hidden bg-black/40 ring-1 ring-white/5 hover:ring-neon/40 transition shadow-[0_0_20px_-8px_var(--neon)]"
+      href="#"
+      className="
+        group relative overflow-hidden rounded-2xl
+        bg-neutral-950 border border-neutral-800
+        hover:border-[var(--neon)]/50 transition
+        shadow-[0_0_0_0_rgba(0,0,0,0)]
+        hover:shadow-[0_0_24px_0_var(--neon-soft)]
+        w-72 md:w-80   /* bigger cards */
+      "
     >
-      {/* Thumbnail */}
-      <div className="relative aspect-[16/9] bg-zinc-900">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={thumb}
-          alt={title}
-          className="absolute inset-0 h-full w-full object-cover"
-          loading="lazy"
+      {/* Thumb: strict 16:9 */}
+      <div className="relative w-full aspect-video">
+        <Image
+          src={thumb || "/thumbs/placeholder.jpg"}
+          alt={title || "Untitled"}
+          fill
+          sizes="(max-width:768px) 70vw, (max-width:1200px) 30vw, 25vw"
+          className="object-cover"
+          priority={live}
         />
-      </div>
-
-      {/* Bottom info bar */}
-      <div className="p-2 flex items-center justify-between">
-        <p className="truncate text-sm font-medium text-neon glow-sm">{title}</p>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-black/0" />
         {live && (
-          <span className="ml-2 shrink-0 text-[10px] px-2 py-0.5 rounded-full bg-neon/15 text-neon ring-1 ring-neon/40 glow-xs">
+          <span className="absolute bottom-2 right-2 text-xs font-bold px-2 py-1 rounded-full
+                           bg-[var(--neon)] text-black shadow-[0_0_12px_var(--neon)]">
             LIVE
           </span>
         )}
+      </div>
+
+      {/* Meta */}
+      <div className="p-3">
+        <h3 className="text-lg font-extrabold text-neutral-100 truncate">
+          {title || "Untitled"}
+        </h3>
+        <p className="mt-1 text-sm text-neutral-400">
+          {(category || "genre").toLowerCase()} {tags.length ? "• " + tags[0] : ""}
+        </p>
       </div>
     </Link>
   );
