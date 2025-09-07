@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+<<<<<<< HEAD
 
 /* === Base guardrails === */
 html, body {
@@ -57,3 +58,8 @@ body {
   .bottom-bar-item .icon { @apply text-xl; }
   .bottom-bar-item.active { @apply opacity-100 text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.7)]; } /* white glow when active */
 }
+=======
+html, body { overflow-x: hidden; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+>>>>>>> e408f521 (chore: remove duplicates; consolidate BottomBar & thumbnails)

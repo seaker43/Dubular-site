@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // components/MediaRow.jsx
 import Link from "next/link";
 import ThumbnailCard from "./ThumbnailCard";
@@ -54,6 +55,23 @@ export default function MediaRow({
                 className="aspect-video"
                 imgClassName="object-cover"
               />
+=======
+import Link from "next/link";
+import ThumbnailCard from "./ThumbnailCard";
+export default function MediaRow({ title, href, category, items = [] }) {
+  return (
+    <section className="mt-8">
+      <div className="mb-3 flex items-baseline justify-between">
+        <Link href={href || `/${category || ""}`} className="text-white text-2xl md:text-3xl font-black tracking-tight hover:opacity-90 transition">
+          {title}
+        </Link>
+      </div>
+      <div className="relative overflow-hidden">
+        <ul className="flex gap-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth scrollbar-hide pb-1">
+          {items.map((it, i) => (
+            <li key={`${category || "row"}-${i}`} className="snap-start shrink-0 w-[78vw] sm:w-[48vw] md:w-[36vw] lg:w-[28vw]">
+              <ThumbnailCard title={it.title} tags={it.tags} imgSrc={`/thumbnails/${category}/${it.file}`} live={it.live} className="aspect-video" imgClassName="object-cover" />
+>>>>>>> e408f521 (chore: remove duplicates; consolidate BottomBar & thumbnails)
             </li>
           ))}
         </ul>

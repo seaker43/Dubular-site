@@ -1,12 +1,14 @@
-/** Final next.config.js (no optimizeCss; CF friendly) */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: '**' },
-      { protocol: 'http',  hostname: '**' }
-    ],
-    formats: ['image/avif','image/webp']
-  }
+  async redirects() {
+    return [
+      {
+        source: '/stream/:channel',
+        destination: '/streams/:channel',
+        permanent: true,
+      },
+    ];
+  },
 };
 module.exports = nextConfig;
