@@ -1,3 +1,4 @@
+// components/FeaturedHero.jsx
 import { useState } from "react";
 
 export default function FeaturedHero({
@@ -13,7 +14,16 @@ export default function FeaturedHero({
   const FALLBACK = "/placeholder.svg";
 
   return (
-    <section className="relative w-full rounded-2xl overflow-hidden ring-1 ring-white/5 bg-neutral-900/60 shadow-[0_0_80px_-20px_rgba(16,185,129,0.35)] aspect-[16/9] sm:aspect-[21/9] mb-4">
+    <section
+      className="
+        relative w-full rounded-2xl overflow-hidden
+        ring-1 ring-white/5 bg-neutral-900/60
+        shadow-[0_0_80px_-20px_rgba(16,185,129,0.35)]
+        /* Taller hero: was aspect-[16/9] */
+        aspect-[16/7] md:aspect-[16/6] lg:aspect-[16/5]
+        mb-4
+      "
+    >
       <div className="absolute inset-0">
         {isVideo ? (
           <video
