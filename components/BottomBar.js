@@ -1,124 +1,69 @@
-// components/BottomBar.js
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useMemo } from "react";
 
-const tabs = [
-  { href: "/rank",   label: "Rank",    icon: TrophyIcon },
-  { href: "/favs",   label: "Favs",    icon: HeartIcon },
-  { href: "/",       label: "Home",    icon: HomeIcon },
-  { href: "/wallet", label: "Wallet",  icon: WalletIcon, tokenBadge: true },
-  { href: "/account",label: "Account", icon: UserIcon },
-];
+/* Simple inline SVG icons (no wallet icon for Wallet tab). */
+const Trophy = (p) => (
+  <svg viewBox="0 0 24 24" width="22" height="22" {...p}>
+    <path fill="currentColor" d="M7 4h10a1 1 0 0 1 1 1v1h2a1 1 0 0 1 1 1v1a5 5 0 0 1-5 5h-1a5 5 0 0 1-2 1.73V17h3a1 1 0 1 1 0 2H8a1 1 0 1 1 0-2h3v-2.27A5 5 0 0 1 9 13H8A5 5 0 0 1 3 8V7a1 1 0 0 1 1-1h2V5a1 1 0 0 1 1-1Zm-2 4v.03A3 3 0 0 0 8 11h1V7H5Zm12 0h-4v4h1a3 3 0 0 0 3-3V8Z"/>
+  </svg>
+);
+const Heart = (p) => (
+  <svg viewBox="0 0 24 24" width="22" height="22" {...p}>
+    <path fill="currentColor" d="M12 21s-7-4.35-9.33-7.21C.88 11.69 2 7.5 6 7.5c2.06 0 3.22 1.17 4 2 0 0 1.06-2 4-2 4 0 5.12 4.19 3.33 6.29C19 16.65 12 21 12 21Z"/>
+  </svg>
+);
+const Home = (p) => (
+  <svg viewBox="0 0 24 24" width="22" height="22" {...p}>
+    <path fill="currentColor" d="M12 3 3 10h2v10h5v-6h4v6h5V10h2L12 3Z"/>
+  </svg>
+);
+const User = (p) => (
+  <svg viewBox="0 0 24 24" width="22" height="22" {...p}>
+    <path fill="currentColor" d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-5 0-9 2.5-9 5.5A1.5 1.5 0 0 0 4.5 21h15A1.5 1.5 0 0 0 21 19.5C21 16.5 17 14 12 14Z"/>
+  </svg>
+);
 
 export default function BottomBar() {
   const { pathname } = useRouter();
 
-  const activeIndex = useMemo(() => {
-    if (pathname === "/") return 2; // Home is center
-    const i = tabs.findIndex(t => t.href === pathname);
-    return i === -1 ? 2 : i;
-  }, [pathname]);
+  const items = [
+    { href: "/rank", label: "Rank", icon: <Trophy /> },
+    { href: "/favs", label: "Favs", icon: <Heart /> },
+    { href: "/", label: "Home", icon: <Home /> },
+    // Wallet: **no wallet icon**; only token badge
+    { href: "/wallet", label: "Wallet", icon: null, token: true },
+    { href: "/account", label: "Account", icon: <User /> },
+  ];
 
   return (
-    <nav
-      className="fixed bottom-0 left-0 right-0 z-50 border-t border-white/5
-                 bg-[#0b0f14]/80 backdrop-blur supports-[backdrop-filter]:bg-[#0b0f14]/60
-                 safe-area-pb"
-      aria-label="Bottom navigation"
-    >
-      <ul className="mx-auto grid max-w-3xl grid-cols-5 gap-1 px-2 py-2">
-        {tabs.map(({ href, label, icon: Icon, tokenBadge }, i) => {
-          const active = i === activeIndex;
+    <nav className="bottom-bar fixed bottom-0 inset-x-0 z-50">
+      <div className="mx-auto max-w-screen-md grid grid-cols-5">
+        {items.map((it) => {
+          const active =
+            it.href === "/"
+              ? pathname === "/"
+              : pathname.startsWith(it.href);
           return (
-            <li key={href} className="relative">
-              {/* Token badge above Wallet */}
-              {tokenBadge && (
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 token-badge"
-                  title="Dubular Token"
-                >
-                  <DubularToken className="h-4 w-4" />
-                </div>
-              )}
-
-              <Link
-                href={href}
-                className={`group flex flex-col items-center justify-center rounded-xl
-                            px-2 py-1.5 text-[12px] font-medium transition
-                            ${active ? "text-teal-300" : "text-zinc-300/80 hover:text-teal-200"}`}
-                aria-current={active ? "page" : undefined}
-              >
-                <Icon
-                  className={`mb-1 h-6 w-6 transition
-                              ${active ? "drop-glow" : "opacity-90 group-hover:opacity-100"}`}
-                />
-                <span className="leading-none">{label}</span>
-              </Link>
-            </li>
+            <Link
+              key={it.href}
+              href={it.href}
+              className={`bottom-item py-3 ${active ? "text-white" : "text-slate-300"}`}
+            >
+              <div className="relative h-6 flex items-center justify-center">
+                {/* render icon unless Wallet (we want only the token badge) */}
+                {it.icon}
+                {it.token && <span className="token-badge">D</span>}
+              </div>
+              <span className="text-xs">{it.label}</span>
+              <span
+                className={`underline block mt-2 h-1 w-11 rounded-full ${
+                  active ? "" : "bg-transparent"
+                }`}
+              />
+            </Link>
           );
         })}
-      </ul>
-
-      {/* Neon pager underline */}
-      <div className="relative h-2">
-        <div
-          className="absolute top-0 h-1 w-1/5 rounded-full bg-teal-400 shadow-[0_0_12px_2px_rgba(34,197,194,0.8)] transition-transform duration-300"
-          style={{ transform: `translateX(${activeIndex * 100}%)` }}
-        />
       </div>
     </nav>
   );
 }
-
-/* ====== Inline icons (no external deps) ====== */
-function HomeIcon(props){return(
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" {...props}>
-    <path d="M3 11.5 12 4l9 7.5" />
-    <path d="M5 10.5V20h14v-9.5" />
-  </svg>
-);}
-function TrophyIcon(props){return(
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" {...props}>
-    <path d="M8 4h8v3a4 4 0 0 1-4 4 4 4 0 0 1-4-4V4Z" />
-    <path d="M8 6H4a3 3 0 0 0 3 3" />
-    <path d="M16 6h4a3 3 0 0 1-3 3" />
-    <path d="M12 11v3" />
-    <path d="M8 20h8" />
-    <path d="M9 17h6" />
-  </svg>
-);}
-function HeartIcon(props){return(
-  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-    <path d="M12 21s-7.5-4.6-9.5-8.7C.9 9.6 2.7 6 6.1 6c2 0 3.3 1.1 3.9 2.1.6-1 1.9-2.1 3.9-2.1 3.4 0 5.2 3.6 3.6 6.3C19.5 16.4 12 21 12 21z"/>
-  </svg>
-);}
-function WalletIcon(props){return(
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" {...props}>
-    <path d="M3 7h15a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z" />
-    <path d="M21 10h-6a2 2 0 0 0 0 4h6v-4Z" />
-    <path d="M3 7V5a2 2 0 0 1 2-2h10" />
-  </svg>
-);}
-function UserIcon(props){return(
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" {...props}>
-    <circle cx="12" cy="7.5" r="3.5" />
-    <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
-  </svg>
-);}
-
-/* Dubular token badge (tiny D in a coin) */
-function DubularToken(props){return(
-  <svg viewBox="0 0 24 24" {...props}>
-    <defs>
-      <radialGradient id="g" cx="50%" cy="50%" r="60%">
-        <stop offset="0%" stopColor="#34d399"/>
-        <stop offset="100%" stopColor="#0ea5a4"/>
-      </radialGradient>
-    </defs>
-    <circle cx="12" cy="12" r="10" fill="url(#g)"/>
-    <circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeOpacity=".35" strokeWidth="1.2"/>
-    <path d="M8.8 8.2h3.9a3.4 3.4 0 1 1 0 6.8H8.8V8.2zM10.6 10v3.2h2.1a1.6 1.6 0 0 0 0-3.2h-2.1z" fill="white"/>
-  </svg>
-);}
