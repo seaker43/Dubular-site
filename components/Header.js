@@ -1,41 +1,43 @@
-// components/Header.js
+// components/Header.jsx
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 export default function Header() {
-  const wrap = {
-    position: "sticky",
-    top: 0,
-    zIndex: 50,
-    backdropFilter: "saturate(180%) blur(10px)",
-    background: "rgba(15,15,20,.75)",
-    borderBottom: "1px solid rgba(255,255,255,.06)",
-  };
-  const bar = {
-    maxWidth: 1100,
-    margin: "0 auto",
-    padding: "14px 20px",
-    display: "flex",
-    alignItems: "center",
-    gap: 18,
-    color: "#eaeaf0",
-  };
-  const brand = { fontWeight: 700, letterSpacing: .2, marginRight: "auto" };
-  const link = { color: "#eaeaf0", textDecoration: "none", opacity: .9 };
-  const pill = {
-    padding: "6px 12px",
-    borderRadius: 12,
-    background: "#2ac1ff1a",
-    border: "1px solid #2ac1ff40",
-  };
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+
+    const resizeObserver = new ResizeObserver(() => {
+      const h = header.offsetHeight || 64; // fallback
+      document.documentElement.style.setProperty("--header-height", `${h}px`);
+    });
+
+    resizeObserver.observe(header);
+    return () => resizeObserver.disconnect();
+  }, []);
 
   return (
-    <header style={wrap}>
-      <nav style={bar}>
-        <Link href="/" style={{...link, ...brand}}>Dubular</Link>
-        <Link href="/pricing" style={link}>Pricing</Link>
-        <a href="/api/health" style={{...link, ...pill}}>Status</a>
-        <a href="https://github.com/seaker43/Dubular-site" style={link}>GitHub</a>
-      </nav>
+    <header
+      ref={headerRef}
+      className="fixed top-0 left-0 z-50 w-full bg-neutral-950/90 backdrop-blur-md border-b border-neutral-800"
+    >
+      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="text-2xl font-bold text-neon drop-shadow-[0_0_8px_rgba(57,255,20,0.8)]">
+          dubUlar
+        </Link>
+
+        {/* Nav (placeholder, can add links later) */}
+        <nav className="hidden md:flex gap-6 text-sm text-zinc-300">
+          <Link href="/find" className="hover:text-neon transition">Find</Link>
+          <Link href="/trending" className="hover:text-neon transition">Trending</Link>
+          <Link href="/recommended" className="hover:text-neon transition">Recommended</Link>
+        </nav>
+      </div>
     </header>
   );
 }
