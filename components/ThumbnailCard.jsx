@@ -20,28 +20,40 @@ export default function ThumbnailCard({ id, title, image, live = false }) {
     try {
       const list = JSON.parse(localStorage.getItem("favorites") || "[]");
       const exists = list.some((x) => x.id === id);
-      const updated = exists ? list.filter((x) => x.id !== id) : [...list, { id, title, image: src }];
+      const updated = exists
+        ? list.filter((x) => x.id !== id)
+        : [...list, { id, title, image: src }];
       localStorage.setItem("favorites", JSON.stringify(updated));
       setFav(!exists);
       if (typeof window !== "undefined") {
-        window.dispatchEvent(new StorageEvent("storage", { key: "favorites", newValue: JSON.stringify(updated) }));
+        window.dispatchEvent(
+          new StorageEvent("storage", {
+            key: "favorites",
+            newValue: JSON.stringify(updated),
+          })
+        );
       }
     } catch {}
   };
 
+  // 🔥 Conditional glow color
+  const glowClass = live
+    ? "ring-red-500/40 shadow-[0_0_30px_5px_rgba(255,0,0,0.55)] hover:shadow-[0_0_40px_8px_rgba(255,0,0,0.7)]"
+    : "ring-green-500/30 shadow-[0_0_25px_3px_rgba(0,255,0,0.4)] hover:shadow-[0_0_35px_6px_rgba(0,255,0,0.6)]";
+
   return (
     <div className="group">
       <div
-        className="
-          relative overflow-hidden rounded-xl
-          ring-1 ring-green-500/30 bg-neutral-900/60
-          shadow-[0_0_25px_3px_rgba(0,255,0,0.4)]
-          transition-transform duration-200
-          hover:scale-[1.03] hover:shadow-[0_0_35px_6px_rgba(0,255,0,0.6)]
-        "
+        className={`
+          relative overflow-hidden rounded-xl bg-neutral-900/60
+          transition-transform duration-200 hover:scale-[1.03]
+          ring-1 ${glowClass}
+        `}
       >
         <div className="relative w-full aspect-video">
-          {!loaded && <div className="absolute inset-0 animate-pulse bg-neutral-900/60" />}
+          {!loaded && (
+            <div className="absolute inset-0 animate-pulse bg-neutral-900/60" />
+          )}
 
           <Image
             src={src || FALLBACK}
@@ -50,7 +62,10 @@ export default function ThumbnailCard({ id, title, image, live = false }) {
             sizes="(max-width:768px) 60vw, (max-width:1024px) 30vw, 20vw"
             className="object-cover"
             onLoadingComplete={() => setLoaded(true)}
-            onError={() => { if (src !== FALLBACK) setSrc(FALLBACK); setLoaded(true); }}
+            onError={() => {
+              if (src !== FALLBACK) setSrc(FALLBACK);
+              setLoaded(true);
+            }}
           />
 
           {live && <span className="live-badge">LIVE</span>}
@@ -58,9 +73,17 @@ export default function ThumbnailCard({ id, title, image, live = false }) {
           <button
             onClick={toggleFavorite}
             aria-label={fav ? "Remove from favorites" : "Add to favorites"}
-            className={`absolute top-2 right-2 inline-flex items-center justify-center h-8 w-8 rounded-full ring-1 ring-white/10 transition ${fav ? "bg-yellow-400 text-black" : "bg-neutral-900/70 text-white"} active:scale-95`}
+            className={`absolute top-2 right-2 inline-flex items-center justify-center h-8 w-8 rounded-full ring-1 ring-white/10 transition ${
+              fav
+                ? "bg-yellow-400 text-black"
+                : "bg-neutral-900/70 text-white"
+            } active:scale-95`}
           >
-            <Star size={18} strokeWidth={2} {...(fav ? { fill: "currentColor" } : {})} />
+            <Star
+              size={18}
+              strokeWidth={2}
+              {...(fav ? { fill: "currentColor" } : {})}
+            />
           </button>
         </div>
       </div>
