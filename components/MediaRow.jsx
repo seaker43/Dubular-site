@@ -1,87 +1,129 @@
-import { useEffect, useMemo, useState } from "react";
-import ThumbnailCard from "./ThumbnailCard";
+import { useEffect, useMemo, useRef } from "react";
+import MediaCard from "./MediaCard";
 
-function usePerPage() {
-  const [per, setPer] = useState(2);
-  useEffect(() => {
-    const mqs = [
-      [window.matchMedia("(min-width: 1280px)"), 8],
-      [window.matchMedia("(min-width: 1024px)"), 6],
-      [window.matchMedia("(min-width: 768px)"), 4],
-      [window.matchMedia("(min-width: 640px)"), 3],
-    ];
-    const compute = () => {
-      for (const [mq, val] of mqs) if (mq.matches) return setPer(val);
-      setPer(2);
-    };
-    compute();
-    mqs.forEach(([mq]) => mq.addEventListener("change", compute));
-    return () => mqs.forEach(([mq]) => mq.removeEventListener("change", compute));
-  }, []);
-  return per;
-}
+/**
+ * MediaRow
+ * - Shows 12 cards by cycling the provided `items`
+ * - Renders 2x list for seamless loop
+ * - Keeps scroll anchored when crossing the midpoint
+ */
+export default function MediaRow({
+  title = "",
+  items = [],
+  hrefPrefix = "",
+  showLive = false,
+}) {
+  const base = items?.length ? items : Array.from({ length: 6 }, (_, i) => ({
+    id: `ph-${i + 1}`,
+    title: `Item #${i + 1}`,
+    category: "art",
+    tag: "pixel",
+    thumbnail: "/images/placeholder-16x9.jpg",
+    live: i % 3 === 0,
+  }));
 
-export default function MediaRow({ title, href = "#", items = [] }) {
-  const perPage = usePerPage();
-  const [start, setStart] = useState(0);
-  const total = items.length;
-
-  const effectivePer = Math.min(perPage, Math.max(total, Math.min(perPage, 8)));
-
-  const windowItems = useMemo(() => {
-    if (!total) return [];
+  // We want 12 visible “unique” cards; cycle the base list
+  const dozen = useMemo(() => {
     const out = [];
-    for (let i = 0; i < Math.min(effectivePer, total); i++) {
-      out.push(items[(start + i) % total]);
-    }
+    const need = 12;
+    for (let i = 0; i < need; i++) out.push(base[i % base.length]);
     return out;
-  }, [items, start, total, effectivePer]);
+  }, [base]);
 
-  const next = () => {
-    if (!total) return;
-    setStart((prev) => (prev + effectivePer) % total);
-  };
-  const prev = () => {
-    if (!total) return;
-    setStart((prev) => (prev - effectivePer + total) % total);
+  // Duplicate once for the looping illusion
+  const loopList = useMemo(() => [...dozen, ...dozen], [dozen]);
+
+  const scrollerRef = useRef(null);
+
+  // Keep scroll anchored when crossing midpoint
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const mid = el.scrollWidth / 2;
+
+    const onScroll = () => {
+      if (el.scrollLeft >= mid) {
+        el.scrollLeft -= mid;
+      } else if (el.scrollLeft < 1) {
+        // If the user flicks back to the start, jump to the "same index" in 2nd half
+        el.scrollLeft += mid;
+      }
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    // Start in the first half (natural)
+    el.scrollLeft = 0;
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const nudge = (dir = 1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    // one “card” ~ 280px including gap; adjust if your card width changes
+    const step = 280 * 2;
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
   };
 
   return (
-    <section className="relative my-6">
-      <div className="flex items-baseline justify-between mb-3 px-2 sm:px-0">
-        <h2 className="text-neon glow text-lg font-semibold tracking-wide">{title}</h2>
-        {total > effectivePer && (
-          <div className="flex gap-2">
-            <button
-              onClick={prev}
-              className="rounded-md border border-neon/40 px-3 py-1 text-neon/90 hover:text-neon hover:border-neon/80 transition"
-            >
-              ‹
-            </button>
-            <button
-              onClick={next}
-              className="rounded-md border border-neon/40 px-3 py-1 text-neon/90 hover:text-neon hover:border-neon/80 transition"
-            >
-              ›
-            </button>
-          </div>
-        )}
+    <section className="relative">
+      <div className="mb-3 flex items-end justify-between">
+        <h2 className="neon-title">{title}</h2>
+        <div className="hidden sm:flex gap-2 pr-2">
+          <button
+            aria-label="Prev"
+            onClick={() => nudge(-1)}
+            className="btn-chrome"
+          >
+            ‹
+          </button>
+          <button
+            aria-label="Next"
+            onClick={() => nudge(1)}
+            className="btn-chrome"
+          >
+            ›
+          </button>
+        </div>
       </div>
 
+      {/* edge fades */}
+      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-10 bg-gradient-to-r from-[rgb(8,10,12)] to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-10 bg-gradient-to-l from-[rgb(8,10,12)] to-transparent" />
+
       <div
-        className={[
-          "grid gap-4",
-          "grid-cols-2",
-          "sm:grid-cols-3",
-          "md:grid-cols-4",
-          "lg:grid-cols-6",
-          "xl:grid-cols-8",
-        ].join(" ")}
+        ref={scrollerRef}
+        className="no-scrollbar relative z-0 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 py-1"
       >
-        {windowItems.map((item, idx) => (
-          <ThumbnailCard key={`${item?.id ?? idx}-${start}`} item={item} />
+        {loopList.map((item, idx) => (
+          <div key={`${item.id ?? idx}-${idx}`} className="snap-start shrink-0">
+            <MediaCard
+              item={item}
+              href={`${hrefPrefix}${item.id ?? idx}`}
+              showLive={showLive}
+            />
+          </div>
         ))}
+      </div>
+
+      {/* mobile nudge buttons floating */}
+      <div className="sm:hidden">
+        <button
+          aria-label="Prev"
+          onClick={() => nudge(-1)}
+          className="btn-fab left-2"
+        >
+          ‹
+        </button>
+        <button
+          aria-label="Next"
+          onClick={() => nudge(1)}
+          className="btn-fab right-2"
+        >
+          ›
+        </button>
       </div>
     </section>
   );
 }
+
+/* Utility classes (piggyback on globals) */
+/* If you prefer, move to globals.css */
