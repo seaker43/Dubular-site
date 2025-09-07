@@ -1,14 +1,11 @@
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ThumbnailCard from "./ThumbnailCard";
 
 /**
  * Props:
- * - title: string  (section title, click -> href)
- * - href: string   (category page)
- * - category: string  (folder under /public/thumbnails/<category>)
- * - items: Array<{ file: string, title?: string, tags?: string[], href?: string, live?: boolean }>
- *
- * Note: put your images in /public/thumbnails/<category>/<file>
+ *  - title, href, category
+ *  - items: [{ file, title?, tags?, href?, live? }]
+ * Images live at /public/thumbnails/<category>/<file>
  */
 export default function MediaRow({
   title = "Trending Now",
@@ -16,42 +13,58 @@ export default function MediaRow({
   category = "trending",
   items = [],
 }) {
-  const containerRef = useRef(null);
+  const scrollerRef = useRef(null);
+  const [oneSetWidth, setOneSetWidth] = useState(0);
 
-  // duplicate items once to create a seamless loop
-  const loopItems = useMemo(() => [...items, ...items], [items]);
+  // Triple the list so we can sit in the middle and recenter invisibly.
+  const triple = useMemo(() => [...items, ...items, ...items], [items]);
 
   useEffect(() => {
-    const el = containerRef.current;
+    const el = scrollerRef.current;
     if (!el) return;
 
-    // hide scrollbar on all platforms
-    el.style.scrollbarWidth = "none"; // Firefox
-    el.style.msOverflowStyle = "none"; // IE/Edge
+    // hide scrollbars everywhere
+    el.style.scrollbarWidth = "none";
+    el.style.msOverflowStyle = "none";
     const styleEl = document.createElement("style");
-    styleEl.textContent = `
-      .no-scrollbar::-webkit-scrollbar { display: none; }
-    `;
+    styleEl.textContent = `.no-scrollbar::-webkit-scrollbar{display:none}`;
     document.head.appendChild(styleEl);
 
-    // seamless loop: when we pass the halfway point, jump back by half
+    // measure width of one full set (card width + gaps)
+    const firstCard = el.querySelector("[data-card]");
+    if (firstCard) {
+      // gap = 1rem (Tailwind gap-4) -> 16px. There are N cards → N gaps, but
+      // since we snap per-card, we can estimate per-card stride as cardWidth + 16px.
+      const stride = firstCard.offsetWidth + 16;
+      setOneSetWidth(stride * items.length);
+
+      // start in the middle set
+      requestAnimationFrame(() => {
+        el.scrollLeft = stride * items.length; // exactly one set
+      });
+    }
+
+    // recenter when we drift near the ends so scrolling is seamless
     const onScroll = () => {
-      const half = el.scrollWidth / 2;
-      if (el.scrollLeft >= half) {
-        el.scrollLeft -= half;
-      }
-      // if user swipes hard left past 0, push forward by half
-      if (el.scrollLeft === 0) {
-        // little nudge to keep inertia nice if at exact 0 and there is content left
-        // no-op unless you want reverse loop; keeping simple.
+      if (!oneSetWidth) return;
+      const left = el.scrollLeft;
+      const leftEdge = oneSetWidth * 0.25; // a bit into the first set
+      const rightEdge = oneSetWidth * 1.75; // a bit into the last set
+      if (left < leftEdge) {
+        // jump forward one set
+        el.scrollLeft = left + oneSetWidth;
+      } else if (left > rightEdge) {
+        // jump back one set
+        el.scrollLeft = left - oneSetWidth;
       }
     };
     el.addEventListener("scroll", onScroll, { passive: true });
+
     return () => {
       el.removeEventListener("scroll", onScroll);
       document.head.removeChild(styleEl);
     };
-  }, []);
+  }, [items.length, oneSetWidth]);
 
   return (
     <section className="mt-6">
@@ -65,10 +78,10 @@ export default function MediaRow({
       </div>
 
       <div
-        ref={containerRef}
+        ref={scrollerRef}
         className="no-scrollbar overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex gap-4 px-1"
       >
-        {loopItems.map((it, i) => (
+        {triple.map((it, i) => (
           <div key={`${it.file}-${i}`} className="snap-start shrink-0">
             <ThumbnailCard
               category={category}
