@@ -1,16 +1,40 @@
 // components/MediaRow.jsx
+import { useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import ThumbnailCard from "./ThumbnailCard";
 
-export default function MediaRow({
-  title,
-  href = "#",
-  items = [],
-  cols = { base: 2, md: 3, lg: 4 },
-  loop = true,
-}) {
-  // duplicate items once for seamless “loop” scroll feel
-  const data = loop ? [...items, ...items] : items;
+export default function MediaRow({ title, href = "#", items = [], loop = true }) {
+  const containerRef = useRef(null);
+
+  // triple the data so we can jump inside the middle "set" for a seamless loop
+  const data = useMemo(() => (loop ? [...items, ...items, ...items] : items), [items, loop]);
+  const setSize = items.length || 1;
+
+  // jump to the middle set on mount; then when user reaches an edge, snap back inside
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || !loop) return;
+
+    // width of one card + gap — measured from first child
+    const first = el.querySelector("[data-card]");
+    if (!first) return;
+
+    const cardW = first.getBoundingClientRect().width + 16; // +gap-4
+    const setWidth = cardW * setSize;
+
+    // start in the middle set
+    el.scrollLeft = setWidth;
+
+    const onScroll = () => {
+      const x = el.scrollLeft;
+      // if we drift to the first or last set, jump back into the middle
+      if (x <= 8) el.scrollLeft = x + setWidth;              // left edge -> go right by one set
+      else if (x >= setWidth * 2 - 8) el.scrollLeft = x - setWidth; // right edge -> go left by one set
+    };
+
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, [loop, setSize]);
 
   return (
     <section className="mb-8">
@@ -22,18 +46,19 @@ export default function MediaRow({
       </div>
 
       <div
+        ref={containerRef}
         className="
-          grid gap-3
-          grid-cols-2
-          md:grid-cols-3
-          lg:grid-cols-4
+          no-scrollbar
+          overflow-x-auto overflow-y-hidden
+          snap-x snap-mandatory
+          flex gap-4 px-1
+          -mx-4 md:mx-0 md:px-0
         "
-        style={{
-          gridTemplateColumns: `repeat(${cols.base ?? 2}, minmax(0, 1fr))`,
-        }}
       >
         {data.map((item, i) => (
-          <ThumbnailCard key={`${item.title}-${i}`} {...item} />
+          <div key={`${item.title}-${i}`} className="snap-start shrink-0" data-card>
+            <ThumbnailCard {...item} />
+          </div>
         ))}
       </div>
     </section>
