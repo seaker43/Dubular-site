@@ -1,53 +1,63 @@
+@import "tailwindcss";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ---------- Theme base ---------- */
+/* Global Theme */
 :root {
-  --accent: #22d3ee; /* cyan-400 */
+  --dubular-green: #10b981; /* emerald neon */
+  --dubular-bg: #0a0a0a;   /* deep neutral background */
 }
 
 html, body {
-  height: 100%;
+  @apply bg-neutral-950 text-white antialiased min-h-screen;
 }
 
-body {
-  @apply bg-neutral-950 text-white antialiased;
-}
-
-/* ---------- Typography ---------- */
-.section-title {
-  @apply text-xl font-semibold mb-3;
-}
-
-.glow {
-  color: var(--accent);
-  text-shadow:
-    0 0 8px rgba(34, 211, 238, 0.35),
-    0 0 18px rgba(34, 211, 238, 0.2);
-}
-
-/* ---------- Components ---------- */
-.live-badge {
-  @apply absolute top-2 left-2 text-[10px] font-black px-2 py-1 rounded-md;
-  background: #ef4444;          /* red-500 */
-  color: #fff;
-  border: 1px solid rgba(255,255,255,.25);
-  animation: neonIdle 1.8s infinite;
-}
-
-/* Horizontal scroller aesthetics */
+/* Scrollbar styling */
 ::-webkit-scrollbar {
   height: 8px;
+  width: 8px;
 }
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
 ::-webkit-scrollbar-thumb {
-  background: #0b1520;
+  background: var(--dubular-green);
   border-radius: 9999px;
 }
 
-/* ---------- Neon idle pulse ---------- */
-@keyframes neonIdle {
-  0%   { box-shadow: 0 0 2px #ef4444, 0 0 6px #ef4444;   }
-  50%  { box-shadow: 0 0 4px #ef4444, 0 0 14px #ef4444;  }
-  100% { box-shadow: 0 0 2px #ef4444, 0 0 6px #ef4444;   }
+::-webkit-scrollbar-thumb:hover {
+  background: #22d3ee;
+}
+
+/* Neon Glow utility */
+.glow-neon {
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.9),
+               0 0 20px rgba(16, 185, 129, 0.6),
+               0 0 40px rgba(16, 185, 129, 0.4);
+}
+
+/* LIVE pulse badge */
+@keyframes pulse-red {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.badge-live {
+  @apply px-2 py-0.5 text-xs font-bold text-white bg-red-600 rounded shadow-lg;
+  animation: pulse-red 1.5s infinite;
+}
+
+/* Green pulsing dot for non-live */
+@keyframes pulse-green {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.badge-green {
+  @apply px-2 py-0.5 text-xs font-bold text-emerald-400 rounded shadow-md;
+  animation: pulse-green 2s infinite;
 }
