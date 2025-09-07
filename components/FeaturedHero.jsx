@@ -17,9 +17,9 @@ export default function FeaturedHero({
     <section
       className="
         relative w-full rounded-2xl overflow-hidden
-        ring-1 ring-white/5 bg-neutral-900/60
-        shadow-[0_0_80px_-20px_rgba(16,185,129,0.35)]
-        /* Taller hero: was aspect-[16/9] */
+        ring-1 ring-green-500/30 bg-neutral-900/60
+        shadow-[0_0_45px_6px_rgba(0,255,0,0.45)]
+        transition-transform
         aspect-[16/7] md:aspect-[16/6] lg:aspect-[16/5]
         mb-4
       "
@@ -49,10 +49,14 @@ export default function FeaturedHero({
         )}
       </div>
 
-      <div className="hero-edge" />
+      {/* Neon green aura edge (like thumbnails) */}
+      <div className="pointer-events-none absolute -top-px left-0 right-0 h-[6px] bg-green-400/70 blur-[4px]" />
+
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60" />
       <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 bg-gradient-to-t from-black/80 to-transparent">
-        <h2 className="text-white text-2xl md:text-3xl font-extrabold drop-shadow">{title}</h2>
+        <h2 className="text-white text-2xl md:text-3xl font-extrabold drop-shadow">
+          {title}
+        </h2>
       </div>
     </section>
   );
