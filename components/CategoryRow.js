@@ -1,41 +1,41 @@
 import Image from "next/image";
+import Link from "next/link";
 
-export default function CategoryRow({ title, items }) {
+export default function CategoryRow({ title, items = [] }) {
   return (
-    <section className="mb-8">
-      <h2 className="text-xl font-semibold mb-3">{title}</h2>
-      <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
-        {items.map((item, i) => (
-          <div
-            key={i}
-            className="relative min-w-[200px] bg-neutral-900 rounded-xl shadow-md overflow-hidden hover:ring-2 hover:ring-emerald-400 transition-all"
+    <section className="mt-8">
+      <h2 className="section-title neon">{title}</h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {items.map((item, idx) => (
+          <article
+            key={`${item.title}-${idx}`}
+            className="relative overflow-hidden rounded-2xl bg-[var(--card)] ring-1 ring-slate-800 thumb-glow"
           >
-            {/* LIVE / Idle Badge */}
-            {item.live ? (
-              <span className="badge-live absolute top-2 left-2 z-10">
-                LIVE
-              </span>
-            ) : (
-              <span className="badge-green absolute top-2 left-2 z-10">
-                ●
-              </span>
-            )}
-
-            {/* Thumbnail */}
-            <Image
-              src={item.img}
-              alt={item.title}
-              width={320}
-              height={180}
-              className="w-full h-40 object-cover"
-            />
-
-            {/* Info */}
-            <div className="p-3">
-              <h3 className="text-cyan-300 font-semibold">{item.title}</h3>
-              <p className="text-sm text-gray-400">{item.tags.join(" • ")}</p>
+            {/* THUMBNAIL — rectangular, no rounded corners on the image */}
+            <div className="relative w-full h-48 sm:h-56 md:h-64">
+              <Image
+                src={item.img}
+                alt={item.title}
+                fill
+                priority={idx < 4}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover rounded-none"
+              />
+              {/* Bottom overlay with LIVE + title */}
+              <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/75 via-black/25 to-transparent">
+                <div className="flex items-end gap-2">
+                  {item.live ? <span className="live-pill">LIVE</span> : null}
+                  <h3 className="neon text-lg font-semibold drop-shadow">
+                    {item.title}
+                  </h3>
+                </div>
+                <p className="mt-1 text-sm text-[var(--muted)]">
+                  {Array.isArray(item.tags) ? item.tags.join(" • ") : item.tags}
+                </p>
+              </div>
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </section>
