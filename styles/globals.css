@@ -2,49 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Theme vars */
+/* Neon gold + green theme */
 :root {
-  --header-height: 64px;
-  --gold: #FFD700;
-  --gold-glow: 0 0 10px rgba(255, 215, 0, 0.8);
+  --neon: #39ff14;
+  --gold: #ffd700;
 }
 
-/* Homepage-wide gold text + glow */
-.homepage {
-  color: var(--gold);
-  text-shadow: var(--gold-glow);
+body {
+  @apply bg-neutral-950 text-gold;
 }
 
-/* Gold nav glow helpers */
-.gold {
-  color: var(--gold);
+/* Hide scrollbar but keep swipe */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }
-.gold-glow {
-  color: var(--gold);
-  text-shadow: var(--gold-glow);
-}
-.icon-gold-glow {
-  filter: drop-shadow(0 0 6px rgba(255,215,0,0.9));
-}
-
-/* Bottom bar baseline */
-.bottom-bar {
-  height: 2.75rem; /* thinner bar */
-  backdrop-filter: blur(8px);
-  background: rgba(0, 0, 0, 0.55);
-  border-top: 1px solid rgba(255,255,255,0.08);
-}
-
-/* Bottom bar items */
-.bottom-bar .nav-item {
-  @apply flex flex-col items-center justify-center gap-0.5;
-  min-width: 64px;
-}
-
-/* Active state = gold + glow */
-.bottom-bar .nav-item.active .nav-icon,
-.bottom-bar .nav-item.active .nav-label {
-  color: var(--gold);
-  text-shadow: var(--gold-glow);
-  filter: drop-shadow(0 0 6px rgba(255,215,0,0.9));
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none; /* Firefox */
 }
