@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export default function FeaturedHero() {
   return (
-    <section className="relative w-full max-w-7xl mx-auto mb-8">
-      <div className="relative w-full aspect-[1/1] overflow-hidden rounded-2xl shadow-[0_0_25px_rgba(57,255,20,0.8)]">
+    <section className="relative w-full max-w-7xl mx-auto mt-20 mb-8">
+      <div className="relative w-full h-[70vh] overflow-hidden rounded-2xl shadow-[0_0_25px_rgba(57,255,20,0.8)]">
         <Image
           src="/thumbs/featured/featured-1.jpg"
           alt="Featured Content"
