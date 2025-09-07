@@ -14,11 +14,12 @@ export default function Header() {
     >
       <Link href="/" className="flex items-center">
         <Image
-          src="/logo.svg"
+          src="/logo.svg"          // must be in /public/logo.svg
           alt="dubUlar Logo"
-          width={120}
-          height={32}
+          width={140}
+          height={36}
           priority
+          className="select-none"
         />
       </Link>
     </header>
