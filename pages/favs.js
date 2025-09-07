@@ -9,7 +9,7 @@ export default function FavsPage() {
     live: i % 4 === 0,
   }));
 =======
-import CarouselRow from "../components/CategoryRow";
+import CategoryRow from "../components/CategoryRow";
 >>>>>>> 63785215 (fix(pages): replace ../components/CategoryRow with components/CategoryRow everywhere)
 
   return (

@@ -22,6 +22,6 @@ export default function RecommendedPage() {
 }
 =======
 import Link from "next/link";
-import CarouselRow from "../components/CategoryRow";
-export default function Recommended(){const items=globalThis.__RECOMMENDED__||[];return(<main className="page"><h2 className="section-title glow"><Link href="/recommended">Recommended</Link></h2><CarouselRow title="Recommended" items={items}/></main>);} 
+import CategoryRow from "../components/CategoryRow";
+export default function Recommended(){const items=globalThis.__RECOMMENDED__||[];return(<main className="page"><h2 className="section-title glow"><Link href="/recommended">Recommended</Link></h2><CategoryRow title="Recommended" items={items}/></main>);} 
 >>>>>>> 63785215 (fix(pages): replace ../components/CategoryRow with components/CategoryRow everywhere)
