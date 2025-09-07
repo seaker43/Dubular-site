@@ -29,5 +29,5 @@ a { @apply outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/60 r
 .navbar-item { @apply flex flex-col items-center text-xs text-neutral-400; }
 .navbar-item.active { @apply text-white; }
 
-/* Featured hero edge */
+/* Featured hero neon edge */
 .hero-edge { @apply pointer-events-none absolute top-0 left-0 right-0 h-[6px] bg-gradient-to-r from-emerald-400/0 via-emerald-400/60 to-emerald-400/0 blur-[2px]; }
