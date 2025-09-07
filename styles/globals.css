@@ -2,18 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Prevent any accidental horizontal scroll */
-html, body {
-  overflow-x: hidden;
-  background-color: #0a0a0a; /* dark bg for consistency */
-  color: #ffffff; /* default text white */
+/* Base */
+html, body { overflow-x: hidden; }
+body { @apply bg-neutral-950 text-white; }
+
+/* Hide scrollbars helper */
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+
+/* Thumbnails */
+.thumbnail-card { @apply rounded-xl bg-neutral-900/40 shadow-lg shadow-black/40; }
+.live-badge { @apply absolute top-2 left-2; }
+.thumbnail-title { @apply text-white; }
+
+/* Glow effect behind thumbnails */
+:root {
+  --thumb-glow: radial-gradient(35% 60% at 50% 100%,
+                rgba(0,255,170,0.35) 0%,
+                rgba(0,255,170,0.18) 35%,
+                rgba(0,0,0,0.0) 70%);
 }
 
-/* Utility: completely hide scrollbars for horizontal carousels */
-.scrollbar-hide {
-  -ms-overflow-style: none; /* IE/Edge */
-  scrollbar-width: none; /* Firefox */
+.thumb-glow > .relative > div[aria-hidden] {
+  background: var(--thumb-glow);
 }
-.scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+
+.thumb-glow:hover > .relative > div[aria-hidden],
+.thumb-glow:focus-visible > .relative > div[aria-hidden] {
+  filter: drop-shadow(0 0 24px rgba(0,255,170,0.35));
 }
