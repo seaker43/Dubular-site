@@ -8,19 +8,20 @@ export default function FeaturedHero({
   autoplay = false,
   muted = true,
   loop = true,
-  live = false, // set true if you want the LIVE badge on the hero
+  live = false, // set true to show LIVE badge
 }) {
   const isVideo = /\.mp4($|\?)/i.test(src);
   const [imgSrc, setImgSrc] = useState(src);
   const FALLBACK = "/placeholder.svg";
 
-  // Reuse the green glow utility on hero
-  const wrapperClass = "thumbnail-default";
-
   return (
     <section
-      className={`relative w-full rounded-2xl overflow-hidden ${wrapperClass}
-                  aspect-[16/7] md:aspect-[16/6] lg:aspect-[16/5] mb-4`}
+      className={`
+        relative w-full rounded-b-2xl overflow-hidden
+        thumbnail-default
+        h-[calc(50vh-56px)]   /* take half viewport height minus header */
+        mb-4
+      `}
     >
       <div className="absolute inset-0">
         {isVideo ? (
@@ -49,13 +50,14 @@ export default function FeaturedHero({
         )}
       </div>
 
-      {/* Optional LIVE pill on hero */}
       {live && <span className="live-badge">LIVE</span>}
 
-      {/* Soft overlay & title */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60" />
-      <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 bg-gradient-to-t from-black/80 to-transparent">
-        <h2 className="text-white text-2xl md:text-3xl font-extrabold drop-shadow">{title}</h2>
+      {/* gradient + title */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/80" />
+      <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+        <h2 className="text-white text-2xl md:text-3xl font-extrabold drop-shadow">
+          {title}
+        </h2>
       </div>
     </section>
   );
