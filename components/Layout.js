@@ -1,16 +1,15 @@
 import Head from "next/head";
-import BottomBar from "./BottomBar.jsx";
-
-export default function Layout({ title = "Dubular", children }) {
+import BottomBar from "./BottomBar";
+export default function Layout({ children, title = "Dubular" }) {
   return (
     <>
       <Head>
         <title>{title}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#09120A" />
       </Head>
-      <main className="min-h-screen bg-black text-white pb-20">
+      <div className={["min-h-screen bg-[#0b0f0c] text-white","pb-20"].join(" ")} style={{paddingBottom:"calc(4.25rem + env(safe-area-inset-bottom))"}}>
         {children}
-      </main>
+      </div>
       <BottomBar />
     </>
   );
