@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240" height="48" viewBox="0 0 240 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="dubUlar logo">
+  <defs>
+    <!-- Cyan core + glow -->
+    <linearGradient id="cyanGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#67e8f9"/>
+    </linearGradient>
+
+    <!-- Emerald accent glow -->
+    <linearGradient id="emeraldGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#10b981"/>
+      <stop offset="1" stop-color="#34d399"/>
+    </linearGradient>
+
+    <!-- Outer glow filter (soft neon) -->
+    <filter id="outerGlow" x="-40%" y="-80%" width="180%" height="260%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="3" result="blur1"/>
+      <feGaussianBlur in="blur1" stdDeviation="2.5" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Heavy glow (behind text) -->
+    <filter id="heavyGlow" x="-60%" y="-120%" width="220%" height="320%">
+      <feGaussianBlur stdDeviation="8" result="g1"/>
+      <feColorMatrix in="g1" type="matrix"
+        values="0 0 0 0 0.13
+                0 0 0 0 0.82
+                0 0 0 0 0.92
+                0 0 0 0.9 0" />
+    </filter>
+
+    <!-- Font fallback: we draw the letters ourselves using a path,
+         so no webfont is required -->
+  </defs>
+
+  <!-- Background is transparent on purpose (works on dark header) -->
+
+  <!-- Big soft cyan aura behind the word -->
+  <g filter="url(#heavyGlow)" opacity="0.55" transform="translate(0,2)">
+    <path d="M18 34C18 24 18 14 28 14H210C220 14 220 34 210 34H28C21 34 18 31 18 34Z" fill="#22d3ee"/>
+  </g>
+
+  <!-- Wordmark: “dubUlar” -->
+  <!-- The look: slightly rounded, modern, friendly sans — custom path -->
+  <g filter="url(#outerGlow)">
+    <!-- Emerald accent underline -->
+    <path d="M36 38 C 70 38, 170 38, 204 38" stroke="url(#emeraldGrad)" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
+
+    <!-- Letters (single continuous outline for a smooth neon stroke) -->
+    <path
+      d="
+      M34 30
+      q0 4 4 4h4q4 0 4-4V20h-4v8q0 2-2 2h-2q-2 0-2-2v-8h-4v10z
+
+      M61 24q0-5 6-5h2q6 0 6 5v3h-10v1q0 2 2 2h2q2 0 2-1h4q-1 5-7 5h-2q-6 0-6-5v-5zm10 1v-1q0-2-2-2h-2q-2 0-2 2v1h6z
+
+      M83 30q0 4 4 4h2q4 0 4-3h.1v3h4V14h-4v9h-.1q0-3-4-3h-2q-4 0-4 4v6zm10-2v-4q0-2-2-2h-2q-2 0-2 2v4q0 2 2 2h2q2 0 2-2z
+
+      M105 30q0 4 4 4h2q4 0 4-3h.1v3h4V20h-4v2h-.1q0-3-4-3h-2q-4 0-4 4v7zm10-3v-3q0-2-2-2h-2q-2 0-2 2v3q0 2 2 2h2q2 0 2-2z
+
+      M127 34h4V14h-4v20z
+
+      M138 24q0-5 6-5h2q6 0 6 5v3h-10v1q0 2 2 2h2q2 0 2-1h4q-1 5-7 5h-2q-6 0-6-5v-5zm10 1v-1q0-2-2-2h-2q-2 0-2 2v1h6z
+
+      M168 30q0 4 4 4h2q4 0 4-3h.1v3h4V20h-4v2h-.1q0-3-4-3h-2q-4 0-4 4v7zm10-3v-3q0-2-2-2h-2q-2 0-2 2v3q0 2 2 2h2q2 0 2-2z
+      "
+      fill="url(#cyanGrad)"
+      stroke="url(#cyanGrad)" stroke-width="0.6"
+    />
+  </g>
+</svg>
