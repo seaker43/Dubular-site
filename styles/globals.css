@@ -1,63 +1,88 @@
-@import "tailwindcss";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Global Theme */
+/* ---- Theme ---- */
 :root {
-  --dubular-green: #10b981; /* emerald neon */
-  --dubular-bg: #0a0a0a;   /* deep neutral background */
+  --bg: #0b0f14;            /* page bg */
+  --card: #121820;          /* card bg */
+  --ink: #d1d5db;           /* body text */
+  --muted: #94a3b8;         /* muted text */
+  --neon: #10b981;          /* emerald/cyan */
 }
 
 html, body {
-  @apply bg-neutral-950 text-white antialiased min-h-screen;
+  background: var(--bg);
+  color: var(--ink);
 }
 
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  height: 8px;
-  width: 8px;
+a { color: inherit; }
+
+/* ---- Neon text + accents ---- */
+.neon {
+  color: var(--neon);
+  text-shadow:
+    0 0 6px  rgba(16,185,129,.55),
+    0 0 14px rgba(16,185,129,.35),
+    0 0 28px rgba(16,185,129,.22);
+}
+.section-title {
+  @apply text-2xl md:text-3xl font-bold mb-3;
+}
+.section-title.neon { /* used by the page headings */
+  color: var(--neon);
+  text-shadow:
+    0 0 6px  rgba(16,185,129,.55),
+    0 0 14px rgba(16,185,129,.35);
 }
 
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
+/* ---- Thumbnail glow ---- */
+.thumb-glow {
+  box-shadow:
+    0 0 0 1px rgba(2,6,23,.8),
+    0 0 38px rgba(16,185,129,.18);
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.thumb-glow:hover {
+  box-shadow:
+    0 0 0 1px rgba(2,6,23,.9),
+    0 0 60px rgba(16,185,129,.35);
+  transform: translateY(-1px);
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--dubular-green);
+/* ---- “LIVE” pill ---- */
+.live-pill {
+  background: linear-gradient(180deg,#ff3b3b,#c1121f);
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: .02em;
+  border-radius: .55rem;
+  padding: .22rem .5rem;
+  line-height: 1;
+  box-shadow: 0 2px 10px rgba(255,59,59,.35);
+}
+
+/* ---- Bottom bar base tweaks ---- */
+.bottom-bar {
+  background: rgba(8,12,17,.9);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(148,163,184,.12);
+}
+.bottom-item {
+  @apply flex flex-col items-center justify-center gap-1 text-sm text-slate-300;
+}
+.bottom-item.active .underline {
+  background: var(--neon);
+}
+
+/* keep token badge style */
+.token-badge {
+  @apply absolute -top-3 left-1/2 -translate-x-1/2;
+  background: #0e1726;
+  width: 22px; height: 22px;
   border-radius: 9999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #22d3ee;
-}
-
-/* Neon Glow utility */
-.glow-neon {
-  text-shadow: 0 0 10px rgba(16, 185, 129, 0.9),
-               0 0 20px rgba(16, 185, 129, 0.6),
-               0 0 40px rgba(16, 185, 129, 0.4);
-}
-
-/* LIVE pulse badge */
-@keyframes pulse-red {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
-}
-
-.badge-live {
-  @apply px-2 py-0.5 text-xs font-bold text-white bg-red-600 rounded shadow-lg;
-  animation: pulse-red 1.5s infinite;
-}
-
-/* Green pulsing dot for non-live */
-@keyframes pulse-green {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.2); }
-}
-
-.badge-green {
-  @apply px-2 py-0.5 text-xs font-bold text-emerald-400 rounded shadow-md;
-  animation: pulse-green 2s infinite;
+  border: 1px solid rgba(16,185,129,.5);
+  display: grid; place-items: center;
+  box-shadow: 0 0 18px rgba(16,185,129,.35);
+  color: var(--neon); font-weight: 800; font-size: 12px;
 }
