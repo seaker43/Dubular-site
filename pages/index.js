@@ -1,49 +1,49 @@
 // pages/index.js
 import Head from "next/head";
-import Layout from "../components/Layout";
 import MediaRow from "../components/MediaRow";
-
-const trending = [
-  { title: "LoFi #1", src: "/thumbnails/lofi1.jpg", tags: ["music", "lofi"], live: true },
-  { title: "LoFi #2", src: "/thumbnails/lofi2.jpg", tags: ["music", "lofi"] },
-  { title: "LoFi #3", src: "/thumbnails/lofi3.jpg", tags: ["music", "lofi"] },
-  { title: "Pixel Art #1", src: "/thumbnails/pixel1.jpg", tags: ["art", "pixel"] },
-  { title: "Pixel Art #2", src: "/thumbnails/pixel2.jpg", tags: ["art", "pixel"] },
-  { title: "Pixel Art #3", src: "/thumbnails/pixel3.jpg", tags: ["art", "pixel"] },
-];
-
-const mostLiked = [
-  { title: "Pixel Art #1", src: "/thumbnails/pixel1.jpg", tags: ["art", "pixel"] },
-  { title: "Pixel Art #2", src: "/thumbnails/pixel2.jpg", tags: ["art", "pixel"] },
-  { title: "Pixel Art #3", src: "/thumbnails/pixel3.jpg", tags: ["art", "pixel"] },
-  { title: "LoFi #1", src: "/thumbnails/lofi1.jpg", tags: ["music", "lofi"] },
-  { title: "LoFi #2", src: "/thumbnails/lofi2.jpg", tags: ["music", "lofi"] },
-  { title: "LoFi #3", src: "/thumbnails/lofi3.jpg", tags: ["music", "lofi"] },
-];
-
-const recommended = [
-  { title: "LoFi #2", src: "/thumbnails/lofi2.jpg", tags: ["music", "lofi"] },
-  { title: "Pixel Art #1", src: "/thumbnails/pixel1.jpg", tags: ["art", "pixel"] },
-  { title: "LoFi #3", src: "/thumbnails/lofi3.jpg", tags: ["music", "lofi"] },
-  { title: "Pixel Art #2", src: "/thumbnails/pixel2.jpg", tags: ["art", "pixel"] },
-  { title: "LoFi #1", src: "/thumbnails/lofi1.jpg", tags: ["music", "lofi"], live: true },
-  { title: "Pixel Art #3", src: "/thumbnails/pixel3.jpg", tags: ["art", "pixel"] },
-];
 
 export default function Home() {
   return (
-    <Layout>
+    <>
       <Head>
         <title>Dubular</title>
       </Head>
 
-      <main className="space-y-10 pb-28">
-        <h1 className="site-title px-4 sm:px-6">Dubular</h1>
+      <main className="px-4 pb-24">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-neon drop-shadow-glow mb-6">
+          Dubular
+        </h1>
 
-        <MediaRow title="Trending Now" items={trending} href="/trending" />
-        <MediaRow title="Most Liked" items={mostLiked} href="/leaderboards" />
-        <MediaRow title="Recommended" items={recommended} href="/recommended" />
+        <MediaRow
+          title="Trending Now"
+          href="/trending"
+          items={[
+            { title: "LoFi #1", category: "music", tag: "lofi", live: true, imgSrc: "/thumbs/music/lofi-1.jpg", href: "/streams/lofi-1" },
+            { title: "LoFi #2", category: "music", tag: "lofi", imgSrc: "/thumbs/music/lofi-2.jpg", href: "/streams/lofi-2" },
+            { title: "LoFi #3", category: "music", tag: "lofi", imgSrc: "/thumbs/music/lofi-3.jpg", href: "/streams/lofi-3" },
+          ]}
+        />
+
+        <MediaRow
+          title="Most Liked"
+          href="/most-liked"
+          items={[
+            { title: "Pixel Art #1", category: "art", tag: "pixel", imgSrc: "/thumbs/art/pixel-1.jpg", href: "/art/1" },
+            { title: "Pixel Art #2", category: "art", tag: "pixel", imgSrc: "/thumbs/art/pixel-2.jpg", href: "/art/2" },
+            { title: "Pixel Art #3", category: "art", tag: "pixel", imgSrc: "/thumbs/art/pixel-3.jpg", href: "/art/3" },
+          ]}
+        />
+
+        <MediaRow
+          title="Recommended"
+          href="/recommended"
+          items={[
+            { title: "LoFi #2", category: "music", tag: "lofi", imgSrc: "/thumbs/music/lofi-2.jpg", href: "/streams/lofi-2" },
+            { title: "Pixel Art #1", category: "art", tag: "pixel", imgSrc: "/thumbs/art/pixel-1.jpg", href: "/art/1" },
+            { title: "LoFi #4", category: "music", tag: "lofi", imgSrc: "/thumbs/music/lofi-4.jpg", href: "/streams/lofi-4" },
+          ]}
+        />
       </main>
-    </Layout>
+    </>
   );
 }
