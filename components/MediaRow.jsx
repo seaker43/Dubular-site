@@ -1,51 +1,37 @@
-// components/MediaRow.jsx
-import Link from "next/link";
 import ThumbnailCard from "./ThumbnailCard";
 
-export default function MediaRow({
-  title,
-  href,
-  category,
-  items = [],
-}) {
-  const showCTA = (href || category) && items.length > 0;
+export default function MediaRow({ title = "Trending Now", items = [], href = "/see-all" }) {
+  const data = items.length ? items : [
+    {
+      id: "lofi-1",
+      title: "LoFi #1",
+      image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80",
+    },
+    {
+      id: "lofi-2",
+      title: "LoFi #2",
+      image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80",
+    },
+    {
+      id: "lofi-3",
+      title: "LoFi #3",
+      image: "https://images.unsplash.com/photo-1521334726092-b509a19597c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80",
+    },
+  ];
 
   return (
-    <section className="mt-8">
-      <div className="mb-3 flex items-baseline justify-between px-1">
-        <h3 className="text-white text-2xl md:text-3xl font-black tracking-tight">
-          {title}
-        </h3>
-        {showCTA ? (
-          <Link
-            href={href || `/${category}`}
-            className="text-white/70 hover:text-white text-sm font-semibold tracking-wide"
-          >
-            SEE ALL →
-          </Link>
-        ) : null}
+    <section className="section">
+      <div className="section-header">
+        <h3 className="section-title">{title}</h3>
+        <a href={href} className="section-link">SEE ALL →</a>
       </div>
-
-      <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-1">
-        {items.length === 0 ? (
-          <div className="text-white/50 text-sm px-1 py-6">
-            Nothing to show yet.
-          </div>
-        ) : (
-          items.map((it, i) => (
-            <div
-              key={`${it.file || it.src}-${i}`}
-              className="min-w-[66vw] sm:min-w-[320px] snap-start"
-            >
-              <ThumbnailCard
-                src={it.src || `/thumbnails/${it.file}`}
-                title={it.title}
-                href={it.href || "#"}
-              />
-            </div>
-          ))
-        )}
-      </div>
+      <ul className="row">
+        {data.map((it) => (
+          <li key={it.id} className="min-w-[65%] sm:min-w-[45%] md:min-w-[30%] lg:min-w-[22%]">
+            <ThumbnailCard {...it} />
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
