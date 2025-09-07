@@ -1,27 +1,29 @@
 // components/Header.jsx
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Header() {
   return (
     <header
       className="
-        fixed top-0 left-0 right-0 z-50
-        bg-neutral-950/90 backdrop-blur
-        border-b border-neutral-800
-        h-14 flex items-center justify-center
+        relative fixed top-0 left-0 right-0 z-50
+        h-14 border-b border-neutral-800
+        bg-black/90 backdrop-blur
       "
     >
-      <Link href="/" className="flex items-center">
+      {/* Stretched, NO CROPPING */}
+      <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
         <Image
-          src="/logo.svg"          // must be in /public/logo.svg
-          alt="dubUlar Logo"
-          width={140}
-          height={36}
+          src="/logo-header.png"      // put your PNG in /public/logo-header.png
+          alt="dubUlar header graphic"
+          fill
           priority
-          className="select-none"
+          className="
+            object-contain object-center
+            opacity-95 pointer-events-none select-none
+          "
+          sizes="100vw"
         />
-      </Link>
+      </div>
     </header>
   );
 }
