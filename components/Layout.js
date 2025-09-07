@@ -1,15 +1,19 @@
+// components/Layout.js
 import Head from "next/head";
 import BottomBar from "./BottomBar";
-export default function Layout({ children, title = "Dubular" }) {
+
+export default function Layout({ children, title }) {
   return (
     <>
       <Head>
-        <title>{title}</title>
-        <meta name="theme-color" content="#09120A" />
+        <title>{title || "dubUlar"}</title>
+        <meta name="theme-color" content="#09182a" />
       </Head>
-      <div className={["min-h-screen bg-[#0b0f0c] text-white","pb-20"].join(" ")} style={{paddingBottom:"calc(4.25rem + env(safe-area-inset-bottom))"}}>
+
+      <div className="min-h-screen bg-[#0b0f1a]">
         {children}
       </div>
+
       <BottomBar />
     </>
   );
