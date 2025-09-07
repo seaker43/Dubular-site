@@ -1,3 +1,4 @@
+// pages/recommended.js
 import Link from "next/link";
 import CategoryRow from "../components/CategoryRow";
 
