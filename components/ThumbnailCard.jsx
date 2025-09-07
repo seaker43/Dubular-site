@@ -1,3 +1,4 @@
+// components/ThumbnailCard.jsx
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
@@ -22,7 +23,6 @@ export default function ThumbnailCard({ id, title, image, live = false }) {
       const updated = exists ? list.filter((x) => x.id !== id) : [...list, { id, title, image: src }];
       localStorage.setItem("favorites", JSON.stringify(updated));
       setFav(!exists);
-      // notify favorites page in other tabs
       if (typeof window !== "undefined") {
         window.dispatchEvent(new StorageEvent("storage", { key: "favorites", newValue: JSON.stringify(updated) }));
       }
@@ -31,7 +31,15 @@ export default function ThumbnailCard({ id, title, image, live = false }) {
 
   return (
     <div className="group">
-      <div className="relative overflow-hidden rounded-xl ring-1 ring-white/5 bg-neutral-900/60 shadow-[0_0_60px_-18px_rgba(16,185,129,0.35)] transition-transform duration-200 hover:scale-[1.02]">
+      <div
+        className="
+          relative overflow-hidden rounded-xl
+          ring-1 ring-green-500/30 bg-neutral-900/60
+          shadow-[0_0_25px_3px_rgba(0,255,0,0.4)]
+          transition-transform duration-200
+          hover:scale-[1.03] hover:shadow-[0_0_35px_6px_rgba(0,255,0,0.6)]
+        "
+      >
         <div className="relative w-full aspect-video">
           {!loaded && <div className="absolute inset-0 animate-pulse bg-neutral-900/60" />}
 
@@ -45,7 +53,6 @@ export default function ThumbnailCard({ id, title, image, live = false }) {
             onError={() => { if (src !== FALLBACK) setSrc(FALLBACK); setLoaded(true); }}
           />
 
-          <div className="hero-edge" />
           {live && <span className="live-badge">LIVE</span>}
 
           <button
@@ -55,8 +62,6 @@ export default function ThumbnailCard({ id, title, image, live = false }) {
           >
             <Star size={18} strokeWidth={2} {...(fav ? { fill: "currentColor" } : {})} />
           </button>
-
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
         </div>
       </div>
       <div className="card-title truncate mt-1">{title}</div>
