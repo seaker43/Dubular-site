@@ -1,37 +1,51 @@
-import FeaturedHero from "@/components/FeaturedHero";
-import CategoryRow from "@/components/CategoryRow";
-
-function makeFallback(category, count = 12) {
-  // Put your images under /public/thumbnails/<category>/<1..n>.jpg or .png
-  return Array.from({ length: count }, (_, i) => ({
-    id: `${category}-${i + 1}`,
-    title: `${category} ${i + 1}`,
-    // Update extensions/paths to match your repo assets
-    thumb: `/thumbnails/${category}/${i + 1}.jpg`,
-    live: (i + 1) % 4 === 0,
-  }));
-}
+// pages/index.js
+import Head from "next/head";
+import MediaRow from "../components/MediaRow";
+import FeaturedHero from "../components/FeaturedHero";
 
 export default function Home() {
-  const trending = (globalThis.__TRENDING__ && globalThis.__TRENDING__.length)
-    ? globalThis.__TRENDING__
-    : makeFallback("trending");
-
-  const recommended = (globalThis.__RECOMMENDED__ && globalThis.__RECOMMENDED__.length)
-    ? globalThis.__RECOMMENDED__
-    : makeFallback("recommended");
-
-  const independent = (globalThis.__INDEPENDENT__ && globalThis.__INDEPENDENT__.length)
-    ? globalThis.__INDEPENDENT__
-    : makeFallback("independent");
-
   return (
-    <main className="homepage px-4 pb-24">
-      <FeaturedHero />
+    <>
+      <Head>
+        <title>Dubular</title>
+      </Head>
 
-      <CategoryRow title="Trending Now" items={trending} />
-      <CategoryRow title="Recommended" items={recommended} />
-      <CategoryRow title="Independent Media" items={independent} />
-    </main>
+      <main className="homepage px-4 pb-24">
+        {/* Featured autoplay hero */}
+        <FeaturedHero />
+
+        {/* Rows */}
+        <MediaRow
+          title="Trending Now"
+          href="/trending"
+          items={[
+            { title: "LoFi #1", category: "music", image: "/thumbnails/trending/trending1.jpg", live: true },
+            { title: "LoFi #2", category: "music", image: "/thumbnails/trending/trending2.jpg" },
+            { title: "LoFi #3", category: "music", image: "/thumbnails/trending/trending3.jpg" },
+            { title: "LoFi #4", category: "music", image: "/thumbnails/trending/trending4.jpg" },
+            { title: "LoFi #5", category: "music", image: "/thumbnails/trending/trending5.jpg" },
+          ]}
+        />
+
+        <MediaRow
+          title="Most Liked"
+          href="/liked"
+          items={[
+            { title: "Pixel Art #1", category: "art", image: "/thumbnails/art/art1.jpg" },
+            { title: "Pixel Art #2", category: "art", image: "/thumbnails/art/art2.jpg" },
+            { title: "Pixel Art #3", category: "art", image: "/thumbnails/art/art3.jpg" },
+          ]}
+        />
+
+        <MediaRow
+          title="Recommended"
+          href="/recommended"
+          items={[
+            { title: "LoFi #2", category: "music", image: "/thumbnails/trending/trending2.jpg" },
+            { title: "Pixel Art #1", category: "art", image: "/thumbnails/art/art1.jpg" },
+          ]}
+        />
+      </main>
+    </>
   );
 }
