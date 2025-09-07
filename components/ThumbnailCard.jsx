@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 
 export default function ThumbnailCard({ id, title, image }) {
   const [fav, setFav] = useState(false);
+  const [src, setSrc] = useState(image);
+  const FALLBACK = "/placeholder.svg";
 
   useEffect(() => {
     const list = JSON.parse(localStorage.getItem("favorites") || "[]");
@@ -28,11 +30,12 @@ export default function ThumbnailCard({ id, title, image }) {
     <div className="thumbnail relative">
       <div className="relative w-full aspect-video">
         <Image
-          src={image}
+          src={src || FALLBACK}
           alt={title}
           fill
           className="object-cover rounded-lg"
           sizes="(max-width:768px) 50vw, (max-width:1024px) 33vw, 16vw"
+          onError={() => setSrc(FALLBACK)}
         />
       </div>
 
