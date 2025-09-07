@@ -1,55 +1,52 @@
 // components/ThumbnailCard.jsx
-export default function ThumbnailCard({
-  src,
-  title = "",
-  href = "#",
-}) {
-  const fallback =
-    "data:image/svg+xml;utf8," +
-    encodeURIComponent(
-      `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 90'>
-        <rect width='100%' height='100%' fill='#0b1512'/>
-        <defs><linearGradient id='g' x1='0' x2='1'>
-          <stop stop-color='#10b981' stop-opacity='.35'/>
-          <stop offset='1' stop-color='#10b981' stop-opacity='0'/>
-        </linearGradient></defs>
-        <rect width='100%' height='100%' fill='url(#g)'/>
-      </svg>`
-    );
+import Image from "next/image";
+import { useState, useEffect } from "react";
+
+export default function ThumbnailCard({ id, title, image }) {
+  const [fav, setFav] = useState(false);
+
+  useEffect(() => {
+    const list = JSON.parse(localStorage.getItem("favorites") || "[]");
+    setFav(list.some((x) => x.id === id));
+  }, [id]);
+
+  const toggleFavorite = () => {
+    const list = JSON.parse(localStorage.getItem("favorites") || "[]");
+    let updated;
+
+    if (fav) {
+      updated = list.filter((x) => x.id !== id);
+    } else {
+      updated = [...list, { id, title, image }];
+    }
+
+    localStorage.setItem("favorites", JSON.stringify(updated));
+    setFav(!fav);
+  };
 
   return (
-    <a
-      href={href}
-      className="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 rounded-xl"
-    >
-      <div className="
-        relative overflow-hidden rounded-xl bg-neutral-900/70
-        aspect-[16/9]
-        shadow-[0_0_0_0_rgba(16,185,129,0)]
-        before:content-[''] before:absolute before:inset-[-30%] before:rounded-full
-        before:bg-emerald-400/10 before:blur-2xl
-        group-hover:shadow-[0_0_30px_-10px_rgba(16,185,129,0.7)]
-        transition-shadow
-        ring-1 ring-white/5
-      ">
-        <img
-          src={src}
+    <div className="thumbnail relative">
+      <div className="relative w-full aspect-video">
+        <Image
+          src={image}
           alt={title}
-          className="absolute inset-0 w-full h-full object-cover will-change-transform"
-          loading="lazy"
-          decoding="async"
-          onError={(e) => {
-            // Hide broken icon and show a soft fallback
-            e.currentTarget.src = fallback;
-            e.currentTarget.style.objectFit = "cover";
-          }}
+          fill
+          className="object-cover rounded-lg"
+          sizes="(max-width:768px) 50vw, (max-width:1024px) 33vw, 16vw"
         />
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-black/20" />
       </div>
 
-      {title ? (
-        <p className="mt-2 text-sm text-white/90 line-clamp-1">{title}</p>
-      ) : null}
-    </a>
+      {/* Favorite Star */}
+      <button
+        onClick={toggleFavorite}
+        className={`absolute top-2 right-2 text-lg p-1 rounded-full transition 
+          ${fav ? "bg-yellow-400 text-black" : "bg-neutral-800/70 text-white"}`}
+        title={fav ? "Remove from Favorites" : "Add to Favorites"}
+      >
+        ★
+      </button>
+
+      <div className="card-title truncate mt-1">{title}</div>
+    </div>
   );
 }
