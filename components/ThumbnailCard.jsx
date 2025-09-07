@@ -2,45 +2,44 @@
 import Link from "next/link";
 
 export default function ThumbnailCard({
-  href = "#",
+  file = "/thumbnails/placeholder.jpg",
   title = "Untitled",
-  src = "/thumbnails/sample.jpg",
+  href = "#",
   live = false,
 }) {
   return (
     <Link
       href={href}
-      className="group block thumbnail-card thumb-glow"
-      aria-label={title}
+      className="thumb-glow block group w-[56vw] sm:w-64 md:w-72 lg:w-80"
+      prefetch={false}
     >
-      <div className="relative w-full overflow-hidden rounded-xl">
-        {/* Glow layer lives behind the image */}
-        <div
-          className="pointer-events-none absolute inset-0 -z-10 opacity-60 blur-2xl transition duration-300 group-hover:opacity-90"
-          aria-hidden
-        />
-        {/* 16:9 aspect ratio box */}
-        <div className="pt-[56.25%]" />
+      <div className="relative aspect-video overflow-hidden rounded-xl bg-neutral-900">
+        {/* image */}
         <img
-          src={src}
+          src={file}
           alt={title}
           loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover will-change-transform transition-transform duration-300 group-hover:scale-[1.02]"
+          decoding="async"
+          className="h-full w-full object-cover will-change-transform [transform:translateZ(0)]"
+          onError={(e) => { e.currentTarget.src = "/thumbnails/placeholder.jpg"; }}
         />
 
-        {/* Title + Live badge */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-2">
-          <div className="flex items-center gap-2">
-            {live && (
-              <span className="live-badge inline-flex h-5 items-center justify-center rounded bg-red-600 px-2 text-[10px] font-bold leading-none">
-                LIVE
-              </span>
-            )}
-            <span className="thumbnail-title line-clamp-2 text-sm font-semibold text-white/95 drop-shadow">
-              {title}
-            </span>
-          </div>
+        {/* live badge (optional) */}
+        {live && (
+          <span className="absolute left-2 top-2 rounded bg-red-600 px-2 py-0.5 text-xs font-bold text-white shadow">
+            LIVE
+          </span>
+        )}
+
+        {/* bottom title strip */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-2">
+          <p className="line-clamp-1 text-sm font-semibold text-white drop-shadow">
+            {title}
+          </p>
         </div>
+
+        {/* hover lift */}
+        <div className="pointer-events-none absolute inset-0 transition-transform duration-200 ease-out group-hover:-translate-y-0.5" />
       </div>
     </Link>
   );
