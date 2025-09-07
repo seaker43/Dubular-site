@@ -1,45 +1,52 @@
-// pages/index.js
-import CategoryRow from "../components/CategoryRow";
-import BottomBar from "../components/BottomBar";
+import Head from "next/head";
+import BottomBar from "@/components/BottomBar";
+import MediaCard from "@/components/MediaCard";
+import MediaRow from "@/components/MediaRow";
+import Section from "@/components/Section";
 
 export default function Home() {
-  // --- Data mocks (replace with real data when wired up) ---
-  const mostWatched = Array.from({ length: 8 }, (_, i) => ({
-    title: `LoFi #${i + 1}`,
-    tags: ["music", "lofi"],
-    img: `https://picsum.photos/seed/lofi-${i + 1}/800/450`,
-    // LIVE every 3rd card
-    live: i % 3 === 0,
-  }));
+  const trending = [
+    { href:"/streams/lofi-1", title:"LoFi #1", img:"/images/cover1.jpg", tags:["music","lofi"], live:true },
+    { href:"/streams/lofi-2", title:"LoFi #2", img:"/images/cover2.jpg", tags:["music","lofi"] },
+  ];
 
-  const mostLiked = Array.from({ length: 8 }, (_, i) => ({
-    title: `Pixel Art #${i + 1}`,
-    tags: ["art", "pixel"],
-    img: `https://picsum.photos/seed/art-${i + 1}/800/450`,
-    // Not live; shows small green idle pulse
-    live: false,
-  }));
+  const mostLiked = [
+    { href:"/art/pixel-1", title:"Pixel Art #1", img:"/images/pixel1.jpg", tags:["art","pixel"] },
+    { href:"/art/pixel-2", title:"Pixel Art #2", img:"/images/pixel2.jpg", tags:["art","pixel"] },
+  ];
 
-  const biggestGrinders = Array.from({ length: 8 }, (_, i) => ({
-    title: `Streamer #${i + 1}`,
-    tags: [`hours:${100 + i * 5}`],
-    img: `https://picsum.photos/seed/var-${i + 1}/800/450`,
-    // LIVE occasionally
-    live: i % 4 === 0,
-  }));
+  const grinders = [
+    { href:"/streamer/one", title:"Streamer #1", img:"/images/stream1.jpg", tags:["hours:100"], live:true },
+    { href:"/streamer/two", title:"Streamer #2", img:"/images/stream2.jpg", tags:["hours:105"] },
+  ];
 
   return (
-    <main className="page">
-      <h1 className="site-title">Dubular</h1>
+    <>
+      <Head>
+        <title>Dubular</title>
+        <meta name="theme-color" content="#0b1012" />
+      </Head>
 
-      <CategoryRow title="Trending Now" items={mostWatched} />
-      <CategoryRow title="Most Liked" items={mostLiked} />
-      <CategoryRow title="Biggest Grinders" items={biggestGrinders} />
+      <main className="pb-28 pt-6">
+        <div className="safe-px">
+          <h1 className="neon-text text-3xl font-extrabold">Dubular</h1>
+        </div>
 
-      {/* Spacer so content isn't hidden behind the bottom bar */}
-      <div className="h-24" />
+        {/* Trending (row) */}
+        <MediaRow title="Trending Now" items={trending} />
+
+        {/* Most Liked (grid) */}
+        <Section title="Most Liked">
+          {mostLiked.map((it,i)=> <MediaCard key={i} {...it} />)}
+        </Section>
+
+        {/* Biggest Grinders (grid) */}
+        <Section title="Biggest Grinders">
+          {grinders.map((it,i)=> <MediaCard key={i} {...it} />)}
+        </Section>
+      </main>
 
       <BottomBar />
-    </main>
+    </>
   );
 }
