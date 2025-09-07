@@ -8,21 +8,19 @@ export default function FeaturedHero({
   autoplay = false,
   muted = true,
   loop = true,
+  live = false, // set true if you want the LIVE badge on the hero
 }) {
   const isVideo = /\.mp4($|\?)/i.test(src);
   const [imgSrc, setImgSrc] = useState(src);
   const FALLBACK = "/placeholder.svg";
 
+  // Reuse the green glow utility on hero
+  const wrapperClass = "thumbnail-default";
+
   return (
     <section
-      className="
-        relative w-full rounded-2xl overflow-hidden
-        ring-1 ring-green-500/30 bg-neutral-900/60
-        shadow-[0_0_45px_6px_rgba(0,255,0,0.45)]
-        transition-transform
-        aspect-[16/7] md:aspect-[16/6] lg:aspect-[16/5]
-        mb-4
-      "
+      className={`relative w-full rounded-2xl overflow-hidden ${wrapperClass}
+                  aspect-[16/7] md:aspect-[16/6] lg:aspect-[16/5] mb-4`}
     >
       <div className="absolute inset-0">
         {isVideo ? (
@@ -44,19 +42,20 @@ export default function FeaturedHero({
             loading="eager"
             decoding="async"
             fetchpriority="high"
-            onError={() => { if (imgSrc !== FALLBACK) setImgSrc(FALLBACK); }}
+            onError={() => {
+              if (imgSrc !== FALLBACK) setImgSrc(FALLBACK);
+            }}
           />
         )}
       </div>
 
-      {/* Neon green aura edge (like thumbnails) */}
-      <div className="pointer-events-none absolute -top-px left-0 right-0 h-[6px] bg-green-400/70 blur-[4px]" />
+      {/* Optional LIVE pill on hero */}
+      {live && <span className="live-badge">LIVE</span>}
 
+      {/* Soft overlay & title */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60" />
       <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 bg-gradient-to-t from-black/80 to-transparent">
-        <h2 className="text-white text-2xl md:text-3xl font-extrabold drop-shadow">
-          {title}
-        </h2>
+        <h2 className="text-white text-2xl md:text-3xl font-extrabold drop-shadow">{title}</h2>
       </div>
     </section>
   );
