@@ -1,0 +1,31 @@
+/* styles/theme-overrides.css */
+
+/* Neon text (stronger than .glow) */
+.neon {
+  text-shadow:
+    0 0 2px #22d3ee,
+    0 0 6px #22d3ee,
+    0 0 12px #22d3ee,
+    0 0 24px #22d3ee;
+}
+
+/* Gentle idle pulse for “LIVE”/active labels */
+@keyframes neonIdle {
+  0%, 100% {
+    text-shadow: 0 0 2px #10b981, 0 0 6px #10b981, 0 0 12px #10b981;
+  }
+  50% {
+    text-shadow: 0 0 2px #10b981, 0 0 8px #10b981, 0 0 24px #10b981;
+  }
+}
+.animate-pulse-idle {
+  animation: neonIdle 1.8s infinite;
+}
+
+/* Divider */
+.hr {
+  height: 1px;
+  background: #27272a; /* zinc-800 */
+  border: 0;
+  margin: 1.5rem 0;
+}
