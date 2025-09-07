@@ -2,51 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global dark theme */
+/* Final global theme */
+:root {
+  --bg: #0b0f13;
+  --surface: #11161c;
+  --neon: #36f2b9;
+  --neon-dim: #22c9a0;
+  --text: #e8f5ef;
+}
+
+* { -webkit-tap-highlight-color: transparent; }
+
+html, body, #__next {
+  height: 100%;
+}
+
 body {
-  @apply bg-neutral-950 text-white;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
 }
 
-/* Section titles */
-.section-title {
-  @apply text-xl font-bold text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.7)];
+/* Neon headings w/ subtle glow */
+h1, h2, h3, .heading-neon {
+  color: var(--neon);
+  text-shadow: 0 0 6px rgba(54,242,185,.35), 0 0 18px rgba(54,242,185,.15);
 }
 
-/* Card thumbnails */
-.card {
-  @apply relative bg-neutral-900 rounded-lg overflow-hidden shadow-lg 
-         hover:ring-2 hover:ring-cyan-500 transition duration-200;
+/* Card surface */
+.card-dark {
+  @apply rounded-2xl bg-[color:var(--surface)] border border-white/5 shadow-lg;
 }
 
-.card img {
-  @apply w-full h-40 object-cover; /* rectangular thumbnails */
+/* Thumbnail frame (rectangular) */
+.thumb {
+  @apply relative overflow-hidden rounded-2xl;
+  box-shadow: 0 0 28px rgba(54,242,185,.08);
+}
+.thumb img {
+  @apply object-cover w-full h-full;
 }
 
-/* Title and tags under thumbnails */
-.card-title {
-  @apply text-cyan-400 font-semibold text-base mt-2 drop-shadow-[0_0_6px_rgba(34,211,238,0.7)];
+/* Glow behind thumbnails */
+.thumb::after {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  background: radial-gradient(40% 40% at 50% 100%, rgba(54,242,185,.12), transparent 70%);
+  pointer-events: none;
 }
 
-.card-tags {
-  @apply text-sm text-neutral-400;
+/* Bottom gradient overlay for title/meta */
+.thumb .overlay {
+  @apply absolute inset-x-0 bottom-0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(7,10,12,.35) 40%, rgba(7,10,12,.85) 100%);
+  padding: 0.7rem 0.9rem 0.9rem;
 }
 
-/* LIVE badge */
-.live-badge {
-  @apply absolute bottom-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded;
-  box-shadow: 0 0 10px rgba(220, 38, 38, 0.7);
+/* LIVE badge bottom-left */
+.badge-live {
+  @apply absolute left-2 bottom-2 px-2.5 py-1 text-[11px] font-semibold rounded-md;
+  background: linear-gradient(180deg,#ff5151,#e21d1d);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(226,29,29,.35);
+  letter-spacing: .2px;
 }
 
-/* Bottom bar */
-.bottom-bar {
-  @apply fixed bottom-0 left-0 right-0 bg-neutral-900 border-t border-neutral-800 
-         flex justify-around items-center py-2;
+/* Online dot (small) */
+.dot-online {
+  @apply inline-block w-2 h-2 rounded-full bg-[color:var(--neon)];
+  box-shadow: 0 0 10px rgba(54,242,185,.9);
 }
-
-.bottom-bar a {
-  @apply flex flex-col items-center text-neutral-400 text-sm;
-}
-
-.bottom-bar a.active {
-  @apply text-cyan-400 drop-shadow-[0_0_6px_rgba(34,211,238,0.7)];
-  }

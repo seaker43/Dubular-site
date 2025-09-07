@@ -1,21 +1,12 @@
-/** @type {import('next').NextConfig} */
+/** Final next.config.js (no optimizeCss; CF friendly) */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
-
   images: {
-    // Remote domains for thumbnails
-    domains: [
-      "picsum.photos",   // your current seeded demo images
-      "images.unsplash.com", // optional, in case you use Unsplash later
-      "cdn.dubular.live" // optional, your own CDN if you add one
+    remotePatterns: [
+      { protocol: 'https', hostname: '**' },
+      { protocol: 'http',  hostname: '**' }
     ],
-    formats: ["image/avif", "image/webp"], // smaller/faster
-  },
-
-  experimental: {
-    optimizeCss: true, // tailwind builds faster
-  },
+    formats: ['image/avif','image/webp']
+  }
 };
-
 module.exports = nextConfig;

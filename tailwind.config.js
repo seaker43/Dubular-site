@@ -1,37 +1,27 @@
-/** @type {import('tailwindcss').Config} */
+/** Final Tailwind v3 config */
 module.exports = {
-  darkMode: "class", // use 'class' so globals.css can force dark mode
+  darkMode: 'class',
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,jsx,ts,tsx}",
+    "./components/**/*.{js,jsx,ts,tsx}",
+    "./app/**/*.{js,jsx,ts,tsx}",
+    "./styles/globals.css"
   ],
   theme: {
     extend: {
       colors: {
-        dubular: {
-          cyan: "#0ff",   // neon cyan
-          red: "#ff0033", // neon red
-        },
+        background: "#0b0f13",
+        surface: "#11161c",
+        neon: "#36f2b9",
+        neonDim: "#22c9a0"
       },
       boxShadow: {
-        neon: "0 0 10px #0ff, 0 0 20px #0ff",
-        "neon-red": "0 0 10px #ff0033, 0 0 20px #ff0033",
+        glow: "0 0 20px rgba(54,242,185,0.25), 0 0 40px rgba(54,242,185,0.15)"
       },
-      keyframes: {
-        neonPulse: {
-          "0%, 100%": { textShadow: "0 0 5px #0ff, 0 0 10px #0ff" },
-          "50%": { textShadow: "0 0 20px #0ff, 0 0 30px #0ff" },
-        },
-        neonIdle: {
-          "0%, 100%": { textShadow: "0 0 2px #0ff, 0 0 6px #0ff" },
-          "50%": { textShadow: "0 0 4px #0ff, 0 0 12px #0ff" },
-        },
-      },
-      animation: {
-        "pulse-neon": "neonPulse 1.5s infinite alternate",
-        "idle-neon": "neonIdle 2s infinite alternate",
-      },
-    },
+      borderRadius: {
+        xl2: "1.25rem"
+      }
+    }
   },
   plugins: [],
 };
