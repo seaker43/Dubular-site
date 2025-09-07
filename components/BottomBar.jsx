@@ -1,42 +1,34 @@
+// components/BottomBar.jsx
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { Trophy, Heart, Home, Search, User } from "lucide-react";
+import { Home, Star, Trophy, User, Search } from "lucide-react";
 
-const tabs = [
-  { href: "/ranks",  label: "Rank",   icon: Trophy },
-  { href: "/favs",   label: "Favs",   icon: Heart  },
-  { href: "/",       label: "Home",   icon: Home   },
-  { href: "/search", label: "Find",   icon: Search },
-  { href: "/account",label: "Account",icon: User   },
-];
-
-export default function BottomBar() {
-  const { pathname } = useRouter();
+const BottomBar = ({ active }) => {
+  const links = [
+    { href: "/ranks", icon: Trophy, label: "Rank" },
+    { href: "/favs", icon: Star, label: "Favs" },
+    { href: "/", icon: Home, label: "Home" },
+    { href: "/search", icon: Search, label: "Find" },
+    { href: "/account", icon: User, label: "Account" },
+  ];
 
   return (
-    <nav className="bottom-bar fixed bottom-0 left-0 right-0 z-50">
-      <ul className="mx-auto flex w-full max-w-4xl items-center justify-around">
-        {tabs.map(({ href, label, icon: Icon }) => {
-          const active = pathname === href;
-          return (
-            <li key={href}>
-              <Link
-                href={href}
-                className={`nav-item ${active ? "active" : ""}`}
-                aria-label={label}
-              >
-                <Icon
-                  className={`nav-icon ${active ? "icon-gold-glow" : ""}`}
-                  size={20}
-                />
-                <span className={`nav-label text-[11px] leading-none ${active ? "gold-glow" : "text-neutral-300"}`}>
-                  {label}
-                </span>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+    <nav className="fixed bottom-0 left-0 w-full bg-neutral-900 border-t border-neutral-800 flex justify-around items-center py-2 z-50">
+      {links.map(({ href, icon: Icon, label }) => (
+        <Link
+          key={href}
+          href={href}
+          className={`flex flex-col items-center text-xs transition-colors ${
+            active === href
+              ? "text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.9)]"
+              : "text-neutral-400 hover:text-white"
+          }`}
+        >
+          <Icon className="w-6 h-6 mb-1" />
+          {label}
+        </Link>
+      ))}
     </nav>
   );
-}
+};
+
+export default BottomBar;
