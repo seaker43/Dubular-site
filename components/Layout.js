@@ -1,5 +1,5 @@
 import Head from "next/head";
-import BottomBar from "./BottomBar";
+import BottomBar from "./BottomBar.jsx";
 
 export default function Layout({ title = "Dubular", children }) {
   return (
