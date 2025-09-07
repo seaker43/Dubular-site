@@ -2,32 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base */
-html, body { overflow-x: hidden; }
-body { @apply bg-neutral-950 text-white; }
+/* Prevent accidental horizontal scroll */
+html, body {
+  overflow-x: hidden;
+  background-color: #0a0a0a; /* dark bg for consistency */
+  color: #ffffff; /* default text white */
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
 
-/* Hide scrollbars helper */
-.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-.scrollbar-hide::-webkit-scrollbar { display: none; }
+/* Utility: hide scrollbars */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* Homepage section titles */
+.homepage h2 {
+  @apply text-white text-xl font-bold mb-2;
+}
+
+/* Featured Hero block */
+.featured-hero {
+  @apply relative w-full h-[60vh] bg-black rounded-xl overflow-hidden shadow-lg;
+}
+.featured-hero video {
+  @apply w-full h-full object-cover;
+}
+.featured-hero-overlay {
+  @apply absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent;
+}
+.featured-hero-overlay h1 {
+  @apply text-white text-3xl font-bold;
+}
 
 /* Thumbnails */
-.thumbnail-card { @apply rounded-xl bg-neutral-900/40 shadow-lg shadow-black/40; }
-.live-badge { @apply absolute top-2 left-2; }
-.thumbnail-title { @apply text-white; }
-
-/* Glow effect behind thumbnails */
-:root {
-  --thumb-glow: radial-gradient(35% 60% at 50% 100%,
-                rgba(0,255,170,0.35) 0%,
-                rgba(0,255,170,0.18) 35%,
-                rgba(0,0,0,0.0) 70%);
+.thumbnail-card {
+  @apply relative rounded-lg overflow-hidden bg-neutral-900 shadow-lg transition-transform duration-300;
+}
+.thumbnail-card img {
+  @apply w-full h-auto aspect-video object-cover;
 }
 
-.thumb-glow > .relative > div[aria-hidden] {
-  background: var(--thumb-glow);
+/* Neon green glow behind thumbnails */
+.thumbnail-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 25px rgba(0, 255, 0, 0.55);
+  z-index: -1;
 }
 
-.thumb-glow:hover > .relative > div[aria-hidden],
-.thumb-glow:focus-visible > .relative > div[aria-hidden] {
-  filter: drop-shadow(0 0 24px rgba(0,255,170,0.35));
+/* Title overlay */
+.thumbnail-title {
+  @apply absolute bottom-0 left-0 w-full px-2 py-1 text-sm text-white bg-black/60;
+}
+
+/* Live badge */
+.live-badge {
+  @apply absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded;
+}
+
+/* Bottom bar */
+nav {
+  font-size: 0.75rem;
 }
