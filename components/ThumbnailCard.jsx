@@ -5,10 +5,12 @@ import { Star } from "lucide-react";
 
 export default function ThumbnailCard({ id, title, image, live = false }) {
   const FALLBACK = "/placeholder.svg";
+
   const [fav, setFav] = useState(false);
   const [src, setSrc] = useState(image || FALLBACK);
   const [loaded, setLoaded] = useState(false);
 
+  // hydrate favorite state
   useEffect(() => {
     try {
       const list = JSON.parse(localStorage.getItem("favorites") || "[]");
@@ -23,37 +25,28 @@ export default function ThumbnailCard({ id, title, image, live = false }) {
       const updated = exists
         ? list.filter((x) => x.id !== id)
         : [...list, { id, title, image: src }];
+
       localStorage.setItem("favorites", JSON.stringify(updated));
       setFav(!exists);
+
+      // notify other tabs/pages (favorites view)
       if (typeof window !== "undefined") {
         window.dispatchEvent(
-          new StorageEvent("storage", {
-            key: "favorites",
-            newValue: JSON.stringify(updated),
-          })
+          new StorageEvent("storage", { key: "favorites", newValue: JSON.stringify(updated) })
         );
       }
     } catch {}
   };
 
-  // 🔥 Conditional glow color
-  const glowClass = live
-    ? "ring-red-500/40 shadow-[0_0_30px_5px_rgba(255,0,0,0.55)] hover:shadow-[0_0_40px_8px_rgba(255,0,0,0.7)]"
-    : "ring-green-500/30 shadow-[0_0_25px_3px_rgba(0,255,0,0.4)] hover:shadow-[0_0_35px_6px_rgba(0,255,0,0.6)]";
+  const wrapperClass = live ? "thumbnail-live" : "thumbnail-default";
 
   return (
     <div className="group">
       <div
-        className={`
-          relative overflow-hidden rounded-xl bg-neutral-900/60
-          transition-transform duration-200 hover:scale-[1.03]
-          ring-1 ${glowClass}
-        `}
+        className={`relative overflow-hidden rounded-xl transition-transform duration-200 hover:scale-[1.03] ${wrapperClass}`}
       >
         <div className="relative w-full aspect-video">
-          {!loaded && (
-            <div className="absolute inset-0 animate-pulse bg-neutral-900/60" />
-          )}
+          {!loaded && <div className="absolute inset-0 animate-pulse bg-neutral-900/60" />}
 
           <Image
             src={src || FALLBACK}
@@ -70,23 +63,20 @@ export default function ThumbnailCard({ id, title, image, live = false }) {
 
           {live && <span className="live-badge">LIVE</span>}
 
+          {/* Favorite Star */}
           <button
             onClick={toggleFavorite}
             aria-label={fav ? "Remove from favorites" : "Add to favorites"}
-            className={`absolute top-2 right-2 inline-flex items-center justify-center h-8 w-8 rounded-full ring-1 ring-white/10 transition ${
-              fav
-                ? "bg-yellow-400 text-black"
-                : "bg-neutral-900/70 text-white"
-            } active:scale-95`}
+            className={`absolute top-2 right-2 inline-flex items-center justify-center
+                        h-8 w-8 rounded-full ring-1 ring-white/10 transition
+                        ${fav ? "bg-yellow-400 text-black" : "bg-neutral-900/70 text-white"}
+                        active:scale-95`}
           >
-            <Star
-              size={18}
-              strokeWidth={2}
-              {...(fav ? { fill: "currentColor" } : {})}
-            />
+            <Star size={18} strokeWidth={2} {...(fav ? { fill: "currentColor" } : {})} />
           </button>
         </div>
       </div>
+
       <div className="card-title truncate mt-1">{title}</div>
     </div>
   );
