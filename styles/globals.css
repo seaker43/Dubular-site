@@ -2,93 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-/* -------------------------------------------------------
-   Base
-------------------------------------------------------- */
-html, body {
-  overflow-x: hidden;             /* never allow horizontal scroll */
-}
-
+/* ---------------- Base ---------------- */
+html, body { overflow-x: hidden; }
 body {
   @apply bg-neutral-950 text-white;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 }
 
-/* -------------------------------------------------------
-   Utility: hide scrollbars (keep scrolling working)
-------------------------------------------------------- */
-.scrollbar-hide {
-  -ms-overflow-style: none;       /* IE/Edge */
-  scrollbar-width: none;          /* Firefox */
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;                  /* Chrome/Safari */
-}
+/* --------- Hide horizontal scrollers (keep scroll working) --------- */
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
 
-/* -------------------------------------------------------
-   Homepage
-------------------------------------------------------- */
-.homepage h2 {
-  @apply text-white text-xl md:text-2xl font-bold mb-2;
-}
+/* ---------------- Homepage ---------------- */
+.homepage h2 { @apply text-white text-xl md:text-2xl font-bold mb-2; }
 
-/* Featured Hero block */
-.featured-hero {
-  @apply relative w-full h-[60vh] md:h-[70vh] bg-black rounded-xl overflow-hidden shadow-lg;
-}
-.featured-hero video {
-  @apply w-full h-full object-cover;
-}
-.featured-hero-overlay {
-  @apply absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent;
-}
-.featured-hero-overlay h1 {
-  @apply text-white text-3xl md:text-4xl font-extrabold;
-}
+/* Featured Hero */
+.featured-hero { @apply relative w-full h-[60vh] md:h-[70vh] bg-black rounded-xl overflow-hidden shadow-lg; }
+.featured-hero video { @apply w-full h-full object-cover; }
+.featured-hero-overlay { @apply absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent; }
+.featured-hero-overlay h1 { @apply text-white text-3xl md:text-4xl font-extrabold; }
 
-/* -------------------------------------------------------
-   Thumbnails / Cards
-------------------------------------------------------- */
-.thumbnail-card {
-  @apply relative rounded-lg overflow-hidden bg-neutral-900 shadow-lg;
-}
-.thumbnail-card img {
-  @apply w-full h-auto aspect-video object-cover will-change-transform;
-}
-.thumbnail-title {
-  @apply absolute bottom-0 left-0 w-full px-2 py-1 text-sm md:text-base text-white bg-black/60;
-}
-.live-badge {
-  @apply absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded;
-}
+/* ---------------- Thumbnails ---------------- */
+.thumbnail-card { @apply relative rounded-lg overflow-hidden bg-neutral-900 shadow-lg; }
+.thumbnail-card img { @apply w-full h-auto aspect-video object-cover will-change-transform; }
+.thumbnail-title { @apply absolute bottom-0 left-0 w-full px-2 py-1 text-sm md:text-base text-white bg-black/60; }
+.live-badge { @apply absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded; }
 
-/* Horizontal scroller (no scrollbar, snap, smooth) */
-.media-row {
-  @apply relative;
-}
-.media-row-track {
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-}
-.media-row-track > * {
-  scroll-snap-align: start;
-}
+/* Horizontal media row (snap + smooth + hidden bar) */
+.media-row { @apply relative; }
+.media-row-track { scroll-snap-type: x mandatory; scroll-behavior: smooth; }
+.media-row-track > * { scroll-snap-align: start; }
 
-/* -------------------------------------------------------
-   Bottom bar
-------------------------------------------------------- */
-.bottom-bar {
-  @apply fixed bottom-0 left-0 right-0 z-50 bg-black/70 backdrop-blur
-         border-t border-neutral-800;
-}
-.bottom-bar nav {
-  @apply mx-auto max-w-screen-md;
-}
-.bottom-bar a {
-  @apply flex flex-col items-center justify-center py-2 px-4 text-xs text-neutral-300;
-}
-.bottom-bar a[aria-current="page"] {
-  @apply text-white;
-  text-shadow: 0 0 6px rgba(255,255,255,0.35);
-}
+/* ---------------- Bottom bar ---------------- */
+.bottom-bar { @apply fixed bottom-0 left-0 right-0 z-50 bg-black/70 backdrop-blur border-t border-neutral-800; }
+.bottom-bar nav { @apply mx-auto max-w-screen-md; }
+.bottom-bar a { @apply flex flex-col items-center justify-center py-2 px-4 text-xs text-neutral-300; }
+.bottom-bar a[aria-current="page"] { @apply text-white; text-shadow: 0 0 6px rgba(255,255,255,0.35); }
