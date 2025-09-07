@@ -1,6 +1,7 @@
-module.exports = {
+/** Only run Tailwind on globals.css to avoid native Oxide in CF builds */
+module.exports = (ctx) => ({
   plugins: {
-    "@tailwindcss/postcss": {}, // Tailwind v4 official PostCSS plugin
-    autoprefixer: {},           // adds vendor prefixes for browser support
+    '@tailwindcss/postcss': ctx?.file?.basename === 'globals.css' ? {} : false,
+    autoprefixer: {},
   },
-};
+});
