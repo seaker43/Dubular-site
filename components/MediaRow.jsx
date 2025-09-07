@@ -1,43 +1,21 @@
 // components/MediaRow.jsx
+import Link from "next/link";
 import ThumbnailCard from "./ThumbnailCard";
 
-export default function MediaRow({
-  title = "Category",
-  items = [],
-  href = "#",
-}) {
-  // duplicate to simulate infinite loop
-  const looped = [...items, ...items];
-
+export default function MediaRow({ title, href, items }) {
   return (
-    <section className="mb-10">
-      <div className="mb-3 flex items-baseline justify-between">
-        <a
-          href={href}
-          className="text-2xl font-extrabold text-[#24ff60] drop-shadow-[0_0_18px_rgba(10,255,50,0.45)]"
-        >
+    <section className="mb-8">
+      <div className="flex items-center justify-between mb-3">
+        <Link href={href || "#"} className="text-2xl font-bold text-gold hover:underline">
           {title}
-        </a>
+        </Link>
       </div>
 
-      <div
-        className={[
-          "no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-1",
-          "scroll-smooth"
-        ].join(" ")}
-      >
-        {looped.map((it, i) => (
-          <div
-            key={`${it.title}-${i}`}
-            className="snap-start shrink-0 w-[78vw] sm:w-[48vw] md:w-[36vw] lg:w-[28vw] xl:w-[22vw]"
-          >
-            <ThumbnailCard
-              href={it.href}
-              title={it.title}
-              subtitle={`${it.category ?? ""}${it.category && it.tag ? " • " : ""}${it.tag ?? ""}`}
-              src={it.src}
-              badge={it.badge}
-            />
+      {/* Horizontal row with hidden scrollbar + snap */}
+      <div className="flex space-x-4 overflow-x-scroll hide-scrollbar snap-x snap-mandatory">
+        {items.map((item, idx) => (
+          <div key={idx} className="snap-start shrink-0 w-64">
+            <ThumbnailCard {...item} />
           </div>
         ))}
       </div>
