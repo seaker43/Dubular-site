@@ -1,101 +1,56 @@
+/* styles/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ===== Dubular Neon Theme (lime neon) ===== */
 :root{
-  --dub-bg:#0b1012;
-  --dub-card:#12181b;
-  --dub-neon:#39ff14;     /* neon lime green */
-  --dub-neon-2:#66ff33;   /* lighter lime accent */
-  --dub-muted:#9fb2b4;
+  /* Neon tuned to your reference image */
+  --neon:#39ff14;
+  --bg:#0c1213;               /* deep charcoal blue/green */
+  --card:#141a1c;             /* card surface */
+  --muted:rgba(255,255,255,.6);
 }
 
-html,body{
-  background:var(--dub-bg);
-  color:#e7f2f2;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+html,body{ height:100%; background:var(--bg); color:#e8f7ef; }
+
+@layer utilities{
+  .text-neon{ color:var(--neon); }
+  .text-muted{ color:var(--muted); }
+
+  .neon-heading{
+    @apply text-2xl sm:text-3xl font-extrabold tracking-tight;
+    color:var(--neon);
+    text-shadow: 0 0 18px color-mix(in oklab, var(--neon) 25%, transparent);
+  }
+
+  .shadow-neon{
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--neon) 18%, transparent),
+      0 0 40px -10px color-mix(in oklab, var(--neon) 55%, transparent);
+  }
+
+  .live-pill{
+    @apply px-3 py-1 rounded-full text-xs font-semibold;
+    color:#0a0f0a;
+    background:var(--neon);
+    box-shadow: 0 0 18px color-mix(in oklab, var(--neon) 40%, transparent);
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar{ display:none; }
+  .scrollbar-hidden{ -ms-overflow-style:none; scrollbar-width:none; }
+
+  .bg-card{ background:var(--card); }
+  .from-bg{ background-color:var(--bg); }
+
+  .text-neon-strong{
+    color:var(--neon);
+    text-shadow:
+      0 0 10px color-mix(in oklab, var(--neon) 45%, transparent),
+      0 0 24px color-mix(in oklab, var(--neon) 25%, transparent);
+  }
 }
 
-/* Headings default weight */
-h1,h2,h3,h4{ @apply font-extrabold tracking-tight; }
-
-/* === Reusable helpers === */
-.neon-text{
-  color:var(--dub-neon);
-  text-shadow:
-    0 0 8px var(--dub-neon),
-    0 0 20px var(--dub-neon-2),
-    0 0 40px var(--dub-neon-2);
-}
-
-.card{
-  background:linear-gradient(180deg,#12181b, #0e1316);
-  box-shadow:
-    0 8px 24px rgba(0,0,0,.45),
-    0 0 0 1px rgba(255,255,255,.03);
-  border-radius: 1rem;
-}
-
-.card-glow{
-  box-shadow:
-    0 8px 24px rgba(0,0,0,.45),
-    0 0 0 1px rgba(255,255,255,.03),
-    0 0 32px var(--dub-neon-2),
-    0 0 64px var(--dub-neon);
-}
-
-/* Thumbnail shell with bottom overlay */
-.thumb{
-  position:relative;
-  overflow:hidden;
-  border-radius:1.25rem;
-  background:#0f1417;
-}
-.thumb::after{
-  content:"";
-  position:absolute; inset:0;
-  box-shadow: inset 0 -120px 120px rgba(0,0,0,.55);
-  pointer-events:none;
-}
-.thumb-overlay{
-  position:absolute; left:0; right:0; bottom:0;
-  display:flex; flex-direction:column; gap:.375rem;
-  padding:.9rem .95rem 1rem;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(6,9,10,.55) 60%, rgba(6,9,10,.9) 100%);
-}
-
-/* LIVE chip bottom-left */
-.live-chip{
-  display:inline-block;
-  font-weight:700;
-  font-size:.8rem;
-  padding:.18rem .5rem .22rem;
-  border-radius:.5rem;
-  color:#fff;
-  background:linear-gradient(180deg,#ff4747,#e01414);
-  box-shadow:0 4px 16px rgba(255,71,71,.45);
-}
-
-/* Section styles */
-.section-title{
-  @apply neon-text text-[22px] md:text-2xl font-extrabold tracking-tight;
-}
-.meta{ color:var(--dub-muted); }
-
-/* Safe area paddings */
-.safe-px{
-  padding-left: max(16px, env(safe-area-inset-left));
-  padding-right:max(16px, env(safe-area-inset-right));
-}
-.safe-pb{ padding-bottom:max(16px, env(safe-area-inset-bottom)); }
-
-/* Reduce tap highlight + nicer focus ring */
-* { -webkit-tap-highlight-color: transparent; }
-:focus-visible{
-  outline: 2px solid var(--dub-neon);
-  outline-offset: 2px;
-  border-radius:.75rem;
-  box-shadow: 0 0 12px var(--dub-neon), 0 0 24px var(--dub-neon-2);
+/* Bottom nav centering helpers (already in place, included for completeness) */
+.navbar-icon{
+  @apply flex flex-col items-center justify-center gap-1;
 }
