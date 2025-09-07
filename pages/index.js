@@ -11,10 +11,15 @@ export default function Home() {
       </Head>
 
       <main className="homepage px-4 pb-24">
-        {/* Featured autoplay hero */}
-        <FeaturedHero />
+        {/* Header spacing is handled inside FeaturedHero via mt-? on the info block */}
+        <FeaturedHero
+          src="/thumbnails/trending/trending1.jpg"
+          title="Featured Content"
+          autoplay
+          muted
+          loop
+        />
 
-        {/* Rows */}
         <MediaRow
           title="Trending Now"
           href="/trending"
@@ -34,15 +39,6 @@ export default function Home() {
             { title: "Pixel Art #1", category: "art", image: "/thumbnails/art/art1.jpg" },
             { title: "Pixel Art #2", category: "art", image: "/thumbnails/art/art2.jpg" },
             { title: "Pixel Art #3", category: "art", image: "/thumbnails/art/art3.jpg" },
-          ]}
-        />
-
-        <MediaRow
-          title="Recommended"
-          href="/recommended"
-          items={[
-            { title: "LoFi #2", category: "music", image: "/thumbnails/trending/trending2.jpg" },
-            { title: "Pixel Art #1", category: "art", image: "/thumbnails/art/art1.jpg" },
           ]}
         />
       </main>
