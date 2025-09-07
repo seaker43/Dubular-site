@@ -1,11 +1,6 @@
-import "../styles/globals.css";
-import BottomBar from "../components/BottomBar";
+// pages/_app.js
+import "@/styles/globals.css";
 
-export default function App({ Component, pageProps }) {
-  return (
-    <>
-      <Component {...pageProps} />
-      <BottomBar />
-    </>
-  );
+export default function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />;
 }
