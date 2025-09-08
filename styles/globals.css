@@ -13,7 +13,7 @@ header{
 }
 
 /* Push content below header */
-main{ @apply pt-20 px-1; }   /* ← reduced side padding to 1 */
+main{ @apply pt-0.5 px-1; }   /* ← reduced top padding, slim side padding */
 
 /* ===== Bottom Bar ===== */
 .navbar{
@@ -124,7 +124,7 @@ main{ @apply pt-20 px-1; }   /* ← reduced side padding to 1 */
 }
 
 /* ===== Favorites ===== */
-.favs-strip{ @apply px-1 mt-4; } /* reduced side padding */
+.favs-strip{ @apply px-1 mt-4; }
 .favs-row{
   @apply flex gap-3 overflow-x-auto py-2;
   scroll-snap-type: x proximity;
