@@ -1,69 +1,140 @@
-// components/FeaturedHero.jsx
-import { useState } from "react";
+// components/FeaturedHeroTabs.jsx
+import { useEffect, useMemo, useRef, useState } from "react";
 
-export default function FeaturedHero({
-  title = "Featured Content",
-  src = "https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-  poster = "https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-  autoplay = false,
-  muted = true,
-  loop = true,
-  live = false,
-  fullHeight = false, // 👈 new prop
+const DEFAULT_TABS = [
+  { key: "gaming",  title: "Gaming",  src: "/thumbnails/trending1.jpg", isVideo: false },
+  { key: "irl",     title: "IRL",     src: "/thumbnails/trending2.jpg", isVideo: false },
+  { key: "music",   title: "Music",   src: "/thumbnails/trending1.jpg", isVideo: false },
+  { key: "podcast", title: "Podcast", src: "/thumbnails/trending2.jpg", isVideo: false },
+];
+
+export default function FeaturedHeroTabs({
+  tabs = DEFAULT_TABS,
+  intervalMs = 5000,     // autoplay speed
+  startKey = "gaming",
+  pauseOnHover = true,
 }) {
-  const isVideo = /\.mp4($|\?)/i.test(src);
-  const [imgSrc, setImgSrc] = useState(src);
-  const FALLBACK = "/placeholder.svg";
+  const keys = useMemo(() => tabs.map(t => t.key), [tabs]);
+  const [active, setActive] = useState(keys.includes(startKey) ? startKey : keys[0]);
+  const timerRef = useRef(null);
+  const wrapRef = useRef(null);
 
-  // Decide size: half-screen vs aspect ratio
-  const sizeClass = fullHeight
-    ? "h-[calc(50vh-56px)] rounded-b-2xl"
-    : "aspect-[16/7] md:aspect-[16/6] lg:aspect-[16/5] rounded-2xl";
+  const activeIndex = keys.indexOf(active);
+
+  // autoplay rotate
+  useEffect(() => {
+    clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      const i = (keys.indexOf(active) + 1) % keys.length;
+      setActive(keys[i]);
+    }, intervalMs);
+    return () => clearInterval(timerRef.current);
+  }, [active, intervalMs, keys]);
+
+  // pause on hover (optional)
+  useEffect(() => {
+    if (!pauseOnHover || !wrapRef.current) return;
+    const el = wrapRef.current;
+    const stop = () => clearInterval(timerRef.current);
+    const start = () => {
+      clearInterval(timerRef.current);
+      timerRef.current = setInterval(() => {
+        const i = (keys.indexOf(active) + 1) % keys.length;
+        setActive(keys[i]);
+      }, intervalMs);
+    };
+    el.addEventListener("mouseenter", stop);
+    el.addEventListener("mouseleave", start);
+    return () => {
+      el.removeEventListener("mouseenter", stop);
+      el.removeEventListener("mouseleave", start);
+    };
+  }, [pauseOnHover, active, intervalMs, keys]);
+
+  const current = tabs[activeIndex];
 
   return (
     <section
-      className={`
-        relative w-full overflow-hidden
-        thumbnail-default
-        ${sizeClass}
-        mb-4
-      `}
+      ref={wrapRef}
+      className="
+        featured-hero featured-glow
+        w-screen
+        h-[60vh] md:h-[65vh]        /* ~10% taller than 50vh */
+        relative mb-4 overflow-hidden rounded-2xl
+        ring-1 ring-white/10
+      "
+      aria-label="Featured Content"
     >
+      {/* media layer (no top crop; we let header padding handle spacing) */}
       <div className="absolute inset-0">
-        {isVideo ? (
+        {current?.isVideo ? (
           <video
             className="w-full h-full object-cover"
-            src={src}
-            poster={poster || FALLBACK}
-            autoPlay={autoplay}
-            muted={muted}
-            loop={loop}
+            src={current.src}
+            autoPlay
+            muted
+            loop
             playsInline
             preload="metadata"
           />
         ) : (
           <img
-            className="w-full h-full object-cover"
-            src={imgSrc}
-            alt={title}
+            key={current?.key}
+            src={current?.src}
+            alt={current?.title}
+            className="
+              w-full h-full object-cover
+              will-change-transform opacity-0
+              animate-[fadeIn_400ms_ease-out_forwards]
+            "
             loading="eager"
             decoding="async"
-            fetchpriority="high"
-            onError={() => {
-              if (imgSrc !== FALLBACK) setImgSrc(FALLBACK);
-            }}
           />
         )}
       </div>
 
-      {live && <span className="live-badge">LIVE</span>}
+      {/* readable gradient */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/70" />
 
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/80" />
+      {/* title */}
       <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-        <h2 className="text-white text-2xl md:text-3xl font-extrabold drop-shadow">
-          {title}
+        <h2 className="text-white text-3xl md:text-4xl font-extrabold drop-shadow">
+          {current?.title}
         </h2>
       </div>
+
+      {/* tabs */}
+      <div
+        role="tablist"
+        aria-label="Featured categories"
+        className="absolute left-0 right-0 bottom-3 flex items-center justify-center gap-2"
+      >
+        {tabs.map((t) => {
+          const isActive = t.key === active;
+          return (
+            <button
+              key={t.key}
+              role="tab"
+              aria-selected={isActive}
+              aria-controls={`panel-${t.key}`}
+              onClick={() => setActive(t.key)}
+              className={`
+                px-3 py-1.5 rounded-full text-sm font-semibold transition-all
+                ${isActive
+                  ? "bg-white text-black"
+                  : "bg-white/20 text-white backdrop-blur hover:bg-white/30"}
+              `}
+            >
+              {t.title}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* keyframe */}
+      <style jsx>{`
+        @keyframes fadeIn { to { opacity: 1; } }
+      `}</style>
     </section>
   );
-}
+                                       }
