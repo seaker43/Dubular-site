@@ -5,33 +5,45 @@ import ThumbnailCard from "./ThumbnailCard";
 export default function MediaLoopRow({ title = "", items = [] }) {
   const trackRef = useRef(null);
 
-  // Duplicate list for seamless loop
-  const doubled = useMemo(() => [...items, ...items], [items]);
+  // Triple buffer for seamless looping (A | B | C all identical)
+  const tripled = useMemo(() => {
+    if (!items?.length) return [];
+    return [...items, ...items, ...items];
+  }, [items]);
 
-  // On mount: center scroll at start of 2nd half for bi-directional room
+  // Position at start of the middle buffer on mount
   useEffect(() => {
     const el = trackRef.current;
-    if (!el) return;
-    // Wait a tick so widths are measured
+    if (!el || tripled.length === 0) return;
+
+    // wait a tick so widths are measured
     const id = requestAnimationFrame(() => {
-      const half = el.scrollWidth / 2;
-      el.scrollLeft = half - el.clientWidth / 2;
+      const block = el.scrollWidth / 3; // width of one buffer
+      // snap instantly without smooth to avoid visible jump
+      const prev = el.style.scrollBehavior;
+      el.style.scrollBehavior = "auto";
+      el.scrollLeft = block; // middle buffer start
+      el.style.scrollBehavior = prev || "";
     });
     return () => cancelAnimationFrame(id);
-  }, [doubled.length]);
+  }, [tripled.length]);
 
-  // Loop effect: if you cross either half, jump back into center window
   const onScroll = () => {
     const el = trackRef.current;
     if (!el) return;
-    const half = el.scrollWidth / 2;
+    const block = el.scrollWidth / 3;
 
-    if (el.scrollLeft < half * 0.25) {
-      // too far left → nudge right by half
-      el.scrollLeft += half;
-    } else if (el.scrollLeft > half * 1.75) {
-      // too far right → nudge left by half
-      el.scrollLeft -= half;
+    // invisible wrap: when drifting near ends of middle buffer,
+    // jump by exactly one block with behavior 'auto' so user doesn't see it.
+    const prev = el.style.scrollBehavior;
+    if (el.scrollLeft <= block * 0.25) {
+      el.style.scrollBehavior = "auto";
+      el.scrollLeft += block;
+      el.style.scrollBehavior = prev || "";
+    } else if (el.scrollLeft >= block * 1.75) {
+      el.style.scrollBehavior = "auto";
+      el.scrollLeft -= block;
+      el.style.scrollBehavior = prev || "";
     }
   };
 
@@ -47,25 +59,20 @@ export default function MediaLoopRow({ title = "", items = [] }) {
         ref={trackRef}
         onScroll={onScroll}
         className="
-          relative
-          flex gap-4
-          overflow-x-auto
+          relative flex gap-4 overflow-x-auto
           snap-x snap-mandatory
           scroll-px-4 px-4 md:px-6
-          [scrollbar-width:none]
+          no-scrollbar
         "
+        // Keep smooth only for user-initiated scrolling; we override to 'auto' during invisible wraps
         style={{ scrollBehavior: "smooth" }}
       >
-        {/* Hide scrollbar (WebKit) */}
-        <style jsx>{`
-          div::-webkit-scrollbar {
-            display: none;
-          }
-        `}</style>
+        {/* WebKit scrollbar hide (fallback to class for Firefox) */}
+        <style jsx>{`div::-webkit-scrollbar { display: none; }`}</style>
 
-        {doubled.map((it, i) => (
+        {tripled.map((it, i) => (
           <ThumbnailCard
-            key={`${title}-${i}-${it.id ?? it.title}`}
+            key={`${title}-${i}-${it.id ?? it.title ?? "item"}`}
             title={it.title}
             image={it.image}
             color={it.color} // "pink" | "blue" | "red"
