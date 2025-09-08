@@ -1,21 +1,18 @@
 import Head from "next/head";
-import BottomBar from "./BottomBar";
 import Header from "./Header";
+import BottomBar from "./BottomBar";
 
-export default function Layout({ children, title }) {
+export default function Layout({ children, title = "dubUlar" }) {
   return (
     <>
       <Head>
-        <title>{title || "dubUlar"}</title>
-        <meta name="theme-color" content="#000000" />
+        <title>{title}</title>
+        <meta name="theme-color" content="#09141a" />
       </Head>
-
-      <Header />   {/* ✅ Only this one reference */}
-
-      <main className="min-h-screen bg-black pt-14 pb-20">
+      <Header />
+      <main className="min-h-screen bg-black pt-16 pb-20">
         {children}
       </main>
-
       <BottomBar />
     </>
   );
