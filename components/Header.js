@@ -11,7 +11,7 @@ export default function Header() {
         src="/Dubular2.png"
         alt="dubUlar logo"
         width={360}   // adjust if your source logo file has different resolution
-        height={80}
+        height={72}
         className="block"
         style={{
           width: "95%",   // 5% less wide
