@@ -2,82 +2,94 @@
 import { useEffect, useMemo, useRef } from "react";
 import ThumbnailCard from "./ThumbnailCard";
 
-export default function MediaLoopRow({ title = "", items = [] }) {
-  const trackRef = useRef(null);
+/**
+ * Seamless, jitter-free infinite row:
+ *  - Triple-buffer items
+ *  - Start centered on buffer B
+ *  - When near edges of B, jump by exactly one buffer (no animation)
+ *  - Scroll-snap to keep cards aligned
+ *  - GPU transforms + containment remove jitter on hover/scroll
+ */
+export default function MediaLoopRow({
+  title = "",
+  items = [],
+  square = false, // set true for favorites row
+}) {
+  const railRef = useRef(null);
+  const guardRef = useRef(false);
 
-  // Triple buffer for seamless looping (A | B | C all identical)
   const tripled = useMemo(() => {
     if (!items?.length) return [];
     return [...items, ...items, ...items];
   }, [items]);
 
-  // Position at start of the middle buffer on mount
+  // position to the middle buffer on mount
   useEffect(() => {
-    const el = trackRef.current;
+    const el = railRef.current;
     if (!el || tripled.length === 0) return;
 
-    // wait a tick so widths are measured
     const id = requestAnimationFrame(() => {
-      const block = el.scrollWidth / 3; // width of one buffer
-      // snap instantly without smooth to avoid visible jump
+      const block = el.scrollWidth / 3;
       const prev = el.style.scrollBehavior;
       el.style.scrollBehavior = "auto";
-      el.scrollLeft = block; // middle buffer start
+      el.scrollLeft = block;
       el.style.scrollBehavior = prev || "";
     });
     return () => cancelAnimationFrame(id);
   }, [tripled.length]);
 
-  const onScroll = () => {
-    const el = trackRef.current;
-    if (!el) return;
-    const block = el.scrollWidth / 3;
+  const handleScroll = () => {
+    const el = railRef.current;
+    if (!el || guardRef.current) return;
 
-    // invisible wrap: when drifting near ends of middle buffer,
-    // jump by exactly one block with behavior 'auto' so user doesn't see it.
-    const prev = el.style.scrollBehavior;
-    if (el.scrollLeft <= block * 0.25) {
+    const block = el.scrollWidth / 3;
+    const left = el.scrollLeft;
+
+    // only wrap when safely past card widths to avoid visible jumps
+    const low = block * 0.2;
+    const high = block * 1.8;
+
+    if (left < low || left > high) {
+      guardRef.current = true;
+      const prev = el.style.scrollBehavior;
       el.style.scrollBehavior = "auto";
-      el.scrollLeft += block;
+      el.scrollLeft = left < low ? left + block : left - block;
       el.style.scrollBehavior = prev || "";
-    } else if (el.scrollLeft >= block * 1.75) {
-      el.style.scrollBehavior = "auto";
-      el.scrollLeft -= block;
-      el.style.scrollBehavior = prev || "";
+      // release on next frame
+      requestAnimationFrame(() => (guardRef.current = false));
     }
   };
 
   return (
     <section className="mt-6">
-      {title ? (
-        <div className="mb-3 flex items-baseline justify-between">
+      {title && (
+        <div className="mb-3 flex items-baseline justify-between px-4 md:px-6">
           <h2 className="text-2xl font-bold">{title}</h2>
         </div>
-      ) : null}
+      )}
 
       <div
-        ref={trackRef}
-        onScroll={onScroll}
-        className="
-          relative flex gap-4 overflow-x-auto
-          snap-x snap-mandatory
-          scroll-px-4 px-4 md:px-6
-          no-scrollbar
-        "
-        // Keep smooth only for user-initiated scrolling; we override to 'auto' during invisible wraps
+        ref={railRef}
+        onScroll={handleScroll}
+        className="scroll-rail no-scrollbar relative flex gap-4 overflow-x-auto snap-x snap-mandatory px-4 md:px-6"
         style={{ scrollBehavior: "smooth" }}
       >
-        {/* WebKit scrollbar hide (fallback to class for Firefox) */}
-        <style jsx>{`div::-webkit-scrollbar { display: none; }`}</style>
-
+        {/* spacing sentinels so edges feel separated */}
+        <div className="shrink-0 w-2" aria-hidden="true" />
         {tripled.map((it, i) => (
-          <ThumbnailCard
-            key={`${title}-${i}-${it.id ?? it.title ?? "item"}`}
-            title={it.title}
-            image={it.image}
-            color={it.color} // "pink" | "blue" | "red"
-          />
+          <div key={`${title}-${i}-${it.id ?? it.title ?? "item"}`} className="snap-start">
+            <ThumbnailCard
+              title={it.title}
+              image={it.image}
+              href={it.href}
+              live={it.live}
+              color={it.color}
+              square={square}
+              creator={it.creator}
+            />
+          </div>
         ))}
+        <div className="shrink-0 w-2" aria-hidden="true" />
       </div>
     </section>
   );
