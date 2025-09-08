@@ -2,210 +2,174 @@
 @tailwind components;
 @tailwind utilities;
 
-/* =============================
-   Base / Reset
-   ============================= */
-html, body {
-  @apply bg-black text-white antialiased min-h-screen;
+/* ===== Base ===== */
+html, body { @apply bg-black text-white antialiased min-h-screen; }
+a { @apply text-cyan-400 hover:underline; }
+
+/* ===== Header (no border line) ===== */
+header{
+  @apply fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur h-20 flex items-center justify-center border-transparent;
 }
 
-/* Prevent accidental global margins/padding from components */
-* { -webkit-tap-highlight-color: transparent; }
+/* Push content below header */
+main{ @apply pt-20; }
 
-/* =============================
-   Header (no border line)
-   ============================= */
-header {
-  @apply fixed top-0 left-0 right-0 z-50
-         bg-black/95 backdrop-blur
-         h-20 flex items-center justify-center;
-  border-bottom: none !important;   /* hide border line */
+/* ===== Bottom Bar ===== */
+.navbar{
+  @apply fixed bottom-0 left-0 right-0 z-50 bg-neutral-950/95 backdrop-blur border-t border-neutral-800 py-2 flex justify-around;
 }
-
-/* Pages must not add extra space themselves. We’ll offset once. */
-main {
-  padding-top: 5rem;                 /* equals header height (h-20) + a smidge */
+.navbar-item{ @apply flex flex-col items-center text-xs text-neutral-400 transition-colors; }
+.navbar-item.active{ @apply text-white; }
+.navbar-item.active .nav-icon{
+  filter: drop-shadow(0 0 6px rgba(168, 85, 247, .85))
+          drop-shadow(0 0 14px rgba(56, 189, 248, .55));
 }
 
-/* =============================
-   Bottom Bar + Active Glow
-   ============================= */
-.navbar {
-  @apply fixed bottom-0 left-0 right-0 z-50
-         bg-neutral-950/95 backdrop-blur
-         border-t border-neutral-800/20
-         py-2;
-}
-.navbar-inner {
-  @apply mx-auto max-w-screen-xl flex items-center justify-around px-4;
-}
-.navbar-item {
-  @apply flex flex-col items-center text-xs text-neutral-400 transition-colors;
-}
-.navbar-item.active {
-  @apply text-white;
-}
-.navbar-item.active .icon-wrap {
-  /* Soft neon ring behind the active tab icon */
-  box-shadow:
-    0 0 8px rgba(59,130,246,.75),
-    0 0 16px rgba(236,72,153,.6);
-  border-radius: 9999px;
+/* ===== Section Titles ===== */
+.section-header h2 { @apply text-2xl font-bold mb-3; }
+
+/* ===== Full-bleed helper (hero edge-to-edge) ===== */
+.full-bleed{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 
-/* =============================
-   Utilities
-   ============================= */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-/* Reduce flicker/tearing on fast swipe */
-.gpu {
-  backface-visibility: hidden;
+/* ===== Featured Hero ===== */
+.featured-hero{
+  @apply relative overflow-hidden rounded-2xl ring-1 ring-white/10;
+  min-height: clamp(220px, 44vh, 520px);
   transform: translateZ(0);
-  will-change: transform;
-  contain: paint layout style;
+}
+.featured-glow-pink{
+  box-shadow:
+    0 0 10px rgba(236, 72, 153, 0.55),
+    0 0 24px rgba(236, 72, 153, 0.45),
+    0 0 44px rgba(236, 72, 153, 0.35);
+}
+.featured-glow-blue{
+  box-shadow:
+    0 0 10px rgba(56, 189, 248, 0.55),
+    0 0 24px rgba(56, 189, 248, 0.45),
+    0 0 44px rgba(56, 189, 248, 0.35);
 }
 
-/* =============================
-   Rows (horizontal loops)
-   ============================= */
-.thumb-row {
-  @apply overflow-x-auto no-scrollbar;
+/* ===== Horizontal Thumbnail Row ===== */
+.thumb-row{
+  @apply relative flex gap-4 overflow-x-auto py-2;
+  padding-bottom: 10px;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-.thumb-track {
-  @apply flex gap-4 px-4;            /* outer page padding */
-  width: max-content;
-}
+.thumb-row::-webkit-scrollbar{ display: none; }
 
-/* =============================
-   Thumbnail Card
-   ============================= */
-.thumbnail {
-  @apply relative rounded-2xl overflow-hidden select-none
-         bg-neutral-900/60 ring-1 ring-white/10
-         transition-transform duration-150 ease-out;
+.thumb-card{
+  @apply relative flex-shrink-0 rounded-2xl bg-neutral-900/50 ring-1 ring-white/5;
+  width: clamp(240px, 76vw, 320px);
+  height: clamp(140px, 40vw, 190px);
   scroll-snap-align: center;
-  width: 72vw;                        /* mobile-friendly width */
-  max-width: 420px;
-  aspect-ratio: 16/9;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 160ms ease, box-shadow 160ms ease;
 }
-.thumbnail.square {                   /* for square avatar-style cards */
-  aspect-ratio: 1 / 1;
-  width: 48vw;
-  max-width: 280px;
+.thumb-card:active { transform: scale(0.98); }
+@media (hover:hover){
+  .thumb-card:hover { transform: translateY(-2px) scale(1.01); }
 }
-.thumbnail:hover { transform: scale(1.02); }
-.thumbnail:active { transform: scale(0.98); }
-
-.thumbnail img, .thumbnail video {
-  @apply w-full h-full object-cover;
-}
-
-/* Glow themes */
-.thumbnail.glow-pink {
+.thumb-img{ @apply w-full h-full object-cover rounded-2xl block; }
+.thumb-title{ @apply absolute left-3 bottom-2 text-white/90 text-base font-semibold drop-shadow; }
+.live-badge{
+  @apply absolute top-2 left-2 text-xs font-bold px-2 py-1 rounded-md;
+  background: rgba(239, 68, 68, 0.95);
+  color: black;
   box-shadow:
-    0 0 8px rgba(236,72,153,.85),
-    0 0 20px rgba(236,72,153,.55),
-    0 0 36px rgba(236,72,153,.35);
+    0 0 8px rgba(239, 68, 68, 0.85),
+    0 0 18px rgba(239, 68, 68, 0.55);
 }
-.thumbnail.glow-blue {
+
+/* ===== Neon glows ===== */
+.glow-cyan{
   box-shadow:
-    0 0 8px rgba(56,189,248,.85),
-    0 0 20px rgba(56,189,248,.55),
-    0 0 36px rgba(56,189,248,.35);
+    0 0 10px rgba(34, 211, 238, 0.35),
+    0 0 22px rgba(34, 211, 238, 0.25),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
 }
-.thumbnail.glow-red {
+.glow-red{
   box-shadow:
-    0 0 10px rgba(239,68,68,.9),
-    0 0 22px rgba(239,68,68,.65),
-    0 0 38px rgba(239,68,68,.45);
+    0 0 10px rgba(239, 68, 68, 0.55),
+    0 0 22px rgba(239, 68, 68, 0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
 }
-
-/* Title badge inside cards (kept minimal) */
-.thumb-title {
-  @apply absolute left-3 bottom-3 text-lg font-bold drop-shadow
-         px-3 py-1 rounded-full bg-black/50 backdrop-blur;
-}
-
-/* Favorite star / pill button */
-.favorite-btn {
-  @apply absolute top-2 right-2 rounded-full
-         bg-black/55 backdrop-blur p-2 ring-1 ring-white/10;
-}
-
-/* =============================
-   Featured Hero (single card with tabs)
-   ============================= */
-.featured-wrap {
-  /* lock near header, full width minus page padding */
-  margin: 0 16px;                     /* equals px-4 on pages */
-}
-.featured-hero {
-  @apply relative rounded-3xl overflow-hidden ring-1 ring-white/10 gpu;
-  width: 100%;
-  /* a bit taller than thumbnails but not overwhelming */
-  min-height: 48vh;                   /* ~half screen */
-  max-height: 56vh;
-}
-.featured-hero img, .featured-hero video {
-  @apply w-full h-full object-cover;
-}
-.featured-tabs {
-  @apply absolute left-4 bottom-4 flex gap-3 flex-wrap;
-}
-.pill-tab {
-  @apply px-4 py-2 rounded-full text-sm font-semibold
-         bg-black/55 text-white backdrop-blur
-         ring-1 ring-white/10 transition;
-}
-.pill-tab.active {
-  @apply ring-2;
+.glow-dual{
   box-shadow:
-    0 0 8px rgba(236,72,153,.75),
-    0 0 16px rgba(56,189,248,.65);
+    0 0 14px rgba(236,72,153,.45),
+    0 0 28px rgba(56,189,248,.35),
+    inset 0 0 0 1px rgba(255,255,255,.06);
 }
 
-/* Alternate hero glow – toggle classes from JS */
-.featured-hero.glow-pink { box-shadow:
-  0 0 14px rgba(236,72,153,.85),
-  0 0 30px rgba(236,72,153,.55),
-  0 0 52px rgba(236,72,153,.35);
+/* ===== NEW: Vertical Top 5 grid (3 portrait cards) ===== */
+.vthumb-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
 }
-.featured-hero.glow-blue { box-shadow:
-  0 0 14px rgba(56,189,248,.85),
-  0 0 30px rgba(56,189,248,.55),
-  0 0 52px rgba(56,189,248,.35);
+@media (max-width: 1024px){
+  .vthumb-grid{ grid-template-columns: repeat(3, 1fr); }
 }
-
-/* =============================
-   Sections / Headings / Spacing
-   ============================= */
-.section {
-  @apply mt-6;
-  padding-inline: 16px;               /* match page px-4 */
+@media (max-width: 768px){
+  .vthumb-grid{ grid-template-columns: repeat(3, 1fr); }
 }
-.section-title {
-  @apply text-2xl font-extrabold mb-3;
+@media (max-width: 640px){
+  .vthumb-grid{ grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
 }
 
-/* Ensure pages can scroll to the bottom even with fixed bottom bar */
-.page-pad-bottom {
-  padding-bottom: 88px;               /* ~height of bottom bar + breathing room */
+.vthumb-card{
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: rgba(23,23,23,0.6);
+  ring: 1px solid rgba(255,255,255,0.06);
+  aspect-ratio: 9 / 16;  /* portrait */
+  transform: translateZ(0);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.vthumb-card:active{ transform: scale(0.985); }
+@media (hover:hover){
+  .vthumb-card:hover{ transform: translateY(-2px) scale(1.01); }
 }
 
-/* =============================
-   Favorite strip specific
-   ============================= */
-.fav-strip {
-  @apply overflow-x-auto no-scrollbar;
-  scroll-snap-type: x mandatory;
+.vthumb-img{
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
 }
-.fav-track {
-  @apply flex gap-4 pl-4 pr-4;
+
+.vthumb-gradient{
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0) 50%);
 }
-.fav-card {
-  @apply thumbnail square glow-blue;
+
+.vthumb-title{
+  position: absolute; left: 0.75rem; right: 0.75rem; bottom: 0.75rem;
+  font-weight: 800; font-size: 1.1rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,.7);
 }
+
+/* ===== Favorites (unchanged here) ===== */
+.favs-strip{ @apply px-4 mt-4; }
+.favs-row{
+  @apply flex gap-3 overflow-x-auto py-2;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
+}
+.fav-card{
+  @apply relative flex-shrink-0 rounded-xl bg-neutral-900/50 ring-1 ring-white/5;
+  width: 110px; height: 110px;
+  scroll-snap-align: start;
+  transform: translateZ(0);
+}
+.fav-card img{ @apply w-full h-full object-cover rounded-xl; }
