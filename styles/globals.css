@@ -7,154 +7,165 @@ html, body {
   @apply bg-black text-white antialiased min-h-screen;
 }
 
-/* Links */
-a { @apply text-cyan-400 hover:underline; }
-
-/* ===== Header =====
-   (no border line per request) */
-header {
-  @apply fixed top-0 left-0 right-0 z-50
-         bg-black/95 backdrop-blur
-         h-20 flex items-center justify-center;
+/* ===== Header (no border line) ===== */
+header{
+  @apply fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur h-20 flex items-center justify-center border-transparent;
 }
 
-/* Ensure page content can sit flush to header; Layout controls spacing. */
-main { margin-top: 0 !important; }
+/* Push content below header */
+main{ @apply pt-20; }
 
 /* ===== Bottom Bar ===== */
-.navbar {
-  @apply fixed bottom-0 w-full flex justify-around
-         bg-neutral-950/95 py-2 backdrop-blur z-50;
+.navbar{
+  @apply fixed bottom-0 left-0 right-0 z-50 bg-neutral-950/95 backdrop-blur border-t border-neutral-800 py-2 flex justify-around;
+}
+.navbar-item{ @apply flex flex-col items-center text-xs text-neutral-400 transition-colors; }
+.navbar-item.active{ @apply text-white; }
+.navbar-item.active .nav-icon{
+  /* subtle glow for active tab */
+  filter: drop-shadow(0 0 6px rgba(168, 85, 247, .85))
+          drop-shadow(0 0 14px rgba(56, 189, 248, .55));
 }
 
-.navbar-item {
-  @apply relative flex flex-col items-center text-xs text-neutral-400 transition;
+/* ===== Section Titles ===== */
+.section-title{ @apply px-4 pb-2 text-3xl font-extrabold; }
+
+/* ===== Carousel / Rows (hide scrollbar) ===== */
+.thumb-row{
+  @apply relative flex gap-4 px-4 overflow-x-auto snap-x snap-mandatory;
+  overscroll-behavior-inline: contain;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;     /* IE/Edge */
+  scrollbar-width: none;        /* Firefox */
 }
+.thumb-row::-webkit-scrollbar{ display: none; }  /* Chrome/Safari */
 
-/* active tab glow */
-.navbar-item.active {
-  @apply text-white;
-  box-shadow:
-    0 0 6px rgba(168, 85, 247, 0.35),
-    0 0 14px rgba(56, 189, 248, 0.35);
-  border-radius: 12px;
-}
-
-/* ===== Sections ===== */
-.section-header h2 { @apply text-2xl font-bold mb-3; }
-
-/* ===== Full-bleed helper (fixes left/right gaps under header) ===== */
-.full-bleed{
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-}
-
-/* Keep featured tight to header (no artificial top gap) */
-.hero-tight{ margin-top: 0 !important; }
-
-/* ===== Featured Hero ===== */
-.featured-hero{
-  @apply relative overflow-hidden rounded-2xl;
-  /* comfortable but shorter hero */
-  min-height: clamp(220px, 44vh, 520px);
-  /* smooth animation layer to help GPUs keep this sharp */
+/* ===== Thumbnail Card (anti-flicker + polish) ===== */
+.thumbnail{
+  @apply relative shrink-0 snap-start rounded-2xl ring-1 ring-white/5 overflow-hidden bg-neutral-900/60;
+  width: clamp(240px, 78vw, 320px);
+  height: clamp(140px, 42vw, 190px);
+  transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+  will-change: transform, box-shadow, opacity;
+  backface-visibility: hidden;
+  contain: paint;
   transform: translateZ(0);
 }
+.thumbnail:hover{ transform: translateY(-2px) scale(1.02); }
 
-/* alternating neon glows (pink / blue) */
-.featured-glow-pink{
-  box-shadow:
-    0 0 10px rgba(236, 72, 153, 0.55),
-    0 0 24px rgba(236, 72, 153, 0.45),
-    0 0 44px rgba(236, 72, 153, 0.35);
-}
-.featured-glow-blue{
-  box-shadow:
-    0 0 10px rgba(56, 189, 248, 0.55),
-    0 0 24px rgba(56, 189, 248, 0.45),
-    0 0 44px rgba(56, 189, 248, 0.35);
-}
-
-/* ===== Thumbnail Row (horizontal, snap, low-jitter) ===== */
-.thumb-row{
-  @apply flex gap-4 overflow-x-auto py-2;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
-  padding-bottom: 10px; /* visual breathing room above bottom bar */
-}
-
-/* each card */
-.thumb-card{
-  @apply relative flex-shrink-0 rounded-2xl bg-neutral-900/50 ring-1 ring-white/5;
-  width: clamp(240px, 76vw, 320px);
-  height: clamp(140px, 40vw, 190px);
-  scroll-snap-align: center;
+/* image/video inside card */
+.thumbnail img,
+.thumbnail video{
+  @apply w-full h-full object-cover block;
+  will-change: transform, opacity;
   backface-visibility: hidden;
   transform: translateZ(0);
-  transition: transform 160ms ease, box-shadow 160ms ease;
 }
 
-/* hover / active pop */
-.thumb-card:active { transform: scale(0.98); }
-@media (hover:hover){
-  .thumb-card:hover { transform: translateY(-2px) scale(1.01); }
-}
-
-/* image */
-.thumb-img{
-  @apply w-full h-full object-cover rounded-2xl;
-  display:block;
-}
-
-/* title */
+/* Title text inside card */
 .thumb-title{
-  @apply absolute left-3 bottom-2 text-white/90 text-base font-semibold drop-shadow;
+  @apply absolute left-3 bottom-3 text-white text-lg font-semibold drop-shadow;
 }
 
-/* live badge */
-.live-badge{
-  @apply absolute top-2 left-2 text-xs font-bold px-2 py-1 rounded-md;
-  background: rgba(239, 68, 68, 0.95);
-  color: black;
+/* Favorite button */
+.favorite-btn{
+  @apply absolute top-2 right-2 rounded-full p-2 bg-black/50 backdrop-blur ring-1 ring-white/10;
+}
+
+/* ===== Neon Glows ===== */
+:root{
+  --pink:#ec4899;   /* neon pink */
+  --blue:#22d3ee;   /* neon blue */
+  --green:#10b981;  /* neon green (legacy) */
+  --red:#ef4444;    /* live */
+}
+
+/* default dual neon (pink/blue) */
+.glow-dual{
   box-shadow:
-    0 0 8px rgba(239, 68, 68, 0.85),
-    0 0 18px rgba(239, 68, 68, 0.55);
+    0 0 14px color-mix(in srgb, var(--pink) 80%, transparent),
+    0 0 28px color-mix(in srgb, var(--blue) 70%, transparent),
+    0 0 48px color-mix(in srgb, var(--pink) 55%, transparent),
+    inset 0 0 0 1px rgba(255,255,255,.06);
 }
 
-/* Default neon (cyan/teal) for non-live cards */
-.glow-cyan{
+/* green option if needed */
+.glow-green{
   box-shadow:
-    0 0 10px rgba(34, 211, 238, 0.35),
-    0 0 22px rgba(34, 211, 238, 0.25),
-    inset 0 0 0 1px rgba(255,255,255,0.05);
+    0 0 12px color-mix(in srgb, var(--green) 85%, transparent),
+    0 0 26px color-mix(in srgb, var(--green) 60%, transparent),
+    inset 0 0 0 1px rgba(255,255,255,.06);
 }
 
-/* Red glow for live */
+/* red for LIVE */
 .glow-red{
   box-shadow:
-    0 0 10px rgba(239, 68, 68, 0.55),
-    0 0 22px rgba(239, 68, 68, 0.45),
-    inset 0 0 0 1px rgba(255,255,255,0.05);
+    0 0 12px color-mix(in srgb, var(--red) 90%, transparent),
+    0 0 28px color-mix(in srgb, var(--red) 70%, transparent),
+    inset 0 0 0 1px rgba(255,255,255,.06);
 }
 
-/* ===== Favorites strip (square, single row above bottom bar) ===== */
-.favs-strip{
-  @apply px-4 mt-4;
-}
-.favs-row{
-  @apply flex gap-3 overflow-x-auto py-2;
-  scroll-snap-type: x proximity;
-  overscroll-behavior-x: contain;
-}
-.fav-card{
-  @apply relative flex-shrink-0 rounded-xl bg-neutral-900/50 ring-1 ring-white/5;
-  width: 110px; height: 110px; /* square */
-  scroll-snap-align: start;
+/* ===== Featured Hero (fills width, anchored under header) ===== */
+.featured-hero{
+  @apply mx-4 mt-3 rounded-3xl overflow-hidden ring-1 ring-white/10 relative;
+  min-height: clamp(220px, 54vh, 520px);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
   transform: translateZ(0);
 }
-.fav-card img{ @apply w-full h-full object-cover rounded-xl; }
+.featured-hero .hero-media{ @apply w-full h-full object-cover block; }
+.featured-hero .hero-gradient{
+  @apply absolute inset-0 pointer-events-none;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.55) 100%);
+}
 
-/* ===== Utilities ===== */
-.hide-border{ border: none !important; }
+/* hero tabs (black, see-through) */
+.hero-tabs{
+  @apply absolute left-4 bottom-4 flex gap-2;
+}
+.hero-tab{
+  @apply px-4 py-2 rounded-full text-sm font-medium
+         bg-black/55 text-white ring-1 ring-white/10 backdrop-blur;
+}
+.hero-tab.active{
+  @apply bg-black/80;
+  box-shadow:
+    0 0 10px color-mix(in srgb, var(--pink) 55%, transparent),
+    0 0 18px color-mix(in srgb, var(--blue) 45%, transparent);
+}
+
+/* optional alternating hero glow: add .hero-glow-a / .hero-glow-b in JS */
+.hero-glow-a{ box-shadow: 0 0 20px color-mix(in srgb, var(--pink) 70%, transparent),
+                           0 0 40px color-mix(in srgb, var(--blue) 60%, transparent); }
+.hero-glow-b{ box-shadow: 0 0 20px color-mix(in srgb, var(--blue) 70%, transparent),
+                           0 0 40px color-mix(in srgb, var(--pink) 60%, transparent); }
+
+/* ===== Favorites strip (square-ish, single row) ===== */
+.favs-strip{
+  @apply fixed left-0 right-0 bottom-16 z-40 px-4 pb-2;
+}
+.favs-row{
+  @apply flex gap-3 overflow-x-auto snap-x snap-mandatory;
+  -ms-overflow-style: none; scrollbar-width: none;
+}
+.favs-row::-webkit-scrollbar{ display:none; }
+.fav-thumb{
+  @apply relative shrink-0 rounded-xl ring-1 ring-white/10 overflow-hidden bg-neutral-900/60;
+  width: clamp(90px, 26vw, 120px);
+  height: clamp(90px, 26vw, 120px);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+.fav-thumb img{ @apply w-full h-full object-cover block; }
+
+/* ===== Utilities for spacing below bottom bar ===== */
+.page-with-bottom-bar{ @apply pb-24; }
+
+/* ===== Mobile flicker guards (applied broadly) ===== */
+img, video, canvas{
+  image-rendering: auto;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
