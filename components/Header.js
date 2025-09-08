@@ -1,12 +1,8 @@
-// components/Header.js
 import Image from "next/image";
 import { forwardRef } from "react";
 
 /**
- * Short banner-style header
- * - Fixed short height (cropped top/bottom)
- * - Image fills & covers the header area (no distortion)
- * - Overflow hidden to clip the logo cleanly
+ * Banner header with cropped logo + bottom gradient blend
  */
 const Header = forwardRef((props, ref) => {
   return (
@@ -14,13 +10,14 @@ const Header = forwardRef((props, ref) => {
       ref={ref}
       className="
         fixed top-0 left-0 right-0 z-50
-        h-14 md:h-16                 /* ← shorter header height */
+        h-14 md:h-16
         bg-black/95 backdrop-blur
         border-b border-neutral-800
-        overflow-hidden              /* ← crop top/bottom */
+        overflow-hidden
       "
     >
       <div className="relative w-full h-full">
+        {/* Logo image fills and crops */}
         <Image
           src="/Dubular2.png"
           alt="dubUlar header logo"
@@ -28,9 +25,18 @@ const Header = forwardRef((props, ref) => {
           priority
           sizes="100vw"
           className="
-            object-cover              /* ← fills box, crops top/bottom */
-            object-center             /* center the crop; change to object-[50%_45%] to bias */
+            object-cover
+            object-center
             select-none pointer-events-none
+          "
+        />
+
+        {/* Bottom fade gradient overlay */}
+        <div
+          className="
+            absolute inset-x-0 bottom-0 h-8
+            bg-gradient-to-b from-transparent to-black
+            pointer-events-none
           "
         />
       </div>
