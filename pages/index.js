@@ -56,7 +56,7 @@ function FeaturedHeroTabs() {
   );
 }
 
-/* ===== Simple “Live” row (edge-padded, not full-bleed) ===== */
+/* ===== Simple Live row ===== */
 const LIVE_ITEMS = [
   { id: 1, title: "Live Music",    img: "/thumbnails/trending1.jpg", live: true },
   { id: 2, title: "Live Show",     img: "/thumbnails/trending2.jpg", live: true },
@@ -83,13 +83,55 @@ function LiveRow() {
             <div className="thumb-title">{item.title}</div>
           </article>
         ))}
-        {/* clones at the end to create seamless loop feel */}
+        {/* clones to smooth the end of the row */}
         {LIVE_ITEMS.slice(0, 2).map((item, i) => (
           <article key={`clone-${i}`} className="thumb-card glow-red">
             <img src={item.img} alt={`${item.title} clone`} className="thumb-img" />
             <span className="live-badge">LIVE</span>
             <div className="thumb-title">{item.title}</div>
           </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ===== NEW: Vertical Top 5 cards (3 portrait thumbs) ===== */
+function TopFiveVertical() {
+  const cards = [
+    {
+      key: "top-streamers",
+      title: "Top 5 Streamers",
+      img: "/thumbnails/portrait1.jpg", // replace with your portrait images
+      href: "/top/streamers",
+    },
+    {
+      key: "top-gifters",
+      title: "Top 5 Gifters",
+      img: "/thumbnails/portrait2.jpg",
+      href: "/top/gifters",
+    },
+    {
+      key: "top-communities",
+      title: "Top 5 Communities",
+      img: "/thumbnails/portrait3.jpg",
+      href: "/top/communities",
+    },
+  ];
+
+  return (
+    <section className="px-4 mt-8">
+      <div className="section-header">
+        <h2>Top 5</h2>
+      </div>
+
+      <div className="vthumb-grid">
+        {cards.map((c) => (
+          <a key={c.key} href={c.href} className="vthumb-card glow-dual" aria-label={c.title}>
+            <img src={c.img} alt={c.title} className="vthumb-img" />
+            <div className="vthumb-gradient" />
+            <div className="vthumb-title">{c.title}</div>
+          </a>
         ))}
       </div>
     </section>
@@ -103,11 +145,14 @@ export default function Home() {
         <title>dubUlar • Home</title>
       </Head>
 
-      {/* Full-bleed featured block right under header */}
+      {/* Full-bleed featured block */}
       <FeaturedHeroTabs />
 
-      {/* Padded content sections */}
+      {/* Live horizontal row */}
       <LiveRow />
+
+      {/* NEW: Three vertical thumbnails under Live */}
+      <TopFiveVertical />
     </Layout>
   );
-              }
+}
