@@ -10,9 +10,8 @@ export default function Layout({ children, title }) {
         <meta name="theme-color" content="#000000" />
       </Head>
 
-      <Header />
+      <Header />   {/* ✅ Only this one reference */}
 
-      {/* push content below the 56px header */}
       <main className="min-h-screen bg-black pt-14 pb-20">
         {children}
       </main>
