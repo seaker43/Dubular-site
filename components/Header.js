@@ -1,34 +1,21 @@
+// components/Header.jsx
 import Image from "next/image";
-import { forwardRef } from "react";
 
-const Header = forwardRef((props, ref) => {
+export default function Header() {
   return (
-    <header
-      ref={ref}
-      className="
-        fixed top-0 left-0 right-0 z-50
-        h-28 md:h-32   /* header height */
-        bg-black/95 backdrop-blur
-        border-b border-neutral-800
-        flex items-center justify-center
-        overflow-hidden
-      "
-    >
-      <div className="relative w-1/2 h-[90%] flex items-center justify-center">
-        <Image
-          src="/Dubular2.png"
-          alt="dubUlar header logo"
-          fill
-          priority
-          className="
-            object-contain
-            select-none pointer-events-none
-          "
-        />
-      </div>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur flex items-center justify-center border-none" style={{ height: "72px" }}>
+      <Image
+        src="/Dubular2.png"
+        alt="dubUlar logo"
+        width={360}   // adjust based on your logo resolution
+        height={72}
+        className="block"
+        style={{
+          width: "120%",  // 20% wider
+          height: "auto",
+        }}
+        priority
+      />
     </header>
   );
-});
-
-Header.displayName = "Header";
-export default Header;
+}
