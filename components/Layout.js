@@ -7,13 +7,13 @@ export default function Layout({ children, title }) {
     <>
       <Head>
         <title>{title || "dubUlar"}</title>
-        <meta name="theme-color" content="#09182a" />
+        <meta name="theme-color" content="#000000" />
       </Head>
 
       <Header />
 
-      {/* push content below fixed header */}
-      <main className="min-h-screen bg-[#0b0f1a] pt-14 pb-20">
+      {/* push content below the 56px header */}
+      <main className="min-h-screen bg-black pt-14 pb-20">
         {children}
       </main>
 
