@@ -1,4 +1,4 @@
-// components/Header.jsx
+// components/Header.js
 import Image from "next/image";
 import { forwardRef } from "react";
 
