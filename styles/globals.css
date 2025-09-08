@@ -3,27 +3,25 @@
 @tailwind utilities;
 
 /* ===== Base ===== */
-html,
-body {
+html, body {
   @apply bg-neutral-950 text-white antialiased min-h-screen;
 }
 
-a {
-  @apply text-cyan-400 hover:underline;
-}
+a { @apply text-cyan-400 hover:underline; }
 
-/* ===== Header ===== */
-header {
+/* ===== Site Header (scoped) =====
+   Use <header class="site-header"> … </header>
+   so we don't accidentally style other <header> tags. */
+.site-header {
   @apply fixed top-0 left-0 right-0 z-50
          bg-black/95 backdrop-blur
          border-b border-neutral-800
          h-20 flex items-center justify-center;
 }
 
-/* Push page content below header */
-main {
-  @apply pt-20; /* same as header height */
-}
+/* If you're NOT using the dynamic padding in Layout,
+   keep this to push content below header. Otherwise remove it. */
+main { @apply pt-20; }
 
 /* ===== Bottom Bar ===== */
 .navbar {
@@ -31,14 +29,8 @@ main {
          bg-neutral-950/95 border-t border-neutral-800
          py-2 backdrop-blur z-50;
 }
-
-.navbar-item {
-  @apply flex flex-col items-center text-xs text-neutral-400;
-}
-
-.navbar-item.active {
-  @apply text-white;
-}
+.navbar-item { @apply flex flex-col items-center text-xs text-neutral-400; }
+.navbar-item.active { @apply text-white; }
 
 /* ===== Thumbnails ===== */
 .thumbnail {
@@ -46,32 +38,27 @@ main {
          bg-neutral-900/70 ring-1 ring-white/5
          shadow-lg transition-transform duration-200;
 }
+.thumbnail img { @apply w-full h-full object-cover; }
 
-.thumbnail img {
-  @apply w-full h-full object-cover;
-}
-
-/* Neon glow (green for default thumbnails) */
+/* Neon glow (green default) */
 .thumbnail.glow-green {
   box-shadow:
-    0 0 8px rgba(16, 185, 129, 0.8),
-    0 0 16px rgba(16, 185, 129, 0.6),
-    0 0 32px rgba(16, 185, 129, 0.4);
+    0 0 8px rgba(16,185,129,.8),
+    0 0 16px rgba(16,185,129,.6),
+    0 0 32px rgba(16,185,129,.4);
 }
-
 /* Red glow for live content */
 .thumbnail.glow-red {
   box-shadow:
-    0 0 8px rgba(239, 68, 68, 0.9),
-    0 0 18px rgba(239, 68, 68, 0.7),
-    0 0 32px rgba(239, 68, 68, 0.5);
+    0 0 8px rgba(239,68,68,.9),
+    0 0 18px rgba(239,68,68,.7),
+    0 0 32px rgba(239,68,68,.5);
 }
 
-/* Favorite button */
+/* Favorite button helper (optional) */
 .favorite-btn {
   @apply absolute top-2 right-2
-         bg-yellow-400 text-black rounded-full p-2
-         shadow-md;
+         bg-yellow-400 text-black rounded-full p-2 shadow-md;
 }
 
 /* ===== Featured Hero ===== */
@@ -80,12 +67,8 @@ main {
          shadow-lg ring-1 ring-white/10;
   min-height: calc(50vh - 5rem); /* top half of screen minus header */
 }
-
 .featured-hero img,
-.featured-hero video {
-  @apply w-full h-full object-cover;
-}
-
+.featured-hero video { @apply w-full h-full object-cover; }
 .featured-hero h2 {
   @apply absolute bottom-0 left-0 p-4
          text-2xl font-extrabold text-white
