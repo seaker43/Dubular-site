@@ -3,10 +3,12 @@
 @tailwind utilities;
 
 /* ===== Base ===== */
-html, body { @apply bg-neutral-950 text-white antialiased min-h-screen; }
+html, body {
+  @apply bg-neutral-950 text-white antialiased min-h-screen;
+}
 a { @apply text-cyan-400 hover:underline; }
 
-/* ===== Site Header (scoped) ===== */
+/* ===== Site Header ===== */
 .site-header {
   @apply fixed top-0 left-0 right-0 z-50
          bg-black/95 backdrop-blur
@@ -14,7 +16,7 @@ a { @apply text-cyan-400 hover:underline; }
          h-20 flex items-center justify-center;
 }
 
-/* Push content below header (remove if you use dynamic padding in Layout) */
+/* Push content below header (if not using dynamic Layout padding) */
 main { @apply pt-20; }
 
 /* ===== Bottom Bar ===== */
@@ -58,7 +60,7 @@ main { @apply pt-20; }
     0 0 40px rgba(239, 68, 68, 0.50);
 }
 
-/* Favorite button helper (optional) */
+/* Favorite button */
 .favorite-btn {
   @apply absolute top-2 right-2
          bg-yellow-400 text-black rounded-full p-2 shadow-md;
@@ -68,10 +70,21 @@ main { @apply pt-20; }
 .featured-hero {
   @apply relative w-full overflow-hidden rounded-2xl
          shadow-lg ring-1 ring-white/10;
-  min-height: calc(50vh - 5rem); /* top half minus header */
+  min-height: calc(50vh - 5rem); /* fallback */
 }
+
+/* Neon blend glow for Featured hero */
+.featured-glow {
+  box-shadow:
+    0 0 12px rgba(236, 72, 153, 0.9),   /* pink */
+    0 0 24px rgba(59, 130, 246, 0.7),   /* blue */
+    0 0 48px rgba(236, 72, 153, 0.5),
+    0 0 72px rgba(59, 130, 246, 0.35);
+}
+
 .featured-hero img,
 .featured-hero video { @apply w-full h-full object-cover; }
+
 .featured-hero h2 {
   @apply absolute bottom-0 left-0 p-4
          text-2xl font-extrabold text-white
