@@ -8,23 +8,18 @@ export default function Header() {
         fixed top-0 left-0 right-0 z-50
         bg-black/95 backdrop-blur
         border-b border-neutral-800
-        h-28 flex items-center justify-center
+        flex items-center justify-center
+        py-2
       "
     >
-      <div className="w-auto max-h-full px-4">
-        <Image
-          src="/Dubular2.png"
-          alt="dubUlar header logo"
-          width={800}         // large base width
-          height={200}        // large base height
-          priority
-          className="
-            object-contain
-            max-h-24          /* keep it big but capped to ~96px tall */
-            w-auto
-          "
-        />
-      </div>
+      <Image
+        src="/Dubular2.png"   // 👈 natural-size logo in /public
+        alt="dubUlar header logo"
+        width={400}           // give a base size (adjust to your PNG’s natural width)
+        height={120}
+        priority
+        className="object-contain w-auto h-auto"
+      />
     </header>
   );
 }
