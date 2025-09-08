@@ -69,7 +69,7 @@ main {
 }
 .thumb-row::-webkit-scrollbar { display: none; }
 
-/* ↓↓↓ Make cards smaller so 1.5–2.5 are visible on mobile/tablet ↓↓↓ */
+/* Thumbnails */
 .thumb-card {
   @apply relative flex-shrink-0 rounded-2xl bg-neutral-900/50 ring-1 ring-white/5;
   width: clamp(180px, 58vw, 280px);
