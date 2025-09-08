@@ -16,7 +16,7 @@ const Header = forwardRef((props, ref) => {
           className="object-contain select-none pointer-events-none"
         />
       </div>
-    </header>
+    </Header>
   );
 });
 
