@@ -8,21 +8,23 @@ export default function Header() {
         fixed top-0 left-0 right-0 z-50
         bg-black/95 backdrop-blur
         border-b border-neutral-800
-        h-24 flex items-center justify-center
+        h-28 flex items-center justify-center
       "
     >
-      <Image
-        src="/Dubular2.png"     // 👈 your new logo in /public
-        alt="dubUlar header logo"
-        width={300}             // base size
-        height={100}
-        priority
-        className="
-          object-contain
-          max-h-20               /* cap max height ~80px */
-          w-auto
-        "
-      />
+      <div className="w-auto max-h-full px-4">
+        <Image
+          src="/Dubular2.png"
+          alt="dubUlar header logo"
+          width={800}         // large base width
+          height={200}        // large base height
+          priority
+          className="
+            object-contain
+            max-h-24          /* keep it big but capped to ~96px tall */
+            w-auto
+          "
+        />
+      </div>
     </header>
   );
 }
