@@ -14,16 +14,14 @@ const Header = forwardRef((props, ref) => {
         overflow-hidden
       "
     >
-      <div className="relative w-full h-full flex items-center justify-center px-4">
+      <div className="relative w-1/2 h-[90%] flex items-center justify-center">
         <Image
           src="/Dubular2.png"
           alt="dubUlar header logo"
-          fill   /* 👈 auto-fills the container */
+          fill
           priority
           className="
             object-contain
-            max-h-full max-w-full
-            p-2
             select-none pointer-events-none
           "
         />
