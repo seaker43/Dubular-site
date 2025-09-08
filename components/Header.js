@@ -1,4 +1,4 @@
-// components/Header.jsx
+// components/Header.js
 import Image from "next/image";
 
 export default function Header() {
@@ -17,8 +17,8 @@ export default function Header() {
           alt="dubUlar header logo"
           fill
           priority
-          className="object-contain object-center opacity-95 pointer-events-none select-none"
           sizes="100vw"
+          className="object-contain object-center opacity-95 pointer-events-none select-none"
         />
       </div>
     </header>
