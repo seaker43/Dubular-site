@@ -2,7 +2,7 @@ import Image from "next/image";
 import { forwardRef } from "react";
 
 /**
- * Banner header with cropped logo + bottom gradient blend
+ * Banner header with centered logo at 50% size and blend
  */
 const Header = forwardRef((props, ref) => {
   return (
@@ -10,33 +10,24 @@ const Header = forwardRef((props, ref) => {
       ref={ref}
       className="
         fixed top-0 left-0 right-0 z-50
-        h-14 md:h-16
+        h-24 md:h-28
         bg-black/95 backdrop-blur
         border-b border-neutral-800
+        flex items-center justify-center
         overflow-hidden
       "
     >
-      <div className="relative w-full h-full">
-        {/* Logo image fills and crops */}
+      <div className="relative w-full h-full flex items-center justify-center">
         <Image
           src="/Dubular2.png"
           alt="dubUlar header logo"
-          fill
+          width={400}   // 👈 controls logo size
+          height={200}
           priority
-          sizes="100vw"
           className="
-            object-cover
-            object-center
+            object-contain
+            max-h-[50%]   // 👈 50% smaller
             select-none pointer-events-none
-          "
-        />
-
-        {/* Bottom fade gradient overlay */}
-        <div
-          className="
-            absolute inset-x-0 bottom-0 h-8
-            bg-gradient-to-b from-transparent to-black
-            pointer-events-none
           "
         />
       </div>
