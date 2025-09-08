@@ -2,74 +2,210 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ===== Layout variables ===== */
-:root{
-  --header-h: 5rem;   /* 80px header */
-  --navbar-h: 4rem;   /* 64px bottom bar */
-  --favs-h: 6rem;     /* space for a fixed favorites strip if present */
+/* =============================
+   Base / Reset
+   ============================= */
+html, body {
+  @apply bg-black text-white antialiased min-h-screen;
 }
 
-/* ===== Base ===== */
-html, body { @apply bg-black text-white antialiased; }
-body { @apply min-h-screen overflow-x-hidden; }
-#__next { @apply min-h-screen flex flex-col; }
+/* Prevent accidental global margins/padding from components */
+* { -webkit-tap-highlight-color: transparent; }
 
-/* ===== Header (fixed) ===== */
-header{
-  position: fixed; inset: 0 0 auto 0; z-index: 50;
-  height: var(--header-h);
-  @apply bg-black/95 backdrop-blur flex items-center justify-center;
-  border-bottom: none;
+/* =============================
+   Header (no border line)
+   ============================= */
+header {
+  @apply fixed top-0 left-0 right-0 z-50
+         bg-black/95 backdrop-blur
+         h-20 flex items-center justify-center;
+  border-bottom: none !important;   /* hide border line */
 }
 
-/* ===== Main spacing =====
-   Always pad below header + bottom bar so you can scroll to the bottom. */
-main{
-  padding-top: var(--header-h);
-  padding-bottom: calc(var(--navbar-h) + 1rem);
+/* Pages must not add extra space themselves. We’ll offset once. */
+main {
+  padding-top: 5rem;                 /* equals header height (h-20) + a smidge */
 }
 
-/* If the page ALSO has a fixed favorites strip above the bottom bar,
-   add class 'has-favs' on a parent (e.g., <body> or a wrapper) to increase padding. */
-.has-favs main{
-  padding-bottom: calc(var(--navbar-h) + var(--favs-h));
+/* =============================
+   Bottom Bar + Active Glow
+   ============================= */
+.navbar {
+  @apply fixed bottom-0 left-0 right-0 z-50
+         bg-neutral-950/95 backdrop-blur
+         border-t border-neutral-800/20
+         py-2;
+}
+.navbar-inner {
+  @apply mx-auto max-w-screen-xl flex items-center justify-around px-4;
+}
+.navbar-item {
+  @apply flex flex-col items-center text-xs text-neutral-400 transition-colors;
+}
+.navbar-item.active {
+  @apply text-white;
+}
+.navbar-item.active .icon-wrap {
+  /* Soft neon ring behind the active tab icon */
+  box-shadow:
+    0 0 8px rgba(59,130,246,.75),
+    0 0 16px rgba(236,72,153,.6);
+  border-radius: 9999px;
 }
 
-/* ===== Bottom bar (fixed) ===== */
-.navbar{
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
-  height: var(--navbar-h);
-  @apply w-full flex justify-around items-center bg-neutral-950/95 backdrop-blur;
-}
+/* =============================
+   Utilities
+   ============================= */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* ===== Favorites strip (fixed optional) =====
-   If you render a fixed favorites row, keep it above the bottom bar and account for it via .has-favs main padding. */
-.favs-strip{
-  position: fixed; left: 0; right: 0;
-  bottom: calc(var(--navbar-h) + 0.5rem);
-  z-index: 49;
-  @apply px-4;
-}
-
-/* ===== Rails & thumbnails (unchanged) ===== */
-.no-scrollbar::-webkit-scrollbar{ display:none; }
-.no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none; }
-
-.thumb-row{
-  @apply relative flex gap-4 overflow-x-auto py-2;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
-}
-
-.thumb-card{
-  @apply relative flex-shrink-0 rounded-2xl bg-neutral-900/50 ring-1 ring-white/5;
-  width: clamp(240px, 76vw, 320px);
-  height: clamp(140px, 40vw, 190px);
-  scroll-snap-align: center;
+/* Reduce flicker/tearing on fast swipe */
+.gpu {
   backface-visibility: hidden;
   transform: translateZ(0);
-  transition: transform 160ms ease, box-shadow 160ms ease;
+  will-change: transform;
+  contain: paint layout style;
 }
 
-.thumb-img{ @apply w-full h-full object-cover rounded-2xl block; }
+/* =============================
+   Rows (horizontal loops)
+   ============================= */
+.thumb-row {
+  @apply overflow-x-auto no-scrollbar;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.thumb-track {
+  @apply flex gap-4 px-4;            /* outer page padding */
+  width: max-content;
+}
+
+/* =============================
+   Thumbnail Card
+   ============================= */
+.thumbnail {
+  @apply relative rounded-2xl overflow-hidden select-none
+         bg-neutral-900/60 ring-1 ring-white/10
+         transition-transform duration-150 ease-out;
+  scroll-snap-align: center;
+  width: 72vw;                        /* mobile-friendly width */
+  max-width: 420px;
+  aspect-ratio: 16/9;
+}
+.thumbnail.square {                   /* for square avatar-style cards */
+  aspect-ratio: 1 / 1;
+  width: 48vw;
+  max-width: 280px;
+}
+.thumbnail:hover { transform: scale(1.02); }
+.thumbnail:active { transform: scale(0.98); }
+
+.thumbnail img, .thumbnail video {
+  @apply w-full h-full object-cover;
+}
+
+/* Glow themes */
+.thumbnail.glow-pink {
+  box-shadow:
+    0 0 8px rgba(236,72,153,.85),
+    0 0 20px rgba(236,72,153,.55),
+    0 0 36px rgba(236,72,153,.35);
+}
+.thumbnail.glow-blue {
+  box-shadow:
+    0 0 8px rgba(56,189,248,.85),
+    0 0 20px rgba(56,189,248,.55),
+    0 0 36px rgba(56,189,248,.35);
+}
+.thumbnail.glow-red {
+  box-shadow:
+    0 0 10px rgba(239,68,68,.9),
+    0 0 22px rgba(239,68,68,.65),
+    0 0 38px rgba(239,68,68,.45);
+}
+
+/* Title badge inside cards (kept minimal) */
+.thumb-title {
+  @apply absolute left-3 bottom-3 text-lg font-bold drop-shadow
+         px-3 py-1 rounded-full bg-black/50 backdrop-blur;
+}
+
+/* Favorite star / pill button */
+.favorite-btn {
+  @apply absolute top-2 right-2 rounded-full
+         bg-black/55 backdrop-blur p-2 ring-1 ring-white/10;
+}
+
+/* =============================
+   Featured Hero (single card with tabs)
+   ============================= */
+.featured-wrap {
+  /* lock near header, full width minus page padding */
+  margin: 0 16px;                     /* equals px-4 on pages */
+}
+.featured-hero {
+  @apply relative rounded-3xl overflow-hidden ring-1 ring-white/10 gpu;
+  width: 100%;
+  /* a bit taller than thumbnails but not overwhelming */
+  min-height: 48vh;                   /* ~half screen */
+  max-height: 56vh;
+}
+.featured-hero img, .featured-hero video {
+  @apply w-full h-full object-cover;
+}
+.featured-tabs {
+  @apply absolute left-4 bottom-4 flex gap-3 flex-wrap;
+}
+.pill-tab {
+  @apply px-4 py-2 rounded-full text-sm font-semibold
+         bg-black/55 text-white backdrop-blur
+         ring-1 ring-white/10 transition;
+}
+.pill-tab.active {
+  @apply ring-2;
+  box-shadow:
+    0 0 8px rgba(236,72,153,.75),
+    0 0 16px rgba(56,189,248,.65);
+}
+
+/* Alternate hero glow – toggle classes from JS */
+.featured-hero.glow-pink { box-shadow:
+  0 0 14px rgba(236,72,153,.85),
+  0 0 30px rgba(236,72,153,.55),
+  0 0 52px rgba(236,72,153,.35);
+}
+.featured-hero.glow-blue { box-shadow:
+  0 0 14px rgba(56,189,248,.85),
+  0 0 30px rgba(56,189,248,.55),
+  0 0 52px rgba(56,189,248,.35);
+}
+
+/* =============================
+   Sections / Headings / Spacing
+   ============================= */
+.section {
+  @apply mt-6;
+  padding-inline: 16px;               /* match page px-4 */
+}
+.section-title {
+  @apply text-2xl font-extrabold mb-3;
+}
+
+/* Ensure pages can scroll to the bottom even with fixed bottom bar */
+.page-pad-bottom {
+  padding-bottom: 88px;               /* ~height of bottom bar + breathing room */
+}
+
+/* =============================
+   Favorite strip specific
+   ============================= */
+.fav-strip {
+  @apply overflow-x-auto no-scrollbar;
+  scroll-snap-type: x mandatory;
+}
+.fav-track {
+  @apply flex gap-4 pl-4 pr-4;
+}
+.fav-card {
+  @apply thumbnail square glow-blue;
+}
