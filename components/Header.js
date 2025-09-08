@@ -2,13 +2,16 @@
 import Image from "next/image";
 import { forwardRef } from "react";
 
-const Header = forwardRef((props, ref) => {
+const Header = forwardRef(function Header(_, ref) {
   return (
-    <header ref={ref} className="site-header">
-      {/* 75% of header width, 90% of header height; centered */}
-      <div className="relative w-3/4 h-[90%] flex items-center justify-center">
+    <header
+      ref={ref}
+      className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur flex items-center justify-center h-20"
+    >
+      {/* Logo fills 75% of header width and 100% of header height */}
+      <div className="relative w-[75%] h-full flex items-center justify-center">
         <Image
-          src="/Dubular2.v2.png"   // or "/Dubular2.png" if that's the file you want
+          src="/Dubular2.png"   // update to your actual logo filename
           alt="dubUlar header logo"
           fill
           priority
@@ -16,9 +19,8 @@ const Header = forwardRef((props, ref) => {
           className="object-contain select-none pointer-events-none"
         />
       </div>
-    </Header>
+    </header>
   );
 });
 
-Header.displayName = "Header";
 export default Header;
