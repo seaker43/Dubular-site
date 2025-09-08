@@ -4,15 +4,27 @@ import { Star } from "lucide-react";
 export default function ThumbnailCard({
   title,
   image = "/placeholder.svg",
-  color = "pink", // "pink" | "blue" | "red" (red = LIVE)
+  color = "pink", // "pink" | "blue" | "red" (red shows LIVE)
   onFav,
 }) {
   const glow =
     color === "red" ? "glow-red" : color === "blue" ? "glow-blue" : "glow-pink";
 
   return (
-    <article className={`thumbnail ${glow} aspect-[16/9] relative`}>
-      {/* Image MUST be a direct child so .thumbnail img rule applies */}
+    <article
+      className={`
+        group thumbnail ${glow} snap-start relative
+        flex-none
+        w-[72vw] sm:w-[48vw] md:w-[36vw] lg:w-[26vw] xl:w-[20vw]
+        aspect-[16/9]
+        transition-transform duration-200
+        hover:scale-[1.03] active:scale-95
+      `}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === "Enter" && e.currentTarget.click()}
+    >
+      {/* Image MUST be direct child for .thumbnail img rule */}
       <img src={image} alt={title} loading="lazy" decoding="async" />
 
       {/* LIVE pill only for red */}
@@ -34,9 +46,9 @@ export default function ThumbnailCard({
         <Star className="w-5 h-5 text-white/90" />
       </button>
 
-      {/* Title overlay */}
+      {/* Bottom title gradient */}
       <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
-        <h3 className="text-white font-semibold drop-shadow">{title}</h3>
+        <h3 className="text-white font-semibold drop-shadow line-clamp-2">{title}</h3>
       </div>
     </article>
   );
