@@ -1,24 +1,113 @@
 // pages/index.js
+import Head from "next/head";
 import Layout from "@components/Layout";
-import FeaturedHeroTabs from "@components/FeaturedHeroTabs";
-import MediaLoopRow from "@components/MediaLoopRow"; // optional if you want rows under hero
+import { useEffect, useState } from "react";
 
-export default function Home() {
-  // Example live row under hero
-  const liveItems = [
-    { id: 1, title: "Live Music", image: "/thumbnails/trending1.jpg", color: "red" },
-    { id: 2, title: "Live Talk", image: "/thumbnails/trending2.jpg", color: "red" },
-  ];
+/* ===== FeaturedHeroTabs (inline for simplicity) ===== */
+const HERO_TABS = [
+  { key: "gaming",   label: "Gaming",   src: "/thumbnails/trending1.jpg" },
+  { key: "irl",      label: "IRL",      src: "/thumbnails/trending2.jpg" },
+  { key: "music",    label: "Music",    src: "/thumbnails/trending3.jpg" },
+  { key: "podcast",  label: "Podcast",  src: "/thumbnails/trending4.jpg" },
+];
+
+function FeaturedHeroTabs() {
+  const [active, setActive] = useState(0);
+  const [glowPink, setGlowPink] = useState(true);
+
+  // auto-rotate + alternate glow
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActive((i) => (i + 1) % HERO_TABS.length);
+      setGlowPink((g) => !g);
+    }, 6000);
+    return () => clearInterval(id);
+  }, []);
+
+  const tab = HERO_TABS[active];
 
   return (
-    <Layout title="dubUlar">
-      {/* Featured hero at top */}
-      <div className="mt-1">
-        <FeaturedHeroTabs />
-      </div>
+    <section className="full-bleed hero-tight">
+      <div className={`featured-hero ${glowPink ? "featured-glow-pink" : "featured-glow-blue"}`}>
+        <img
+          src={tab.src}
+          alt={tab.label}
+          className="w-full h-full object-cover will-change-transform"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
 
-      {/* Optional rows */}
-      <MediaLoopRow title="Live" items={liveItems} />
-    </Layout>
+        {/* transparent black category pills */}
+        <div className="absolute bottom-4 left-4 flex gap-3">
+          {HERO_TABS.map((t, i) => (
+            <button
+              key={t.key}
+              onClick={() => setActive(i)}
+              className={`px-4 py-2 rounded-full bg-black/60 text-white border backdrop-blur-sm transition
+                         ${i === active ? "border-white/60" : "border-white/20 hover:border-white/40"}`}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
+
+/* ===== Simple “Live” row (edge-padded, not full-bleed) ===== */
+const LIVE_ITEMS = [
+  { id: 1, title: "Live Music",    img: "/thumbnails/trending1.jpg", live: true },
+  { id: 2, title: "Live Show",     img: "/thumbnails/trending2.jpg", live: true },
+  { id: 3, title: "Speedrun",      img: "/thumbnails/trending3.jpg", live: true },
+  { id: 4, title: "Talk Radio",    img: "/thumbnails/trending4.jpg", live: true },
+];
+
+function LiveRow() {
+  return (
+    <section className="px-4 mt-6">
+      <div className="section-header">
+        <h2>Live</h2>
+      </div>
+
+      <div className="thumb-row" role="list">
+        {LIVE_ITEMS.map((item) => (
+          <article
+            key={item.id}
+            className={`thumb-card ${item.live ? "glow-red" : "glow-cyan"}`}
+            role="listitem"
+          >
+            <img src={item.img} alt={item.title} className="thumb-img" />
+            {item.live && <span className="live-badge">LIVE</span>}
+            <div className="thumb-title">{item.title}</div>
+          </article>
+        ))}
+        {/* clones at the end to create seamless loop feel */}
+        {LIVE_ITEMS.slice(0, 2).map((item, i) => (
+          <article key={`clone-${i}`} className="thumb-card glow-red">
+            <img src={item.img} alt={`${item.title} clone`} className="thumb-img" />
+            <span className="live-badge">LIVE</span>
+            <div className="thumb-title">{item.title}</div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export default function Home() {
+  return (
+    <Layout>
+      <Head>
+        <title>dubUlar • Home</title>
+      </Head>
+
+      {/* Full-bleed featured block right under header */}
+      <FeaturedHeroTabs />
+
+      {/* Padded content sections */}
+      <LiveRow />
+    </Layout>
+  );
+              }
