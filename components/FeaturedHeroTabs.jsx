@@ -10,23 +10,27 @@ const DEFAULT_TABS = [
 
 export default function FeaturedHeroTabs({
   tabs = DEFAULT_TABS,
-  intervalMs = 5000,     // autoplay speed
+  intervalMs = 5000,
   startKey = "gaming",
   pauseOnHover = true,
 }) {
-  const keys = useMemo(() => tabs.map(t => t.key), [tabs]);
+  const keys = useMemo(() => tabs.map((t) => t.key), [tabs]);
   const [active, setActive] = useState(keys.includes(startKey) ? startKey : keys[0]);
   const timerRef = useRef(null);
   const wrapRef = useRef(null);
 
   const activeIndex = keys.indexOf(active);
+  const current = tabs[activeIndex];
+
+  // Alternate glow color by tab index: even = pink, odd = blue
+  const glowClass = activeIndex % 2 === 0 ? "featured-glow-pink" : "featured-glow-blue";
 
   // autoplay rotate
   useEffect(() => {
     clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
-      const i = (keys.indexOf(active) + 1) % keys.length;
-      setActive(keys[i]);
+      const next = (keys.indexOf(active) + 1) % keys.length;
+      setActive(keys[next]);
     }, intervalMs);
     return () => clearInterval(timerRef.current);
   }, [active, intervalMs, keys]);
@@ -39,8 +43,8 @@ export default function FeaturedHeroTabs({
     const start = () => {
       clearInterval(timerRef.current);
       timerRef.current = setInterval(() => {
-        const i = (keys.indexOf(active) + 1) % keys.length;
-        setActive(keys[i]);
+        const next = (keys.indexOf(active) + 1) % keys.length;
+        setActive(keys[next]);
       }, intervalMs);
     };
     el.addEventListener("mouseenter", stop);
@@ -51,21 +55,19 @@ export default function FeaturedHeroTabs({
     };
   }, [pauseOnHover, active, intervalMs, keys]);
 
-  const current = tabs[activeIndex];
-
   return (
     <section
       ref={wrapRef}
-      className="
-        featured-hero featured-glow
+      className={`
+        featured-hero ${glowClass}
         w-screen
-        h-[60vh] md:h-[65vh]        /* ~10% taller than 50vh */
+        h-[50vh] md:h-[55vh]      /* shorter than before */
         relative mb-4 overflow-hidden rounded-2xl
         ring-1 ring-white/10
-      "
+      `}
       aria-label="Featured Content"
     >
-      {/* media layer (no top crop; we let header padding handle spacing) */}
+      {/* media */}
       <div className="absolute inset-0">
         {current?.isVideo ? (
           <video
@@ -82,34 +84,23 @@ export default function FeaturedHeroTabs({
             key={current?.key}
             src={current?.src}
             alt={current?.title}
-            className="
-              w-full h-full object-cover
-              will-change-transform opacity-0
-              animate-[fadeIn_400ms_ease-out_forwards]
-            "
+            className="w-full h-full object-cover will-change-transform"
             loading="eager"
             decoding="async"
           />
         )}
       </div>
 
-      {/* readable gradient */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/70" />
+      {/* subtle readability gradient (kept minimal since title text is removed) */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/5 via-black/10 to-black/30" />
 
-      {/* title */}
-      <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-        <h2 className="text-white text-3xl md:text-4xl font-extrabold drop-shadow">
-          {current?.title}
-        </h2>
-      </div>
-
-      {/* tabs */}
+      {/* TAB BUTTONS ONLY (no big title overlay) */}
       <div
         role="tablist"
         aria-label="Featured categories"
         className="absolute left-0 right-0 bottom-3 flex items-center justify-center gap-2"
       >
-        {tabs.map((t) => {
+        {tabs.map((t, i) => {
           const isActive = t.key === active;
           return (
             <button
@@ -130,11 +121,6 @@ export default function FeaturedHeroTabs({
           );
         })}
       </div>
-
-      {/* keyframe */}
-      <style jsx>{`
-        @keyframes fadeIn { to { opacity: 1; } }
-      `}</style>
     </section>
   );
-                                       }
+}
