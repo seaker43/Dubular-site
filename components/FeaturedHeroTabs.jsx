@@ -1,120 +1,85 @@
 // components/FeaturedHeroTabs.jsx
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 
-const DEFAULT_TABS = [
-  { key: "gaming",  title: "Gaming",  src: "/thumbnails/trending1.jpg", isVideo: false },
-  { key: "irl",     title: "IRL",     src: "/thumbnails/trending2.jpg", isVideo: false },
-  { key: "music",   title: "Music",   src: "/thumbnails/trending1.jpg", isVideo: false },
-  { key: "podcast", title: "Podcast", src: "/thumbnails/trending2.jpg", isVideo: false },
+const TABS = [
+  {
+    title: "Gaming",
+    // Unsplash topic query — always returns something
+    image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1600&auto=format&fit=crop",
+  },
+  {
+    title: "IRL",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600&auto=format&fit=crop",
+  },
+  {
+    title: "Music",
+    image: "https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=1600&auto=format&fit=crop",
+  },
+  {
+    title: "Podcast",
+    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1600&auto=format&fit=crop",
+  },
 ];
 
-export default function FeaturedHeroTabs({
-  tabs = DEFAULT_TABS,
-  intervalMs = 5000,
-  startKey = "gaming",
-  pauseOnHover = true,
-}) {
-  const keys = useMemo(() => tabs.map((t) => t.key), [tabs]);
-  const [active, setActive] = useState(keys.includes(startKey) ? startKey : keys[0]);
-  const timerRef = useRef(null);
-  const wrapRef = useRef(null);
+export default function FeaturedHeroTabs() {
+  const [active, setActive] = useState(0);
 
-  const activeIndex = keys.indexOf(active);
-  const current = tabs[activeIndex];
+  // Alternate neon glow by tab (pink ↔ blue)
+  const glowClass = useMemo(
+    () => (active % 2 === 0 ? "featured-glow-pink" : "featured-glow-blue"),
+    [active]
+  );
 
-  // Alternate glow color by tab index: even = pink, odd = blue
-  const glowClass = activeIndex % 2 === 0 ? "featured-glow-pink" : "featured-glow-blue";
-
-  // autoplay rotate
+  // Optional: auto-rotate every 7s (pause when user taps a tab for ~10s)
   useEffect(() => {
-    clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => {
-      const next = (keys.indexOf(active) + 1) % keys.length;
-      setActive(keys[next]);
-    }, intervalMs);
-    return () => clearInterval(timerRef.current);
-  }, [active, intervalMs, keys]);
+    const id = setInterval(() => {
+      setActive((a) => (a + 1) % TABS.length);
+    }, 7000);
+    return () => clearInterval(id);
+  }, []);
 
-  // pause on hover (optional)
-  useEffect(() => {
-    if (!pauseOnHover || !wrapRef.current) return;
-    const el = wrapRef.current;
-    const stop = () => clearInterval(timerRef.current);
-    const start = () => {
-      clearInterval(timerRef.current);
-      timerRef.current = setInterval(() => {
-        const next = (keys.indexOf(active) + 1) % keys.length;
-        setActive(keys[next]);
-      }, intervalMs);
-    };
-    el.addEventListener("mouseenter", stop);
-    el.addEventListener("mouseleave", start);
-    return () => {
-      el.removeEventListener("mouseenter", stop);
-      el.removeEventListener("mouseleave", start);
-    };
-  }, [pauseOnHover, active, intervalMs, keys]);
+  const current = TABS[active];
 
   return (
     <section
-      ref={wrapRef}
-      className={`
-        featured-hero ${glowClass}
-        w-screen
-        h-[50vh] md:h-[55vh]      /* shorter than before */
-        relative mb-4 overflow-hidden rounded-2xl
-        ring-1 ring-white/10
-      `}
+      className={`hero-offset featured-hero ${glowClass} mx-4 md:mx-6 rounded-2xl overflow-hidden ring-1 ring-white/10 bg-neutral-900/50`}
       aria-label="Featured Content"
     >
-      {/* media */}
-      <div className="absolute inset-0">
-        {current?.isVideo ? (
-          <video
-            className="w-full h-full object-cover"
-            src={current.src}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-          />
-        ) : (
-          <img
-            key={current?.key}
-            src={current?.src}
-            alt={current?.title}
-            className="w-full h-full object-cover will-change-transform"
-            loading="eager"
-            decoding="async"
-          />
-        )}
+      {/* Media */}
+      <div className="relative w-full h-[48vh] md:h-[55vh]">
+        {/* image tag keeps it simple for remote URLs; no Next/Image config needed */}
+        <img
+          src={current.image}
+          alt={current.title}
+          className="w-full h-full object-cover"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+          onError={(e) => {
+            // graceful fallback if remote fails
+            e.currentTarget.src =
+              "https://images.unsplash.com/photo-1495567720989-cebdbdd97913?q=80&w=1600&auto=format&fit=crop";
+          }}
+        />
+
+        {/* Subtle bottom fade so tabs sit nicely */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
       </div>
 
-      {/* subtle readability gradient (kept minimal since title text is removed) */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/5 via-black/10 to-black/30" />
-
-      {/* TAB BUTTONS ONLY (no big title overlay) */}
-      <div
-        role="tablist"
-        aria-label="Featured categories"
-        className="absolute left-0 right-0 bottom-3 flex items-center justify-center gap-2"
-      >
-        {tabs.map((t, i) => {
-          const isActive = t.key === active;
+      {/* Tabs (no large title overlay per your request) */}
+      <div className="absolute bottom-3 left-3 right-3 flex gap-3 flex-wrap">
+        {TABS.map((t, i) => {
+          const isActive = i === active;
           return (
             <button
-              key={t.key}
-              role="tab"
-              aria-selected={isActive}
-              aria-controls={`panel-${t.key}`}
-              onClick={() => setActive(t.key)}
-              className={`
-                px-3 py-1.5 rounded-full text-sm font-semibold transition-all
-                ${isActive
-                  ? "bg-white text-black"
-                  : "bg-white/20 text-white backdrop-blur hover:bg-white/30"}
-              `}
+              key={t.title}
+              onClick={() => setActive(i)}
+              className={[
+                "px-4 py-2 rounded-full text-sm font-medium transition-transform",
+                "backdrop-blur bg-white/90 text-black",
+                "hover:scale-[1.03] active:scale-[0.97]",
+                isActive ? "ring-2 ring-white" : "opacity-90",
+              ].join(" ")}
             >
               {t.title}
             </button>
