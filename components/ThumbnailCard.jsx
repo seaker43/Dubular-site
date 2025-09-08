@@ -1,140 +1,82 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+// components/ThumbnailCard.jsx
+import Link from "next/link";
+import { useState } from "react";
 
-/* ===== Base ===== */
-html, body { @apply bg-neutral-950 text-white antialiased; height: auto; }
-body { @apply min-h-screen overflow-x-hidden; }
-a { @apply text-cyan-400 hover:underline; }
-#__next { @apply min-h-screen flex flex-col; }
+export default function ThumbnailCard({
+  title,
+  image,            // URL string
+  href = "#",
+  live = false,
+  color = "pink",    // "pink" | "blue" | "red" (red wins if live)
+  square = false,    // true for favorites rail
+  creator,           // { name, slug, logoUrl }
+}) {
+  const [loaded, setLoaded] = useState(false);
+  const glow = live ? "glow-red" : color === "blue" ? "glow-blue" : "glow-pink";
+  const Wrapper = href === "#" ? "div" : Link;
 
-/* ===== Header (fixed, no border) ===== */
-header {
-  @apply fixed top-0 left-0 right-0 z-50
-         bg-black/95 backdrop-blur
-         h-20 flex items-center justify-center;
-  border-bottom: none;
-}
+  // Fixed ratio wrapper prevents layout shift/jitter.
+  // Square for favorites, 16:9 for normal rows.
+  const ratioClass = square ? "thumb-ratio thumb-square" : "thumb-ratio thumb-169";
 
-/* ===== Main content spacing ===== */
-main { @apply flex-1 pt-20 pb-24; }
+  return (
+    <div className={`thumbnail ${glow} relative shrink-0 select-none`}>
+      {/* Ratio box holds the height; everything sits inside */}
+      <div className={ratioClass}>
+        {/* Channel badge */}
+        {creator?.slug && (
+          <Link
+            href={`/creator/${creator.slug}`}
+            aria-label={`${creator.name ?? "Creator"} page`}
+            className="channel-badge"
+          >
+            {creator?.logoUrl ? (
+              <img
+                src={creator.logoUrl}
+                alt={`${creator.name ?? "Creator"} logo`}
+                width="36"
+                height="36"
+                className="rounded-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <div className="h-9 w-9 rounded-full bg-neutral-700 grid place-items-center text-xs text-white/70">?</div>
+            )}
+          </Link>
+        )}
 
-/* ===== Bottom Bar (fixed, no border) ===== */
-.navbar {
-  @apply fixed bottom-0 left-0 right-0 z-50
-         w-full flex justify-around items-center
-         bg-neutral-950/95 backdrop-blur py-2;
-  height: 64px;
-}
-.navbar-item { @apply flex flex-col items-center text-xs text-neutral-400 gap-1 transition; }
-.navbar-item.active {
-  @apply text-white;
-  text-shadow:
-    0 0 6px rgba(236,72,153,0.8),
-    0 0 12px rgba(59,130,246,0.7),
-    0 0 20px rgba(59,130,246,0.5);
-}
-.navbar-item.active svg {
-  filter: drop-shadow(0 0 6px rgba(236,72,153,0.8))
-          drop-shadow(0 0 12px rgba(59,130,246,0.7));
-}
+        {/* Shimmer while loading */}
+        {!loaded && <div className="thumb-skeleton" />}
 
-/* ===== Scroll rails (smooth + stable) ===== */
-.scroll-rail {
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  scroll-padding-left: 1rem;
-  contain: layout paint style;
-  backface-visibility: hidden;
-  will-change: scroll-position;
-}
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        {/* Actual media */}
+        <Wrapper href={href} className="block">
+          <img
+            src={image || "/placeholder.svg"}
+            alt={title || "Thumbnail"}
+            className={`thumb-media ${loaded ? "opacity-100" : "opacity-0"}`}
+            loading="lazy"
+            decoding="async"
+            onLoad={() => setLoaded(true)}
+            onError={(e) => {
+              e.currentTarget.src = "/placeholder.svg";
+              setLoaded(true);
+            }}
+          />
+        </Wrapper>
 
-/* ===== Thumbnail cards (separated look) ===== */
-.thumbnail {
-  @apply relative overflow-hidden rounded-xl
-         bg-neutral-900/70
-         transition-transform duration-200;
-  outline: 1px solid rgba(255,255,255,0.08);
-  box-shadow:
-    0 2px 10px rgba(0,0,0,0.45),
-    0 0 0 1px rgba(255,255,255,0.04) inset;
-}
-.thumbnail img,
-.thumbnail picture,
-.thumbnail video { @apply w-full h-full object-cover; }
-.thumbnail:hover { transform: translate3d(0,-2px,0); }
-.thumbnail:active { transform: translate3d(0,0,0) scale(0.98); }
+        {/* Title strip */}
+        <div className="thumb-title">
+          <span className="drop-shadow-sm">{title || "Untitled"}</span>
+        </div>
 
-/* Brand edge glows */
-.thumbnail.glow-pink { box-shadow:
-  0 2px 10px rgba(0,0,0,0.45),
-  0 0 0 1px rgba(255,255,255,0.04) inset,
-  0 0 10px rgba(236,72,153,0.35),
-  0 0 24px rgba(236,72,153,0.25);
+        {/* LIVE pill */}
+        {live && (
+          <span className="absolute top-2 right-2 text-[10px] font-bold px-2 py-1 rounded-md bg-red-500/90 text-white shadow">
+            LIVE
+          </span>
+        )}
+      </div>
+    </div>
+  );
 }
-.thumbnail.glow-blue { box-shadow:
-  0 2px 10px rgba(0,0,0,0.45),
-  0 0 0 1px rgba(255,255,255,0.04) inset,
-  0 0 10px rgba(59,130,246,0.35),
-  0 0 24px rgba(59,130,246,0.25);
-}
-.thumbnail.glow-red { box-shadow:
-  0 2px 10px rgba(0,0,0,0.45),
-  0 0 0 1px rgba(255,255,255,0.04) inset,
-  0 0 10px rgba(239,68,68,0.45),
-  0 0 24px rgba(239,68,68,0.35);
-}
-
-/* Aspect helpers (ensures Image fill has height) */
-.aspect-square { aspect-ratio: 1 / 1; }
-.aspect-video { aspect-ratio: 16 / 9; }
-
-/* Title strip */
-.thumb-title {
-  @apply absolute inset-x-0 bottom-0 p-2
-         bg-gradient-to-t from-black/80 to-transparent
-         text-sm font-semibold;
-}
-
-/* Channel badge ring */
-.channel-badge {
-  @apply absolute top-2 left-2 z-10 rounded-full p-[2px];
-  background: rgba(255,255,255,0.08);
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.18) inset;
-}
-
-/* ===== Featured Hero ===== */
-.hero-tight { margin-top: 0 !important; }
-.featured-hero {
-  @apply relative w-full overflow-hidden rounded-2xl;
-  min-height: 48vh;
-  outline: 1px solid rgba(255,255,255,0.08);
-  box-shadow:
-    0 20px 40px rgba(0,0,0,0.45),
-    0 0 0 1px rgba(255,255,255,0.04) inset;
-}
-.featured-hero img,
-.featured-hero video { @apply w-full h-full object-cover; }
-.featured-glow-pink { box-shadow:
-  0 20px 40px rgba(0,0,0,0.45),
-  0 0 0 1px rgba(255,255,255,0.04) inset,
-  0 0 16px rgba(236,72,153,0.35),
-  0 0 36px rgba(236,72,153,0.25);
-}
-.featured-glow-blue { box-shadow:
-  0 20px 40px rgba(0,0,0,0.45),
-  0 0 0 1px rgba(255,255,255,0.04) inset,
-  0 0 16px rgba(59,130,246,0.35),
-  0 0 36px rgba(59,130,246,0.25);
-}
-
-/* ===== Creator page niceties ===== */
-.creator-banner { position: relative; height: 220px; }
-.creator-avatar {
-  box-shadow:
-    0 0 8px rgba(236,72,153,0.35),
-    0 0 16px rgba(59,130,246,0.25);
-    }
