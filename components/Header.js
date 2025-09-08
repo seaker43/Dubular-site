@@ -3,9 +3,12 @@ import { forwardRef } from "react";
 
 const Header = forwardRef((props, ref) => {
   return (
-    <header ref={ref} className="site-header">
-      {/* logo is constrained by this box: 50% width, 90% height of header */}
-      <div className="relative w-1/2 h-[90%] flex items-center justify-center">
+    <header
+      ref={ref}
+      className="site-header fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur h-20 flex items-center justify-center border-none overflow-hidden"
+    >
+      {/* logo now fills full width + height of header */}
+      <div className="relative w-full h-full flex items-center justify-center">
         <Image
           src="/Dubular2.png"
           alt="dubUlar header logo"
