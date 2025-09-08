@@ -5,50 +5,48 @@
 /* ===== Base ===== */
 html, body {
   @apply bg-neutral-950 text-white antialiased;
-  height: auto;               /* allow page to grow */
+  height: auto;
 }
 body { @apply min-h-screen overflow-x-hidden; }
 
 a { @apply text-cyan-400 hover:underline; }
 
-/* Optional root flex to ensure content grows under fixed bars */
 #__next { @apply min-h-screen flex flex-col; }
 
-/* ===== Header (fixed) ===== */
+/* ===== Header (fixed, no border) ===== */
 header {
   @apply fixed top-0 left-0 right-0 z-50
          bg-black/95 backdrop-blur
-         border-b border-neutral-800
          h-20 flex items-center justify-center;
+  border-bottom: none; /* no header border */
 }
 
-/* ===== Main content spacing =====
-   pt-20 = header height, pb-24 = bottom bar safe area
-*/
+/* ===== Main content spacing ===== */
 main {
   @apply flex-1 pt-20 pb-24;
 }
 
-/* ===== Bottom Bar (fixed) ===== */
+/* ===== Bottom Bar ===== */
 .navbar {
   @apply fixed bottom-0 left-0 right-0 z-50
          w-full flex justify-around items-center
          bg-neutral-950/95 border-t border-neutral-800
          py-2 backdrop-blur;
-  height: 64px; /* ~pb-24 (6rem) allows room; tweak if you change this */
+  height: 64px;
 }
 .navbar-item { @apply flex flex-col items-center text-xs text-neutral-400 gap-1; }
 .navbar-item.active { @apply text-white; }
 
-/* ===== Thumbnails (cards) ===== */
+/* ===== Thumbnails ===== */
 .thumbnail {
   @apply relative overflow-hidden rounded-xl
          bg-neutral-900/70 ring-1 ring-white/5
          shadow-lg transition-transform duration-200;
 }
-.thumbnail img, .thumbnail picture, .thumbnail video { @apply w-full h-full object-cover; }
+.thumbnail img,
+.thumbnail picture,
+.thumbnail video { @apply w-full h-full object-cover; }
 
-/* Brand glow variants */
 .thumbnail.glow-pink {
   box-shadow:
     0 0 8px rgba(236, 72, 153, 0.9),
@@ -61,7 +59,6 @@ main {
     0 0 18px rgba(59, 130, 246, 0.7),
     0 0 32px rgba(59, 130, 246, 0.5);
 }
-/* LIVE (red) */
 .thumbnail.glow-red {
   box-shadow:
     0 0 8px rgba(239, 68, 68, 0.9),
@@ -69,7 +66,6 @@ main {
     0 0 32px rgba(239, 68, 68, 0.5);
 }
 
-/* Favorite button helper (optional) */
 .favorite-btn {
   @apply absolute top-2 right-2
          bg-yellow-400 text-black rounded-full p-2 shadow-md;
@@ -77,20 +73,17 @@ main {
 
 /* ===== Featured Hero ===== */
 .hero-offset {
-  /* clean gap under header + correct anchor snaps */
   margin-top: clamp(8px, 2vh, 16px);
   scroll-margin-top: 5rem;
 }
-
 .featured-hero {
   @apply relative w-full overflow-hidden rounded-2xl
          shadow-lg ring-1 ring-white/10;
-  min-height: 48vh; /* component can set exact h via classes */
+  min-height: 48vh;
 }
 .featured-hero img,
 .featured-hero video { @apply w-full h-full object-cover; }
 
-/* Alternating hero glow (pink / blue) */
 .featured-glow-pink {
   box-shadow:
     0 0 10px rgba(236, 72, 153, 0.75),
@@ -104,13 +97,13 @@ main {
     0 0 42px rgba(59, 130, 246, 0.35);
 }
 
-/* ===== Favorites rail helpers (horizontal scroll) ===== */
+/* ===== Favorites rail ===== */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-.aspect-square { aspect-ratio: 1 / 1; } /* ensure squares without plugin */
+.aspect-square { aspect-ratio: 1 / 1; }
 
-/* ===== Creator page niceties (optional) ===== */
+/* ===== Creator page ===== */
 .creator-banner { position: relative; height: 220px; }
 .creator-avatar {
   box-shadow:
