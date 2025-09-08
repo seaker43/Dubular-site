@@ -1,101 +1,103 @@
 // components/MediaLoopRow.jsx
-import { useEffect, useMemo, useRef } from "react";
-import ThumbnailCard from "./ThumbnailCard";
+import { useEffect, useRef } from "react";
 
 /**
- * Seamless infinite row with flicker-hardening:
- *  - triple buffer
- *  - always 'auto' scrollBehavior (touch remains smooth)
- *  - GPU-promoted rail via CSS
- *  - preloads items near the viewport to avoid skeleton flashes
+ * Seamless, manual horizontal scroller that loops infinitely.
+ * - No auto snap-back; you can keep swiping forever.
+ * - Duplicates the items 3x and keeps the viewport centered on the middle set.
+ * - Uses your existing CSS classes: .thumb-row, .thumb-card, .thumb-img, .thumb-title, .live-badge, glow-*
+ *
+ * Props:
+ *  - title?: string (optional section heading you render outside if you want)
+ *  - items: Array<{ id: string|number, title: string, img: string, live?: boolean, href?: string }>
+ *  - cardClass?: string (optional extra classes for each card)
  */
-export default function MediaLoopRow({
-  title = "",
-  items = [],
-  square = false, // true for favorites rail
-}) {
+export default function MediaLoopRow({ items = [], cardClass = "" }) {
   const railRef = useRef(null);
-  const guardRef = useRef(false);
 
-  const tripled = useMemo(() => {
-    if (!items?.length) return [];
-    return [...items, ...items, ...items];
-  }, [items]);
-
-  // Center on the middle buffer on mount
-  useEffect(() => {
+  // Helper to center on the middle set
+  const centerOnMiddle = () => {
     const el = railRef.current;
-    if (!el || tripled.length === 0) return;
-    const id = requestAnimationFrame(() => {
-      const block = el.scrollWidth / 3;
-      el.scrollLeft = block; // instant; we keep scrollBehavior 'auto'
-    });
-    return () => cancelAnimationFrame(id);
-  }, [tripled.length]);
-
-  // Seamless wrap; trigger earlier to avoid visible “edge” work
-  const handleScroll = () => {
-    const el = railRef.current;
-    if (!el || guardRef.current) return;
-
-    const block = el.scrollWidth / 3;
-    const left = el.scrollLeft;
-
-    const low = block * 0.3;
-    const high = block * 1.7;
-
-    if (left < low || left > high) {
-      guardRef.current = true;
-      // instant re-center with no smooth behavior
-      el.scrollLeft = left < low ? left + block : left - block;
-      requestAnimationFrame(() => (guardRef.current = false));
-    }
+    if (!el) return;
+    // We render items x 3; each set ≈ totalWidth/3
+    const third = el.scrollWidth / 3;
+    // Put us roughly at the center of the middle set
+    el.scrollLeft = third + (el.clientWidth * 0.5);
   };
 
-  // Preload items local to the center of the row to reduce skeleton flashes
-  // Map index -> whether “priority” preload should be used
-  const preloadRadius = 6; // how many items to preload around center
-  const centerIndex = Math.floor(tripled.length / 2);
+  useEffect(() => {
+    centerOnMiddle();
+    const el = railRef.current;
+    if (!el) return;
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const max = el.scrollWidth;
+        const third = max / 3;
+        const left = el.scrollLeft;
+
+        // When you cross left boundary of the first third, jump forward one third.
+        if (left < third * 0.4) {
+          el.scrollLeft = left + third;
+        }
+        // When you cross right boundary of the last third, jump back one third.
+        else if (left > third * 1.6) {
+          el.scrollLeft = left - third;
+        }
+        ticking = false;
+      });
+    };
+
+    el.addEventListener("scroll", onScroll, { passive: true });
+    // Re-center on resize
+    const onResize = () => centerOnMiddle();
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [items.length]);
+
+  // Duplicate items 3x to create the seamless loop effect
+  const tripled = [...items, ...items, ...items];
 
   return (
-    <section className="mt-6">
-      {title && (
-        <div className="mb-3 flex items-baseline justify-between px-4 md:px-6">
-          <h2 className="text-2xl font-bold">{title}</h2>
-        </div>
-      )}
-
-      <div
-        ref={railRef}
-        onScroll={handleScroll}
-        className="scroll-rail no-scrollbar relative flex gap-4 overflow-x-auto snap-x snap-mandatory px-4 md:px-6"
-        style={{ scrollBehavior: "auto" }}
-      >
-        {/* edge spacers */}
-        <div className="shrink-0 w-2" aria-hidden="true" />
-        {tripled.map((it, i) => {
-          const priority =
-            Math.abs(i - centerIndex) <= preloadRadius; // preload around middle
-          return (
-            <div
-              key={`${title}-${i}-${it.id ?? it.title ?? "item"}`}
-              className="snap-start"
-            >
-              <ThumbnailCard
-                title={it.title}
-                image={it.image}
-                href={it.href}
-                live={it.live}
-                color={it.color}
-                square={square}
-                creator={it.creator}
-                priority={priority}
-              />
-            </div>
-          );
-        })}
-        <div className="shrink-0 w-2" aria-hidden="true" />
-      </div>
-    </section>
+    <div className="thumb-row no-scrollbar" ref={railRef} role="list">
+      <div className="shrink-0 w-2" aria-hidden="true" />
+      {tripled.map((item, idx) => {
+        const key = `${item.id ?? idx}-${idx}`;
+        const Card = (
+          <article
+            key={key}
+            className={`thumb-card ${item.live ? "glow-red" : "glow-dual"} ${cardClass}`}
+            role="listitem"
+          >
+            <img
+              src={item.img}
+              alt={item.title ?? "thumbnail"}
+              className="thumb-img"
+              loading="lazy"
+              decoding="async"
+              draggable="false"
+              onError={(e) => { e.currentTarget.src = "/placeholder.svg"; }}
+            />
+            {item.live && <span className="live-badge">LIVE</span>}
+            {item.title && <div className="thumb-title">{item.title}</div>}
+          </article>
+        );
+        return item.href ? (
+          <a key={`a-${key}`} href={item.href} aria-label={item.title ?? "Open"}>
+            {Card}
+          </a>
+        ) : (
+          Card
+        );
+      })}
+      <div className="shrink-0 w-2" aria-hidden="true" />
+    </div>
   );
 }
