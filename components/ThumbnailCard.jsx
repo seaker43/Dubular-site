@@ -1,83 +1,43 @@
 // components/ThumbnailCard.jsx
-import Image from "next/image";
-import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
 
-export default function ThumbnailCard({ id, title, image, live = false }) {
-  const FALLBACK = "/placeholder.svg";
-
-  const [fav, setFav] = useState(false);
-  const [src, setSrc] = useState(image || FALLBACK);
-  const [loaded, setLoaded] = useState(false);
-
-  // hydrate favorite state
-  useEffect(() => {
-    try {
-      const list = JSON.parse(localStorage.getItem("favorites") || "[]");
-      setFav(list.some((x) => x.id === id));
-    } catch {}
-  }, [id]);
-
-  const toggleFavorite = () => {
-    try {
-      const list = JSON.parse(localStorage.getItem("favorites") || "[]");
-      const exists = list.some((x) => x.id === id);
-      const updated = exists
-        ? list.filter((x) => x.id !== id)
-        : [...list, { id, title, image: src }];
-
-      localStorage.setItem("favorites", JSON.stringify(updated));
-      setFav(!exists);
-
-      // notify other tabs/pages (favorites view)
-      if (typeof window !== "undefined") {
-        window.dispatchEvent(
-          new StorageEvent("storage", { key: "favorites", newValue: JSON.stringify(updated) })
-        );
-      }
-    } catch {}
-  };
-
-  const wrapperClass = live ? "thumbnail-live" : "thumbnail-default";
+export default function ThumbnailCard({
+  title,
+  image = "/placeholder.svg",
+  color = "pink", // "pink" | "blue" | "red" (red = LIVE)
+  onFav,
+}) {
+  const glow =
+    color === "red" ? "glow-red" : color === "blue" ? "glow-blue" : "glow-pink";
 
   return (
-    <div className="group">
-      <div
-        className={`relative overflow-hidden rounded-xl transition-transform duration-200 hover:scale-[1.03] ${wrapperClass}`}
+    <article className={`thumbnail ${glow} aspect-[16/9] relative`}>
+      {/* Image MUST be a direct child so .thumbnail img rule applies */}
+      <img src={image} alt={title} loading="lazy" decoding="async" />
+
+      {/* LIVE pill only for red */}
+      {color === "red" && (
+        <span className="absolute left-2 top-2 text-xs font-semibold px-2 py-1 rounded-md bg-red-600/90 text-white shadow">
+          LIVE
+        </span>
+      )}
+
+      {/* Favorite */}
+      <button
+        aria-label="favorite"
+        className="absolute top-2 right-2 grid place-items-center w-9 h-9 rounded-full bg-black/35 backdrop-blur ring-1 ring-white/15"
+        onClick={(e) => {
+          e.stopPropagation();
+          onFav?.();
+        }}
       >
-        <div className="relative w-full aspect-video">
-          {!loaded && <div className="absolute inset-0 animate-pulse bg-neutral-900/60" />}
+        <Star className="w-5 h-5 text-white/90" />
+      </button>
 
-          <Image
-            src={src || FALLBACK}
-            alt={title || "Thumbnail"}
-            fill
-            sizes="(max-width:768px) 60vw, (max-width:1024px) 30vw, 20vw"
-            className="object-cover"
-            onLoadingComplete={() => setLoaded(true)}
-            onError={() => {
-              if (src !== FALLBACK) setSrc(FALLBACK);
-              setLoaded(true);
-            }}
-          />
-
-          {live && <span className="live-badge">LIVE</span>}
-
-          {/* Favorite Star */}
-          <button
-            onClick={toggleFavorite}
-            aria-label={fav ? "Remove from favorites" : "Add to favorites"}
-            className={`absolute top-2 right-2 inline-flex items-center justify-center
-                        h-8 w-8 rounded-full ring-1 ring-white/10 transition
-                        ${fav ? "bg-yellow-400 text-black" : "bg-neutral-900/70 text-white"}
-                        active:scale-95`}
-          >
-            <Star size={18} strokeWidth={2} {...(fav ? { fill: "currentColor" } : {})} />
-          </button>
-        </div>
+      {/* Title overlay */}
+      <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+        <h3 className="text-white font-semibold drop-shadow">{title}</h3>
       </div>
-
-      <div className="card-title truncate mt-1">{title}</div>
-    </div>
+    </article>
   );
 }
