@@ -10,11 +10,11 @@ export default function Header() {
       <Image
         src="/Dubular2.png"
         alt="dubUlar logo"
-        width={360}   // adjust to match your logo resolution
+        width={360}   // adjust if your source logo file has different resolution
         height={72}
         className="block"
         style={{
-          width: "90%",   // 10% less wide
+          width: "95%",   // 5% less wide
           height: "auto",
         }}
         priority
