@@ -11,7 +11,7 @@ const Header = forwardRef(function Header(_, ref) {
       {/* Logo fills 75% of header width and 100% of header height */}
       <div className="relative w-[75%] h-full flex items-center justify-center">
         <Image
-          src="/Dubular2.vs2.png"   // update to your actual logo filename
+          src="/Dubular2.v2.png"   // update to your actual logo filename
           alt="dubUlar header logo"
           fill
           priority
