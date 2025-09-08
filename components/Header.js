@@ -15,7 +15,7 @@ export default function Header() {
           height={72}
           className="block"
           style={{
-            width: "120%",  // 20% wider
+            width: "90%",  // 10% less wide
             height: "auto",
           }}
           priority
