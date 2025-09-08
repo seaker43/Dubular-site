@@ -3,17 +3,18 @@
 @tailwind utilities;
 
 /* ===== Base ===== */
-html,
-body {
-  @apply bg-neutral-950 text-white antialiased min-h-screen;
+html, body {
+  @apply bg-neutral-950 text-white antialiased;
+  height: auto;               /* allow page to grow */
 }
+body { @apply min-h-screen overflow-x-hidden; }
 
 a { @apply text-cyan-400 hover:underline; }
 
-/* ===== Header (fixed) =====
-   If your Header component uses <header>, keep this.
-   If you switched to <header class="site-header">, just change the selector below to .site-header
-*/
+/* Optional root flex to ensure content grows under fixed bars */
+#__next { @apply min-h-screen flex flex-col; }
+
+/* ===== Header (fixed) ===== */
 header {
   @apply fixed top-0 left-0 right-0 z-50
          bg-black/95 backdrop-blur
@@ -21,14 +22,20 @@ header {
          h-20 flex items-center justify-center;
 }
 
-/* Push page content below header height */
-main { @apply pt-20; }
+/* ===== Main content spacing =====
+   pt-20 = header height, pb-24 = bottom bar safe area
+*/
+main {
+  @apply flex-1 pt-20 pb-24;
+}
 
-/* ===== Bottom Bar ===== */
+/* ===== Bottom Bar (fixed) ===== */
 .navbar {
-  @apply fixed bottom-0 w-full flex justify-around
+  @apply fixed bottom-0 left-0 right-0 z-50
+         w-full flex justify-around items-center
          bg-neutral-950/95 border-t border-neutral-800
-         py-2 backdrop-blur z-50;
+         py-2 backdrop-blur;
+  height: 64px; /* ~pb-24 (6rem) allows room; tweak if you change this */
 }
 .navbar-item { @apply flex flex-col items-center text-xs text-neutral-400 gap-1; }
 .navbar-item.active { @apply text-white; }
@@ -39,7 +46,7 @@ main { @apply pt-20; }
          bg-neutral-900/70 ring-1 ring-white/5
          shadow-lg transition-transform duration-200;
 }
-.thumbnail img { @apply w-full h-full object-cover; }
+.thumbnail img, .thumbnail picture, .thumbnail video { @apply w-full h-full object-cover; }
 
 /* Brand glow variants */
 .thumbnail.glow-pink {
@@ -70,7 +77,7 @@ main { @apply pt-20; }
 
 /* ===== Featured Hero ===== */
 .hero-offset {
-  /* locks a small, responsive gap under the header and anchors scroll correctly */
+  /* clean gap under header + correct anchor snaps */
   margin-top: clamp(8px, 2vh, 16px);
   scroll-margin-top: 5rem;
 }
@@ -78,9 +85,8 @@ main { @apply pt-20; }
 .featured-hero {
   @apply relative w-full overflow-hidden rounded-2xl
          shadow-lg ring-1 ring-white/10;
-  min-height: 48vh; /* ~half screen; actual height set inline in the component */
+  min-height: 48vh; /* component can set exact h via classes */
 }
-
 .featured-hero img,
 .featured-hero video { @apply w-full h-full object-cover; }
 
@@ -98,14 +104,13 @@ main { @apply pt-20; }
     0 0 42px rgba(59, 130, 246, 0.35);
 }
 
-/* ===== Favorites rail helpers ===== */
+/* ===== Favorites rail helpers (horizontal scroll) ===== */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Ensure square cards even if Tailwind aspect-ratio plugin isn't enabled */
-.aspect-square { aspect-ratio: 1 / 1; }
+.aspect-square { aspect-ratio: 1 / 1; } /* ensure squares without plugin */
 
-/* ===== Creator page (optional niceties) ===== */
+/* ===== Creator page niceties (optional) ===== */
 .creator-banner { position: relative; height: 220px; }
 .creator-avatar {
   box-shadow:
