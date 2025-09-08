@@ -18,7 +18,7 @@ header {
   @apply fixed top-0 left-0 right-0 z-50
          bg-black/95 backdrop-blur
          h-20 flex items-center justify-center;
-  border-bottom: none; /* no header border */
+  border-bottom: none;
 }
 
 /* ===== Main content spacing ===== */
@@ -26,16 +26,24 @@ main {
   @apply flex-1 pt-20 pb-24;
 }
 
-/* ===== Bottom Bar ===== */
+/* ===== Bottom Bar (fixed, no border) ===== */
 .navbar {
   @apply fixed bottom-0 left-0 right-0 z-50
          w-full flex justify-around items-center
-         bg-neutral-950/95 border-t border-neutral-800
-         py-2 backdrop-blur;
+         bg-neutral-950/95 backdrop-blur py-2;
   height: 64px;
 }
-.navbar-item { @apply flex flex-col items-center text-xs text-neutral-400 gap-1; }
-.navbar-item.active { @apply text-white; }
+.navbar-item {
+  @apply flex flex-col items-center text-xs text-neutral-400 gap-1 transition;
+}
+.navbar-item.active {
+  @apply text-white;
+  /* Neon glow for active tab (applies to icon + text) */
+  text-shadow:
+    0 0 6px rgba(236,72,153,0.8),
+    0 0 12px rgba(59,130,246,0.7),
+    0 0 20px rgba(59,130,246,0.5);
+}
 
 /* ===== Thumbnails ===== */
 .thumbnail {
