@@ -11,10 +11,9 @@ export default function Header() {
         flex items-center justify-center
       "
     >
-      {/* Stretched image with NO CROPPING */}
       <div className="relative w-full h-full">
         <Image
-          src="/header-logo.png"   // must exist in /public
+          src="/header-logo.png"
           alt="dubUlar header logo"
           fill
           priority
