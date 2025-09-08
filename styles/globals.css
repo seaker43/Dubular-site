@@ -20,6 +20,11 @@ header {
          h-20 flex items-center justify-center;
 }
 
+/* Push page content below header */
+main {
+  @apply pt-20; /* same as header height */
+}
+
 /* ===== Bottom Bar ===== */
 .navbar {
   @apply fixed bottom-0 w-full flex justify-around
@@ -73,6 +78,7 @@ header {
 .featured-hero {
   @apply relative w-full overflow-hidden rounded-2xl
          shadow-lg ring-1 ring-white/10;
+  min-height: calc(50vh - 5rem); /* top half of screen minus header */
 }
 
 .featured-hero img,
