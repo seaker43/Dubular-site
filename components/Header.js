@@ -5,22 +5,22 @@ export default function Header() {
   return (
     <header
       className="
-        relative fixed top-0 left-0 right-0 z-50
-        h-16 border-b border-neutral-800        /* ↑ a bit taller */
+        fixed top-0 left-0 right-0 z-50
         bg-black/95 backdrop-blur
-        flex items-center justify-center
+        border-b border-neutral-800
+        h-24 flex items-center justify-center
       "
     >
       <Image
-        src="/header-logo.png"
+        src="/Dubular2.png"     // 👈 your new logo in /public
         alt="dubUlar header logo"
-        fill
+        width={300}             // base size
+        height={100}
         priority
-        sizes="100vw"
         className="
-          object-contain object-center           /* ← no cropping, no stretch */
-          w-full h-full opacity-95 pointer-events-none select-none
-          px-4                                   /* small horizontal breathing room */
+          object-contain
+          max-h-20               /* cap max height ~80px */
+          w-auto
         "
       />
     </header>
