@@ -2,75 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ================== Root layout metrics ================== */
-:root{
-  --header-h: 80px;     /* header height (h-20) */
-  --navbar-h: 64px;     /* bottom bar visual height */
-}
+/* ===== Base ===== */
+html, body { @apply bg-black text-white antialiased min-h-screen; }
+a { @apply text-cyan-400 hover:underline; }
 
-/* ================== Base ================== */
-html, body {
-  @apply bg-black text-white antialiased;
-  height: auto;              /* avoid locking viewport */
-  min-height: 100%;
-}
-
-body {
-  overflow-y: auto;          /* ensure page can scroll */
-  -webkit-overflow-scrolling: touch;
-}
-
-#__next {
-  min-height: 100vh;         /* Next.js root fills screen */
-  display: flex;
-  flex-direction: column;
-}
-
-/* ================== Header (no border line) ================== */
+/* ===== Header (height now controlled in Header.js) ===== */
 header{
   @apply fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur flex items-center justify-center;
-  height: var(--header-h);
-  border: none !important;   /* force-hide separator line */
+  border: none !important; /* force-hide any border line */
 }
 
-/* ================== Page content area ================== */
-/* Use on the main element so content clears header & bottom bar */
-.page-wrap{
-  /* push below fixed header, and keep space for bottom bar */
-  padding-top: var(--header-h);
-  padding-bottom: var(--navbar-h);
-  min-height: calc(100vh - var(--header-h)); /* allows scrolling past bottom */
-}
+/* Push content below header (matches h-20 in Header.js) */
+main{ @apply pt-20; }
 
-/* Optional generic main tag support (if some pages don’t use page-wrap) */
-main{
-  padding-top: var(--header-h);
-  padding-bottom: var(--navbar-h);
-}
-
-/* ================== Bottom Bar ================== */
+/* ===== Bottom Bar ===== */
 .navbar{
   @apply fixed bottom-0 left-0 right-0 z-50 bg-neutral-950/95 backdrop-blur border-t border-neutral-800 py-2 flex justify-around;
-  height: var(--navbar-h);
 }
 .navbar-item{ @apply flex flex-col items-center text-xs text-neutral-400 transition-colors; }
 .navbar-item.active{ @apply text-white; }
 .navbar-item.active .nav-icon{
-  filter: drop-shadow(0 0 6px rgba(168,85,247,.85))
-          drop-shadow(0 0 14px rgba(56,189,248,.55));
+  filter: drop-shadow(0 0 6px rgba(168, 85, 247, .85))
+          drop-shadow(0 0 14px rgba(56, 189, 248, .55));
 }
 
-/* ================== Section Titles ================== */
+/* ===== Section Titles ===== */
 .section-header h2 { @apply text-2xl font-bold mb-3; }
 
-/* ================== Full-bleed helper ================== */
+/* ===== Full-bleed helper (hero edge-to-edge) ===== */
 .full-bleed{
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
 }
 
-/* ================== Featured Hero ================== */
+/* ===== Featured Hero ===== */
 .featured-hero{
   @apply relative overflow-hidden rounded-2xl ring-1 ring-white/10;
   min-height: clamp(220px, 44vh, 520px);
@@ -78,18 +44,18 @@ main{
 }
 .featured-glow-pink{
   box-shadow:
-    0 0 10px rgba(236,72,153,.55),
-    0 0 24px rgba(236,72,153,.45),
-    0 0 44px rgba(236,72,153,.35);
+    0 0 10px rgba(236, 72, 153, 0.55),
+    0 0 24px rgba(236, 72, 153, 0.45),
+    0 0 44px rgba(236, 72, 153, 0.35);
 }
 .featured-glow-blue{
   box-shadow:
-    0 0 10px rgba(56,189,248,.55),
-    0 0 24px rgba(56,189,248,.45),
-    0 0 44px rgba(56,189,248,.35);
+    0 0 10px rgba(56, 189, 248, 0.55),
+    0 0 24px rgba(56, 189, 248, 0.45),
+    0 0 44px rgba(56, 189, 248, 0.35);
 }
 
-/* ================== Horizontal Thumbnail Row ================== */
+/* ===== Horizontal Thumbnail Row ===== */
 .thumb-row{
   @apply relative flex gap-4 overflow-x-auto py-2;
   padding-bottom: 10px;
@@ -101,6 +67,7 @@ main{
 }
 .thumb-row::-webkit-scrollbar{ display: none; }
 
+/* Card size tuned so 1.5–2.5 show on mobile/tablet */
 .thumb-card{
   @apply relative flex-shrink-0 rounded-2xl bg-neutral-900/50 ring-1 ring-white/5;
   width: clamp(180px, 58vw, 280px);
@@ -123,27 +90,28 @@ main{
 
 .thumb-img{ @apply w-full h-full object-cover rounded-2xl block; }
 .thumb-title{ @apply absolute left-3 bottom-2 text-white/90 text-base font-semibold drop-shadow; }
+
 .live-badge{
   @apply absolute top-2 left-2 text-xs font-bold px-2 py-1 rounded-md;
-  background: rgba(239,68,68,.95);
+  background: rgba(239, 68, 68, 0.95);
   color: black;
   box-shadow:
-    0 0 8px rgba(239,68,68,.85),
-    0 0 18px rgba(239,68,68,.55);
+    0 0 8px rgba(239, 68, 68, 0.85),
+    0 0 18px rgba(239, 68, 68, 0.55);
 }
 
-/* ================== Neon glows ================== */
+/* ===== Neon glows ===== */
 .glow-cyan{
   box-shadow:
-    0 0 10px rgba(34,211,238,.35),
-    0 0 22px rgba(34,211,238,.25),
-    inset 0 0 0 1px rgba(255,255,255,.05);
+    0 0 10px rgba(34, 211, 238, 0.35),
+    0 0 22px rgba(34, 211, 238, 0.25),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
 }
 .glow-red{
   box-shadow:
-    0 0 10px rgba(239,68,68,.55),
-    0 0 22px rgba(239,68,68,.45),
-    inset 0 0 0 1px rgba(255,255,255,.05);
+    0 0 10px rgba(239, 68, 68, 0.55),
+    0 0 22px rgba(239, 68, 68, 0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
 }
 .glow-dual{
   box-shadow:
@@ -152,33 +120,34 @@ main{
     inset 0 0 0 1px rgba(255,255,255,.06);
 }
 
-/* ================== Top-5 vertical grid ================== */
+/* ===== Vertical Top 5 grid ===== */
 .vthumb-grid{
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
 }
 @media (max-width: 640px){
-  .vthumb-grid{ grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+  .vthumb-grid{ grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
 }
 .vthumb-card{
   position: relative;
   border-radius: 1rem;
   overflow: hidden;
-  background: rgba(23,23,23,.6);
+  background: rgba(23,23,23,0.6);
+  ring: 1px solid rgba(255,255,255,0.06);
   aspect-ratio: 9 / 16;
   transform: translateZ(0);
   transition: transform 160ms ease, box-shadow 160ms ease;
 }
-.vthumb-card:active{ transform: scale(.985); }
+.vthumb-card:active{ transform: scale(0.985); }
 @media (hover:hover){
   .vthumb-card:hover{ transform: translateY(-2px) scale(1.01); }
 }
-.vthumb-img{ width:100%; height:100%; object-fit:cover; object-position:center; display:block; }
-.vthumb-gradient{ position:absolute; inset:0; pointer-events:none; background:linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0) 50%); }
-.vthumb-title{ position:absolute; left:.75rem; right:.75rem; bottom:.75rem; font-weight:800; font-size:1.1rem; text-shadow:0 1px 2px rgba(0,0,0,.7); }
+.vthumb-img{ width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.vthumb-gradient{ position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0) 50%); }
+.vthumb-title{ position: absolute; left: 0.75rem; right: 0.75rem; bottom: 0.75rem; font-weight: 800; font-size: 1.1rem; text-shadow: 0 1px 2px rgba(0,0,0,.7); }
 
-/* ================== Favorites strip ================== */
+/* ===== Favorites ===== */
 .favs-strip{ @apply px-4 mt-4; }
 .favs-row{
   @apply flex gap-3 overflow-x-auto py-2;
