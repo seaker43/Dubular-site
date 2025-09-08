@@ -2,192 +2,159 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ========= Global layout variables ========= */
-:root{
-  --header-h: 5rem;   /* 80px – one source of truth */
-  --navbar-h: 4rem;   /* 64px */
+/* ===== Base ===== */
+html, body {
+  @apply bg-black text-white antialiased min-h-screen;
 }
 
-/* ========= Base ========= */
-html, body { @apply bg-neutral-950 text-white antialiased; }
-body { @apply min-h-screen overflow-x-hidden; }
-#__next { @apply min-h-screen flex flex-col; }
+/* Links */
 a { @apply text-cyan-400 hover:underline; }
 
-/* ========= Header (fixed) ========= */
-header{
-  position: fixed; inset: 0 0 auto 0; z-index: 50;
-  height: var(--header-h);
-  @apply bg-black/95 backdrop-blur flex items-center justify-center;
-  border-bottom: none; /* hide line */
+/* ===== Header =====
+   (no border line per request) */
+header {
+  @apply fixed top-0 left-0 right-0 z-50
+         bg-black/95 backdrop-blur
+         h-20 flex items-center justify-center;
 }
 
-/* Push page content below header, above bottom bar */
-main{
-  padding-top: var(--header-h);
-  padding-bottom: calc(var(--navbar-h) + 0.75rem);
+/* Ensure page content can sit flush to header; Layout controls spacing. */
+main { margin-top: 0 !important; }
+
+/* ===== Bottom Bar ===== */
+.navbar {
+  @apply fixed bottom-0 w-full flex justify-around
+         bg-neutral-950/95 py-2 backdrop-blur z-50;
 }
 
-/* ========= Bottom bar (fixed) ========= */
-.navbar{
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
-  height: var(--navbar-h);
-  @apply w-full flex justify-around items-center bg-neutral-950/95 backdrop-blur;
-}
-.navbar-item{ @apply flex flex-col items-center text-xs text-neutral-400 gap-1 transition; }
-.navbar-item.active{ @apply text-white; }
-.navbar-item.active{
-  text-shadow:
-    0 0 6px rgba(236,72,153,.8),
-    0 0 12px rgba(59,130,246,.7),
-    0 0 20px rgba(59,130,246,.5);
-}
-.navbar-item.active svg{
-  filter: drop-shadow(0 0 6px rgba(236,72,153,.8))
-          drop-shadow(0 0 12px rgba(59,130,246,.7));
+.navbar-item {
+  @apply relative flex flex-col items-center text-xs text-neutral-400 transition;
 }
 
-/* ========= Horizontal rails (thumbnails) ========= */
-.scroll-rail{
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  scroll-padding-left: 1rem;
-  contain: layout paint style;
-  backface-visibility: hidden;
-  will-change: scroll-position, transform;
+/* active tab glow */
+.navbar-item.active {
+  @apply text-white;
+  box-shadow:
+    0 0 6px rgba(168, 85, 247, 0.35),
+    0 0 14px rgba(56, 189, 248, 0.35);
+  border-radius: 12px;
+}
+
+/* ===== Sections ===== */
+.section-header h2 { @apply text-2xl font-bold mb-3; }
+
+/* ===== Full-bleed helper (fixes left/right gaps under header) ===== */
+.full-bleed{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* Keep featured tight to header (no artificial top gap) */
+.hero-tight{ margin-top: 0 !important; }
+
+/* ===== Featured Hero ===== */
+.featured-hero{
+  @apply relative overflow-hidden rounded-2xl;
+  /* comfortable but shorter hero */
+  min-height: clamp(220px, 44vh, 520px);
+  /* smooth animation layer to help GPUs keep this sharp */
   transform: translateZ(0);
 }
-.no-scrollbar::-webkit-scrollbar{ display: none; }
-.no-scrollbar{ -ms-overflow-style: none; scrollbar-width: none; }
 
-/* ========= Featured hero ========= */
-.hero-tight{ margin-top: 0 !important; }
-.featured-hero{
-  @apply relative w-full overflow-hidden rounded-2xl;
-  min-height: 48vh;
-  outline: 1px solid rgba(255,255,255,0.08);
-  box-shadow:
-    0 20px 40px rgba(0,0,0,.45),
-    0 0 0 1px rgba(255,255,255,.04) inset;
-}
-.featured-hero img,
-.featured-hero video{ @apply w-full h-full object-cover; }
+/* alternating neon glows (pink / blue) */
 .featured-glow-pink{
   box-shadow:
-    0 20px 40px rgba(0,0,0,.45),
-    0 0 0 1px rgba(255,255,255,.04) inset,
-    0 0 16px rgba(236,72,153,.35),
-    0 0 36px rgba(236,72,153,.25);
+    0 0 10px rgba(236, 72, 153, 0.55),
+    0 0 24px rgba(236, 72, 153, 0.45),
+    0 0 44px rgba(236, 72, 153, 0.35);
 }
 .featured-glow-blue{
   box-shadow:
-    0 20px 40px rgba(0,0,0,.45),
-    0 0 0 1px rgba(255,255,255,.04) inset,
-    0 0 16px rgba(59,130,246,.35),
-    0 0 36px rgba(59,130,246,.25);
+    0 0 10px rgba(56, 189, 248, 0.55),
+    0 0 24px rgba(56, 189, 248, 0.45),
+    0 0 44px rgba(56, 189, 248, 0.35);
 }
 
-/* ========= Thumbnail cards ========= */
-.card{
-  position: relative;
-  border-radius: .75rem;
-  outline: 1px solid rgba(255,255,255,.08);
-  box-shadow: 0 2px 10px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.04);
-  transition: transform 200ms ease;
-  overflow: hidden;
-  background: rgba(23,23,23,.7);
+/* ===== Thumbnail Row (horizontal, snap, low-jitter) ===== */
+.thumb-row{
+  @apply flex gap-4 overflow-x-auto py-2;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  padding-bottom: 10px; /* visual breathing room above bottom bar */
+}
+
+/* each card */
+.thumb-card{
+  @apply relative flex-shrink-0 rounded-2xl bg-neutral-900/50 ring-1 ring-white/5;
+  width: clamp(240px, 76vw, 320px);
+  height: clamp(140px, 40vw, 190px);
+  scroll-snap-align: center;
+  backface-visibility: hidden;
   transform: translateZ(0);
-  will-change: transform;
+  transition: transform 160ms ease, box-shadow 160ms ease;
 }
-.card:hover{ transform: translate3d(0,-2px,0); }
-.card:active{ transform: translate3d(0,0,0) scale(.98); }
 
-.glow-pink{
-  box-shadow:
-    0 2px 10px rgba(0,0,0,.45),
-    inset 0 0 0 1px rgba(255,255,255,.04),
-    0 0 10px rgba(236,72,153,.35),
-    0 0 24px rgba(236,72,153,.25);
+/* hover / active pop */
+.thumb-card:active { transform: scale(0.98); }
+@media (hover:hover){
+  .thumb-card:hover { transform: translateY(-2px) scale(1.01); }
 }
-.glow-blue{
-  box-shadow:
-    0 2px 10px rgba(0,0,0,.45),
-    inset 0 0 0 1px rgba(255,255,255,.04),
-    0 0 10px rgba(59,130,246,.35),
-    0 0 24px rgba(59,130,246,.25);
+
+/* image */
+.thumb-img{
+  @apply w-full h-full object-cover rounded-2xl;
+  display:block;
 }
+
+/* title */
+.thumb-title{
+  @apply absolute left-3 bottom-2 text-white/90 text-base font-semibold drop-shadow;
+}
+
+/* live badge */
+.live-badge{
+  @apply absolute top-2 left-2 text-xs font-bold px-2 py-1 rounded-md;
+  background: rgba(239, 68, 68, 0.95);
+  color: black;
+  box-shadow:
+    0 0 8px rgba(239, 68, 68, 0.85),
+    0 0 18px rgba(239, 68, 68, 0.55);
+}
+
+/* Default neon (cyan/teal) for non-live cards */
+.glow-cyan{
+  box-shadow:
+    0 0 10px rgba(34, 211, 238, 0.35),
+    0 0 22px rgba(34, 211, 238, 0.25),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+/* Red glow for live */
 .glow-red{
   box-shadow:
-    0 2px 10px rgba(0,0,0,.45),
-    inset 0 0 0 1px rgba(255,255,255,.04),
-    0 0 10px rgba(239,68,68,.45),
-    0 0 24px rgba(239,68,68,.35);
+    0 0 10px rgba(239, 68, 68, 0.55),
+    0 0 22px rgba(239, 68, 68, 0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
 }
 
-.ratio{ position: relative; width: 100%; overflow: hidden; }
-.ratio-16x9{ aspect-ratio: 16/9; }
-.ratio-1x1{ aspect-ratio: 1/1; }
+/* ===== Favorites strip (square, single row above bottom bar) ===== */
+.favs-strip{
+  @apply px-4 mt-4;
+}
+.favs-row{
+  @apply flex gap-3 overflow-x-auto py-2;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
+}
+.fav-card{
+  @apply relative flex-shrink-0 rounded-xl bg-neutral-900/50 ring-1 ring-white/5;
+  width: 110px; height: 110px; /* square */
+  scroll-snap-align: start;
+  transform: translateZ(0);
+}
+.fav-card img{ @apply w-full h-full object-cover rounded-xl; }
 
-.media{
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center;
-  backface-visibility: hidden;
-}
-
-/* Skeleton shimmer (kept to prevent layout flashes) */
-.skeleton{
-  position: absolute; inset: 0;
-  background: linear-gradient(90deg,
-      rgba(255,255,255,.05) 0%,
-      rgba(255,255,255,.10) 50%,
-      rgba(255,255,255,.05) 100%);
-  background-size: 200% 100%;
-  animation: scan 1.2s linear infinite;
-  will-change: background-position;
-  pointer-events: none;
-}
-@keyframes scan{
-  0%{ background-position: 200% 0; }
-  100%{ background-position: -200% 0; }
-}
-
-/* Title strip */
-.title{
-  position: absolute; left: 0; right: 0; bottom: 0;
-  padding: .5rem;
-  background: linear-gradient(to top, rgba(0,0,0,.8), transparent);
-}
-.label{ font-size: .875rem; font-weight: 600; filter: drop-shadow(0 1px 1px rgba(0,0,0,.6)); }
-
-/* Channel badge */
-.badge{
-  position: absolute; left: .5rem; top: .5rem; z-index: 2;
-  border-radius: 9999px; padding: 2px;
-  background: rgba(255,255,255,.08);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
-}
-.badge-img{ border-radius: 9999px; display: block; width: 36px; height: 36px; object-fit: cover; }
-.badge-fallback{
-  width: 36px; height: 36px; border-radius: 9999px;
-  background: #3f3f46; color: rgba(255,255,255,.7);
-  display: grid; place-items: center; font-size: .75rem;
-}
-
-/* LIVE pill */
-.live{
-  position: absolute; right: .5rem; top: .5rem;
-  font-size: 10px; font-weight: 700;
-  padding: .25rem .5rem; border-radius: .375rem;
-  background: rgba(239,68,68,.9); color: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,.4);
-}
-
-/* Creator page helpers */
-.creator-banner{ position: relative; height: 220px; }
-.creator-avatar{
-  box-shadow:
-    0 0 8px rgba(236,72,153,.35),
-    0 0 16px rgba(59,130,246,.25);
-  }
+/* ===== Utilities ===== */
+.hide-border{ border: none !important; }
