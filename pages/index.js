@@ -1,86 +1,76 @@
 // pages/index.js
 import Head from "next/head";
+import Link from "next/link";
 
-const trending = [
-  { id: 1, title: "Cyber Drift", src: "/thumbnails/trending1.jpg" },
-  { id: 2, title: "Night City", src: "/thumbnails/trending2.jpg" },
-  { id: 3, title: "Synthwave FM", src: "/thumbnails/trending3.jpg" },
-  { id: 4, title: "Neon Streets", src: "/thumbnails/trending4.jpg" },
-];
-
+/** ------- Mock data (swap later) ------- */
 const liveNow = [
-  { id: "l1", title: "Arena Live", src: "/thumbnails/live1.jpg" },
-  { id: "l2", title: "IRL Downtown", src: "/thumbnails/live2.jpg" },
-  { id: "l3", title: "Music Session", src: "/thumbnails/live3.jpg" },
+  { id: "lv1", title: "Arena Finals", img: "/thumbnails/live1.jpg", href: "/watch/lv1" },
+  { id: "lv2", title: "Night Vibes",  img: "/thumbnails/live2.jpg", href: "/watch/lv2" },
+  { id: "lv3", title: "IRL Walk",     img: "/thumbnails/live3.jpg", href: "/watch/lv3" },
+  { id: "lv4", title: "Music Set",    img: "/thumbnails/live4.jpg", href: "/watch/lv4" },
 ];
+
+/** small card using globals.css classes */
+function Thumb({ item, glow = "glow-dual", live = false }) {
+  return (
+    <Link href={item.href} className={`thumb-card ${glow}`} prefetch={false}>
+      <img src={item.img} alt={item.title} className="thumb-img" />
+      {live && <div className="live-badge">LIVE</div>}
+      <div className="thumb-title">{item.title}</div>
+    </Link>
+  );
+}
 
 export default function Home() {
   return (
     <>
       <Head>
         <title>dubUlar — Home</title>
-        <meta name="description" content="dubUlar home" />
+        <meta name="description" content="Watch live streams and discover creators" />
       </Head>
 
-      {/* Content clears fixed header via globals (main{ pt-20 }). 
-          .page-container adds the responsive side padding. */}
       <main>
-        <div className="page-container space-y-8 pb-24">
-          {/* ===== Featured (simple static hero; replace src as needed) ===== */}
-          <section className="featured-hero featured-glow-pink">
-            <img
-              src="/thumbnails/trending1.jpg"
-              alt="Featured"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 to-transparent">
-              <h2 className="text-white text-2xl md:text-3xl font-extrabold">
-                Featured Content
-              </h2>
-            </div>
-          </section>
+        {/* Featured hero snug under header */}
+        <section className="featured-hero featured-glow-pink full-bleed">
+          <img src="/thumbnails/featured.jpg" alt="Featured" />
+          <div className="overlay" />
+        </section>
 
-          {/* ===== Live (red glow + badge) ===== */}
-          <section>
-            <div className="section-header">
-              <h2>Live</h2>
-            </div>
-            <div className="thumb-row">
-              {liveNow.map((item) => (
-                <article key={item.id} className="thumb-card glow-red">
-                  <span className="live-badge">LIVE</span>
-                  <img
-                    src={item.src}
-                    alt={item.title}
-                    className="thumb-img"
-                    loading="lazy"
-                  />
-                  <div className="thumb-title">{item.title}</div>
-                </article>
-              ))}
-            </div>
-          </section>
+        {/* Live row */}
+        <section className="mt-4">
+          <div className="section-header">
+            <h2>Live</h2>
+          </div>
+          <div className="thumb-row">
+            {liveNow.map((it) => (
+              <Thumb key={it.id} item={it} glow="glow-red" live />
+            ))}
+          </div>
+        </section>
 
-          {/* ===== Trending (dual neon glow) ===== */}
-          <section>
-            <div className="section-header">
-              <h2>Trending</h2>
-            </div>
-            <div className="thumb-row">
-              {trending.map((item) => (
-                <article key={item.id} className="thumb-card glow-dual">
-                  <img
-                    src={item.src}
-                    alt={item.title}
-                    className="thumb-img"
-                    loading="lazy"
-                  />
-                  <div className="thumb-title">{item.title}</div>
-                </article>
-              ))}
-            </div>
-          </section>
-        </div>
+        {/* Three vertical portrait thumbnails */}
+        <section className="mt-4">
+          <div className="section-header">
+            <h2>Top 5</h2>
+          </div>
+          <div className="vthumb-grid">
+            <Link href="/find?section=top-streamers" className="vthumb-card glow-dual" prefetch={false}>
+              <img src="/thumbnails/top_streamers.jpg" alt="Top 5 Streamers" className="vthumb-img" />
+              <div className="vthumb-gradient" />
+              <div className="vthumb-title">Top 5 Streamers</div>
+            </Link>
+            <Link href="/find?section=top-gifters" className="vthumb-card glow-dual" prefetch={false}>
+              <img src="/thumbnails/top_gifters.jpg" alt="Top 5 Gifters" className="vthumb-img" />
+              <div className="vthumb-gradient" />
+              <div className="vthumb-title">Top 5 Gifters</div>
+            </Link>
+            <Link href="/find?section=top-communities" className="vthumb-card glow-dual" prefetch={false}>
+              <img src="/thumbnails/top_communities.jpg" alt="Top 5 Communities" className="vthumb-img" />
+              <div className="vthumb-gradient" />
+              <div className="vthumb-title">Top 5 Communities</div>
+            </Link>
+          </div>
+        </section>
       </main>
     </>
   );
