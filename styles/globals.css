@@ -78,6 +78,7 @@ main {
 }
 .thumb-row::-webkit-scrollbar{ display: none; }
 
+/* Legacy card sizing (kept for pages that still use .thumb-card directly) */
 .thumb-card{
   @apply relative flex-shrink-0 rounded-2xl bg-neutral-900/50 ring-1 ring-white/5;
   width: clamp(180px, 58vw, 280px);
@@ -97,7 +98,6 @@ main {
 @media (hover:hover){
   .thumb-card:hover { transform: translateY(-2px) scale(1.01); }
 }
-
 .thumb-img{ @apply w-full h-full object-cover rounded-2xl block; }
 .thumb-title{ @apply absolute left-3 bottom-2 text-white/90 text-base font-semibold drop-shadow; }
 .live-badge{
@@ -191,3 +191,19 @@ main {
   width:110px; height:110px; scroll-snap-align:start; transform:translateZ(0);
 }
 .fav-card img{ @apply w-full h-full object-cover rounded-xl; }
+
+/* =========================================================
+   Thumb / MediaLoopRow helpers (new)
+   ========================================================= */
+
+/* Hide horizontal scrollbar cross-browser when needed */
+.no-scrollbar {
+  -ms-overflow-style: none;    /* IE/Edge */
+  scrollbar-width: none;       /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar { display: none; }  /* WebKit */
+
+/* Optional ratio helpers if you ever need them globally */
+.ratio { position: relative; width: 100%; overflow: hidden; }
+.ratio-16x9 { aspect-ratio: 16 / 9; }
+.ratio-1x1  { aspect-ratio: 1 / 1; }
