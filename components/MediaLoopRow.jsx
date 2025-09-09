@@ -1,31 +1,42 @@
 // components/MediaLoopRow.jsx
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
+import Thumb from "@/components/Thumb";
 
 /**
  * Seamless, manual horizontal scroller that loops infinitely.
  * - No auto snap-back; you can keep swiping forever.
  * - Duplicates the items 3x and keeps the viewport centered on the middle set.
- * - Uses your existing CSS classes: .thumb-row, .thumb-card, .thumb-img, .thumb-title, .live-badge, glow-*
  *
  * Props:
- *  - title?: string (optional section heading you render outside if you want)
- *  - items: Array<{ id: string|number, title: string, img: string, live?: boolean, href?: string }>
- *  - cardClass?: string (optional extra classes for each card)
+ *  - items: Array<{
+ *      id: string|number,
+ *      title?: string,
+ *      img?: string,        // or 'image'
+ *      image?: string,      // alias
+ *      live?: boolean,
+ *      href?: string,
+ *      color?: "pink"|"blue"|"red",
+ *      creator?: { name?: string, slug?: string, logoUrl?: string }
+ *    }>
  */
-export default function MediaLoopRow({ items = [], cardClass = "" }) {
+export default function MediaLoopRow({ items = [] }) {
   const railRef = useRef(null);
 
-  // Helper to center on the middle set
+  const tripled = useMemo(() => {
+    if (!items?.length) return [];
+    return [...items, ...items, ...items];
+  }, [items]);
+
+  // Center viewport on the middle set
   const centerOnMiddle = () => {
     const el = railRef.current;
-    if (!el) return;
-    // We render items x 3; each set ≈ totalWidth/3
+    if (!el || el.scrollWidth === 0) return;
     const third = el.scrollWidth / 3;
-    // Put us roughly at the center of the middle set
-    el.scrollLeft = third + (el.clientWidth * 0.5);
+    el.scrollLeft = third + el.clientWidth * 0.5;
   };
 
   useEffect(() => {
+    if (!tripled.length) return;
     centerOnMiddle();
     const el = railRef.current;
     if (!el) return;
@@ -39,11 +50,11 @@ export default function MediaLoopRow({ items = [], cardClass = "" }) {
         const third = max / 3;
         const left = el.scrollLeft;
 
-        // When you cross left boundary of the first third, jump forward one third.
+        // Crossed left boundary of first third → jump forward one third
         if (left < third * 0.4) {
           el.scrollLeft = left + third;
         }
-        // When you cross right boundary of the last third, jump back one third.
+        // Crossed right boundary of last third → jump back one third
         else if (left > third * 1.6) {
           el.scrollLeft = left - third;
         }
@@ -52,7 +63,7 @@ export default function MediaLoopRow({ items = [], cardClass = "" }) {
     };
 
     el.addEventListener("scroll", onScroll, { passive: true });
-    // Re-center on resize
+
     const onResize = () => centerOnMiddle();
     window.addEventListener("resize", onResize);
 
@@ -60,41 +71,30 @@ export default function MediaLoopRow({ items = [], cardClass = "" }) {
       el.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
     };
-  }, [items.length]);
+  }, [tripled.length]);
 
-  // Duplicate items 3x to create the seamless loop effect
-  const tripled = [...items, ...items, ...items];
+  if (!items?.length) return null;
 
   return (
     <div className="thumb-row no-scrollbar" ref={railRef} role="list">
       <div className="shrink-0 w-2" aria-hidden="true" />
       {tripled.map((item, idx) => {
         const key = `${item.id ?? idx}-${idx}`;
-        const Card = (
-          <article
-            key={key}
-            className={`thumb-card ${item.live ? "glow-red" : "glow-dual"} ${cardClass}`}
-            role="listitem"
-          >
-            <img
-              src={item.img}
-              alt={item.title ?? "thumbnail"}
-              className="thumb-img"
-              loading="lazy"
-              decoding="async"
-              draggable="false"
-              onError={(e) => { e.currentTarget.src = "/placeholder.svg"; }}
+        const src = item.image || item.img || "/placeholder.svg";
+        return (
+          <div key={key} role="listitem" className="snap-start">
+            <Thumb
+              title={item.title}
+              image={src}
+              href={item.href}
+              live={!!item.live}
+              color={item.color}
+              square={false}
+              creator={item.creator}
+              // small perf boost for the first few in view
+              priority={idx < 6}
             />
-            {item.live && <span className="live-badge">LIVE</span>}
-            {item.title && <div className="thumb-title">{item.title}</div>}
-          </article>
-        );
-        return item.href ? (
-          <a key={`a-${key}`} href={item.href} aria-label={item.title ?? "Open"}>
-            {Card}
-          </a>
-        ) : (
-          Card
+          </div>
         );
       })}
       <div className="shrink-0 w-2" aria-hidden="true" />
