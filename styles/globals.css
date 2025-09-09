@@ -6,28 +6,96 @@
 html, body { @apply bg-black text-white antialiased min-h-screen; }
 a { @apply text-cyan-400 hover:underline; }
 
-/* ===== Header (no border line) ===== */
+/* ===== Header ===== */
 header{
   @apply fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur h-20 flex items-center justify-center;
   border: none !important;
 }
 
 /* Push content below header */
-main { 
-  @apply pt-8 px-4; /* top padding = 32px, side padding = 1rem */
-}
+main { @apply pt-8 px-4; }
 
-/* ===== Section Titles ===== */
-.section-header h2 { @apply text-2xl font-bold mb-3; }
-
-/* ===== Full-bleed helper (edge-to-edge) ===== */
-.full-bleed{
+/* ===== Full-bleed helper for rows (edge-to-edge without cutting content) ===== */
+.full-bleed {
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
 }
 
-/* ===== Featured Hero ===== */
+/* ===== Search Bar (find page) ===== */
+.search-wrap { width: 100%; }
+.search-bar {
+  @apply w-full flex items-center gap-2 bg-neutral-900/70 rounded-xl ring-1 ring-white/10 p-3;
+}
+.search-bar input {
+  @apply flex-1 bg-transparent outline-none text-white placeholder:text-neutral-400;
+}
+.search-bar button {
+  @apply shrink-0 px-3 py-1 rounded-lg bg-black/70 text-white hover:bg-black/80 transition;
+}
+
+/* ===== Horizontal Thumbnail Row (unified) =====
+   Put class "full-bleed" on the CONTAINER that wraps .thumb-row
+*/
+.thumb-row{
+  @apply relative flex gap-4 overflow-x-auto py-2;
+  padding-bottom: 10px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.thumb-row::-webkit-scrollbar{ display: none; }
+
+/* CONSISTENT card width across pages.
+   72vw on phones, clamped to 320px max, 220px min on tablets/desktops. */
+.thumb-card{
+  @apply relative rounded-2xl bg-neutral-900/50 ring-1 ring-white/5;
+  width: clamp(220px, 72vw, 320px);
+  /* Maintain same height by aspect-ratio in markup (16:9) */
+  scroll-snap-align: center;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  overflow: hidden;
+}
+.thumb-card:active { transform: scale(0.98); }
+@media (hover:hover){
+  .thumb-card:hover { transform: translateY(-2px) scale(1.01); }
+}
+
+/* Image fitting – default = contain (no cropping) */
+.thumb-img{ position:absolute; inset:0; width:100%; height:100%; }
+.thumb-contain{ object-fit: contain; background: #0a0a0a; }
+.thumb-cover{  object-fit: cover; }
+
+.thumb-title{ @apply absolute left-3 bottom-2 text-white/90 text-base font-semibold drop-shadow; }
+.live-badge{
+  @apply absolute top-2 left-2 text-xs font-bold px-2 py-1 rounded-md;
+  background: rgba(239, 68, 68, 0.95);
+  color: black;
+  box-shadow:
+    0 0 8px rgba(239, 68, 68, 0.85),
+    0 0 18px rgba(239, 68, 68, 0.55);
+}
+
+/* ===== Neon glows (site palette aligned to logo) ===== */
+.glow-dual{
+  /* neon pink + cyan, soft falloff */
+  box-shadow:
+    0 0 12px rgba(236,72,153,.40),
+    0 0 28px rgba(56,189,248,.30),
+    inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.glow-red{
+  box-shadow:
+    0 0 12px rgba(239,68,68,.50),
+    0 0 26px rgba(239,68,68,.35),
+    inset 0 0 0 1px rgba(255,255,255,.06);
+}
+
+/* ===== Featured Hero (kept snug to header by main pt-8) ===== */
 .featured-hero{
   @apply relative overflow-hidden rounded-2xl ring-1 ring-white/10;
   min-height: clamp(220px, 44vh, 520px);
@@ -40,96 +108,7 @@ main {
   background: linear-gradient(to bottom, rgba(0,0,0,0) 35%, rgba(0,0,0,.6) 100%);
 }
 
-/* Alternating hero glow helpers */
-.featured-glow-pink{
-  box-shadow:
-    0 0 10px rgba(236, 72, 153, 0.55),
-    0 0 24px rgba(236, 72, 153, 0.45),
-    0 0 44px rgba(236, 72, 153, 0.35);
-}
-.featured-glow-blue{
-  box-shadow:
-    0 0 10px rgba(56, 189, 248, 0.55),
-    0 0 24px rgba(56, 189, 248, 0.45),
-    0 0 44px rgba(56, 189, 248, 0.35);
-}
-
-/* ===== Search Bar (find page) ===== */
-.search-wrap { width: 100%; margin-top: 0 !important; }
-.search-bar {
-  @apply w-full flex items-center gap-2 bg-neutral-900/70 rounded-xl ring-1 ring-white/10 p-3;
-}
-.search-bar input {
-  @apply flex-1 bg-transparent outline-none text-white placeholder:text-neutral-400;
-}
-.search-bar button {
-  @apply shrink-0 px-3 py-1 rounded-lg bg-black/70 text-white hover:bg-black/80 transition;
-}
-
-/* ===== Horizontal Thumbnail Row ===== */
-.thumb-row{
-  @apply relative flex gap-4 overflow-x-auto py-2;
-  padding-bottom: 10px;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.thumb-row::-webkit-scrollbar{ display: none; }
-
-/* Legacy card sizing (kept for pages that still use .thumb-card directly) */
-.thumb-card{
-  @apply relative flex-shrink-0 rounded-2xl bg-neutral-900/50 ring-1 ring-white/5;
-  width: clamp(180px, 58vw, 280px);
-  height: clamp(120px, 32vw, 160px);
-  scroll-snap-align: center;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-  transition: transform 160ms ease, box-shadow 160ms ease;
-}
-@media (min-width: 768px){
-  .thumb-card{
-    width: clamp(220px, 42vw, 300px);
-    height: clamp(130px, 24vw, 180px);
-  }
-}
-.thumb-card:active { transform: scale(0.98); }
-@media (hover:hover){
-  .thumb-card:hover { transform: translateY(-2px) scale(1.01); }
-}
-.thumb-img{ @apply w-full h-full object-cover rounded-2xl block; }
-.thumb-title{ @apply absolute left-3 bottom-2 text-white/90 text-base font-semibold drop-shadow; }
-.live-badge{
-  @apply absolute top-2 left-2 text-xs font-bold px-2 py-1 rounded-md;
-  background: rgba(239, 68, 68, 0.95);
-  color: black;
-  box-shadow:
-    0 0 8px rgba(239, 68, 68, 0.85),
-    0 0 18px rgba(239, 68, 68, 0.55);
-}
-
-/* ===== Neon glows ===== */
-.glow-cyan{
-  box-shadow:
-    0 0 10px rgba(34, 211, 238, 0.35),
-    0 0 22px rgba(34, 211, 238, 0.25),
-    inset 0 0 0 1px rgba(255,255,255,0.05);
-}
-.glow-red{
-  box-shadow:
-    0 0 10px rgba(239, 68, 68, 0.55),
-    0 0 22px rgba(239, 68, 68, 0.45),
-    inset 0 0 0 1px rgba(255,255,255,0.05);
-}
-.glow-dual{
-  box-shadow:
-    0 0 14px rgba(236,72,153,.45),
-    0 0 28px rgba(56,189,248,.35),
-    inset 0 0 0 1px rgba(255,255,255,.06);
-}
-
-/* ===== Vertical Top 5 grid (3 portrait cards) ===== */
+/* ===== Vertical Top 5 grid (unchanged) ===== */
 .vthumb-grid{
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -144,7 +123,7 @@ main {
   overflow: hidden;
   background: rgba(23,23,23,0.6);
   ring: 1px solid rgba(255,255,255,0.06);
-  aspect-ratio: 9 / 16;  /* portrait */
+  aspect-ratio: 9 / 16;
   transform: translateZ(0);
   transition: transform 160ms ease, box-shadow 160ms ease;
 }
@@ -152,21 +131,9 @@ main {
 @media (hover:hover){
   .vthumb-card:hover{ transform: translateY(-2px) scale(1.01); }
 }
-.vthumb-img{
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center;
-  display: block;
-}
-.vthumb-gradient{
-  position: absolute; inset: 0;
-  pointer-events: none;
-  background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0) 50%);
-}
-.vthumb-title{
-  position: absolute; left: 0.75rem; right: 0.75rem; bottom: 0.75rem;
-  font-weight: 800; font-size: 1.1rem;
-  text-shadow: 0 1px 2px rgba(0,0,0,.7);
-}
+.vthumb-img{ width:100%; height:100%; object-fit: cover; object-position:center; display:block; }
+.vthumb-gradient{ position:absolute; inset:0; pointer-events:none; background:linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0) 50%); }
+.vthumb-title{ position:absolute; left:.75rem; right:.75rem; bottom:.75rem; font-weight:800; font-size:1.1rem; text-shadow:0 1px 2px rgba(0,0,0,.7); }
 
 /* ===== Bottom Bar ===== */
 .navbar{
@@ -179,7 +146,7 @@ main {
           drop-shadow(0 0 14px rgba(56, 189, 248, .55));
 }
 
-/* ===== Favorites (unchanged) ===== */
+/* ===== Favorites ===== */
 .favs-strip{ @apply mt-4; }
 .favs-row{
   @apply flex gap-3 overflow-x-auto py-2;
@@ -191,19 +158,3 @@ main {
   width:110px; height:110px; scroll-snap-align:start; transform:translateZ(0);
 }
 .fav-card img{ @apply w-full h-full object-cover rounded-xl; }
-
-/* =========================================================
-   Thumb / MediaLoopRow helpers (new)
-   ========================================================= */
-
-/* Hide horizontal scrollbar cross-browser when needed */
-.no-scrollbar {
-  -ms-overflow-style: none;    /* IE/Edge */
-  scrollbar-width: none;       /* Firefox */
-}
-.no-scrollbar::-webkit-scrollbar { display: none; }  /* WebKit */
-
-/* Optional ratio helpers if you ever need them globally */
-.ratio { position: relative; width: 100%; overflow: hidden; }
-.ratio-16x9 { aspect-ratio: 16 / 9; }
-.ratio-1x1  { aspect-ratio: 1 / 1; }
