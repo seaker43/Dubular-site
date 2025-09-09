@@ -1,81 +1,84 @@
 // components/Thumb.jsx
 import Link from "next/link";
-import Image from "next/image";
+import { useState, useMemo } from "react";
 
+/**
+ * Thumb – Single reusable thumbnail card used everywhere.
+ * - Edge-to-edge rows handled by CSS (.thumb-row.full-bleed).
+ * - Images default to object-contain (no cropping). Set fit="cover" if you need.
+ * - live=true forces red glow; otherwise "dual" (pink+cyan).
+ */
 export default function Thumb({
-  title,
-  image,             // URL string
+  id,
+  title = "Untitled",
+  img = "/placeholder.svg",
   href = "#",
   live = false,
-  color = "dual",    // "dual" | "cyan" | "red"
-  creator,           // { name, slug, logoUrl }
-  className = "",
+  fit = "contain", // "contain" (no cropping) | "cover" (crop)
   priority = false,
 }) {
-  // Glow mapping → matches globals.css
-  const glowClass = live
-    ? "glow-red"
-    : color === "cyan"
-    ? "glow-cyan"
-    : "glow-dual";
+  const [loaded, setLoaded] = useState(false);
 
-  const CardInner = (
-    <article
-      className={`thumb-card ${glowClass} ${className}`.trim()}
-      role="listitem"
-    >
-      {/* Creator badge */}
-      {creator?.slug && (
-        <Link
-          href={`/creator/${creator.slug}`}
-          aria-label={`${creator?.name ?? "Creator"} page`}
-          className="absolute top-2 left-2 z-10 rounded-full bg-black/70 p-1 ring-1 ring-white/20"
-        >
-          {creator?.logoUrl ? (
-            <Image
-              src={creator.logoUrl}
-              alt={`${creator?.name ?? "Creator"} logo`}
-              width={32}
-              height={32}
-              className="rounded-full object-cover"
-            />
-          ) : (
-            <div className="w-8 h-8 rounded-full bg-neutral-700 flex items-center justify-center text-xs text-white/70">
-              ?
-            </div>
-          )}
-        </Link>
-      )}
-
-      {/* Thumbnail image */}
-      <Image
-        src={image || "/placeholder.svg"}
-        alt={title || "Thumbnail"}
-        className="thumb-img"
-        width={640}
-        height={360}
-        priority={priority}
-        quality={85}
-        draggable={false}
-        onError={(e) => {
-          e.currentTarget.src = "/placeholder.svg";
-        }}
-      />
-
-      {/* LIVE badge */}
-      {live && <span className="live-badge">LIVE</span>}
-
-      {/* Title */}
-      {title && <div className="thumb-title">{title}</div>}
-    </article>
+  const glowClass = useMemo(
+    () => (live ? "glow-red" : "glow-dual"),
+    [live]
   );
 
-  // Wrap in link only when href is valid
-  return href && href !== "#"
-    ? (
-      <Link href={href} aria-label={title || "Open"}>
-        {CardInner}
-      </Link>
-    )
-    : CardInner;
+  const Wrapper = href === "#" ? "div" : Link;
+
+  return (
+    <article
+      className={`thumb-card ${glowClass} shrink-0 select-none snap-start`}
+      role="listitem"
+      data-id={id}
+    >
+      <div className="ratio ratio-16x9">
+        {/* lightweight skeleton that doesn’t reflow on load */}
+        <div
+          className="skeleton"
+          style={{ visibility: loaded ? "hidden" : "visible" }}
+          aria-hidden="true"
+        />
+        <Wrapper href={href} aria-label={title}>
+          <img
+            src={img}
+            alt={title}
+            className={`thumb-img ${fit === "cover" ? "thumb-cover" : "thumb-contain"}`}
+            loading={priority ? "eager" : "lazy"}
+            fetchpriority={priority ? "high" : "auto"}
+            decoding="async"
+            draggable="false"
+            onLoad={() => setLoaded(true)}
+            onError={(e) => {
+              e.currentTarget.src = "/placeholder.svg";
+              setLoaded(true);
+            }}
+          />
+        </Wrapper>
+
+        {live && <span className="live-badge">LIVE</span>}
+        {!!title && <div className="thumb-title">{title}</div>}
+      </div>
+
+      <style jsx>{`
+        .ratio { position: relative; width: 100%; overflow: hidden; }
+        .ratio-16x9 { aspect-ratio: 16 / 9; }
+
+        .skeleton {
+          position: absolute; inset: 0;
+          background: linear-gradient(90deg,
+            rgba(255,255,255,.06) 0%,
+            rgba(255,255,255,.12) 50%,
+            rgba(255,255,255,.06) 100%);
+          background-size: 200% 100%;
+          animation: scan 1.2s linear infinite;
+          pointer-events: none;
+        }
+        @keyframes scan {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+      `}</style>
+    </article>
+  );
 }
