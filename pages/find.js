@@ -1,10 +1,10 @@
 // pages/find.js
 import Head from "next/head";
-import FindThumb from "@/components/FindThumb";
+import MediaRow from "@/components/MediaLoopRow";
 
-const CATEGORIES = [
+const CATS = [
   {
-    name: "Trending",
+    title: "Trending",
     items: [
       { id: "tr1", title: "LoFi #1", src: "/thumbnails/trending/1.jpg" },
       { id: "tr2", title: "LoFi #2", src: "/thumbnails/trending/2.jpg" },
@@ -14,7 +14,7 @@ const CATEGORIES = [
     ],
   },
   {
-    name: "Recommended",
+    title: "Recommended",
     items: [
       { id: "re1", title: "Chill Beats", src: "/thumbnails/recommended/1.jpg" },
       { id: "re2", title: "Study Flow", src: "/thumbnails/recommended/2.jpg" },
@@ -24,7 +24,7 @@ const CATEGORIES = [
     ],
   },
   {
-    name: "Most Watched",
+    title: "Most Watched",
     items: [
       { id: "mw1", title: "Synthwave", src: "/thumbnails/most-watched/1.jpg" },
       { id: "mw2", title: "Vapor Dreams", src: "/thumbnails/most-watched/2.jpg" },
@@ -34,7 +34,7 @@ const CATEGORIES = [
     ],
   },
   {
-    name: "Most Liked",
+    title: "Most Liked",
     items: [
       { id: "ml1", title: "Deep Focus", src: "/thumbnails/most-liked/1.jpg" },
       { id: "ml2", title: "Lo-Key", src: "/thumbnails/most-liked/2.jpg" },
@@ -44,7 +44,7 @@ const CATEGORIES = [
     ],
   },
   {
-    name: "Biggest Grinders",
+    title: "Biggest Grinders",
     items: [
       { id: "bg1", title: "24/7 Loops", src: "/thumbnails/grinders/1.jpg" },
       { id: "bg2", title: "No Breaks", src: "/thumbnails/grinders/2.jpg" },
@@ -58,28 +58,26 @@ const CATEGORIES = [
 export default function Find() {
   return (
     <>
-      <Head>
-        <title>Find • dubUlar</title>
-      </Head>
+      <Head><title>Find • dubUlar</title></Head>
 
-      {/* Search bar area */}
-      <div className="px-4 mb-6">
+      {/* Search bar */}
+      <div className="px-4 mt-3 mb-6">
         <div className="w-full h-12 rounded-2xl bg-neutral-900/80 ring-1 ring-white/10 backdrop-blur flex items-center px-4">
-          <span className="text-neutral-400">Search titles…</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24" className="w-5 h-5 text-neutral-400 mr-2">
+            <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 21.5 21.5 20l-6-6zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+          </svg>
+          <input
+            type="text"
+            placeholder="Search titles..."
+            className="bg-transparent outline-none text-white placeholder:text-neutral-400 w-full"
+          />
         </div>
       </div>
 
-      {/* Category rows */}
-      <div className="space-y-8 px-4">
-        {CATEGORIES.map((cat) => (
-          <section key={cat.name}>
-            <h2 className="text-2xl font-bold mb-3">{cat.name}</h2>
-            <ul className="thumb-row">
-              {cat.items.map((it) => (
-                <FindThumb key={it.id} item={it} />
-              ))}
-            </ul>
-          </section>
+      {/* Rows */}
+      <div className="space-y-8">
+        {CATS.map((c) => (
+          <MediaRow key={c.title} title={c.title} items={c.items} />
         ))}
       </div>
     </>
