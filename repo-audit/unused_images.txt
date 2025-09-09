@@ -1,0 +1,22 @@
+## Possibly unused images in public/
+public/_headers
+public/demo/art-1.jpg
+public/demo/art-2.jpg
+public/demo/art-3.jpg
+public/demo/art-4.jpg
+public/demo/art-5.jpg
+public/demo/art-6.jpg
+public/demo/art-7.jpg
+public/demo/art-8.jpg
+public/demo/lofi-7.jpg
+public/demo/lofi-8.jpg
+public/demo/var-1.jpg
+public/demo/var-2.jpg
+public/demo/var-3.jpg
+public/demo/var-4.jpg
+public/demo/var-5.jpg
+public/demo/var-6.jpg
+public/demo/var-7.jpg
+public/demo/var-8.jpg
+public/header-logo.png
+public/thumbnails/trending/trending5.jpg

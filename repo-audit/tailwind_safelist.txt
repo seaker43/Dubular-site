@@ -1,0 +1,3 @@
+## Tailwind safelist
+safelist exists
+8:  safelist: [
