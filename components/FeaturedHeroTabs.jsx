@@ -1,81 +1,53 @@
-// components/FeaturedHeroTabs.jsx
-import { useState, useEffect, useMemo } from "react";
+// components/FeaturedLoopHero.jsx
+import { useEffect, useState } from "react";
 
 const TABS = [
-  {
-    title: "Gaming",
-    image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1600&auto=format&fit=crop",
-  },
-  {
-    title: "IRL",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600&auto=format&fit=crop",
-  },
-  {
-    title: "Music",
-    image: "https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=1600&auto=format&fit=crop",
-  },
-  {
-    title: "Podcast",
-    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1600&auto=format&fit=crop",
-  },
+  { key: "gaming", label: "Gaming", src: "/thumbnails/trending1.jpg" },
+  { key: "irl",    label: "IRL",    src: "/thumbnails/trending2.jpg" },
+  { key: "music",  label: "Music",  src: "/thumbnails/trending3.jpg" },
+  { key: "pod",    label: "Podcast",src: "/thumbnails/trending4.jpg" },
 ];
 
-export default function FeaturedHeroTabs() {
-  const [active, setActive] = useState(0);
+export default function FeaturedLoopHero() {
+  const [tab, setTab] = useState(TABS[0].key);
+  const [glow, setGlow] = useState("featured-glow-pink");
 
-  // alternate glow (pink/blue)
-  const glowClass = useMemo(
-    () => (active % 2 === 0 ? "featured-glow-pink" : "featured-glow-blue"),
-    [active]
-  );
-
-  // auto-rotate every 7s
   useEffect(() => {
     const id = setInterval(() => {
-      setActive((a) => (a + 1) % TABS.length);
-    }, 7000);
+      setTab((prev) => {
+        const idx = TABS.findIndex(t => t.key === prev);
+        const next = TABS[(idx + 1) % TABS.length].key;
+        return next;
+      });
+      setGlow((g) => (g === "featured-glow-pink" ? "featured-glow-blue" : "featured-glow-pink"));
+    }, 3500);
     return () => clearInterval(id);
   }, []);
 
-  const current = TABS[active];
+  const active = TABS.find(t => t.key === tab) || TABS[0];
 
   return (
-    <section
-      className={`hero-offset featured-hero ${glowClass} mx-4 md:mx-6 rounded-2xl overflow-hidden ring-1 ring-white/10 bg-neutral-900/50`}
-    >
-      {/* Hero media */}
-      <div className="relative w-full h-[48vh] md:h-[55vh]">
-        <img
-          src={current.image}
-          alt={current.title}
-          className="w-full h-full object-cover"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-        />
-        {/* gradient overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/25 to-transparent" />
-      </div>
+    <section className={`featured-hero ${glow} full-bleed mt-0`}>
+      <img
+        src={active.src}
+        alt={active.label}
+        className="w-full h-full object-cover"
+      />
 
-      {/* Tabs */}
-      <div className="absolute bottom-4 left-4 right-4 flex gap-3 flex-wrap">
-        {TABS.map((t, i) => {
-          const isActive = i === active;
-          return (
-            <button
-              key={t.title}
-              onClick={() => setActive(i)}
-              className={[
-                "px-4 py-2 rounded-full text-sm font-medium transition-transform",
-                "bg-black/60 text-white backdrop-blur-sm",
-                "hover:scale-[1.05] active:scale-[0.97]",
-                isActive ? "ring-2 ring-white/80" : "opacity-90",
-              ].join(" ")}
-            >
-              {t.title}
-            </button>
-          );
-        })}
+      {/* bottom gradient + tab buttons */}
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-black/20 to-black/60" />
+      <div className="absolute bottom-2 left-2 right-2 flex flex-wrap gap-2 pointer-events-auto">
+        {TABS.map((t) => (
+          <button
+            key={t.key}
+            onClick={() => setTab(t.key)}
+            className={`px-3 py-1 rounded-lg text-sm transition ${
+              t.key === tab ? "bg-black/80 ring-1 ring-white/20" : "bg-black/50 hover:bg-black/60"
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
       </div>
     </section>
   );
