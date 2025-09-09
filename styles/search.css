@@ -1,5 +1,7 @@
-/* ===== Search Bar (find page) ===== */
-.search-wrap { width: 100%; margin-top: 0 !important; }
+.search-wrap {
+  width: 100%;
+  margin-top: 0 !important;
+}
 .search-bar {
   @apply w-full flex items-center gap-2 bg-neutral-900/70 rounded-xl ring-1 ring-white/10 p-3;
 }

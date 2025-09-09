@@ -1,13 +1,9 @@
-/* Push content below header */
-main { 
-  @apply pt-8 px-4; /* top padding = 32px, side padding = 1rem */
+main {
+  padding-top: calc(var(--header-h) + var(--header-gap) + var(--safe-top));
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
-
-/* Section Titles */
-.section-header h2 { @apply text-2xl font-bold mb-3; }
-
-/* Full-bleed helper (edge-to-edge) */
-.full-bleed{
+.full-bleed {
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
