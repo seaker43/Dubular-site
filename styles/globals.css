@@ -12,13 +12,13 @@ a {
 
 /* ===== Header ===== */
 header {
-  @apply fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur h-20 flex items-center justify-center;
+  @apply fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur h-22 flex items-center justify-center;
   border: none !important;
 }
 
 /* Push content below header */
 main { 
-  @apply pt-15 px-1;  /* top padding = 15, slim side padding */ 
+  @apply pt-15 px-2;  /* top padding = 15, side padding = 2 */ 
 }
 
 /* ===== Bottom Bar ===== */
@@ -190,7 +190,7 @@ main {
 }
 
 /* ===== Favorites ===== */
-.favs-strip { @apply px-1 mt-4; }
+.favs-strip { @apply px-2 mt-4; }
 .favs-row {
   @apply flex gap-3 overflow-x-auto py-2;
   scroll-snap-type: x proximity;
