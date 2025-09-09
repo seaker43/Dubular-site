@@ -12,7 +12,7 @@ const Header = forwardRef((props, ref) => {
       {/* logo box: 75% width, full height */}
       <div className="relative w-3/4 h-full">
         <Image
-          src="/Dubular2.png"
+          src="/Dubular2.v2.png"
           alt="dubUlar header logo"
           fill
           priority
