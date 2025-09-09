@@ -44,7 +44,7 @@ const recommended = [
   { id: "rc5", title: "Don’t miss these",    img: "/thumbnails/reco2.jpg", href: "/watch/rc5" },
 ];
 
-/** ---------- Thumbnail card (uses your globals.css classes) ---------- */
+/** ---------- Thumbnail card (forces glow) ---------- */
 function FindThumb({ item, glow = "glow-dual" }) {
   return (
     <Link href={item.href} className={`thumb-card ${glow}`} prefetch={false}>
@@ -54,7 +54,7 @@ function FindThumb({ item, glow = "glow-dual" }) {
   );
 }
 
-/** ---------- Row section ---------- */
+/** ---------- Section row ---------- */
 function Row({ title, items }) {
   return (
     <section className="mt-4">
@@ -63,7 +63,7 @@ function Row({ title, items }) {
       </div>
       <div className="thumb-row">
         {items.map((it) => (
-          <FindThumb key={it.id} item={it} />
+          <FindThumb key={it.id} item={it} glow="glow-dual" />
         ))}
       </div>
     </section>
@@ -94,7 +94,7 @@ export default function Find() {
           </form>
         </div>
 
-        {/* Your chosen categories */}
+        {/* Your categories */}
         <Row title="Biggest Grinders" items={biggestGrinders} />
         <Row title="Most Watched" items={mostWatched} />
         <Row title="Most Liked" items={mostLiked} />
@@ -103,4 +103,4 @@ export default function Find() {
       </main>
     </>
   );
-  }
+}
