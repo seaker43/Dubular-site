@@ -1,106 +1,87 @@
 // pages/find.js
 import Head from "next/head";
-import Link from "next/link";
-import { Search } from "lucide-react";
+import FindThumb from "@/components/FindThumb";
 
-/** ---------- Mock data (replace with real results) ---------- */
-const biggestGrinders = [
-  { id: "bg1", title: "Daily Marathoner", img: "/thumbnails/grinders1.jpg", href: "/watch/bg1" },
-  { id: "bg2", title: "No Days Off",     img: "/thumbnails/grinders2.jpg", href: "/watch/bg2" },
-  { id: "bg3", title: "Grinding Clips",   img: "/thumbnails/grinders3.jpg", href: "/watch/bg3" },
-  { id: "bg4", title: "Late Night Grind", img: "/thumbnails/grinders4.jpg", href: "/watch/bg4" },
-  { id: "bg5", title: "Road to Partner",  img: "/thumbnails/grinders2.jpg", href: "/watch/bg5" },
+const CATEGORIES = [
+  {
+    name: "Trending",
+    items: [
+      { id: "tr1", title: "LoFi #1", src: "/thumbnails/trending/1.jpg" },
+      { id: "tr2", title: "LoFi #2", src: "/thumbnails/trending/2.jpg" },
+      { id: "tr3", title: "LoFi #3", src: "/thumbnails/trending/3.jpg" },
+      { id: "tr4", title: "LoFi #4", src: "/thumbnails/trending/4.jpg" },
+      { id: "tr5", title: "LoFi #5", src: "/thumbnails/trending/5.jpg" },
+    ],
+  },
+  {
+    name: "Recommended",
+    items: [
+      { id: "re1", title: "Chill Beats", src: "/thumbnails/recommended/1.jpg" },
+      { id: "re2", title: "Study Flow", src: "/thumbnails/recommended/2.jpg" },
+      { id: "re3", title: "Night Drive", src: "/thumbnails/recommended/3.jpg" },
+      { id: "re4", title: "Focus Core", src: "/thumbnails/recommended/4.jpg" },
+      { id: "re5", title: "Ambient Set", src: "/thumbnails/recommended/5.jpg" },
+    ],
+  },
+  {
+    name: "Most Watched",
+    items: [
+      { id: "mw1", title: "Synthwave", src: "/thumbnails/most-watched/1.jpg" },
+      { id: "mw2", title: "Vapor Dreams", src: "/thumbnails/most-watched/2.jpg" },
+      { id: "mw3", title: "Retro Night", src: "/thumbnails/most-watched/3.jpg" },
+      { id: "mw4", title: "Lounge FM", src: "/thumbnails/most-watched/4.jpg" },
+      { id: "mw5", title: "Night Owl", src: "/thumbnails/most-watched/5.jpg" },
+    ],
+  },
+  {
+    name: "Most Liked",
+    items: [
+      { id: "ml1", title: "Deep Focus", src: "/thumbnails/most-liked/1.jpg" },
+      { id: "ml2", title: "Lo-Key", src: "/thumbnails/most-liked/2.jpg" },
+      { id: "ml3", title: "Calm Loop", src: "/thumbnails/most-liked/3.jpg" },
+      { id: "ml4", title: "Soft Neon", src: "/thumbnails/most-liked/4.jpg" },
+      { id: "ml5", title: "City Rain", src: "/thumbnails/most-liked/5.jpg" },
+    ],
+  },
+  {
+    name: "Biggest Grinders",
+    items: [
+      { id: "bg1", title: "24/7 Loops", src: "/thumbnails/grinders/1.jpg" },
+      { id: "bg2", title: "No Breaks", src: "/thumbnails/grinders/2.jpg" },
+      { id: "bg3", title: "Always On", src: "/thumbnails/grinders/3.jpg" },
+      { id: "bg4", title: "Night Shift", src: "/thumbnails/grinders/4.jpg" },
+      { id: "bg5", title: "Grinding", src: "/thumbnails/grinders/5.jpg" },
+    ],
+  },
 ];
-
-const mostWatched = [
-  { id: "mw1", title: "Top VOD #1",  img: "/thumbnails/watched1.jpg", href: "/watch/mw1" },
-  { id: "mw2", title: "Top VOD #2",  img: "/thumbnails/watched2.jpg", href: "/watch/mw2" },
-  { id: "mw3", title: "Top VOD #3",  img: "/thumbnails/watched3.jpg", href: "/watch/mw3" },
-  { id: "mw4", title: "Top VOD #4",  img: "/thumbnails/watched4.jpg", href: "/watch/mw4" },
-  { id: "mw5", title: "Top VOD #5",  img: "/thumbnails/watched2.jpg", href: "/watch/mw5" },
-];
-
-const mostLiked = [
-  { id: "ml1", title: "Fan Favorite",    img: "/thumbnails/liked1.jpg", href: "/watch/ml1" },
-  { id: "ml2", title: "Most Hearts",     img: "/thumbnails/liked2.jpg", href: "/watch/ml2" },
-  { id: "ml3", title: "Clipped to Heaven", img: "/thumbnails/liked3.jpg", href: "/watch/ml3" },
-  { id: "ml4", title: "Community Pick",  img: "/thumbnails/liked4.jpg", href: "/watch/ml4" },
-  { id: "ml5", title: "S Tier",          img: "/thumbnails/liked2.jpg", href: "/watch/ml5" },
-];
-
-const trending = [
-  { id: "tr1", title: "Speedrun Saturday", img: "/thumbnails/trending1.jpg", href: "/watch/tr1" },
-  { id: "tr2", title: "New Meta Clips",    img: "/thumbnails/trending2.jpg", href: "/watch/tr2" },
-  { id: "tr3", title: "Chill Streams",     img: "/thumbnails/trending3.jpg", href: "/watch/tr3" },
-  { id: "tr4", title: "Tourney Recap",     img: "/thumbnails/trending4.jpg", href: "/watch/tr4" },
-  { id: "tr5", title: "Highlights Pack",   img: "/thumbnails/trending2.jpg", href: "/watch/tr5" },
-];
-
-const recommended = [
-  { id: "rc1", title: "Because you liked X", img: "/thumbnails/reco1.jpg", href: "/watch/rc1" },
-  { id: "rc2", title: "Creators like Y",     img: "/thumbnails/reco2.jpg", href: "/watch/rc2" },
-  { id: "rc3", title: "Handpicked",          img: "/thumbnails/reco3.jpg", href: "/watch/rc3" },
-  { id: "rc4", title: "For your nights",     img: "/thumbnails/reco4.jpg", href: "/watch/rc4" },
-  { id: "rc5", title: "Don’t miss these",    img: "/thumbnails/reco2.jpg", href: "/watch/rc5" },
-];
-
-/** ---------- Thumbnail card (forces glow) ---------- */
-function FindThumb({ item, glow = "glow-dual" }) {
-  return (
-    <Link href={item.href} className={`thumb-card ${glow}`} prefetch={false}>
-      <img src={item.img} alt={item.title} className="thumb-img" />
-      <div className="thumb-title">{item.title}</div>
-    </Link>
-  );
-}
-
-/** ---------- Section row ---------- */
-function Row({ title, items }) {
-  return (
-    <section className="mt-4">
-      <div className="section-header">
-        <h2>{title}</h2>
-      </div>
-      <div className="thumb-row">
-        {items.map((it) => (
-          <FindThumb key={it.id} item={it} glow="glow-dual" />
-        ))}
-      </div>
-    </section>
-  );
-}
 
 export default function Find() {
   return (
     <>
       <Head>
-        <title>dubUlar — Find</title>
-        <meta name="description" content="Search and discover on dubUlar" />
+        <title>Find • dubUlar</title>
       </Head>
 
-      <main>
-        {/* Search bar snug under header */}
-        <div className="search-wrap">
-          <form className="search-bar" action="/find" method="get">
-            <Search size={18} className="opacity-80" />
-            <input
-              type="text"
-              name="q"
-              placeholder="Search creators, streams, categories…"
-              autoComplete="off"
-              aria-label="Search"
-            />
-            <button type="submit">Search</button>
-          </form>
+      {/* Search bar area */}
+      <div className="px-4 mb-6">
+        <div className="w-full h-12 rounded-2xl bg-neutral-900/80 ring-1 ring-white/10 backdrop-blur flex items-center px-4">
+          <span className="text-neutral-400">Search titles…</span>
         </div>
+      </div>
 
-        {/* Your categories */}
-        <Row title="Biggest Grinders" items={biggestGrinders} />
-        <Row title="Most Watched" items={mostWatched} />
-        <Row title="Most Liked" items={mostLiked} />
-        <Row title="Trending" items={trending} />
-        <Row title="Recommended" items={recommended} />
-      </main>
+      {/* Category rows */}
+      <div className="space-y-8 px-4">
+        {CATEGORIES.map((cat) => (
+          <section key={cat.name}>
+            <h2 className="text-2xl font-bold mb-3">{cat.name}</h2>
+            <ul className="thumb-row">
+              {cat.items.map((it) => (
+                <FindThumb key={it.id} item={it} />
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
     </>
   );
 }
