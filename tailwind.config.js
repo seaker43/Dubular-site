@@ -1,4 +1,3 @@
-// tailwind.config.js
 module.exports = {
   content: [
     "./pages/**/*.{js,jsx,ts,tsx}",
@@ -8,7 +7,12 @@ module.exports = {
   ],
   safelist: [
     "thumb-row","thumb-card","thumb-img","thumb-title","live-badge",
-    "glow-dual","glow-red","glow-cyan" // and "glow-blue" if you use it
+    "glow-dual","glow-red","glow-cyan","glow-blue","glow-pink",
+    "ratio","ratio-16x9","ratio-1x1","no-scrollbar",
+    "featured-hero","featured-glow-pink","featured-glow-blue",
+    "search-wrap","search-bar",
+    "vthumb-grid","vthumb-card","vthumb-img","vthumb-gradient","vthumb-title",
+    "navbar","navbar-item","favs-strip","favs-row","fav-card"
   ],
   theme: { extend: {} },
   plugins: [],

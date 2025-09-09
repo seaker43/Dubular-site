@@ -1,0 +1,5 @@
+/* ===== Header (no border line) ===== */
+header{
+  @apply fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur h-20 flex items-center justify-center;
+  border: none !important;
+}
