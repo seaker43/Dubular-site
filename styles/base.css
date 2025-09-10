@@ -1,3 +1,4 @@
+ @import "./design-system.css";
 /* ===== Base ===== */
 html, body { @apply bg-black text-white antialiased min-h-screen; }
 a { @apply text-cyan-400 hover:underline; }
