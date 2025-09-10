@@ -5,10 +5,10 @@ body{
 }
 
 /* Keep horizontal page padding on main only */
-main{ padding-left:1rem; padding-right:1rem; }
+main{padding:0!important;margin:0!important}
 
 /* Full-bleed helper (unchanged) */
-.full-bleed{
+.full-bleed{width:100vw;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important;padding:0!important}
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
