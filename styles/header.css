@@ -9,3 +9,4 @@ header .logo-picture{
   object-fit: cover;
   object-position: top;
 }
+header { overflow: visible !important; }
