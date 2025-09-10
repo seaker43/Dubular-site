@@ -10,3 +10,7 @@ body{
   padding-right: 0 !important;
   margin: 0 !important;
 }
+
+/* === design-system safeguards === */
+main{ padding-top:var(--header-h)!important; padding-left:var(--page-x)!important; padding-right:var(--page-x)!important; }
+.featured-hero,.search-wrap,.thumb-row{ margin:0!important; border-radius:var(--radius)!important; }
