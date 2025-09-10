@@ -1,7 +1,7 @@
 :root{
   --header-h: 80px;                 /* header height (h-20) */
   --safe-top: env(safe-area-inset-top, 0px);
-  --gap: 16px;                      /* space under header */
+  --gap: 24px;                      /* space under header */
   --nav-h: 56px;                    /* bottom nav */
 }
 /* Make sure header has the height we expect */
