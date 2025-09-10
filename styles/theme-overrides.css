@@ -1,16 +1,17 @@
-/* === HEADER OVERLAP HOTFIX (safe-area-aware) === */
 :root{
-  --header-h: 80px;                /* match your header height */
-  --header-gap: 16px;              /* breath under header */
+  --header-h: 80px;                 /* header height (h-20) */
   --safe-top: env(safe-area-inset-top, 0px);
-  --nav-h: 56px;                   /* bottom nav height */
+  --gap: 16px;                      /* space under header */
+  --nav-h: 56px;                    /* bottom nav */
 }
+/* Make sure header has the height we expect */
+header{ height: var(--header-h) !important; }
+/* Push everything down — body wins everywhere */
 body{
-  /* Push ALL content below fixed header */
-  padding-top: calc(var(--safe-top) + var(--header-h) + var(--header-gap)) !important;
+  padding-top: calc(var(--safe-top) + var(--header-h) + var(--gap)) !important;
   padding-bottom: var(--nav-h);
 }
-main{ padding-left:1rem; padding-right:1rem; }
-/* Keep hero snug; remove any legacy top margins */
-.featured-hero{ margin-top: 0 !important; }
-.search-wrap{ margin-top: 0 !important; }
+/* Kill stray margins that can fight us */
+.featured-hero, .search-wrap{ margin-top: 0 !important; }
+/* If any page used main padding before, zero it (body now handles offset) */
+main{ padding-top: 0 !important; }
