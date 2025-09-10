@@ -1,13 +1,16 @@
-.wrap{position:relative;display:inline-flex;gap:.15rem;line-height:1}
-.#18ff3c{color:#18ff3c;text-shadow:0 0 12px #00e5ff,0 0 26px #00e5ff66}
-.pink{color:#ff4dff;text-shadow:0 0 16px #ff4dff,0 0 30px #ff4dff99}
-.overspray{content:"";position:absolute;inset:-18px -24px -20px;z-index:0;pointer-events:none;background:
-radial-gradient(60% 70% at 28% 45%,rgba(34,211,238,.28) 0 45%,transparent 70%),
-radial-gradient(58% 68% at 66% 52%,rgba(255,77,255,.30) 0 45%,transparent 72%),
-radial-gradient(70% 80% at 50% 40%,rgba(34,211,238,.20) 0 42%,transparent 72%);filter:blur(18px) saturate(1.05)}
-.jitter{animation:tag 4.6s ease-in-out infinite}
-@keyframes tag{0%,100%{transform:rotate(-.5deg) translateY(.2px)}50%{transform:rotate(.6deg) translateY(-.2px)}}
-.drip{position:absolute;bottom:-10px;width:7px;height:22px;border-radius:10px;filter:blur(.6px) saturate(1.1);opacity:.85;z-index:0}
-.d1{left:18%;background:linear-gradient(#18ff3c 0 60%,transparent);box-shadow:0 0 8px #18ff3caa}
-.d2{left:48%;background:linear-gradient(#ff4dff 0 65%,transparent);box-shadow:0 0 8px #ff4dffaa}
-.d3{left:76%;width:6px;height:18px;background:linear-gradient(#18ff3c 0 55%,transparent);box-shadow:0 0 7px #18ff3c88}
+/* Logo — keep aspect, no cropping */
+.logo, .site-logo, .logo-wrap {
+  display: flex;
+  align-items: center;
+  height: var(--header-h);
+}
+.logo img,
+.site-logo img {
+  max-height: calc(var(--header-h) - 8px);
+  width: auto;
+  object-fit: contain;
+  object-position: left center;
+  display: block;
+  margin: 0;
+  border-radius: 0;
+}
