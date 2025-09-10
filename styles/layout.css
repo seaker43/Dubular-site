@@ -1,15 +1,11 @@
-/* Put the vertical offset on BODY so every page clears the fixed header */
-body{
-  padding-top: calc(var(--header-h) + var(--header-gap) + var(--safe-top));
-  padding-bottom: var(--nav-h); /* keeps content above bottom nav */
+/* Layout helpers */
+main{
+  padding-top:var(--header-h);
+  padding-left:var(--page-x);
+  padding-right:var(--page-x);
 }
-
-/* Keep horizontal page padding on main only */
-main{padding:0!important;margin:0!important}
-
-/* Full-bleed helper (unchanged) */
-.full-bleed{width:100vw;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important;padding:0!important}
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+.full-bleed{
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
 }
