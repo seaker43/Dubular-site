@@ -1,8 +1,8 @@
 export default function MostLiked() {
   return (
-    <main style={{ padding: 16 }}>
+    <main style={{ padding: "2rem" }}>
       <h1>Most Liked</h1>
-      <p>This page is a placeholder. Replace with your real content later.</p>
+      <p>This page will display the most liked media. (Placeholder)</p>
     </main>
   );
 }
