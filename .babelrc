@@ -1,6 +1,0 @@
-{
-  "swcMinify": false,
-  "presets": [
-    "@babel/preset-react"
-  ]
-}
