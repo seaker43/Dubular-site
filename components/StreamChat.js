@@ -41,7 +41,7 @@ export default function StreamChat({ channel }) {
           placeholder={`Message #${channel}`}
           className="chat-input"
         />
-        <button className="glow-bg" className="chat-send" type="submit">
+        <button className="glow-bg chat-send" type="submit">
           Send
         </button>
       </form>

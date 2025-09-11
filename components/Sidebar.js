@@ -5,9 +5,7 @@ export default function Sidebar({ open, chats, activeId, onSelect }) {
     <aside className={`beta-sidebar ${open ? "open" : ""}`}>
       <div className="sidebar-section">
         <div className="section-title">Workspace</div>
-        <button className="glow-bg" className="wide-btn">
-          + New Chat
-        </button>
+        <button className="glow-bg wide-btn">+ New Chat</button>
       </div>
 
       <div className="sidebar-section">
@@ -29,12 +27,8 @@ export default function Sidebar({ open, chats, activeId, onSelect }) {
       </div>
 
       <div className="sidebar-footer">
-        <button className="glow-bg" className="wide-btn ghost">
-          Settings
-        </button>
-        <button className="glow-bg" className="wide-btn ghost">
-          Support
-        </button>
+        <button className="glow-bg wide-btn ghost">Settings</button>
+        <button className="glow-bg wide-btn ghost">Support</button>
       </div>
     </aside>
   );

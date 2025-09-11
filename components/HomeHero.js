@@ -4,9 +4,7 @@ export default function HomeHero() {
   return (
     <section className="home-hero">
       <div className="home-hero__text">
-        <h1 className="glow" className="home-hero__title">
-          Dubular Beta
-        </h1>
+        <h1 className="glow home-hero__title">Dubular Beta</h1>
         <p className="home-hero__subtitle">
           Watch live streams, track leaderboards, and join prize pools — all in
           one place.
