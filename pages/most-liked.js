@@ -1,6 +1,6 @@
 // pages/most-liked.js
 import Head from "next/head";
-import ThumbnailCard from "../components/ThumbnailCard";
+import Thumb from "../components/Thumb";
 
 const items = [
   { title: "Pixel Art #1", category: "art", tag: "pixel", imgSrc: "/thumbs/art/pixel-1.jpg", href: "/art/1" },
@@ -19,7 +19,7 @@ export default function MostLiked() {
         <h1 className="text-4xl md:text-5xl font-extrabold text-neon drop-shadow-glow mb-6">Most Liked</h1>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {items.map((it, i) => (
-            <ThumbnailCard key={i} {...it} />
+            <Thumb key={i} {...it} />
           ))}
         </div>
       </main>

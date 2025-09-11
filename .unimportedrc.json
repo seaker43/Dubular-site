@@ -1,0 +1,15 @@
+{
+  "entryFiles": [
+    "pages/**/*.js",
+    "pages/**/*.jsx",
+    "pages/**/*.ts",
+    "pages/**/*.tsx",
+    "next.config.js"
+  ],
+  "ignoreFiles": [
+    "src/components/Features.js",
+    "src/components/Footer.js",
+    "src/components/Hero.js",
+    "src/components/Navbar.js"
+  ]
+}
