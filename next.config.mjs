@@ -1,5 +1,9 @@
-/** @type {import('next').NextConfig} */
+import path from "path";
+/** @type {import("next").NextConfig} */
 const nextConfig = {
-  eslint: { ignoreDuringBuilds: true }, // don’t block deploys on lint issues
+  webpack: (config) => {
+    config.resolve.alias = { ...(config.resolve.alias || {}), "@": path.resolve(process.cwd()) };
+    return config;
+  },
 };
 export default nextConfig;
