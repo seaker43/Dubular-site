@@ -1,3 +1,4 @@
+import React from "react";
 // components/Header.js
 import Image from "next/image";
 import { forwardRef } from "react";

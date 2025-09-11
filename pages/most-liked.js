@@ -1,3 +1,4 @@
+import React from "react";
 // pages/most-liked.js
 import Head from "next/head";
 import Thumb from "../components/Thumb";

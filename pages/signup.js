@@ -1,3 +1,4 @@
+import React from "react";
 // pages/signup.js
 import Head from "next/head";
 

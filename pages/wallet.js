@@ -1,3 +1,4 @@
+import React from "react";
 export default function Wallet() {
   return (
     <main className="main" style={{ paddingTop: 16 }}>

@@ -1,3 +1,4 @@
+import React from "react";
 // pages/rank.js
 import Head from "next/head";
 

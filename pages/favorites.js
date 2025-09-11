@@ -1,3 +1,4 @@
+import React from "react";
 // pages/favorites.js
 import Head from "next/head";
 import Thumb from "@/components/Thumb";

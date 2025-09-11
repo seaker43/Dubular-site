@@ -1,3 +1,4 @@
+import React from "react";
 // pages/creator/[slug].js
 import { useRouter } from "next/router";
 import Head from "next/head";

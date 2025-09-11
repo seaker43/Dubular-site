@@ -1,3 +1,4 @@
+import React from "react";
 // components/Layout.js
 import Header from "./Header";
 import BottomBar from "./BottomBar";

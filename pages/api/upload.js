@@ -1,3 +1,4 @@
+import React from "react";
 export const runtime = "edge";
 // Handles file uploads
 export default async function handler(req, res) {

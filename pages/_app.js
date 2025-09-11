@@ -1,3 +1,4 @@
+import React from "react";
 import "../styles/header.css";
 import "../styles/layout.css";
 import "@/styles/globals.css";
