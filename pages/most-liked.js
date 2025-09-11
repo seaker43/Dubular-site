@@ -67,3 +67,5 @@ export default function MostLiked() {
     </>
   );
 }
+
+export async function getServerSideProps(){return{props:{}}}

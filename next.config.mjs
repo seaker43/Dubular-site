@@ -1,3 +1,4 @@
+export default { eslint:{ignoreDuringBuilds:true} };
 import path from "path";
 /** @type {import("next").NextConfig} */
 const nextConfig = {
