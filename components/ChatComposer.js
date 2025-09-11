@@ -20,8 +20,7 @@ export default function ChatComposer({ onSend }) {
   return (
     <div className="composer">
       <button
-        className="glow-bg"
-        className="icon-btn"
+        className="glow-bg icon-btn"
         onClick={() => fileRef.current?.click()}
         title="Attach file"
       >
@@ -44,12 +43,7 @@ export default function ChatComposer({ onSend }) {
         rows={1}
       />
       <input ref={fileRef} type="file" hidden />
-      <button
-        className="glow-bg"
-        className="send-btn"
-        onClick={send}
-        aria-label="Send"
-      >
+      <button className="glow-bg send-btn" onClick={send} aria-label="Send">
         <svg className="glow" viewBox="0 0 24 24" width="22" height="22">
           <path
             d="M22 2L11 13"
