@@ -1,10 +1,10 @@
-export default { eslint:{ignoreDuringBuilds:true} };
-import path from "path";
-/** @type {import("next").NextConfig} */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack: (config) => {
-    config.resolve.alias = { ...(config.resolve.alias || {}), "@": path.resolve(process.cwd()) };
-    return config;
-  },
+  reactStrictMode: true,
+  images: { unoptimized: true },        // good for CF Pages / next-on-pages
+  eslint: { ignoreDuringBuilds: true }, // silence ESLint during CF build
+  experimental: {
+    instrumentationHook: false          // avoid accidental double exports via instrumentation
+  }
 };
 export default nextConfig;
