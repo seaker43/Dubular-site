@@ -1,6 +1,6 @@
 import React from "react";
 // components/Layout.js
-import Header from './Header';
+import Header from './Header.js';
 import BottomBar from "./BottomBar";
 
 export default function Layout({ children }) {
