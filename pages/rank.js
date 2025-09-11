@@ -79,3 +79,5 @@ export default function Rank() {
     </>
   );
 }
+
+export async function getServerSideProps(){return{props:{}}}
