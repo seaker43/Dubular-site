@@ -1,1 +1,1 @@
-export { default } from './Thumb';
+export { default } from "./Thumb";
