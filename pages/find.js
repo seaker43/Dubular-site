@@ -1,7 +1,7 @@
 import React from "react";
 // pages/find.js
 import Head from "next/head";
-import MediaRow from "@/components/MediaLoopRow";
+import MediaRow from "../components/MediaLoopRow";
 
 const CATS = [
   {

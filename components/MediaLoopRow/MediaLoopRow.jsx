@@ -1,5 +1,5 @@
 import React from "react";
-import Thumb from "@/components/Thumb";
+import Thumb from "../Thumb";
 export default function MediaLoopRow({ items = [], title = "Media" }) {
   return (
     <section className="space-y-2">
