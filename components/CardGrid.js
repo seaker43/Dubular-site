@@ -14,9 +14,7 @@ export default function CardGrid({ title, items = [] }) {
               style={{ backgroundImage: `url(${x.image})` }}
             />
             <div className="card__body">
-              <h3 className="glow" className="card__title">
-                {x.title}
-              </h3>
+              <h3 className="glow card__title">{x.title}</h3>
               <p className="card__desc">{x.desc}</p>
             </div>
           </Link>
