@@ -2,34 +2,5 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Split partials */
-@import "./base.css";
-@import "./header.css";
-@import "./layout.css";
-@import "./hero.css";
-@import "./search.css";
-@import "./thumb.css";
-@import "./grid.css";
-@import "./navbar.css";
-@import "./favs.css";
-@import "./util.css";
-
-/* Helpers required by Thumb/MediaLoopRow */
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.ratio {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-.ratio-16x9 {
-  aspect-ratio: 16 / 9;
-}
-.ratio-1x1 {
-  aspect-ratio: 1 / 1;
-}
+/* app-wide tweaks */
+:root { color-scheme: dark light; }
