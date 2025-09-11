@@ -7,9 +7,7 @@ export default function Layout({ children }) {
     <div className="bg-black min-h-screen flex flex-col">
       <Header />
       {/* No extra pt-* here; padding is controlled globally */}
-      <main className="flex-1 px-4 md:px-6">
-        {children}
-      </main>
+      <main className="flex-1 px-4 md:px-6">{children}</main>
       <BottomBar />
     </div>
   );

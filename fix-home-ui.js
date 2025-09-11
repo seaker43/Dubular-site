@@ -1,19 +1,26 @@
 const fs = require("fs");
 const f = "pages/index.js";
-let s = fs.readFileSync(f,"utf8");
+let s = fs.readFileSync(f, "utf8");
 
 // --- 1) remove duplicate logo hero cards ---
-s = s.replace(/<div[^>]*>\s*<DubularLogo[\s\S]*?<\/div>/g,"");
+s = s.replace(/<div[^>]*>\s*<DubularLogo[\s\S]*?<\/div>/g, "");
 
 // --- 2) ensure header only renders once ---
-s = s.replace(/<header[\s\S]*?<\/header>/,`
+s = s.replace(
+  /<header[\s\S]*?<\/header>/,
+  `
 <header style={{display:"flex",justifyContent:"center",padding:"10px 0"}}>
   <DubularLogo />
-</header>`);
+</header>`
+);
 
 // --- 3) inject Featured Streamers carousel ---
-if(!/Featured Streamers/.test(s)){
-  s = s.replace(/<main[^>]*>/, m => m + `
+if (!/Featured Streamers/.test(s)) {
+  s = s.replace(
+    /<main[^>]*>/,
+    (m) =>
+      m +
+      `
     <section style={{padding:"12px"}}>
       <h2 style={{color:"#18e27a",margin:"0 0 10px"}}>Featured Streamers</h2>
       <div style={{display:"flex",gap:12,overflowX:"auto",paddingBottom:6}}>
@@ -41,9 +48,10 @@ if(!/Featured Streamers/.test(s)){
         ))}
       </div>
     </section>
-  `);
+  `
+  );
 }
 
 // --- save ---
-fs.writeFileSync(f,s);
+fs.writeFileSync(f, s);
 console.log("✔ Patched homepage UI");

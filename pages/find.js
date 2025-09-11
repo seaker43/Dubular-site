@@ -27,8 +27,16 @@ const CATS = [
     title: "Most Watched",
     items: [
       { id: "mw1", title: "Synthwave", src: "/thumbnails/most-watched/1.jpg" },
-      { id: "mw2", title: "Vapor Dreams", src: "/thumbnails/most-watched/2.jpg" },
-      { id: "mw3", title: "Retro Night", src: "/thumbnails/most-watched/3.jpg" },
+      {
+        id: "mw2",
+        title: "Vapor Dreams",
+        src: "/thumbnails/most-watched/2.jpg",
+      },
+      {
+        id: "mw3",
+        title: "Retro Night",
+        src: "/thumbnails/most-watched/3.jpg",
+      },
       { id: "mw4", title: "Lounge FM", src: "/thumbnails/most-watched/4.jpg" },
       { id: "mw5", title: "Night Owl", src: "/thumbnails/most-watched/5.jpg" },
     ],
@@ -58,13 +66,22 @@ const CATS = [
 export default function Find() {
   return (
     <>
-      <Head><title>Find • dubUlar</title></Head>
+      <Head>
+        <title>Find • dubUlar</title>
+      </Head>
 
       {/* Search bar */}
       <div className="px-4 mt-3 mb-6">
         <div className="w-full h-12 rounded-2xl bg-neutral-900/80 ring-1 ring-white/10 backdrop-blur flex items-center px-4">
-          <svg aria-hidden="true" viewBox="0 0 24 24" className="w-5 h-5 text-neutral-400 mr-2">
-            <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 21.5 21.5 20l-6-6zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            className="w-5 h-5 text-neutral-400 mr-2"
+          >
+            <path
+              fill="currentColor"
+              d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 21.5 21.5 20l-6-6zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+            />
           </svg>
           <input
             type="text"

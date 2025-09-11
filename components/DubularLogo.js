@@ -1,1 +1,1 @@
-<div id="logo" class="logo-slot"></div>
+<div id="logo" class="logo-slot"></div>;

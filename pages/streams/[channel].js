@@ -1,5 +1,5 @@
-export const runtime = 'experimental-edge';
-export const dynamic = 'force-dynamic';
+export const runtime = "experimental-edge";
+export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 import { useRouter } from "next/router";
@@ -23,7 +23,10 @@ export default function ChannelStream() {
           muted
           className="w-full rounded-lg border border-#18e27a-500"
         >
-          <source src={`/streams/${channel}.m3u8`} type="application/x-mpegURL" />
+          <source
+            src={`/streams/${channel}.m3u8`}
+            type="application/x-mpegURL"
+          />
           Your browser does not support HLS streaming.
         </video>
       </div>

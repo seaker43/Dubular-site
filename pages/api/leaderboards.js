@@ -11,5 +11,7 @@ export default async function handler(req) {
       { name: "viewerX", earned: 8800, streak: 11 },
     ],
   };
-  return new Response(JSON.stringify(data), { headers: { "content-type": "application/json" } });
+  return new Response(JSON.stringify(data), {
+    headers: { "content-type": "application/json" },
+  });
 }

@@ -1,11 +1,14 @@
 /* Hero */
-.featured-hero{ transform: translateZ(0); margin-top:0 !important; }
+.featured-hero {
+  transform: translateZ(0);
+  margin-top: 0 !important;
+}
 .featured-hero img,
-.featured-hero video{
-  width:100vw;
-  height:100%;
-  object-fit:cover;
-  object-position:center;
-  margin:0!important;
-  border-radius:0!important;
+.featured-hero video {
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  margin: 0 !important;
+  border-radius: 0 !important;
 }

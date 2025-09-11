@@ -1,5 +1,7 @@
 /* Logo — keep aspect, no cropping */
-.logo, .site-logo, .logo-wrap {
+.logo,
+.site-logo,
+.logo-wrap {
   display: flex;
   align-items: center;
   height: var(--header-h);

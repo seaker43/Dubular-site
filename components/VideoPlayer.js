@@ -1,6 +1,11 @@
 import { useEffect, useRef } from "react";
 
-export default function VideoPlayer({ src, poster, autoPlay=true, muted=true }) {
+export default function VideoPlayer({
+  src,
+  poster,
+  autoPlay = true,
+  muted = true,
+}) {
   const videoRef = useRef(null);
 
   useEffect(() => {

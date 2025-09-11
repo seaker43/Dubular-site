@@ -8,7 +8,10 @@ export default function StreamChat({ channel }) {
   const scrollerRef = useRef(null);
 
   useEffect(() => {
-    scrollerRef.current?.scrollTo({ top: scrollerRef.current.scrollHeight, behavior: "smooth" });
+    scrollerRef.current?.scrollTo({
+      top: scrollerRef.current.scrollHeight,
+      behavior: "smooth",
+    });
   }, [messages]);
 
   function send(e) {
@@ -22,7 +25,10 @@ export default function StreamChat({ channel }) {
     <div className="chat">
       <div ref={scrollerRef} className="chat-scroll">
         {messages.map((m) => (
-          <div key={m.id} className={`chat-row ${m.user === "you" ? "mine" : ""}`}>
+          <div
+            key={m.id}
+            className={`chat-row ${m.user === "you" ? "mine" : ""}`}
+          >
             <span className="chat-user">{m.user}</span>
             <span className="chat-text">{m.text}</span>
           </div>
@@ -35,7 +41,9 @@ export default function StreamChat({ channel }) {
           placeholder={`Message #${channel}`}
           className="chat-input"
         />
-        <button className="glow-bg" className="chat-send" type="submit">Send</button>
+        <button className="glow-bg" className="chat-send" type="submit">
+          Send
+        </button>
       </form>
     </div>
   );

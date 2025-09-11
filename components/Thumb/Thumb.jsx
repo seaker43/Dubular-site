@@ -3,7 +3,7 @@ export default function Thumb({
   title = "Untitled",
   image = "/placeholder.svg",
   live = false,
-  glow = "dual", /* "dual" | "red" | "cyan" */
+  glow = "dual" /* "dual" | "red" | "cyan" */,
   href = "#",
   square = false,
   priority = false,
@@ -14,7 +14,10 @@ export default function Thumb({
 
   return (
     <a href={href} className="block shrink-0" draggable="false">
-      <div className={`thumb-card ${cardGlow}`} style={{ width: "min(86vw, 360px)" }}>
+      <div
+        className={`thumb-card ${cardGlow}`}
+        style={{ width: "min(86vw, 360px)" }}
+      >
         <div className={`ratio ${aspect}`}>
           <img
             src={image}
@@ -24,7 +27,9 @@ export default function Thumb({
             fetchpriority={priority ? "high" : "auto"}
             decoding="async"
             draggable="false"
-            onError={(e) => { e.currentTarget.src = "/placeholder.svg"; }}
+            onError={(e) => {
+              e.currentTarget.src = "/placeholder.svg";
+            }}
           />
           {live && <span className="live-badge">LIVE</span>}
           <div className="thumb-title">{title}</div>

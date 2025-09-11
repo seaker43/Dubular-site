@@ -126,14 +126,21 @@ export default function CreatorPage() {
       <section className="max-w-6xl mx-auto px-4 pb-28">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-xl font-semibold">Uploads</h2>
-          <Link href={`/creator/${creator.slug}/videos`} className="text-cyan-400">
+          <Link
+            href={`/creator/${creator.slug}/videos`}
+            className="text-cyan-400"
+          >
             See all →
           </Link>
         </div>
 
         <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {creator.uploads.map((v, i) => {
-            const glow = v.live ? "glow-red" : i % 2 ? "glow-blue" : "glow-pink";
+            const glow = v.live
+              ? "glow-red"
+              : i % 2
+                ? "glow-blue"
+                : "glow-pink";
             return (
               <li key={v.id}>
                 <div className={`thumbnail ${glow} relative`}>

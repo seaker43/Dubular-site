@@ -1,13 +1,15 @@
 /* Horizontal thumbs */
-.thumb-row{
-  display:flex;
-  gap:0;
-  overflow-x:auto;
-  padding:0!important;
-  margin:0!important;
-  scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;
-  -ms-overflow-style:none;
-  scrollbar-width:none;
+.thumb-row {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  padding: 0 !important;
+  margin: 0 !important;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-.thumb-row::-webkit-scrollbar{ display:none; }
+.thumb-row::-webkit-scrollbar {
+  display: none;
+}

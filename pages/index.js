@@ -4,10 +4,30 @@ import Link from "next/link";
 
 /** ------- Mock data (swap later) ------- */
 const liveNow = [
-  { id: "lv1", title: "Arena Finals", img: "/thumbnails/live1.jpg", href: "/watch/lv1" },
-  { id: "lv2", title: "Night Vibes",  img: "/thumbnails/live2.jpg", href: "/watch/lv2" },
-  { id: "lv3", title: "IRL Walk",     img: "/thumbnails/live3.jpg", href: "/watch/lv3" },
-  { id: "lv4", title: "Music Set",    img: "/thumbnails/live4.jpg", href: "/watch/lv4" },
+  {
+    id: "lv1",
+    title: "Arena Finals",
+    img: "/thumbnails/live1.jpg",
+    href: "/watch/lv1",
+  },
+  {
+    id: "lv2",
+    title: "Night Vibes",
+    img: "/thumbnails/live2.jpg",
+    href: "/watch/lv2",
+  },
+  {
+    id: "lv3",
+    title: "IRL Walk",
+    img: "/thumbnails/live3.jpg",
+    href: "/watch/lv3",
+  },
+  {
+    id: "lv4",
+    title: "Music Set",
+    img: "/thumbnails/live4.jpg",
+    href: "/watch/lv4",
+  },
 ];
 
 /** small card using globals.css classes */
@@ -26,7 +46,10 @@ export default function Home() {
     <>
       <Head>
         <title>dubUlar — Home</title>
-        <meta name="description" content="Watch live streams and discover creators" />
+        <meta
+          name="description"
+          content="Watch live streams and discover creators"
+        />
       </Head>
 
       <main>
@@ -54,18 +77,42 @@ export default function Home() {
             <h2>Top 5</h2>
           </div>
           <div className="vthumb-grid">
-            <Link href="/find?section=top-streamers" className="vthumb-card glow-dual" prefetch={false}>
-              <img src="/thumbnails/top_streamers.jpg" alt="Top 5 Streamers" className="vthumb-img" />
+            <Link
+              href="/find?section=top-streamers"
+              className="vthumb-card glow-dual"
+              prefetch={false}
+            >
+              <img
+                src="/thumbnails/top_streamers.jpg"
+                alt="Top 5 Streamers"
+                className="vthumb-img"
+              />
               <div className="vthumb-gradient" />
               <div className="vthumb-title">Top 5 Streamers</div>
             </Link>
-            <Link href="/find?section=top-gifters" className="vthumb-card glow-dual" prefetch={false}>
-              <img src="/thumbnails/top_gifters.jpg" alt="Top 5 Gifters" className="vthumb-img" />
+            <Link
+              href="/find?section=top-gifters"
+              className="vthumb-card glow-dual"
+              prefetch={false}
+            >
+              <img
+                src="/thumbnails/top_gifters.jpg"
+                alt="Top 5 Gifters"
+                className="vthumb-img"
+              />
               <div className="vthumb-gradient" />
               <div className="vthumb-title">Top 5 Gifters</div>
             </Link>
-            <Link href="/find?section=top-communities" className="vthumb-card glow-dual" prefetch={false}>
-              <img src="/thumbnails/top_communities.jpg" alt="Top 5 Communities" className="vthumb-img" />
+            <Link
+              href="/find?section=top-communities"
+              className="vthumb-card glow-dual"
+              prefetch={false}
+            >
+              <img
+                src="/thumbnails/top_communities.jpg"
+                alt="Top 5 Communities"
+                className="vthumb-img"
+              />
               <div className="vthumb-gradient" />
               <div className="vthumb-title">Top 5 Communities</div>
             </Link>

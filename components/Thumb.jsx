@@ -19,10 +19,7 @@ export default function Thumb({
 }) {
   const [loaded, setLoaded] = useState(false);
 
-  const glowClass = useMemo(
-    () => (live ? "glow-red" : "glow-dual"),
-    [live]
-  );
+  const glowClass = useMemo(() => (live ? "glow-red" : "glow-dual"), [live]);
 
   const Wrapper = href === "#" ? "div" : Link;
 
@@ -61,22 +58,35 @@ export default function Thumb({
       </div>
 
       <style jsx>{`
-        .ratio { position: relative; width: 100%; overflow: hidden; }
-        .ratio-16x9 { aspect-ratio: 16 / 9; }
+        .ratio {
+          position: relative;
+          width: 100%;
+          overflow: hidden;
+        }
+        .ratio-16x9 {
+          aspect-ratio: 16 / 9;
+        }
 
         .skeleton {
-          position: absolute; inset: 0;
-          background: linear-gradient(90deg,
-            rgba(255,255,255,.06) 0%,
-            rgba(255,255,255,.12) 50%,
-            rgba(255,255,255,.06) 100%);
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.06) 0%,
+            rgba(255, 255, 255, 0.12) 50%,
+            rgba(255, 255, 255, 0.06) 100%
+          );
           background-size: 200% 100%;
           animation: scan 1.2s linear infinite;
           pointer-events: none;
         }
         @keyframes scan {
-          0% { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
+          0% {
+            background-position: 200% 0;
+          }
+          100% {
+            background-position: -200% 0;
+          }
         }
       `}</style>
     </article>

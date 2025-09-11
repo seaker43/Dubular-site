@@ -27,10 +27,20 @@ export default function Leaderboards({ data }) {
         <div className="board">
           <h2>Top Streamers</h2>
           <table>
-            <thead><tr><th>Streamer</th><th>Tokens</th><th>Pool Wins</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Streamer</th>
+                <th>Tokens</th>
+                <th>Pool Wins</th>
+              </tr>
+            </thead>
             <tbody>
               {data.streamers.map((s, i) => (
-                <tr key={i}><td>{s.name}</td><td>{s.tokens.toLocaleString()}</td><td>{s.wins}</td></tr>
+                <tr key={i}>
+                  <td>{s.name}</td>
+                  <td>{s.tokens.toLocaleString()}</td>
+                  <td>{s.wins}</td>
+                </tr>
               ))}
             </tbody>
           </table>
@@ -39,10 +49,20 @@ export default function Leaderboards({ data }) {
         <div className="board">
           <h2>Top Viewers</h2>
           <table>
-            <thead><tr><th>Viewer</th><th>Earned</th><th>Streak</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Viewer</th>
+                <th>Earned</th>
+                <th>Streak</th>
+              </tr>
+            </thead>
             <tbody>
               {data.viewers.map((v, i) => (
-                <tr key={i}><td>{v.name}</td><td>{v.earned.toLocaleString()}</td><td>{v.streak} days</td></tr>
+                <tr key={i}>
+                  <td>{v.name}</td>
+                  <td>{v.earned.toLocaleString()}</td>
+                  <td>{v.streak} days</td>
+                </tr>
               ))}
             </tbody>
           </table>

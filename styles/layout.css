@@ -1,11 +1,11 @@
 /* Layout helpers */
-main{
-  padding-top:var(--header-h);
-  padding-left:var(--page-x);
-  padding-right:var(--page-x);
+main {
+  padding-top: var(--header-h);
+  padding-left: var(--page-x);
+  padding-right: var(--page-x);
 }
-.full-bleed{
-  width:100vw;
-  margin-left:calc(50% - 50vw);
-  margin-right:calc(50% - 50vw);
+.full-bleed {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }

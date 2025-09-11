@@ -17,7 +17,9 @@ export default function CategoryRow({ title, items = [] }) {
       >
         {/* Hide webkit scrollbar */}
         <style jsx>{`
-          div::-webkit-scrollbar { display: none; }
+          div::-webkit-scrollbar {
+            display: none;
+          }
         `}</style>
 
         {list.map((it) => (
@@ -36,10 +38,14 @@ export default function CategoryRow({ title, items = [] }) {
               />
 
               {/* Bottom gradient for title + live badge */}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 p-2
-                              bg-gradient-to-t from-black/70 via-black/35 to-transparent">
+              <div
+                className="pointer-events-none absolute inset-x-0 bottom-0 p-2
+                              bg-gradient-to-t from-black/70 via-black/35 to-transparent"
+              >
                 <div className="flex items-center justify-between gap-2">
-                  <h4 className="text-sm font-medium gold-glow line-clamp-1">{it.title}</h4>
+                  <h4 className="text-sm font-medium gold-glow line-clamp-1">
+                    {it.title}
+                  </h4>
                   {it.live && (
                     <span className="ml-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold gold-glow bg-black/40">
                       LIVE

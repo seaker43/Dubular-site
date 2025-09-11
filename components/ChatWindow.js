@@ -4,7 +4,10 @@ import MessageBubble from "./MessageBubble";
 export default function ChatWindow({ messages }) {
   const scroller = useRef(null);
   useEffect(() => {
-    scroller.current?.scrollTo({ top: scroller.current.scrollHeight, behavior: "smooth" });
+    scroller.current?.scrollTo({
+      top: scroller.current.scrollHeight,
+      behavior: "smooth",
+    });
   }, [messages]);
 
   return (
@@ -21,7 +24,12 @@ export default function ChatWindow({ messages }) {
         </div>
       ) : (
         messages.map((m, i) => (
-          <MessageBubble key={i} role={m.role} content={m.content} time={m.time} />
+          <MessageBubble
+            key={i}
+            role={m.role}
+            content={m.content}
+            time={m.time}
+          />
         ))
       )}
     </main>

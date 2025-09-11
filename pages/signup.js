@@ -6,14 +6,34 @@ export default function Signup() {
     <>
       <Head>
         <title>Sign up – Dubular</title>
-        <meta name="description" content="Create your Dubular account to start dubbing videos." />
+        <meta
+          name="description"
+          content="Create your Dubular account to start dubbing videos."
+        />
       </Head>
 
-      <main style={{ maxWidth: 600, margin: "60px auto", padding: "0 20px", textAlign: "center" }}>
+      <main
+        style={{
+          maxWidth: 600,
+          margin: "60px auto",
+          padding: "0 20px",
+          textAlign: "center",
+        }}
+      >
         <h1>Sign up</h1>
-        <p>🚀 This is a placeholder page. In production you’ll add your actual signup form.</p>
+        <p>
+          🚀 This is a placeholder page. In production you’ll add your actual
+          signup form.
+        </p>
 
-        <form style={{ display: "flex", flexDirection: "column", gap: "14px", marginTop: "28px" }}>
+        <form
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "14px",
+            marginTop: "28px",
+          }}
+        >
           <input type="text" placeholder="Name" style={input} />
           <input type="email" placeholder="Email" style={input} />
           <input type="password" placeholder="Password" style={input} />

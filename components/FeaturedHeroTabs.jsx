@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 
 const TABS = [
   { key: "gaming", label: "Gaming", src: "/thumbnails/trending1.jpg" },
-  { key: "irl",    label: "IRL",    src: "/thumbnails/trending2.jpg" },
-  { key: "music",  label: "Music",  src: "/thumbnails/trending3.jpg" },
-  { key: "pod",    label: "Podcast",src: "/thumbnails/trending4.jpg" },
+  { key: "irl", label: "IRL", src: "/thumbnails/trending2.jpg" },
+  { key: "music", label: "Music", src: "/thumbnails/trending3.jpg" },
+  { key: "pod", label: "Podcast", src: "/thumbnails/trending4.jpg" },
 ];
 
 export default function FeaturedLoopHero() {
@@ -15,16 +15,18 @@ export default function FeaturedLoopHero() {
   useEffect(() => {
     const id = setInterval(() => {
       setTab((prev) => {
-        const idx = TABS.findIndex(t => t.key === prev);
+        const idx = TABS.findIndex((t) => t.key === prev);
         const next = TABS[(idx + 1) % TABS.length].key;
         return next;
       });
-      setGlow((g) => (g === "featured-glow-pink" ? "featured-glow-blue" : "featured-glow-pink"));
+      setGlow((g) =>
+        g === "featured-glow-pink" ? "featured-glow-blue" : "featured-glow-pink"
+      );
     }, 3500);
     return () => clearInterval(id);
   }, []);
 
-  const active = TABS.find(t => t.key === tab) || TABS[0];
+  const active = TABS.find((t) => t.key === tab) || TABS[0];
 
   return (
     <section className={`featured-hero ${glow} full-bleed mt-0`}>
@@ -42,7 +44,9 @@ export default function FeaturedLoopHero() {
             key={t.key}
             onClick={() => setTab(t.key)}
             className={`px-3 py-1 rounded-lg text-sm transition ${
-              t.key === tab ? "bg-black/80 ring-1 ring-white/20" : "bg-black/50 hover:bg-black/60"
+              t.key === tab
+                ? "bg-black/80 ring-1 ring-white/20"
+                : "bg-black/50 hover:bg-black/60"
             }`}
           >
             {t.label}
