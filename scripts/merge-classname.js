@@ -10,7 +10,7 @@ const files = execSync("git ls-files '*.js' '*.jsx' '*.tsx'", {
   .split("\n")
   .filter(Boolean);
 
-// regex: <tag ... className="a" ... className="b" ...>
+// regex: <tag ... className="a b" ...  ...>
 const re =
   /(<[^>]*?)\bclassName=(["'])([^"']*)\2([^>]*?)\bclassName=(["'])([^"']*)\5([^>]*?>)/gs;
 
