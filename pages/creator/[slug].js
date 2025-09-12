@@ -115,7 +115,7 @@ export default function CreatorPage() {
  <a
  key={l.label}
  href={l.href}
- className="px-3 py-1 rounded-full bg-neutral-900/60 ring-1 ring-white/10 hover:ring-white/25 text-sm"
+ className=" py-1 rounded-full bg-neutral-900/60 ring-1 ring-white/10 hover:ring-white/25 text-sm"
  >
  {l.label}
  </a>
@@ -181,7 +181,7 @@ export default function CreatorPage() {
  </Link>
 
  {v.live && (
- <span className="absolute top-2 right-2 text-xs font-bold  py-1 rounded-md bg-red-500/90 text-white shadow">
+ <span className="absolute top-2 right-2 text-xs font-bold py-1 rounded-md bg-red-500/90 text-white shadow">
  LIVE
  </span>
  )}

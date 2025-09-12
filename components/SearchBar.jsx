@@ -21,7 +21,7 @@ export default function SearchBar({ defaultValue = "", onChange }) {
  <div className="mb-4">
  <div
  className="
- flex items-center gap-2 px-3 py-2 rounded-xl
+ flex items-center gap-2 py-2 rounded-xl
  bg-neutral-900/70 border border-neutral-800
  focus-within:border-emerald-500/50 focus-within:shadow-[0_0_18px_rgba(16,185,129,0.35)]
  transition

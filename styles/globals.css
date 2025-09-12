@@ -113,3 +113,14 @@ main>.mx-auto {
   margin-left:0 !important;
   margin-right:0 !important;
 }
+
+/* full-bleed hardening */
+html, body { margin:0 !important; padding:0 !important; }
+main, section, .page-shell {
+  padding-left:0 !important;
+  padding-right:0 !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  max-width:none !important;
+}
+.w-full { width:100% !important; }
