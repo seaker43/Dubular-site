@@ -18,3 +18,4 @@ ErrorPage.getInitialProps = ({ res, err }) => {
 };
 
 export default ErrorPage;
+export const config = { runtime: experimental-edge }
