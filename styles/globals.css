@@ -1,45 +1,37 @@
+/* styles/globals.css */
+
+/* Tailwind layers */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Force dark mode background */
-:root {
-  color-scheme: dark;
-}
+/* ---- Core tokens & utilities ---- */
+@import "./base.css";
+@import "./util.css";
 
-/* App-wide body defaults */
-body {
-  @apply bg-neutral-950 text-white antialiased;
-}
+/* ---- Theme (base first, then overrides) ---- */
+@import "./theme.css";
+@import "./theme-overrides.css";
 
-/* Neon glow for thumbnails */
-.thumbnail-glow {
-  @apply ring-1 ring-cyan-400/50 rounded-xl shadow-lg;
-  box-shadow: 0 0 10px rgba(34, 211, 238, 0.7),
-              0 0 20px rgba(34, 211, 238, 0.5),
-              0 0 40px rgba(34, 211, 238, 0.3);
-}
+/* ---- Layout primitives ---- */
+@import "./grid.css";
+@import "./layout.css";
 
-/* LIVE badge */
-.badge-live {
-  @apply absolute top-2 left-2 bg-red-600 text-xs px-2 py-0.5 rounded-md font-bold text-white;
-  box-shadow: 0 0 6px rgba(220, 38, 38, 0.8),
-              0 0 12px rgba(220, 38, 38, 0.6);
-}
+/* ---- App sections / components ---- */
+@import "./header.css";
+@import "./navbar.css";
+@import "./bottom-bar.css";
+@import "./hero.css";
+@import "./favs.css";
+@import "./search.css";
+@import "./stream.css";
+@import "./thumb.css";
 
-/* Header fixes */
-.site-header {
-  @apply bg-black/95 backdrop-blur;
-  height: 88px;
-}
+/* ---- Design helpers (keep late so they can override) ---- */
+@import "./design-system.css";
 
-/* Bottom bar */
-.bottom-bar {
-  @apply fixed bottom-0 w-full flex justify-around bg-neutral-950 border-t border-neutral-800 py-2 text-xs;
-}
-.bottom-bar a {
-  @apply flex flex-col items-center text-neutral-400;
-}
-.bottom-bar a.active {
-  @apply text-cyan-400;
-}
+/* ---- Optional: environment-specific tweaks (last) ---- */
+@import "./beta.css";
+
+/* App-wide tweaks */
+:root { color-scheme: dark light; }
