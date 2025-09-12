@@ -14,7 +14,7 @@ export default function Rank() {
       </Head>
 
       <main>
-        <div className="space-y-8 pb-24 px-2">
+        <div className="space-y-8 pb-24">
           {/* Top 5 Streamers */}
           <section>
             <div className="section-header">

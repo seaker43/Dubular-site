@@ -16,7 +16,7 @@ export default function ChannelStream() {
 
   return (
     <Layout>
-      <div className="p-4 text-white">
+      <div className="py-4 text-white">
         <h1 className="text-2xl font-bold mb-4">{channel}’s Stream</h1>
         <video
           controls

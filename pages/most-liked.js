@@ -8,7 +8,7 @@ export async function getServerSideProps() {
 export default function MostLikedPage() {
   return (
     <Layout title="Most Liked">
-      <div className="p-4">
+      <div className="py-4">
         <h1 className="text-2xl font-semibold">Most Liked</h1>
         {/* TODO: render your real list component here */}
       </div>

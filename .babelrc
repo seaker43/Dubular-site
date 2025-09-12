@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 {
   "presets": [
     ["@babel/preset-env", { "targets": { "node": "current" } }],
     ["@babel/preset-react", { "runtime": "automatic" }]
   ]
 }
+=======
+{ "presets": ["next/babel"] }
+>>>>>>> 3626b3f6 (fix: next.config.js + Termux dev setup)

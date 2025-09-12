@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev -p 3000",
-    "build": "next build",
+    "dev": "NEXT_DISABLE_SWC_BINARY=1 NEXT_FORCE_WASM=1 next dev -p 3000",
+    "build": "NEXT_DISABLE_SWC_BINARY=1 NEXT_FORCE_WASM=1 next build",
     "start": "next start",
     "lint": "eslint .",
     "cleanup": "node scripts/cleanup-ui.cjs",
@@ -30,10 +30,20 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@babel/core": "^7.27.1",
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
     "@eslint/js": "^8.57.1",
+=======
+    "@babel/core": "^7.27.0",
+    "@babel/preset-env": "^7.28.3",
+    "@babel/preset-react": "^7.27.1",
+    "@eslint/js": "^8.57.1",
+    "@next/swc-wasm-nodejs": "14.2.14",
+    "@next/swc-wasm-web": "14.2.14",
+    "@swc/helpers": "^0.5.17",
+>>>>>>> 3626b3f6 (fix: next.config.js + Termux dev setup)
     "@types/node": "^24.3.1",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",

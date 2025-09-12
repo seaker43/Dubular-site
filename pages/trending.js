@@ -55,7 +55,7 @@ export default function Trending() {
       <Head>
         <title>Trending • Dubular</title>
       </Head>
-      <main className="px-4 pb-24">
+      <main className="pb-24">
         <h1 className="text-4xl md:text-5xl font-extrabold text-neon drop-shadow-glow mb-6">
           Trending Now
         </h1>

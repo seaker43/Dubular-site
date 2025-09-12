@@ -30,7 +30,7 @@ export default function Favorites() {
       <Head>
         <title>Favorites • dubUlar</title>
       </Head>
-      <section className="px-4 mt-4">
+      <section className="mt-4">
         <h2 className="text-2xl font-bold mb-3">Favorites</h2>
         <ul className="flex gap-3 overflow-x-auto py-2 scroll-snap-x">
           {MOCK.map((it) => (

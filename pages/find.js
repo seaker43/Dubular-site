@@ -72,8 +72,8 @@ export default function Find() {
       </Head>
 
       {/* Search bar */}
-      <div className="px-4 mt-3 mb-6">
-        <div className="w-full h-12 rounded-2xl bg-neutral-900/80 ring-1 ring-white/10 backdrop-blur flex items-center px-4">
+      <div className="mt-3 mb-6">
+        <div className="w-full h-12 rounded-2xl bg-neutral-900/80 ring-1 ring-white/10 backdrop-blur flex items-center">
           <svg
             aria-hidden="true"
             viewBox="0 0 24 24"
