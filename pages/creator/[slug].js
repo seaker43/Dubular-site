@@ -158,7 +158,7 @@ export default function CreatorPage() {
  />
  </Link>
 
- <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/70 to-transparent rounded-b-xl">
+ <div className="absolute inset-x-0 bottom-0 p-0 bg-gradient-to-t from-black/70 to-transparent rounded-b-xl">
  <div className="text-white font-semibold drop-shadow-sm">
  {v.title}
  </div>

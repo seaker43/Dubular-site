@@ -1,8 +1,8 @@
 /* Layout helpers */
 main {
   padding-top: var(--header-h);
-  padding-left: var(--page-x);
-  padding-right: var(--page-x);
+  padding-left:0!important;
+  padding-right:0!important;
 }
 .full-bleed {
   width: 100vw;

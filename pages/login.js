@@ -59,7 +59,7 @@ export default function Login() {
 
  return (
  <Layout>
- <div className="max-w-md mt-16 p-6 rounded-2xl bg-[#0c1218]/70 border border-white/5 shadow-[0_0_60px_rgba(24,226,122,0.08)]">
+ <div className="max-w-md mt-16 p-0 rounded-2xl bg-[#0c1218]/70 border border-white/5 shadow-[0_0_60px_rgba(24,226,122,0.08)]">
  <h1 className="text-3xl dubular-headline mb-6">Login</h1>
  <form onSubmit={onLogin} className="space-y-4">
  <label className="block">

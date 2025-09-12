@@ -32,7 +32,7 @@ export default function Thumb({
  }}
  />
  {live && <span className="live-badge">LIVE</span>}
- <div className="p-2 thumb-title">{title}</div>
+ <div className="p-0 thumb-title">{title}</div>
  </div>
  </div>
  </a>

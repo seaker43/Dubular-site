@@ -41,7 +41,7 @@ export default function SearchBar({ defaultValue = "", onChange }) {
  <button
  onClick={clear}
  aria-label="Clear search"
- className="p-1 rounded hover:bg-neutral-800/70 active:scale-95"
+ className="p-0 rounded hover:bg-neutral-800/70 active:scale-95"
  >
  <X size={16} />
  </button>
