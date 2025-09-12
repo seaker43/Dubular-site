@@ -1,4 +1,4 @@
-import App from 'next/app'
+import BaseApp from "next/app"
 // pages/_app.js
 import React from "react";
 import "../styles/globals.css";
