@@ -4,7 +4,7 @@ import React from "react";
 import "../styles/globals.css";
 import Layout from "../components/Layout";
 
-export default function App({ Component, pageProps }) {
+function MyApp({ Component, pageProps }) {
   return (
     <Layout>
       <Component {...pageProps} />
@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }) {
 }
 
 // Disables Automatic Static Optimization (forces SSR for all pages)
-MyApp.getInitialProps = async (appContext) => {
-  const appProps = await App.getInitialProps(appContext);
+MyBaseApp.getInitialProps = async (appContext) => {
+  const appProps = await BaseApp.getInitialProps(appContext);
   return { ...appProps };
 };
