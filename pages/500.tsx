@@ -1,0 +1,1 @@
+export const runtime='edge';export default function FiveHundred(){return null}
