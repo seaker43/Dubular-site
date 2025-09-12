@@ -197,4 +197,4 @@ export default function CreatorPage() {
 
 export async function getServerSideProps(){return{props:{}}}
 
-export const config = { runtime: 'edge' };
+export const config = { runtime: 'experimental-edge' };

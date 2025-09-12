@@ -102,4 +102,4 @@ export default function Login() {
   );
 }
 
-export const config = { runtime: 'edge' };
+export const config = { runtime: 'experimental-edge' };

@@ -72,4 +72,4 @@ export default function Leaderboards({ data }) {
     </Layout>
   );
 }
-export const config = { runtime: 'edge' };
+export const config = { runtime: 'experimental-edge' };
