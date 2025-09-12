@@ -1,9 +1,2 @@
-export const dynamic = "force-dynamic";
-export default function Page() {
-  return (
-    <main style={{ maxWidth: 600, margin: "60px auto", padding: "0 20px", textAlign: "center" }}>
-      <h1>stream</h1>
-      <p>🚧 Placeholder page for /stream. Replace with real content when ready.</p>
-    </main>
-  );
-}
+export default function Stream(){ return <main style={{maxWidth:600,margin:"60px auto",padding:"0 20px",textAlign:"center"}}><h1>Stream</h1><p>Temporary placeholder. Replace later.</p></main>; }
+export async function getServerSideProps(){ return { props: {} }; }
