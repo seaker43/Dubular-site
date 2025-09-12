@@ -6,8 +6,8 @@
 body {
   padding-top: var(--header-h) !important;
   padding-bottom: var(--bottom-h) !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  padding-left: var(--page-x, 16px) !important;
+  padding-right: var(--page-x, 16px) !important;
   margin: 0 !important;
 }
 
