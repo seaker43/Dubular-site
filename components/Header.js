@@ -1,28 +1,25 @@
-// components/Header.js
-import { forwardRef } from "react";
+import React, { forwardRef } from "react";
+import Image from "next/image";
 
-const Header = forwardRef((props, ref) => {
+const Header = forwardRef(function Header(_props, ref) {
   return (
     <header
       ref={ref}
-      className="site-header fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur flex items-center justify-center"
-      style={{ height: "88px", border: "none" }}
+      className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur flex items-center justify-center"
+      style={{ height: 88, border: "none" }}
     >
-      {/* Centered logo */}
-      <div className="h-[60px] flex items-center justify-center w-full">
-        <img
-          src="/Dubular2.v2.png"  // file lives in /public with this exact case
-          alt="dubUlar header logo"
-          width="180"
-          height="60"
-          loading="eager"
-          decoding="async"
-          style={{ objectFit: "contain", display: "block" }}
+      <div className="relative h-full w-full max-w-none">
+        <Image
+          src="/Dubular2.v2.png"
+          alt="Dubular"
+          fill
+          priority
+          className="object-cover object-top select-none pointer-events-none"
+          sizes="100vw"
         />
       </div>
     </header>
   );
 });
 
-Header.displayName = "Header";
 export default Header;
