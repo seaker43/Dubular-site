@@ -1,5 +1,5 @@
 // Minimal Edge-compatible error page for Pages Router
-export const runtime = "experimental-edge";
+export const config = { runtime: 'edge' }
 
 function ErrorPage({ statusCode }) {
   return (
