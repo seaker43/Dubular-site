@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout";
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   // Mock seasonal snapshot
   const data = {
     streamers: [
@@ -72,6 +72,3 @@ export default function Leaderboards({ data }) {
     </Layout>
   );
 }
-
-
-export async function getServerSideProps(){return {props:{}}}
