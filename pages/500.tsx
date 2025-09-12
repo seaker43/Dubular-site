@@ -1,1 +1,1 @@
-export const config={runtime:'experimental-edge'};export default function FiveHundred(){return null}
+export default function FiveHundred(){return <></>}

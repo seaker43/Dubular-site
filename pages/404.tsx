@@ -1,1 +1,1 @@
-export const config={runtime:'experimental-edge'};export default function FourOhFour(){return null}
+export default function FourOhFour(){return <></>}
