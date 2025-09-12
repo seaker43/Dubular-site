@@ -1,11 +1,10 @@
 // pages/_app.js
-import "../styles/globals.css";
-import Layout from "../components/Layout";
+import '../styles/globals.css'
 
 export default function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
+    <main className="pt-0"> {/* or just remove className entirely */}
       <Component {...pageProps} />
-    </Layout>
-  );
+    </main>
+  )
 }
