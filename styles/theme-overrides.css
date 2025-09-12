@@ -23,3 +23,12 @@ main {
   margin: 0 !important;
   border-radius: var(--radius) !important;
 }
+
+/* --- DEBUG: will be removed later --- */
+body::before{
+  content:"OVERRIDES LOADED";
+  position:fixed; inset:auto auto 12px 12px;
+  z-index:99999; padding:2px 6px; border-radius:6px;
+  background:#ff2a6d; color:#fff; font:600 10px/1 system-ui;
+  box-shadow:0 2px 6px rgba(0,0,0,.4);
+}
