@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3000",
-    "build": "next build",
+    "dev": "NEXT_DISABLE_SWC_BINARY=1 NEXT_FORCE_WASM=1 next dev -p 3000",
+    "build": "NEXT_DISABLE_SWC_BINARY=1 NEXT_FORCE_WASM=1 next build",
     "start": "next start",
     "lint": "eslint .",
     "cleanup": "node scripts/cleanup-ui.cjs",
@@ -16,7 +16,7 @@
     "prettier:check": "prettier --check .",
     "scan": "npm run lint && npm run typecheck && npm run imports && npm run deps && npm run semgrep && npm run spell && npm run prettier:check",
     "scan:all": "eslint . --ext .js,.jsx,.ts,.tsx && prettier --check . && tsc --noEmit || true",
-    "dev:wasm": "NEXT_DISABLE_SWC_BINARY=1 NEXT_FORCE_WASM=1 NEXT_SKIP_NAPI_BINARY_DOWNLOAD=1 next dev -p 3000",
+    "dev:wasm": "NEXT_DISABLE_SWC_BINARY=1 NEXT_FORCE_WASM=1 next dev -p 3000",
     "preview": "wrangler pages dev .vercel/output/static --compatibility-date=2024-09-01",
     "cf:build": "npx @cloudflare/next-on-pages@latest",
     "cf:deploy": "npx wrangler pages deploy .vercel/output/static --project-name dubular-site"
