@@ -1,3 +1,4 @@
+import App from 'next/app'
 // pages/_app.js
 import React from "react";
 import "../styles/globals.css";
@@ -10,3 +11,9 @@ export default function App({ Component, pageProps }) {
     </Layout>
   );
 }
+
+// Disables Automatic Static Optimization (forces SSR for all pages)
+MyApp.getInitialProps = async (appContext) => {
+  const appProps = await App.getInitialProps(appContext);
+  return { ...appProps };
+};
