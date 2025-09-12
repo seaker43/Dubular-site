@@ -2,8 +2,8 @@ export const dynamic = "force-dynamic";
 export default function Page() {
   return (
     <main style={{ maxWidth: 600, margin: "60px auto", padding: "0 20px", textAlign: "center" }}>
-      <h1>streams</h1>
-      <p>🚧 Placeholder page for /streams. Replace with real content when ready.</p>
+      <h1>stream</h1>
+      <p>🚧 Placeholder page for /stream. Replace with real content when ready.</p>
     </main>
   );
 }
