@@ -2,13 +2,13 @@
 const nextConfig = {
   reactStrictMode: true,
 
-  // Turn off SWC entirely (use Babel + Terser instead)
+  // 👇 Force Babel, never SWC
   swcMinify: false,
   experimental: {
-    swcLoader: false,
-    swcMinify: false,
+    forceSwcTransforms: false,
   },
 
+  // Ensure images still work
   images: {
     remotePatterns: [{ protocol: "https", hostname: "**" }],
   },
