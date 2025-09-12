@@ -1,1 +1,1 @@
-export const config={runtime:'edge'};export default function Error(){return null}
+export const runtime='edge';export const config={runtime:'edge'};export default function Error(){return null}
