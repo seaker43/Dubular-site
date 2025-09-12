@@ -1,4 +1,4 @@
-export const config = { runtime: "experimental-edge" };
+export const runtime = "experimental-edge";
 
 function ErrorPage({ statusCode }) {
   return (
