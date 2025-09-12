@@ -123,3 +123,5 @@ export default function Home() {
     </>
   );
 }
+
+export const config = { runtime: 'edge' };

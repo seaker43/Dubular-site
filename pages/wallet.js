@@ -19,3 +19,5 @@ export default function Wallet() {
 }
 
 export async function getServerSideProps(){ return { props: {} }; }
+
+export const config = { runtime: 'edge' };

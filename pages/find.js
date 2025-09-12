@@ -101,3 +101,5 @@ export default function Find() {
     </>
   );
 }
+
+export const config = { runtime: 'edge' };

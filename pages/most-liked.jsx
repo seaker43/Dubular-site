@@ -6,3 +6,5 @@ export default function MostLiked() {
     </main>
   );
 }
+
+export const config = { runtime: 'edge' };

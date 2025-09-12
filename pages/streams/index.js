@@ -22,3 +22,5 @@ export default function Streams() {
     </Layout>
   );
 }
+
+export const config = { runtime: 'edge' };

@@ -17,3 +17,5 @@ export default function Account() {
     </main>
   );
 }
+
+export const config = { runtime: 'edge' };

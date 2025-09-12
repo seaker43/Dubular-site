@@ -17,3 +17,5 @@ MyApp.getInitialProps = async (appContext) => {
 };
 
 export default MyApp;
+
+export const config = { runtime: 'edge' };

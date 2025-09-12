@@ -68,3 +68,5 @@ export default function Trending() {
     </>
   );
 }
+
+export const config = { runtime: 'edge' };

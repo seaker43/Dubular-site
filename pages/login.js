@@ -101,3 +101,5 @@ export default function Login() {
     </Layout>
   );
 }
+
+export const config = { runtime: 'edge' };

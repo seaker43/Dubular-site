@@ -15,3 +15,5 @@ export default function MostLikedPage() {
     </Layout>
   );
 }
+
+export const config = { runtime: 'edge' };
