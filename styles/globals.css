@@ -1,0 +1,11 @@
+
+/* === DEBUG STRIPE: remove after confirm === */
+body::before{
+  content:"build " attr(data-build);
+  display:block;
+  font:600 12px/1 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  padding:4px 8px;
+  background:repeating-linear-gradient(45deg,#ff3366 0 12px,#ffcc00 12px 24px);
+  color:#111;
+  letter-spacing:.04em;
+}
