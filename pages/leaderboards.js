@@ -72,3 +72,6 @@ export default function Leaderboards({ data }) {
     </Layout>
   );
 }
+
+
+export async function getServerSideProps(){return {props:{}}}
