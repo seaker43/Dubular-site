@@ -1,21 +1,17 @@
-// Minimal Edge-compatible error page for Pages Router
-export const config = { runtime: 'edge' }
+export const config = { runtime: "experimental-edge" };
 
 function ErrorPage({ statusCode }) {
   return (
     <main style={{maxWidth:600,margin:"60px auto",padding:"0 20px",textAlign:"center"}}>
-      <h1>Something went wrong</h1>
-      <p>{statusCode ? `Error ${statusCode}` : "An unexpected error occurred."}</p>
-      <p><a href="/">Back home</a></p>
+      <h1>{statusCode ? `Error ${statusCode}` : "An error occurred"}</h1>
+      <p>Something went wrong.</p>
     </main>
   );
 }
 
-// Preserve status code when available
 ErrorPage.getInitialProps = ({ res, err }) => {
   const statusCode = res?.statusCode ?? err?.statusCode ?? 404;
   return { statusCode };
 };
 
 export default ErrorPage;
-export const config = { runtime: experimental-edge }
