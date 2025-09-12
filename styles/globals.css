@@ -2,5 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-/* app-wide tweaks */
-:root { color-scheme: dark light; }
+/* Force dark mode background */
+:root {
+  color-scheme: dark;
+}
+
+/* App-wide body defaults */
+body {
+  @apply bg-neutral-950 text-white antialiased;
+}
+
+/* Neon glow for thumbnails */
+.thumbnail-glow {
+  @apply ring-1 ring-cyan-400/50 rounded-xl shadow-lg;
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.7),
+              0 0 20px rgba(34, 211, 238, 0.5),
+              0 0 40px rgba(34, 211, 238, 0.3);
+}
+
+/* LIVE badge */
+.badge-live {
+  @apply absolute top-2 left-2 bg-red-600 text-xs px-2 py-0.5 rounded-md font-bold text-white;
+  box-shadow: 0 0 6px rgba(220, 38, 38, 0.8),
+              0 0 12px rgba(220, 38, 38, 0.6);
+}
+
+/* Header fixes */
+.site-header {
+  @apply bg-black/95 backdrop-blur;
+  height: 88px;
+}
+
+/* Bottom bar */
+.bottom-bar {
+  @apply fixed bottom-0 w-full flex justify-around bg-neutral-950 border-t border-neutral-800 py-2 text-xs;
+}
+.bottom-bar a {
+  @apply flex flex-col items-center text-neutral-400;
+}
+.bottom-bar a.active {
+  @apply text-cyan-400;
+}
