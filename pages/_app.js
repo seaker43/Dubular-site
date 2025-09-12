@@ -1,7 +1,8 @@
-import "../styles/util.css";
-import "../styles/theme.css";
-import "../styles/layout.css";
 import "../styles/globals.css";
+
+export default function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />;
+}
 import Layout from "../components/Layout/Layout";
 
 export default function MyApp({ Component, pageProps }) {
