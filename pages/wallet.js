@@ -17,3 +17,5 @@ export default function Wallet() {
     </main>
   );
 }
+
+export async function getServerSideProps(){ return { props: {} }; }
