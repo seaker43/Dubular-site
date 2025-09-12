@@ -46,3 +46,42 @@ meta[name="viewport"]{ content: "width=device-width, initial-scale=1, viewport-f
   --safe-top: env(safe-area-inset-top);
 }
 body{ padding-top: max(0px, calc(var(--safe-top) - 8px)); } /* small cushion only */
+
+/* ==== Home hero: clamp size, remove forced spacing ==== */
+.featured-hero {
+  position: relative;
+  inline-size: 100%;
+  block-size: clamp(160px, 35vh, 260px); /* <= adjust to taste */
+  min-block-size: 0 !important;
+  margin: 0 auto;
+  padding: 0 !important;
+  background: transparent !important;
+  overflow: hidden;
+  border-radius: 0 0 24px 24px;
+}
+
+.featured-hero,
+.featured-hero.full-bleed {
+  height: auto !important;
+  min-height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.featured-hero > img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  aspect-ratio: auto !important;
+}
+
+.featured-hero .overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none;
+}
+
+main > section:first-of-type {
+  margin-top: 0 !important;
+}

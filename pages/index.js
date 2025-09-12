@@ -55,7 +55,7 @@ export default function Home() {
 
  <main>
  {/* Featured hero snug under header */}
- <section className="featured-hero featured-glow-pink full-bleed">
+ <section className="featured-hero featured-glow-pink full-bleed" style={{ height: 'clamp(160px, 35vh, 260px)', minHeight: 0, padding: 0 }}>
  <img src="/thumbnails/featured.jpg" alt="Featured" />
  <div className="overlay" />
  </section>
