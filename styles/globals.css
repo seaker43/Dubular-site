@@ -9,3 +9,40 @@ body::before{
   color:#111;
   letter-spacing:.04em;
 }
+
+/* === Global layout + header/hero squash === */
+html, body, #__next { margin:0; padding:0; min-height:100%; background:#000; }
+
+/* Remove any forced hero/header height/padding coming from components */
+header, .header, .banner, [class*="hero"], [class*="Hero"], [id*="hero"] {
+  height:auto !important;
+  min-height:0 !important;
+  padding-top:0 !important;
+  padding-bottom:0 !important;
+  overflow:visible !important;
+}
+
+/* If there’s a full-bleed wrapper adding the gap, neutralize it */
+[class*="container"], [class*="wrap"], main, .page, .page-root {
+  margin-top:0 !important;
+  padding-top:0 !important;
+}
+
+/* Broken header logo collapses to reasonable size */
+img[alt*="header logo" i] {
+  display:block !important;
+  height:32px !important;
+  width:auto !important;
+  object-fit:contain !important;
+  margin:12px 16px !important;
+}
+
+/* Prevent stray margins on first element from creating a gap */
+main > :first-child { margin-top:0 !important; }
+
+/* iOS safe-area: let content sit under the address bar without extra gap */
+meta[name="viewport"]{ content: "width=device-width, initial-scale=1, viewport-fit=cover"; }
+:root{
+  --safe-top: env(safe-area-inset-top);
+}
+body{ padding-top: max(0px, calc(var(--safe-top) - 8px)); } /* small cushion only */
