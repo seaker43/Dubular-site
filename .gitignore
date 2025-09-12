@@ -53,3 +53,7 @@ dump_*
 dubular-site.tar.gz
 dubular-beta.zip
 dubular-beta.zip
+
+# Ignore backup/temp files
+package.json.bak
+package.tmp
