@@ -94,3 +94,6 @@ header.site-header {
 @import "./beta.css";
 @import "./util.css";
 /* NOTE: skip CSS Modules like logo.module.css here; those belong in the component */
+
+/* === Full-bleed page shell === */
+main,main>section,main>div{padding-left:0!important;padding-right:0!important;max-width:none!important} .container,.max-w-none,.max-w-6xl,.max-w-7xl{max-width:none!important} main>.mx-auto{margin-left:0!important;margin-right:0!important}

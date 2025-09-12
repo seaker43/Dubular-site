@@ -181,7 +181,7 @@ export default function CreatorPage() {
  </Link>
 
  {v.live && (
- <span className="absolute top-2 right-2 text-xs font-bold px-2 py-1 rounded-md bg-red-500/90 text-white shadow">
+ <span className="absolute top-2 right-2 text-xs font-bold  py-1 rounded-md bg-red-500/90 text-white shadow">
  LIVE
  </span>
  )}

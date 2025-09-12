@@ -69,7 +69,7 @@ export default function Login() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3 outline-none focus:border-[#18e27a]"
+              className="mt-1 w-full rounded-xl bg-black/40 border border-white/10  py-3 outline-none focus:border-[#18e27a]"
             />
           </label>
           <label className="block">
@@ -79,7 +79,7 @@ export default function Login() {
               required
               value={pwd}
               onChange={(e) => setPwd(e.target.value)}
-              className="mt-1 w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3 outline-none focus:border-[#18e27a]"
+              className="mt-1 w-full rounded-xl bg-black/40 border border-white/10  py-3 outline-none focus:border-[#18e27a]"
             />
           </label>
           {err && <p className="text-red-400 text-sm">{err}</p>}
