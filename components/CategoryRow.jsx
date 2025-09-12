@@ -28,7 +28,7 @@ export default function CategoryRow({ title, items = [] }) {
  className="snap-start shrink-0 w-[320px]"
  aria-label={it.title}
  >
- <div className="relative w-full aspect-video overflow-hidden rounded-lg shadow-2xl">
+ <div className="px-4 sm:px-6 lg:px-8 relative w-full aspect-video overflow-hidden rounded-lg shadow-2xl">
  {/* Use <img> so missing files don't break build; adjust path/extension in index.js */}
  <img
  src={it.thumb}
@@ -42,7 +42,7 @@ export default function CategoryRow({ title, items = [] }) {
  className="pointer-events-none absolute inset-x-0 bottom-0 p-2
  bg-gradient-to-t from-black/70 via-black/35 to-transparent"
  >
- <div className="flex items-center justify-between gap-2">
+ <div className="px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
  <h4 className="text-sm font-medium gold-glow line-clamp-1">
  {it.title}
  </h4>
