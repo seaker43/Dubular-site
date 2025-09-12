@@ -14,13 +14,13 @@ export default function Rank() {
  </Head>
 
  <main>
- <div className="space-y-8 pb-24">
+ <div className="px-4 sm:px-6 lg:px-8 space-y-8 pb-24">
  {/* Top 5 Streamers */}
  <section>
- <div className="section-header">
+ <div className="px-4 sm:px-6 lg:px-8 section-header">
  <h2>Top 5 Streamers</h2>
  </div>
- <div className="vthumb-grid">
+ <div className="px-4 sm:px-6 lg:px-8 vthumb-grid">
  {[1, 2, 3, 4, 5].map((i) => (
  <article key={`s-${i}`} className="vthumb-card glow-dual">
  <img
@@ -28,8 +28,8 @@ export default function Rank() {
  alt={`Streamer ${i}`}
  className="vthumb-img"
  />
- <div className="vthumb-gradient" />
- <div className="vthumb-title">Streamer #{i}</div>
+ <div className="px-4 sm:px-6 lg:px-8 vthumb-gradient" />
+ <div className="px-4 sm:px-6 lg:px-8 vthumb-title">Streamer #{i}</div>
  </article>
  ))}
  </div>
@@ -37,10 +37,10 @@ export default function Rank() {
 
  {/* Top 5 Gifters */}
  <section>
- <div className="section-header">
+ <div className="px-4 sm:px-6 lg:px-8 section-header">
  <h2>Top 5 Gifters</h2>
  </div>
- <div className="vthumb-grid">
+ <div className="px-4 sm:px-6 lg:px-8 vthumb-grid">
  {[1, 2, 3, 4, 5].map((i) => (
  <article key={`g-${i}`} className="vthumb-card glow-dual">
  <img
@@ -48,8 +48,8 @@ export default function Rank() {
  alt={`Gifter ${i}`}
  className="vthumb-img"
  />
- <div className="vthumb-gradient" />
- <div className="vthumb-title">Gifter #{i}</div>
+ <div className="px-4 sm:px-6 lg:px-8 vthumb-gradient" />
+ <div className="px-4 sm:px-6 lg:px-8 vthumb-title">Gifter #{i}</div>
  </article>
  ))}
  </div>
@@ -57,10 +57,10 @@ export default function Rank() {
 
  {/* Top 5 Communities */}
  <section>
- <div className="section-header">
+ <div className="px-4 sm:px-6 lg:px-8 section-header">
  <h2>Top 5 Communities</h2>
  </div>
- <div className="vthumb-grid">
+ <div className="px-4 sm:px-6 lg:px-8 vthumb-grid">
  {[1, 2, 3, 4, 5].map((i) => (
  <article key={`c-${i}`} className="vthumb-card glow-dual">
  <img
@@ -68,8 +68,8 @@ export default function Rank() {
  alt={`Community ${i}`}
  className="vthumb-img"
  />
- <div className="vthumb-gradient" />
- <div className="vthumb-title">Community #{i}</div>
+ <div className="px-4 sm:px-6 lg:px-8 vthumb-gradient" />
+ <div className="px-4 sm:px-6 lg:px-8 vthumb-title">Community #{i}</div>
  </article>
  ))}
  </div>
