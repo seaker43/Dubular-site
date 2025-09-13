@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "cf:build": "next build && npx @cloudflare/next-on-pages",
+    "cf:build": "npm run build && node scripts/write-version.js && npx @cloudflare/next-on-pages",
     "postbuild": "node scripts/write-version.js"
   },
   "dependencies": {
