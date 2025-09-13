@@ -25,7 +25,7 @@ export default function MediaCard({
 
  <div className="thumb-overlay">
  <div className="flex items-center gap-2">
- {live && <span className="live-chip">LIVE</span>}
+ {live && <span className="live-badge">LIVE</span>}
  <h3 className="neon-text text-xl font-extrabold">{title}</h3>
  </div>
  {tags?.length ? (
