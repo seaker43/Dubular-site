@@ -1,32 +1,21 @@
-/* ==========================
-   dubUlar overrides
-   ========================== */
-
-/* Fix header logo size + alignment */
-.header-logo {
-  max-height: 48px !important;
-  width: auto !important;
-  object-fit: contain !important;
-  display: inline-block !important;
-}
-
-/* Neon red glow for LIVE badge */
-.live-badge {
-  background: red !important;
-  color: white !important;
-  padding: 2px 6px !important;
-  border-radius: 6px !important;
-  font-weight: bold !important;
-  text-transform: uppercase !important;
-  box-shadow: 0 0 8px red, 0 0 16px red !important;
-  font-size: 0.75rem !important; /* slightly smaller, readable */
-}
-.live-badge{background:red;color:#fff;font-weight:bold;border-radius:4px;padding:2px 6px;}
+/* Dubular custom overrides */
 .live-badge {
   background: red;
   color: #fff;
   font-weight: bold;
   border-radius: 4px;
   padding: 2px 6px;
-  box-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+  font-size: 0.75rem;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+}
+
+/* Thumbnail neon green glow */
+.thumbnail img {
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 255, 128, 0.8);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.thumbnail img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(0, 255, 128, 1);
 }
