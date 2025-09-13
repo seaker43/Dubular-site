@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         {/* Final overrides, load after Next CSS */}
-        <link rel="stylesheet" href="/overrides.css?v=5" />
+        <link rel="stylesheet" href="/overrides.css?v=6" />
       </Head>
       <body>
         <Main />
