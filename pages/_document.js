@@ -5,7 +5,6 @@ export default function Document() {
     <Html lang="en">
       <Head>
         {/* Keep external file (cache-busted) */}
-        <link rel="stylesheet" href="/overrides.css?v=10" />
         {/* Inline safety net so we bypass any external CSS caching */}
         <style id="inline-overrides">{`
           /* Dubular custom overrides */
