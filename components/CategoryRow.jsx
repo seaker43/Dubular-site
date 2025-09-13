@@ -1,9 +1,9 @@
 
 # creator slug page
-sed -i 's/{live && .\?["'\'']\?LIVE["'\'']\?}/{live && <span className="live-badge">LIVE<\/span>}/' pages/creator/\[slug].js || true
+sed -i 's/{live && .\?["'\'']\?LIVE["'\'']\?}/{live && <span className="live-badge"><span className="live-badge">LIVE</span><\/span>}/' pages/creator/\[slug].js || true
 nano pages/creator/\[slug].js
 # creator slug page
-sed -i 's/{live && .\?["'\'']\?LIVE["'\'']\?}/{live && <span className="live-badge">LIVE<\/span>}/' pages/creator/\[slug].js || true
+sed -i 's/{live && .\?["'\'']\?LIVE["'\'']\?}/{live && <span className="live-badge"><span className="live-badge">LIVE</span><\/span>}/' pages/creator/\[slug].js || true
 nano pages/creator/\[slug].jsimport Link from "next/link";
 
 export default function CategoryRow({ title, items = [] }) {
