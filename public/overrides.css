@@ -21,3 +21,4 @@
   box-shadow: 0 0 8px red, 0 0 16px red !important;
   font-size: 0.75rem !important; /* slightly smaller, readable */
 }
+.live-badge{background:red;color:#fff;font-weight:bold;border-radius:4px;padding:2px 6px;}
