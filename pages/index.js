@@ -51,7 +51,8 @@ export default function Home() {
  name="description"
  content="Watch live streams and discover creators"
  />
- </Head>
+   <meta name="x-build" content="20250913000811" />
+    </Head>
 
  <main>
  {/* Featured hero snug under header */}
