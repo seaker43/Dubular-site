@@ -1,9 +1,23 @@
-/* Force neon red glow for LIVE badge */
+/* ==========================
+   dubUlar overrides
+   ========================== */
+
+/* Fix header logo size + alignment */
+.header-logo {
+  max-height: 48px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  display: inline-block !important;
+}
+
+/* Neon red glow for LIVE badge */
 .live-badge {
   background: red !important;
   color: white !important;
   padding: 2px 6px !important;
   border-radius: 6px !important;
   font-weight: bold !important;
-  box-shadow: 0 0 12px red, 0 0 24px red !important;
+  text-transform: uppercase !important;
+  box-shadow: 0 0 8px red, 0 0 16px red !important;
+  font-size: 0.75rem !important; /* slightly smaller, readable */
 }
