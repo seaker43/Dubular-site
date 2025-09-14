@@ -22,7 +22,7 @@ header, .header, .banner, [class*="hero"], [class*="Hero"], [id*="hero"] {
   overflow:visible !important;
 }
 
-/* If there’s a full-bleed wrapper adding the gap, neutralize it */
+/* If theres a full-bleed wrapper adding the gap, neutralize it */
 [class*="container"], [class*="wrap"], main, .page, .page-root {
   margin-top:0 !important;
   padding-top:0 !important;
@@ -56,7 +56,7 @@ body{ padding-top: max(0px, calc(var(--safe-top) - 8px)); } /* small cushion onl
   margin: 0 auto;
   padding: 0 !important;
   background: transparent !important;
-  overflow: hidden;
+  /* overflow: hidden; */
   border-radius: 0 0 24px 24px;
 }
 
@@ -87,3 +87,15 @@ main > section:first-of-type {
 }
 
 @import "./theme-overrides.css";
+
+
+
+html, body {
+  min-height: 100%;
+  height: auto;
+  overflow-y: auto !important;
+}
+
+
+/* scroll fix */
+html, body { min-height: 100%; height: auto; overflow-y: auto !important; }
