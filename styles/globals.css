@@ -99,3 +99,7 @@ html, body {
 
 /* scroll fix */
 html, body { min-height: 100%; height: auto; overflow-y: auto !important; }
+
+/* --- ensure content can scroll under fixed bottom bar --- */
+:root { --bottom-bar-h: 72px; } /* adjust if your bar is taller/shorter */
+body { padding-bottom: calc(var(--bottom-bar-h) + env(safe-area-inset-bottom, 0px) + 16px); }
