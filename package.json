@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "npx @cloudflare/next-on-pages@latest",
     "start": "next start",
-    "postbuild": "node scripts/write-version.js"
+    "postbuild": "node scripts/write-version.js",
+    "vercel-build": "next build && node scripts/write-version.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.57.4",
