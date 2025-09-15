@@ -7,7 +7,7 @@
 html,
 body,
 #__next {
-  min-height: 100vh;
+  min-height: auto;
 }
 body {
   padding-bottom: calc(var(--bb-h) + env(safe-area-inset-bottom, 0px));
