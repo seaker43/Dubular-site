@@ -33,7 +33,6 @@
     "vercel": "47.0.4",
     "wrangler": "^4.37.0"
   },
-  "packageManager": "pnpm@10.16.0",
   "pnpm": {
     "overrides": {
       "@next/swc-android-arm64": "0.0.0-ignore",
