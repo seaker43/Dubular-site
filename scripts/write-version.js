@@ -1,13 +1,26 @@
 const fs = require("fs");
 const path = require("path");
 
-const versionFile = path.join(__dirname, "../public/__version.json");
+// Use the process CWD to avoid surprises in CI environments
+const publicDir = path.resolve(process.cwd(), "public");
+const versionFile = path.join(publicDir, "__version.json");
+
+// Collect a commit SHA from common CI providers
+const commit =
+  process.env.VERCEL_GIT_COMMIT_SHA ||
+  process.env.CF_PAGES_COMMIT_SHA ||
+  process.env.GITHUB_SHA ||
+  process.env.COMMIT_REF ||
+  "local-dev";
+
 const version = {
   buildTime: new Date().toISOString(),
-  commit: process.env.VERCEL_GIT_COMMIT_SHA || process.env.CF_PAGES_COMMIT_SHA || "local-dev"
+  commit
 };
 
-fs.mkdirSync(path.dirname(versionFile), { recursive: true });
-fs.writeFileSync(versionFile, JSON.stringify(version, null, 2), "utf8");
+// Ensure public dir exists (recursive works even if already present)
+fs.mkdirSync(publicDir, { recursive: true });
 
-console.log("✅ Version file written:", versionFile);
+// Write the file
+fs.writeFileSync(versionFile, JSON.stringify(version, null, 2), "utf8");
+console.log("✅ Version file written:", versionFile, version);
