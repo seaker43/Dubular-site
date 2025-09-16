@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx @cloudflare/next-on-pages@latest",
+    "build": "rm -rf .vercel/output && npx @cloudflare/next-on-pages@latest",
     "vercel-build": "mkdir -p public && node scripts/write-version.js && next build",
     "start": "next start",
     "postbuild": "node scripts/write-version.js"
