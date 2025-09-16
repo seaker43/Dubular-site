@@ -1,26 +1,37 @@
 const fs = require("fs");
 const path = require("path");
 
-// Use the process CWD to avoid surprises in CI environments
-const publicDir = path.resolve(process.cwd(), "public");
-const versionFile = path.join(publicDir, "__version.json");
+function envCommit() {
+  return (
+    process.env.VERCEL_GIT_COMMIT_SHA ||
+    process.env.CF_PAGES_COMMIT_SHA ||
+    process.env.GITHUB_SHA ||
+    process.env.COMMIT_REF ||
+    "local-dev"
+  );
+}
 
-// Collect a commit SHA from common CI providers
-const commit =
-  process.env.VERCEL_GIT_COMMIT_SHA ||
-  process.env.CF_PAGES_COMMIT_SHA ||
-  process.env.GITHUB_SHA ||
-  process.env.COMMIT_REF ||
-  "local-dev";
+const content = JSON.stringify({ buildTime: new Date().toISOString(), commit: envCommit() }, null, 2);
 
-const version = {
-  buildTime: new Date().toISOString(),
-  commit
-};
+// Try multiple destinations; succeed on the first that works.
+const targets = [
+  path.resolve(process.cwd(), "public", "__version.json"),                        // pre-build, ideal
+  path.resolve(process.cwd(), ".vercel", "output", "static", "__version.json"),  // CF/Vercel output
+];
 
-// Ensure public dir exists (recursive works even if already present)
-fs.mkdirSync(publicDir, { recursive: true });
+let wrote = false;
+for (const file of targets) {
+  try {
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, content, "utf8");
+    console.log("✅ wrote", file);
+    wrote = true;
+    break;
+  } catch (e) {
+    console.warn("⚠️  failed to write", file, e.message);
+  }
+}
 
-// Write the file
-fs.writeFileSync(versionFile, JSON.stringify(version, null, 2), "utf8");
-console.log("✅ Version file written:", versionFile, version);
+if (!wrote) {
+  console.warn("⚠️  Could not write __version.json anywhere. Continuing without failing the build.");
+}
