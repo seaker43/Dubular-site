@@ -1,1 +1,9 @@
-/** @type {import("next").NextConfig} */\nconst nextConfig = {\n  webpack: (config) => {\n    config.resolve = config.resolve || {};\n    config.resolve.alias = { ...(config.resolve.alias ?? {}) };\n    return config;\n  },\n};\n\nmodule.exports = nextConfig;\n
+/** @type {import("next").NextConfig} */
+const nextConfig = {
+  webpack: (config) => {
+    config.resolve = config.resolve || {};
+    config.resolve.alias = { ...(config.resolve.alias ?? {}) };
+    return config;
+  },
+};
+module.exports = nextConfig;
