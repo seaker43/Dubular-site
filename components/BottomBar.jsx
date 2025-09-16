@@ -1,6 +1,6 @@
 // components/BottomBar.jsx
-import Link from "next/link";
-import { Trophy, Star, Home, Search, User } from "lucide-react";
+import Link from"next/link";
+import { Trophy, Star, Home, Search, User } from"lucide-react";
 
 export default function BottomBar() {
  return (

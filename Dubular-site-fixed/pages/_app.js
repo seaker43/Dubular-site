@@ -1,7 +1,7 @@
-export const dynamic = "force-dynamic";
-import "../styles/globals.css";
-import "../styles/theme-overrides.css";
+export const dynamic ="force-dynamic";
+import"../styles/globals.css";
+import"../styles/theme-overrides.css";
 
 export default function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+ return <Component {...pageProps} />;
 }

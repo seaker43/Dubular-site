@@ -4,28 +4,28 @@ body::before{
   content:"build " attr(data-build);
   display:block;
   font:600 12px/1 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  padding:4px 8px;
+  
   background:repeating-linear-gradient(45deg,#ff3366 0 12px,#ffcc00 12px 24px);
   color:#111;
   letter-spacing:.04em;
 }
 
 /* === Global layout + header/hero squash === */
-html, body, #__next { margin:0; padding:0; min-height:100%; background:#000; }
+html, body, #__next {  min-height:100%; background:#000; }
 
 /* Remove any forced hero/header height/padding coming from components */
 header, .header, .banner, [class*="hero"], [class*="Hero"], [id*="hero"] {
   height:auto !important;
   min-height:0 !important;
-  padding-top:0 !important;
-  padding-bottom:0 !important;
+  
+  
   overflow:visible !important;
 }
 
 /* If theres a full-bleed wrapper adding the gap, neutralize it */
 [class*="container"], [class*="wrap"], main, .page, .page-root {
-  margin-top:0 !important;
-  padding-top:0 !important;
+  
+  
 }
 
 /* Broken header logo collapses to reasonable size */
@@ -34,18 +34,18 @@ img[alt*="header logo" i] {
   height:32px !important;
   width:auto !important;
   object-fit:contain !important;
-  margin:12px 16px !important;
+  
 }
 
 /* Prevent stray margins on first element from creating a gap */
-main > :first-child { margin-top:0 !important; }
+main > :first-child {  }
 
 /* iOS safe-area: let content sit under the address bar without extra gap */
 meta[name="viewport"]{ content: "width=device-width, initial-scale=1, viewport-fit=cover"; }
 :root{
   --safe-top: env(safe-area-inset-top);
 }
-body{ padding-top: max(0px, calc(var(--safe-top) - 8px)); } /* small cushion only */
+body{ } /* small cushion only */
 
 /* ==== Home hero: clamp size, remove forced spacing ==== */
 .featured-hero {
@@ -53,8 +53,8 @@ body{ padding-top: max(0px, calc(var(--safe-top) - 8px)); } /* small cushion onl
   inline-size: 100%;
   block-size: clamp(160px, 35vh, 260px); /* <= adjust to taste */
   min-block-size: 0 !important;
-  margin: 0 auto;
-  padding: 0 !important;
+  
+  
   background: transparent !important;
   /* overflow: hidden; */
   border-radius: 0 0 24px 24px;
@@ -64,8 +64,8 @@ body{ padding-top: max(0px, calc(var(--safe-top) - 8px)); } /* small cushion onl
 .featured-hero.full-bleed {
   height: auto !important;
   min-height: 0 !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
+  
+  
 }
 
 .featured-hero > img {
@@ -83,7 +83,7 @@ body{ padding-top: max(0px, calc(var(--safe-top) - 8px)); } /* small cushion onl
 }
 
 main > section:first-of-type {
-  margin-top: 0 !important;
+  
 }
 
 @import "./theme-overrides.css";
@@ -102,11 +102,13 @@ html, body { min-height: 100%; height: auto; overflow-y: auto !important; }
 
 /* --- ensure content can scroll under fixed bottom bar --- */
 :root { --bottom-bar-h: 72px; } /* adjust if your bar is taller/shorter */
-body { padding-bottom: calc(var(--bottom-bar-h) + env(safe-area-inset-bottom, 0px) + 16px); }
+body { }
 
 /* --- allow full-page scroll + safe area --- */
 html, body { overflow-y: auto !important; height: auto; min-height: 100%; }
 
 /* bottom padding so fixed bottom bar doesn’t cover the end */
 :root { --bottom-bar-h: 84px; } /* tweak if your bar is taller/shorter */
-body { padding-bottom: calc(var(--bottom-bar-h) + env(safe-area-inset-bottom, 0px) + 16px) !important; }
+body { }
+
+@import "./spacing.css";

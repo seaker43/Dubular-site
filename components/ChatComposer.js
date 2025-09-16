@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef } from"react";
 
 export default function ChatComposer({ onSend }) {
  const [value, setValue] = useState("");
@@ -11,7 +11,7 @@ export default function ChatComposer({ onSend }) {
  };
 
  const handleKey = (e) => {
- if (e.key === "Enter" && !e.shiftKey) {
+ if (e.key ==="Enter" && !e.shiftKey) {
  e.preventDefault();
  send();
  }

@@ -1,8 +1,8 @@
 
 export default function MessageBubble({ role, content, time }) {
- const isUser = role === "user";
+ const isUser = role ==="user";
  return (
- <div className={`msg ${isUser ? "user" : "assistant"}`}>
+ <div className={`msg ${isUser ?"user" :"assistant"}`}>
  {!isUser && (
  <div className="avatar">
  <span>🤖</span>

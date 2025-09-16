@@ -1,8 +1,8 @@
-export const dynamic = "force-dynamic";
+export const dynamic ="force-dynamic";
 export const runtime = 'experimental-edge';
 
-import { useRouter } from "next/router";
-import Layout from "../../components/Layout";
+import { useRouter } from"next/router";
+import Layout from"../../components/Layout";
 
 export default function ChannelStream() {
  const router = useRouter();
@@ -14,8 +14,8 @@ export default function ChannelStream() {
 
  return (
  <Layout>
- <div className="py-4 text-white">
- <h1 className="text-2xl font-bold mb-4">{channel}’s Stream</h1>
+ <div className="text-white">
+ <h1 className="text-2xl font-bold ">{channel}’s Stream</h1>
  <video
  controls
  autoPlay

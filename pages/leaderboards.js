@@ -1,18 +1,18 @@
-export const dynamic = "force-dynamic";
-import Layout from "../components/Layout";
+export const dynamic ="force-dynamic";
+import Layout from"../components/Layout";
 
 export const getServerSideProps = async () => {
  // Mock seasonal snapshot
  const data = {
  streamers: [
- { name: "DJ Nova", tokens: 58230, wins: 12 },
- { name: "LumaBeats", tokens: 54110, wins: 10 },
- { name: "SpeedyJay", tokens: 40780, wins: 8 },
+ { name:"DJ Nova", tokens: 58230, wins: 12 },
+ { name:"LumaBeats", tokens: 54110, wins: 10 },
+ { name:"SpeedyJay", tokens: 40780, wins: 8 },
  ],
  viewers: [
- { name: "crypt0fan", earned: 9200, streak: 14 },
- { name: "viewerX", earned: 8800, streak: 11 },
- { name: "dub_diego", earned: 7700, streak: 9 },
+ { name:"crypt0fan", earned: 9200, streak: 14 },
+ { name:"viewerX", earned: 8800, streak: 11 },
+ { name:"dub_diego", earned: 7700, streak: 9 },
  ],
  };
  return { props: { data } };

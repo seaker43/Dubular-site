@@ -1,7 +1,7 @@
 export default function HomeIcon({
  size = 26,
- className = "",
- stroke = "var(--dubular-accent,#18e27a)",
+ className ="",
+ stroke ="var(--dubular-accent,#18e27a)",
 }) {
  return (
  <svg

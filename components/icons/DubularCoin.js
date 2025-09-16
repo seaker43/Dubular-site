@@ -1,5 +1,5 @@
-export default function DubularCoin({ size = 36, className = "" }) {
- const accent = "var(--dubular-accent,#18e27a)";
+export default function DubularCoin({ size = 36, className ="" }) {
+ const accent ="var(--dubular-accent,#18e27a)";
  return (
  <svg
  width={size}

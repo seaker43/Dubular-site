@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from"react";
 
 export default function BodyPad({ children }) {
  useEffect(() => {
@@ -6,5 +6,5 @@ export default function BodyPad({ children }) {
  return () => document.body.classList.remove("has-bottom-bar");
  }, []);
 
- return <div className="pb-20">{children}</div>; // pb-20 ensures bottom padding
+ return <div className="">{children}</div>; // ensures bottom padding
 }

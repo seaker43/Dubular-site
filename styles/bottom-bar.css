@@ -10,7 +10,7 @@ body,
   min-height: auto;
 }
 body {
-  padding-bottom: calc(var(--bb-h) + env(safe-area-inset-bottom, 0px));
+  
 }
 .bottom-bar {
   position: fixed;

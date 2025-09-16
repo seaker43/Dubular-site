@@ -1,10 +1,10 @@
-export const runtime = "experimental-edge";
-export const dynamic = "force-dynamic";
+export const runtime ="experimental-edge";
+export const dynamic ="force-dynamic";
 import { useMemo, useState } from 'react';
 
-import Link from "next/link";
-import { getSupabase } from "../lib/supabaseClient";
-import Layout from "../components/Layout";
+import Link from"next/link";
+import { getSupabase } from"../lib/supabaseClient";
+import Layout from"../components/Layout";
 
 export default function Login() {
  const supabase = useMemo(() => getSupabase(), []);
@@ -15,7 +15,7 @@ export default function Login() {
  const [err, setErr] = useState(null);
 
  const greenBtn =
- " py-3 rounded-xl font-medium bg-[#18e27a]/15 border border-[#18e27a]/30 hover:bg-[#18e27a]/25 shadow-[0_0_24px_rgba(24,226,122,0.15)] transition";
+" rounded-xl font-medium bg-[#18e27a]/15 border border-[#18e27a]/30 hover:bg-[#18e27a]/25 shadow-[0_0_24px_rgba(24,226,122,0.15)] transition";
 
  async function onLogin(e) {
  e.preventDefault();
@@ -45,7 +45,7 @@ export default function Login() {
  email || undefined,
  {
  redirectTo:
- typeof window !== "undefined"
+ typeof window !=="undefined"
  ? `${location.origin}/reset`
  : undefined,
  }
@@ -61,8 +61,8 @@ export default function Login() {
 
  return (
  <Layout>
- <div className="max-w-md mt-16 p-0 rounded-2xl bg-[#0c1218]/70 border border-white/5 shadow-[0_0_60px_rgba(24,226,122,0.08)]">
- <h1 className="text-3xl dubular-headline mb-6">Login</h1>
+ <div className="max-w-md rounded-2xl bg-[#0c1218]/70 border border-white/5 shadow-[0_0_60px_rgba(24,226,122,0.08)]">
+ <h1 className="text-3xl dubular-headline ">Login</h1>
  <form onSubmit={onLogin} className="space-y-4">
  <label className="block">
  <span className="text-sm text-white/70">Email</span>
@@ -71,7 +71,7 @@ export default function Login() {
  required
  value={email}
  onChange={(e) => setEmail(e.target.value)}
- className="mt-1 w-full rounded-xl bg-black/40 border border-white/10 py-3 outline-none focus:border-[#18e27a]"
+ className=" w-full rounded-xl bg-black/40 border border-white/10 outline-none focus:border-[#18e27a]"
  />
  </label>
  <label className="block">
@@ -81,14 +81,14 @@ export default function Login() {
  required
  value={pwd}
  onChange={(e) => setPwd(e.target.value)}
- className="mt-1 w-full rounded-xl bg-black/40 border border-white/10 py-3 outline-none focus:border-[#18e27a]"
+ className=" w-full rounded-xl bg-black/40 border border-white/10 outline-none focus:border-[#18e27a]"
  />
  </label>
  {err && <p className="text-red-400 text-sm">{err}</p>}
  {msg && <p className="text-emerald-300 text-sm">{msg}</p>}
  <div className="flex items-center justify-between">
  <button disabled={loading} className={greenBtn} type="submit">
- {loading ? "Working…" : "Login"}
+ {loading ?"Working…" :"Login"}
  </button>
  <button
  type="button"

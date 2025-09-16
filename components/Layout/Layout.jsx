@@ -1,6 +1,6 @@
 // components/Layout/Layout.jsx
-import Header from "../Header";
-import BottomBar from "../BottomBar";
+import Header from"../Header";
+import BottomBar from"../BottomBar";
 
 export default function Layout({ children }) {
  return (
@@ -10,11 +10,11 @@ export default function Layout({ children }) {
 
  {/* Page content, pushed below header, full-bleed, no side padding */}
  <main
- className="relative w-full pt-[88px] pb-20 overflow-x-hidden"
+ className="relative w-full overflow-x-hidden"
  style={{
  // Hard-stop any stray horizontal padding
- paddingLeft: 0,
- paddingRight: 0,
+ __: 0,
+ __: 0,
  }}
  >
  {children}

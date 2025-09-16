@@ -1,6 +1,6 @@
-export const dynamic = "force-dynamic";
+export const dynamic ="force-dynamic";
 // pages/rank.js
-import Head from "next/head";
+import Head from"next/head";
 
 export default function Rank() {
  return (
@@ -14,13 +14,13 @@ export default function Rank() {
  </Head>
 
  <main>
- <div className="px-0 sm:px-0 lg:px-0 space-y-8 pb-24">
+ <div className="sm: lg: space-y-8">
  {/* Top 5 Streamers */}
  <section>
- <div className="px-0 sm:px-0 lg:px-0 section-header">
+ <div className="sm: lg: section-header">
  <h2>Top 5 Streamers</h2>
  </div>
- <div className="px-0 sm:px-0 lg:px-0 vthumb-grid">
+ <div className="sm: lg: vthumb-grid">
  {[1, 2, 3, 4, 5].map((i) => (
  <article key={`s-${i}`} className="vthumb-card glow-dual">
  <img
@@ -28,8 +28,8 @@ export default function Rank() {
  alt={`Streamer ${i}`}
  className="vthumb-img"
  />
- <div className="px-0 sm:px-0 lg:px-0 vthumb-gradient" />
- <div className="px-0 sm:px-0 lg:px-0 vthumb-title">Streamer #{i}</div>
+ <div className="sm: lg: vthumb-gradient" />
+ <div className="sm: lg: vthumb-title">Streamer #{i}</div>
  </article>
  ))}
  </div>
@@ -37,10 +37,10 @@ export default function Rank() {
 
  {/* Top 5 Gifters */}
  <section>
- <div className="px-0 sm:px-0 lg:px-0 section-header">
+ <div className="sm: lg: section-header">
  <h2>Top 5 Gifters</h2>
  </div>
- <div className="px-0 sm:px-0 lg:px-0 vthumb-grid">
+ <div className="sm: lg: vthumb-grid">
  {[1, 2, 3, 4, 5].map((i) => (
  <article key={`g-${i}`} className="vthumb-card glow-dual">
  <img
@@ -48,8 +48,8 @@ export default function Rank() {
  alt={`Gifter ${i}`}
  className="vthumb-img"
  />
- <div className="px-0 sm:px-0 lg:px-0 vthumb-gradient" />
- <div className="px-0 sm:px-0 lg:px-0 vthumb-title">Gifter #{i}</div>
+ <div className="sm: lg: vthumb-gradient" />
+ <div className="sm: lg: vthumb-title">Gifter #{i}</div>
  </article>
  ))}
  </div>
@@ -57,10 +57,10 @@ export default function Rank() {
 
  {/* Top 5 Communities */}
  <section>
- <div className="px-0 sm:px-0 lg:px-0 section-header">
+ <div className="sm: lg: section-header">
  <h2>Top 5 Communities</h2>
  </div>
- <div className="px-0 sm:px-0 lg:px-0 vthumb-grid">
+ <div className="sm: lg: vthumb-grid">
  {[1, 2, 3, 4, 5].map((i) => (
  <article key={`c-${i}`} className="vthumb-card glow-dual">
  <img
@@ -68,8 +68,8 @@ export default function Rank() {
  alt={`Community ${i}`}
  className="vthumb-img"
  />
- <div className="px-0 sm:px-0 lg:px-0 vthumb-gradient" />
- <div className="px-0 sm:px-0 lg:px-0 vthumb-title">Community #{i}</div>
+ <div className="sm: lg: vthumb-gradient" />
+ <div className="sm: lg: vthumb-title">Community #{i}</div>
  </article>
  ))}
  </div>

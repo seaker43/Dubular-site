@@ -1,6 +1,6 @@
 /* ===== Bottom Bar ===== */
 .navbar {
-  @apply fixed bottom-0 left-0 right-0 z-50 bg-neutral-950/95 backdrop-blur border-t border-neutral-800 py-2 flex justify-around;
+  @apply fixed bottom-0 left-0 right-0 z-50 bg-neutral-950/95 backdrop-blur border-t border-neutral-800  flex justify-around;
 }
 .navbar-item {
   @apply flex flex-col items-center text-xs text-neutral-400 transition-colors;

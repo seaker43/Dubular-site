@@ -1,16 +1,16 @@
 // components/ThumbnailCard.jsx
-import Thumb from "./Thumb/Thumb";
+import Thumb from"./Thumb/Thumb";
 
 export default function ThumbnailCard({
  title,
  image,
- href = "#",
+ href ="#",
  live = false,
- color = "pink", // "pink" | "blue" | "red"
+ color ="pink", //"pink" |"blue" |"red"
  square = false,
  priority = false,
 }) {
- const glow = live ? "red" : color === "blue" ? "cyan" : "dual";
+ const glow = live ?"red" : color ==="blue" ?"cyan" :"dual";
  return (
  <Thumb
  title={title}

@@ -1,37 +1,37 @@
-export const dynamic = "force-dynamic";
+export const dynamic ="force-dynamic";
 // Creator slug page
-import { useRouter } from "next/router";
-import Head from "next/head";
-import Link from "next/link";
-import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useRouter } from"next/router";
+import Head from"next/head";
+import Link from"next/link";
+import Image from"next/image";
+import { useEffect, useMemo, useState } from"react";
 
 /** Mock loader — replace with real fetch later */
 function getMockCreator(slug) {
- const name = (slug || "unknown")
+ const name = (slug ||"unknown")
  .split("-")
  .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
- .join(" ");
+ .join("");
 
  const thumbs = [
- "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1600&auto=format&fit=crop",
- "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600&auto=format&fit=crop",
- "https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=1600&auto=format&fit=crop",
- "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1600&auto=format&fit=crop",
+"https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1600&auto=format&fit=crop",
+"https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600&auto=format&fit=crop",
+"https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=1600&auto=format&fit=crop",
+"https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1600&auto=format&fit=crop",
  ];
 
  return {
  name,
  slug,
  bannerUrl:
- "https://images.unsplash.com/photo-1515165562835-c3b8c2e3dba3?q=80&w=1600&auto=format&fit=crop",
+"https://images.unsplash.com/photo-1515165562835-c3b8c2e3dba3?q=80&w=1600&auto=format&fit=crop",
  logoUrl: `https://cdn.dubular.live/logos/${slug}.png`,
- bio: "Independent creator streaming gaming, IRL sessions, and chill music sets. New uploads weekly.",
+ bio:"Independent creator streaming gaming, IRL sessions, and chill music sets. New uploads weekly.",
  followers: 48210,
  links: [
- { label: "Website", href: "#" },
- { label: "Twitter/X", href: "#" },
- { label: "Discord", href: "#" },
+ { label:"Website", href:"#" },
+ { label:"Twitter/X", href:"#" },
+ { label:"Discord", href:"#" },
  ],
  uploads: Array.from({ length: 8 }).map((_, i) => ({
  id: `${slug}-${i}`,
@@ -55,12 +55,12 @@ export default function CreatorPage() {
  }, [slug]);
 
  const title = useMemo(
- () => (creator ? `${creator.name} • dubUlar` : "Creator • dubUlar"),
+ () => (creator ? `${creator.name} • dubUlar` :"Creator • dubUlar"),
  [creator]
  );
 
  if (!creator) {
- return <div className="py-10 text-neutral-400">Loading creator…</div>;
+ return <div className="text-neutral-400">Loading creator…</div>;
  }
 
  return (
@@ -73,17 +73,17 @@ export default function CreatorPage() {
  {/* Banner */}
  <section className="creator-banner relative">
  <Image
- src={creator.bannerUrl || "/placeholder.svg"}
+ src={creator.bannerUrl ||"/placeholder.svg"}
  alt={`${creator.name} banner`}
  fill
  className="object-cover"
  priority
  />
  <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/40 to-black/70" />
- <div className="relative z-10 pt-24 pb-6 flex items-end gap-4">
- <div className="rounded-full p-[3px] bg-white/10 ring-1 ring-white/20">
+ <div className="relative z-10 flex items-end gap-4">
+ <div className="rounded-full bg-white/10 ring-1 ring-white/20">
  <Image
- src={creator.logoUrl || "/placeholder.svg"}
+ src={creator.logoUrl ||"/placeholder.svg"}
  alt={`${creator.name} logo`}
  width={88}
  height={88}
@@ -92,15 +92,15 @@ export default function CreatorPage() {
  </div>
  <div className="flex-1">
  <h1 className="text-2xl md:text-3xl font-bold">{creator.name}</h1>
- <div className="mt-1 text-sm text-neutral-300">
+ <div className=" text-sm text-neutral-300">
  {Intl.NumberFormat().format(creator.followers)} followers
  </div>
  </div>
  <div className="flex items-center gap-2">
- <button className="py-2 rounded-lg bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition">
+ <button className="rounded-lg bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition">
  Follow
  </button>
- <button className="py-2 rounded-lg bg-neutral-800 text-white hover:bg-neutral-700 transition">
+ <button className="rounded-lg bg-neutral-800 text-white hover:bg-neutral-700 transition">
  Share
  </button>
  </div>
@@ -108,14 +108,14 @@ export default function CreatorPage() {
  </section>
 
  {/* Bio + links */}
- <section className="py-6">
+ <section className="">
  <p className="text-neutral-300">{creator.bio}</p>
- <div className="mt-3 flex flex-wrap gap-2">
+ <div className=" flex flex-wrap gap-2">
  {creator.links?.map((l) => (
  <a
  key={l.label}
  href={l.href}
- className=" py-1 rounded-full bg-neutral-900/60 ring-1 ring-white/10 hover:ring-white/25 text-sm"
+ className="rounded-full bg-neutral-900/60 ring-1 ring-white/10 hover:ring-white/25 text-sm"
  >
  {l.label}
  </a>
@@ -124,8 +124,8 @@ export default function CreatorPage() {
  </section>
 
  {/* Uploads grid */}
- <section className="pb-28">
- <div className="flex items-center justify-between mb-3">
+ <section className="">
+ <div className="flex items-center justify-between ">
  <h2 className="text-xl font-semibold">Uploads</h2>
  <Link
  href={`/creator/${creator.slug}/videos`}
@@ -138,10 +138,10 @@ export default function CreatorPage() {
  <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
  {creator.uploads.map((v, i) => {
  const glow = v.live
- ? "glow-red"
+ ?"glow-red"
  : i % 2
- ? "glow-blue"
- : "glow-pink";
+ ?"glow-blue"
+ :"glow-pink";
  return (
  <li key={v.id}>
  <div className={`thumbnail ${glow} relative`}>
@@ -150,7 +150,7 @@ export default function CreatorPage() {
  className="block rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400/60"
  >
  <Image
- src={v.thumb || "/placeholder.svg"}
+ src={v.thumb ||"/placeholder.svg"}
  alt={v.title}
  width={1280}
  height={720}
@@ -158,7 +158,7 @@ export default function CreatorPage() {
  />
  </Link>
 
- <div className="absolute inset-x-0 bottom-0 p-0 bg-gradient-to-t from-black/70 to-transparent rounded-b-xl">
+ <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent rounded-b-xl">
  <div className="text-white font-semibold drop-shadow-sm">
  {v.title}
  </div>
@@ -169,9 +169,9 @@ export default function CreatorPage() {
  className="absolute left-2 top-2 z-10"
  aria-label={`${creator.name} page`}
  >
- <div className="rounded-full p-[2px] bg-white/10 ring-1 ring-white/20">
+ <div className="rounded-full bg-white/10 ring-1 ring-white/20">
  <Image
- src={creator.logoUrl || "/placeholder.svg"}
+ src={creator.logoUrl ||"/placeholder.svg"}
  alt={`${creator.name} logo`}
  width={32}
  height={32}
@@ -181,7 +181,7 @@ export default function CreatorPage() {
  </Link>
 
  {v.live && (
- <span className="absolute top-2 right-2 text-xs font-bold py-1 rounded-md bg-red-500/90 text-white shadow">
+ <span className="absolute top-2 right-2 text-xs font-bold rounded-md bg-red-500/90 text-white shadow">
  LIVE
  </span>
  )}

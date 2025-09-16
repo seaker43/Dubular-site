@@ -1,7 +1,7 @@
 
 export default function Sidebar({ open, chats, activeId, onSelect }) {
  return (
- <aside className={`beta-sidebar ${open ? "open" : ""}`}>
+ <aside className={`beta-sidebar ${open ?"open" :""}`}>
  <div className="sidebar-section">
  <div className="section-title">Workspace</div>
  <button className="glow-bg wide-btn">+ New Chat</button>
@@ -13,7 +13,7 @@ export default function Sidebar({ open, chats, activeId, onSelect }) {
  {chats.map((c) => (
  <li key={c.id}>
  <button
- className={`chat-item ${c.id === activeId ? "active" : ""}`}
+ className={`chat-item ${c.id === activeId ?"active" :""}`}
  onClick={() => onSelect(c.id)}
  title={c.title}
  >

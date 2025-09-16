@@ -1,14 +1,14 @@
 // components/Navbar.js
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { Home, User, Wallet, Heart, Trophy } from "lucide-react";
+import Link from"next/link";
+import { useRouter } from"next/router";
+import { Home, User, Wallet, Heart, Trophy } from"lucide-react";
 
 const navItems = [
- { name: "Rank", href: "/rank", icon: Trophy },
- { name: "Favs", href: "/favs", icon: Heart },
- { name: "Home", href: "/", icon: Home },
- { name: "Wallet", href: "/wallet", icon: Wallet, badge: "D" },
- { name: "Account", href: "/account", icon: User },
+ { name:"Rank", href:"/rank", icon: Trophy },
+ { name:"Favs", href:"/favs", icon: Heart },
+ { name:"Home", href:"/", icon: Home },
+ { name:"Wallet", href:"/wallet", icon: Wallet, badge:"D" },
+ { name:"Account", href:"/account", icon: User },
 ];
 
 export default function Navbar() {
@@ -29,7 +29,7 @@ export default function Navbar() {
  {/* Icon */}
  <Icon
  className={`h-6 w-6 transition-colors ${
- active ? "text-neon drop-shadow-glow" : "text-gray-400"
+ active ?"text-neon drop-shadow-glow" :"text-gray-400"
  }`}
  />
 
@@ -42,8 +42,8 @@ export default function Navbar() {
 
  {/* Label */}
  <span
- className={`mt-1 text-xs ${
- active ? "text-neon font-semibold" : "text-gray-400"
+ className={` text-xs ${
+ active ?"text-neon font-semibold" :"text-gray-400"
  }`}
  >
  {item.name}

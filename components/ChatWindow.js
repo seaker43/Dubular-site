@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from "react";
-import MessageBubble from "./MessageBubble";
+import React, { useEffect, useRef } from"react";
+import MessageBubble from"./MessageBubble";
 
 export default function ChatWindow({ messages }) {
  const scroller = useRef(null);
  useEffect(() => {
  scroller.current?.scrollTo({
  top: scroller.current.scrollHeight,
- behavior: "smooth",
+ behavior:"smooth",
  });
  }, [messages]);
 

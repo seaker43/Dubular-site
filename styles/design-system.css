@@ -12,16 +12,16 @@
 
 /* Sitewide spacing */
 main {
-  padding-top: var(--header-h);
-  padding-left: var(--page-x);
-  padding-right: var(--page-x);
+  
+  
+  
 }
 
 /* Full-bleed helper */
 .full-bleed {
   width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  
+  
 }
 
 /* Edge-to-edge surfaces */
@@ -30,7 +30,7 @@ main {
 .search-bar,
 .thumb-row,
 .vthumb-grid {
-  margin: 0 !important;
+  
   border-radius: var(--radius) !important;
 }
 .featured-hero img,
@@ -39,15 +39,15 @@ main {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  margin: 0 !important;
+  
   border-radius: var(--radius) !important;
 }
 .search-wrap,
 .search-bar,
 .thumb-row {
   width: 100vw;
-  padding-left: var(--page-x);
-  padding-right: var(--page-x);
+  
+  
 }
 
 /* Glows aligned to brand */

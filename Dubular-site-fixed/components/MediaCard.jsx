@@ -1,16 +1,16 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from"next/image";
+import Link from"next/link";
 
 export default function MediaCard({
- href = "#",
- title = "",
+ href ="#",
+ title ="",
  tags = [],
  img,
  live = false,
 }) {
  return (
  <Link href={href} className="block">
- <article className="card card-glow p-0 rounded-2xl">
+ <article className="card card-glow rounded-2xl">
  <div className="thumb h-52 md:h-60">
  {!!img && (
  <Image
@@ -29,7 +29,7 @@ export default function MediaCard({
  <h3 className="neon-text text-xl font-extrabold">{title}</h3>
  </div>
  {tags?.length ? (
- <p className="meta text-sm">{tags.join(" • ")}</p>
+ <p className="meta text-sm">{tags.join(" •")}</p>
  ) : null}
  </div>
  </div>
