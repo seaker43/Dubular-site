@@ -1,0 +1,14 @@
+/* ===== Bottom Bar ===== */
+.navbar {
+  @apply fixed bottom-0 left-0 right-0 z-50 bg-neutral-950/95 backdrop-blur border-t border-neutral-800 py-2 flex justify-around;
+}
+.navbar-item {
+  @apply flex flex-col items-center text-xs text-neutral-400 transition-colors;
+}
+.navbar-item.active {
+  @apply text-white;
+}
+.navbar-item.active .nav-icon {
+  filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.85))
+    drop-shadow(0 0 14px rgba(56, 189, 248, 0.55));
+}

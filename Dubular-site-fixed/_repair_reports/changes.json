@@ -1,0 +1,44 @@
+{
+  "code_updates": [
+    "pages/account.js",
+    "pages/favorites.js",
+    "pages/find.js",
+    "pages/index.js",
+    "pages/leaderboards.js",
+    "pages/login.js",
+    "pages/most-liked.js",
+    "pages/rank.js",
+    "pages/recommended.js",
+    "pages/trending.js",
+    "pages/api/generate.js",
+    "pages/api/health.js",
+    "pages/api/leaderboards.js",
+    "pages/api/pools.js",
+    "pages/api/upload.js",
+    "pages/api/wallet.js",
+    "pages/api/assistant/avatar.js",
+    "pages/api/assistant/message.js",
+    "pages/api/assistant/narrate.js",
+    "pages/api/db/fetch.js",
+    "pages/api/db/save.js",
+    "pages/creator/[slug].js",
+    "pages/creator/index.jsx",
+    "pages/signup/index.jsx",
+    "pages/stream/index.jsx",
+    "pages/wallet/index.jsx",
+    "components/BodyPad.js",
+    "components/ChatComposer.js",
+    "components/ChatWindow.js",
+    "components/FeaturedHeroTabs.jsx",
+    "components/Header.js",
+    "components/SearchBar.jsx",
+    "components/StreamChat.js",
+    "components/VideoPlayer.js"
+  ],
+  "tailwind.config.js": [
+    "tailwind.config.js"
+  ],
+  "styles/globals.css": [
+    "styles/globals.css"
+  ]
+}

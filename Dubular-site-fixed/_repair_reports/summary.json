@@ -1,0 +1,11 @@
+{
+  "repo_root": "/mnt/data/repo_scan",
+  "scanned_files": 71,
+  "changed_files": 36,
+  "changes_breakdown": {
+    "code_updates": 34,
+    "tailwind.config.js": 1,
+    "styles/globals.css": 1
+  },
+  "missing_local_imports_count": 0
+}

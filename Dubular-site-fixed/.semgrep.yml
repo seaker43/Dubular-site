@@ -1,0 +1,15 @@
+rules:
+  - rules: # React patterns
+      - id: react-best-practices
+      - pattern-either:
+          - pattern: ReactDOM.render(...)
+          - pattern: setState(...)
+        message: "Potential legacy React pattern"
+        severity: INFO
+    languages: [javascript, typescript]
+  - rules: # Secrets baseline
+      - id: secret-detection
+        pattern: /(?i)(api[_-]?key|token|secret|password)\s*[:=]\s*['\"][A-Za-z0-9_\-]{12,}['\"]/
+        message: "Possible hardcoded secret"
+        severity: WARNING
+        languages: [generic]
