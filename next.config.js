@@ -1,5 +1,1 @@
-/** @type {import("next").NextConfig} */
-const nextConfig = {
-  eslint: { ignoreDuringBuilds: true }
-};
-module.exports = nextConfig;
+/** @type {import("next").NextConfig} */\nconst nextConfig = {\n  webpack: (config) => {\n    config.resolve = config.resolve || {};\n    config.resolve.alias = { ...(config.resolve.alias ?? {}) };\n    return config;\n  },\n};\n\nmodule.exports = nextConfig;\n
