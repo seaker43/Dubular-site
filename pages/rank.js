@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // pages/rank.js
 import Head from "next/head";
 

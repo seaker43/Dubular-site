@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // pages/favorites.js
 import Head from "next/head";
 import Thumb from "../components/Thumb";

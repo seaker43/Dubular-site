@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import Layout from "../components/Layout";
 
 export async function getServerSideProps() {

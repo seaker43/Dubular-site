@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 export default function Account() {
  return (
  <main className="main" style={{ paddingTop: 16 }}>
