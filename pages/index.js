@@ -13,4 +13,4 @@ export default function Home() {
 }
 
 // keep parity with other pages
-export const config = { runtime: "edge" };
+export const config = { runtime: 'experimental-edge' };
