@@ -1,4 +1,3 @@
-import React from "react";
 export const runtime = "edge";
 // Fetch from D1
 export default async function handler(req, res) {

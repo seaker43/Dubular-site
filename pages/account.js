@@ -1,4 +1,3 @@
-import React from "react";
 export default function Account() {
  return (
  <main className="main" style={{ paddingTop: 16 }}>
@@ -18,4 +17,4 @@ export default function Account() {
  );
 }
 
-export const config = { runtime: 'experimental-edge' };
+export const config = { runtime: 'edge' };

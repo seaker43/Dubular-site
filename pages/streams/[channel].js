@@ -1,7 +1,4 @@
-import React from "react";
-export const runtime = "experimental-edge";
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const runtime = "edge";
 
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";

@@ -1,4 +1,3 @@
-import React from "react";
 import Thumb from "../Thumb";
 export default function MediaLoopRow({ items = [], title = "Media" }) {
  return (

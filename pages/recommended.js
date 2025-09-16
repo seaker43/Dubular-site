@@ -1,4 +1,3 @@
-import React from "react";
 // pages/recommended.js
 import Head from "next/head";
 import Thumb from "../components/Thumb";
@@ -68,4 +67,4 @@ export default function Recommended() {
  );
 }
 
-export const config = { runtime: 'experimental-edge' };
+export const config = { runtime: 'edge' };

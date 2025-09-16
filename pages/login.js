@@ -1,4 +1,3 @@
-import React from "react";
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { getSupabase } from "../lib/supabaseClient";
@@ -102,4 +101,4 @@ export default function Login() {
  );
 }
 
-export const config = { runtime: 'experimental-edge' };
+export const config = { runtime: 'edge' };

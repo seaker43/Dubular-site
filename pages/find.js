@@ -1,4 +1,3 @@
-import React from "react";
 // pages/find.js
 import Head from "next/head";
 import MediaRow from "../components/MediaLoopRow";
@@ -102,4 +101,4 @@ export default function Find() {
  );
 }
 
-export const config = { runtime: 'experimental-edge' };
+export const config = { runtime: 'edge' };

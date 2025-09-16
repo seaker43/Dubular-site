@@ -16,4 +16,4 @@ export default function MostLikedPage() {
  );
 }
 
-export const config = { runtime: 'experimental-edge' };
+export const config = { runtime: 'edge' };

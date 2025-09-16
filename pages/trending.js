@@ -1,4 +1,3 @@
-import React from "react";
 // pages/trending.js
 import Head from "next/head";
 import Thumb from "../components/Thumb";
@@ -69,4 +68,4 @@ export default function Trending() {
  );
 }
 
-export const config = { runtime: 'experimental-edge' };
+export const config = { runtime: 'edge' };

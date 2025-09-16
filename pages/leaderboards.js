@@ -1,4 +1,3 @@
-import React from "react";
 import Layout from "../components/Layout";
 
 export const getServerSideProps = async () => {
@@ -72,4 +71,4 @@ export default function Leaderboards({ data }) {
  </Layout>
  );
 }
-export const config = { runtime: 'experimental-edge' };
+export const config = { runtime: 'edge' };

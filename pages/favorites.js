@@ -1,4 +1,3 @@
-import React from "react";
 // pages/favorites.js
 import Head from "next/head";
 import Thumb from "../components/Thumb";
@@ -52,4 +51,4 @@ export default function Favorites() {
 
 export async function getServerSideProps(){return{props:{}}}
 
-export const config = { runtime: 'experimental-edge' };
+export const config = { runtime: 'edge' };

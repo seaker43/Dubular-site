@@ -1,4 +1,3 @@
-import React from "react";
 // pages/rank.js
 import Head from "next/head";
 
@@ -82,4 +81,4 @@ export default function Rank() {
 
 export async function getServerSideProps(){return{props:{}}}
 
-export const config = { runtime: 'experimental-edge' };
+export const config = { runtime: 'edge' };

@@ -1,5 +1,4 @@
 // Creator slug page
-import React from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
@@ -197,4 +196,4 @@ export default function CreatorPage() {
 
 export async function getServerSideProps(){return{props:{}}}
 
-export const config = { runtime: 'experimental-edge' };
+export const config = { runtime: 'edge' };
