@@ -14,10 +14,7 @@ function envCommit() {
 const content = JSON.stringify({ buildTime: new Date().toISOString(), commit: envCommit() }, null, 2);
 
 // Try multiple destinations; succeed on the first that works.
-const targets = [
-  path.resolve(process.cwd(), "public", "__version.json"),                        // pre-build, ideal
-  path.resolve(process.cwd(), ".vercel", "output", "static", "__version.json"),  // CF/Vercel output
-];
+const targets=[path.resolve(process.cwd(),"public","__version.json")];
 
 let wrote = false;
 for (const file of targets) {
