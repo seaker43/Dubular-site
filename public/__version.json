@@ -1,1 +1,4 @@
-/data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/ubuntu/.l2s/.l2s.__version.json0001
+{
+  "buildTime": "2025-09-16T21:33:46.607Z",
+  "commit": "local-dev"
+}
