@@ -1,5 +1,1 @@
-/**
- * Minimal OpenNext config for Cloudflare Pages.
- * Defaults are fine for our current setup.
- */
-export default {};
+import type { Config } from "open-next"; const config: Config = { default: {} }; export default config;
