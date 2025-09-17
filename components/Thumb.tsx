@@ -1,0 +1,1 @@
+<PASTE THE Thumb.tsx CODE FROM ABOVE HERE>
