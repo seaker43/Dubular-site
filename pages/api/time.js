@@ -1,1 +1,0 @@
-export const runtime='edge';export const dynamic='force-dynamic';export default function handler(req,res){res.setHeader('Cache-Control','no-store');res.json({now:new Date().toISOString(),rand:Math.random()});}
