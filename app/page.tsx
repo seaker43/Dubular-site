@@ -1,2 +1,1 @@
 "use client"; import Thumb from "@/components/Thumb"; export default function Home(){return(<div className="p-4"><h1 className="text-2xl font-bold text-cyan-400 mb-4">Trending Now</h1><div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"><Thumb title="Sample" imageUrl="https://source.unsplash.com/random/800x450?sig=1"/></div></div>);}
-export const runtime = edge;
