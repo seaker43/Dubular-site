@@ -1,11 +1,13 @@
-export const metadata = { title: 'Dubular' };
+export const dynamic = "force-dynamic";
+import "../styles/globals.css";
+import "../styles/theme-overrides.css";
+
+export const metadata = { title: "Dubular" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body style={{margin:0,background:'#000',color:'#0ff',fontFamily:'system-ui, sans-serif'}}>
-        {children}
-      </body>
+    <html lang="en" data-build={process.env.NEXT_PUBLIC_BUILD || ""}>
+      <body>{children}</body>
     </html>
   );
 }

@@ -1,10 +1,1 @@
-export const metadata = { title: 'Dubular' };
-
-export default function Home() {
-  return (
-    <main style={{minHeight:'100vh',background:'#000',color:'#0ff',padding:'3rem 1.25rem'}}> 
-      <h1 style={{fontSize:'clamp(2rem,6vw,3.25rem)',fontWeight:800,letterSpacing:1}}>Dubular — Home</h1>
-      <p style={{marginTop:12,opacity:.85}}>App Router live on Cloudflare. Try the API: <a href="/api/time" style={{color:'#0ff',textDecoration:'underline'}}>GET /api/time</a></p>
-    </main>
-  );
-}
+"use client"; import ThumbnailCard from "@/components/ThumbnailCard"; export default function Home(){return(<div className="p-4"><h1 className="text-2xl font-bold text-cyan-400 mb-4">Trending Now</h1><div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"><ThumbnailCard title="Sample" imageUrl="https://source.unsplash.com/random/800x450?sig=1"/></div></div>);}
