@@ -1,20 +1,8 @@
-/** @type {import('next').NextConfig} */
+/** @type {import("next").NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  experimental: {
-    outputFileTracingRoot: __dirname,
-  },
-  // this is the critical part for Cloudflare Pages:
-  output: 'standalone',
-  webpack(config) {
-    config.resolve = config.resolve || {};
-    config.resolve.alias = {
-      ...(config.resolve.alias ?? {}),
-    };
-    return config;
-  },
+  eslint: { ignoreDuringBuilds: true },
+  images: { unoptimized: true },
+  experimental: { outputFileTracingRoot: __dirname },
+  output: "standalone"
 };
-
 module.exports = nextConfig;
