@@ -11,6 +11,7 @@
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload"
   },
   "dependencies": {
+    "@opennextjs/cloudflare": "latest",
     "@supabase/supabase-js": "2.57.4",
     "hls.js": "1.6.12",
     "lucide-react": "^0.544.0",
@@ -26,6 +27,7 @@
     "eslint": "^9.35.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.13",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "wrangler": "latest"
   }
 }
