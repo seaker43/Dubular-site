@@ -2,7 +2,7 @@ name = "dubular-site"
 compatibility_date = "2024-09-01"
 
 # Cloudflare Pages artifact (static) produced by next-on-pages
-pages_build_output_dir = ".vercel/output"
+pages_build_output_dir = ".open-next"
 
 # Example: add environment vars used at runtime (optional)
 # [vars]

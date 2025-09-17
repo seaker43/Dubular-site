@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 pnpm run cf:build
-pnpm dlx wrangler@latest pages deploy .vercel/output/static \
+pnpm dlx wrangler@latest pages deploy .open-next/static \
   --project-name=dubular-beta \
   --branch main \
   --commit-dirty=true \

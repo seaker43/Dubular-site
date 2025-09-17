@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx @cloudflare/next-on-pages@latest",
-    "vercel-build": "next build && node scripts/write-version.js",
+    "build": "rm -rf .open-next && npx @cloudflare/next-on-pages build",
     "start": "next start",
     "postbuild": "node scripts/write-version.js"
   },

@@ -1,14 +1,13 @@
-/** @type {import("next").NextConfig} */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "standalone",
-  images: { unoptimized: true },
+  reactStrictMode: true,
+  swcMinify: true,
+  poweredByHeader: false,
+  images: { unoptimized: true, remotePatterns: [{ protocol: "https", hostname: "**" }] },
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
-  // moved out of "experimental"
-  outputFileTracingRoot: __dirname,
   webpack: (config) => {
-    config.resolve = config.resolve || {};
-    config.resolve.alias = { ...(config.resolve.alias ?? {}) };
+    config.resolve.fallback = { ...config.resolve.fallback, fs: false, net: false, tls: false };
     return config;
   },
 };
