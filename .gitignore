@@ -64,7 +64,6 @@ package.tmp
 
 # build artifacts
 .next
-.vercel
 .cache
 
 # temp & backups
@@ -73,5 +72,4 @@ package.tmp
 
 # build artifacts
 .next
-.vercel
 .cache
