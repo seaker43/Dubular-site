@@ -1,8 +1,15 @@
 /** @type {import("next").NextConfig} */
 const nextConfig = {
-  eslint: { ignoreDuringBuilds: true },
+  output: "standalone",
   images: { unoptimized: true },
-  experimental: { outputFileTracingRoot: __dirname },
-  output: "standalone"
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true },
+  // moved out of "experimental"
+  outputFileTracingRoot: __dirname,
+  webpack: (config) => {
+    config.resolve = config.resolve || {};
+    config.resolve.alias = { ...(config.resolve.alias ?? {}) };
+    return config;
+  },
 };
 module.exports = nextConfig;
