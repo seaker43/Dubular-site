@@ -1,3 +1,7 @@
+export const dynamic="force-dynamic";
+export const fetchCache="force-no-store";
+export const revalidate=0;
+
 import HeadTags from "../components/HeadTags.jsx";
 import Header from "../components/Header.jsx";
 import HomeHero from "../components/HomeHero.js";
