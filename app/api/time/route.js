@@ -1,0 +1,1 @@
+export const runtime='edge';export async function GET(){return new Response(JSON.stringify({now:new Date().toISOString(),rand:Math.random()}),{headers:{'Content-Type':'application/json','Cache-Control':'no-store'}})}
