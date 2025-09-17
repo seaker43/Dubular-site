@@ -1,63 +1,44 @@
-import Link from"next/link";
+"use client";
 
-/**
- * CategoryRow
- * Props:
- * - title: string
- * - items: Array<{ id: string|number, title: string, thumb: string, live?: boolean }>
- */
 export default function CategoryRow({ title, items = [] }) {
- const list = Array.isArray(items) ? items : [];
-
- return (
- <section className="">
- <h3 className=" text-xl font-semibold gold-glow">
- <Link href={`/category/${encodeURIComponent((title ||"").toLowerCase())}`}>
- {title}
- </Link>
- </h3>
-
- <div
- className="flex gap-3 overflow-x-auto snap-x snap-mandatory 
- [--ms-overflow-style:none] [scrollbar-width:none]"
- style={{ scrollBehavior:"smooth" }}
- >
- {/* Hide webkit scrollbar */}
- <style jsx>{`
- div::-webkit-scrollbar { display: none; }
- `}</style>
-
- {list.map((it) => (
- <article
- key={it?.id ?? String(Math.random())}
- aria-label={it?.title ||""}
- className="snap-start shrink-0 w-[320px]"
- >
- <div className="sm: lg: relative w-full aspect-video overflow-hidden rounded-lg shadow-2xl">
- {/* Use <img> so missing files don't break build; Next/Image can be added later */}
- <img
- src={it?.thumb ||""}
- alt={it?.title ||""}
- className="w-full h-full object-cover"
- loading="lazy"
- />
-
- {/* Bottom gradient for title + live badge */}
- <div className="pointer-events-none absolute inset-x-0 bottom-0 
- bg-gradient-to-t from-black/70 via-black/35 to-transparent">
- <div className="sm: lg: flex items-center justify-between gap-2">
- <h4 className="text-sm font-medium gold-glow line-clamp-1">
- {it?.title ||""}
- </h4>
- {it?.live && (
- <span className="live-badge">LIVE</span>
- )}
- </div>
- </div>
- </div>
- </article>
- ))}
- </div>
- </section>
- );
+  return (
+    <section className="py-6">
+      {title ? (
+        <h2 className="mb-3 text-xl font-semibold text-white">{title}</h2>
+      ) : null}
+      <div
+        className="flex gap-3 overflow-x-auto snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none]"
+        style={{ scrollBehavior: "smooth" }}
+      >
+        {items.map((it, i) => (
+          <a
+            key={i}
+            href={it.href || "#"}
+            className="snap-start shrink-0 w-64 rounded-xl overflow-hidden bg-neutral-900 border border-neutral-800 hover:border-neutral-600"
+            title={it.title}
+          >
+            <img
+              src={it.img || "/placeholder.svg"}
+              alt={it.title || "item"}
+              className="h-36 w-full object-cover"
+              loading="lazy"
+            />
+            <div className="p-3">
+              <div className="text-white text-sm line-clamp-1">{it.title || "Untitled"}</div>
+              {Array.isArray(it.tags) && it.tags.length > 0 ? (
+                <div className="mt-1 text-xs text-neutral-400 line-clamp-1">
+                  {it.tags.join(" • ")}
+                </div>
+              ) : null}
+              {it.live ? (
+                <span className="mt-2 inline-block rounded-full bg-red-600/90 px-2 py-0.5 text-[10px] font-semibold text-white">
+                  LIVE
+                </span>
+              ) : null}
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  );
 }
