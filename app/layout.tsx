@@ -1,3 +1,4 @@
+export const fetchCache = 'force-no-store';
 export const dynamic = "force-dynamic";
 import "../styles/globals.css";
 import "../styles/theme-overrides.css";
