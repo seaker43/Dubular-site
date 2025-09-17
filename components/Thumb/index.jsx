@@ -1,4 +1,4 @@
-// components/ThumbnailCard.jsx
+// components/Thumb.jsx
 import Thumb from"./Thumb/Thumb";
 
 export default function ThumbnailCard({
