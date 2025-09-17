@@ -1,1 +1,42 @@
-"use client"; import Thumb from "@/components/Thumb"; export default function Home(){return(<div className="p-4"><h1 className="text-2xl font-bold text-cyan-400 mb-4">Trending Now</h1><div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"><Thumb title="Sample" imageUrl="https://source.unsplash.com/random/800x450?sig=1"/></div></div>);}
+import HeadTags from "../components/HeadTags.jsx";
+import Header from "../components/Header.jsx";
+import HomeHero from "../components/HomeHero.js";
+import MediaLoopRow from "../components/MediaLoopRow";
+import CardGrid from "../components/CardGrid.js";
+import BottomBar from "../components/BottomBar.jsx";
+
+// Temporary demo data; replace with real data/supabase later
+const trending = Array.from({ length: 8 }).map((_, i) => ({
+  title: `LoFi #${i + 1}`,
+  href: `/streams/lofi-${i + 1}`,
+  imgSrc: `/placeholder.svg`,
+}));
+
+export default function Page() {
+  return (
+    <>
+      <HeadTags
+        title="Dubular — Home"
+        desc="Dubular site"
+        url="https://beta.dubular.live"
+        image="/og.png"
+      />
+      <Header />
+      <main className="min-h-screen text-white px-4 md:px-6 lg:px-8">
+        <section className="py-8">
+          <HomeHero />
+        </section>
+
+        <section className="py-6">
+          <MediaLoopRow title="Trending Now" items={trending} />
+        </section>
+
+        <section className="py-6">
+          <CardGrid title="Fresh Picks" items={trending} />
+        </section>
+      </main>
+
+      <BottomBar />
+    </>
+  );
+}
