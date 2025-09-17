@@ -3,7 +3,6 @@ const file = path.resolve(process.cwd(),"public","__version.json");
 fs.mkdirSync(path.dirname(file), { recursive: true });
 const commit =
  process.env.CF_PAGES_COMMIT_SHA ||
- process.env.VERCEL_GIT_COMMIT_SHA ||
  process.env.GITHUB_SHA ||
  process.env.COMMIT_REF ||
 "local-dev";
