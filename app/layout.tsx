@@ -2,8 +2,7 @@ export const dynamic="force-dynamic";
 export const fetchCache="force-no-store";
 export const revalidate=0;
 
-export const fetchCache = 'force-no-store';
-export const dynamic = "force-dynamic";
+
 import "../styles/globals.css";
 import "../styles/theme-overrides.css";
 
