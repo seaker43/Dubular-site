@@ -4,7 +4,6 @@ export const revalidate=0;
 
 
 import "../styles/globals.css";
-import "../styles/theme-overrides.css";
 
 export const metadata = { title: "Dubular" };
 
