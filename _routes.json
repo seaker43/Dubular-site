@@ -1,13 +1,4 @@
-{
-  "version": 1,
+{ "version": 1,
   "include": ["/*"],
-  "exclude": [
-    "/_next/*",
-    "/static/*",
-    "/assets/*",
-    "/images/*",
-    "/favicon.ico",
-    "/robots.txt",
-    "/sitemap.xml"
-  ]
+  "exclude": ["/_next/static/*","/_next/image*","/favicon.ico","/assets/*","/static/*"]
 }

@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "deploy": "bash -ceu 'opennextjs-cloudflare build --skipWranglerConfigCheck --yes; rm -rf .vercel && mkdir -p .vercel/output; cp -R .open-next/. .vercel/output/; if [ -f .open-next/_worker.js ]; then cp -f .open-next/_worker.js .vercel/output/_worker.js; elif [ -f .open-next/worker.js ]; then cp -f .open-next/worker.js .vercel/output/_worker.js; fi; if [ -f .open-next/_routes.json ]; then cp -f .open-next/_routes.json .vercel/output/; fi; mkdir -p .vercel/output/static; rm -f .vercel/output/static/index.html || true'",
+    "deploy": "bash -ceu 'opennextjs-cloudflare build --skipWranglerConfigCheck --yes; rm -rf .vercel && mkdir -p .vercel/output; cp -R .open-next/. .vercel/output/; if [ -f .open-next/_worker.js ]; then cp -f .open-next/_worker.js .vercel/output/_worker.js; elif [ -f .open-next/worker.js ]; then cp -f .open-next/worker.js .vercel/output/_worker.js; fi; if [ -f .open-next/_routes.json ]; then cp -f .open-next/_routes.json .vercel/output/; fi; mkdir -p .vercel/output/static; rm -f .vercel/output/static/index.html || true'; cp -f _routes.json .vercel/output/_routes.json || true",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload"
   },
