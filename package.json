@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "deploy": "bash -ceu 'opennextjs-cloudflare build --skipWranglerConfigCheck --yes; rm -rf .vercel && mkdir -p .vercel/output; cp -R .open-next/. .vercel/output/; cp -f .open-next/_worker.js .open-next/_routes.json .vercel/output/ || true; rm -f .vercel/output/static/index.html || true'",
+    "deploy": "bash -ceu 'opennextjs-cloudflare build --skipWranglerConfigCheck --yes; rm -rf .vercel && mkdir -p .vercel/output; cp -R .open-next/. .vercel/output/; cp -f .open-next/worker.js .vercel/output/_worker.js || true; cp -f .open-next/routes.json .vercel/output/_routes.json || true; mkdir -p .vercel/output/static;'",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload"
   },
