@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "deploy": "bash -c 'set -euo pipefail; opennextjs-cloudflare build --skipWranglerConfigCheck --yes; if [ ! -d .open-next ]; then echo \"❌ OpenNext output (.open-next) not found\" >&2; exit 1; fi; rm -rf .vercel && mkdir -p .vercel/output; cp -R .open-next/. .vercel/output/; if [ ! -d .vercel/output/static ]; then echo \"⚠️ .vercel/output/static missing; creating empty dir for Cloudflare Pages\" >&2; mkdir -p .vercel/output/static; fi'",
+    "deploy": "bash -c 'set -euo pipefail; opennextjs-cloudflare build --skipWranglerConfigCheck --yes; rm -rf .vercel && mkdir -p .vercel/output; cp -R .open-next/. .vercel/output/; rm -f .vercel/output/static/index.html || true; if [ ! -d .vercel/output/static ]; then mkdir -p .vercel/output/static; fi'",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload"
   },
