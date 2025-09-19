@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "deploy": "opennextjs-cloudflare build --skipWranglerConfigCheck --yes && mkdir -p .open-next/static/open-next && find .open-next -mindepth 1 -maxdepth 1 ! -name static -exec cp -R {} .open-next/static/open-next ; && printf \"import worker from \"./open-next/worker.js\";\nexport default { fetch:(req,env,ctx)=>worker.fetch(req,env,ctx) };\n\" > .open-next/static/_worker.js"
+    "deploy": "npx opennextjs-cloudflare build --skipWranglerConfigCheck --yes && rm -rf .open-next/static && mkdir -p .open-next/static/open-next && find .open-next -mindepth 1 -maxdepth 1 ! -name static -exec cp -R {} .open-next/static/open-next \\; && printf 'import worker from \"./open-next/worker.js\";\\nexport default { fetch: (req, env, ctx) => worker.fetch(req, env, ctx) };\\n' > .open-next/static/_worker.js"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "latest",
