@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "deploy": "opennextjs-cloudflare build --skipWranglerConfigCheck --yes
+    "deploy": "opennextjs-cloudflare build --skipWranglerConfigCheck --yes"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "latest",
