@@ -1,5 +1,1 @@
-export default {
-  async fetch(request, env, ctx) {
-    return new Response("Booting…", { status: 200, headers: { "content-type": "text/plain" } });
-  }
-};
+import worker from "./.open-next/worker.js";\n\nexport default {\n  async fetch(request, env, ctx) {\n    return worker.fetch(request, env, ctx);\n  }\n};
