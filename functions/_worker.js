@@ -1,1 +1,1 @@
-// placeholder – will be overwritten at build time
+export { default as fetch } from "../.open-next/worker.js";
