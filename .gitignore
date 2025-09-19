@@ -35,7 +35,6 @@ Thumbs.db
 # Ignore accidental backups & temp files
 *.bak
 *.fixed
-!functions/_worker.js
-!functions/_worker.js
 !functions/
-!functions/_worker.js
+functions/*
+!functions/.gitkeep
