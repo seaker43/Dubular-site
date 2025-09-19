@@ -36,5 +36,5 @@ Thumbs.db
 *.bak
 *.fixed
 !functions/
-functions/*
 !functions/.gitkeep
+!functions/_worker.js
