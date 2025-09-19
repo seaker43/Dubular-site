@@ -16,7 +16,6 @@ dist/
 .vercel/
 
 # Cloudflare build cache
-functions/
 .cache/
 
 # Logs
@@ -38,3 +37,4 @@ Thumbs.db
 !functions/
 !functions/.gitkeep
 !functions/_worker.js
+!functions

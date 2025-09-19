@@ -1,1 +1,1 @@
-export { default as fetch } from '../.open-next/worker.js';
+export { default as fetch } from ../.open-next/worker.js;
