@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "deploy": "opennextjs-cloudflare build --skipWranglerConfigCheck --yes && mkdir -p .open-next/static && cp _routes.json .open-next/static/_routes.json"
+    "deploy": "opennextjs-cloudflare build --skipWranglerConfigCheck --yes && node -e \"const fs=require('fs'); if(fs.existsSync('.open-next/worker.js')) fs.copyFileSync('.open-next/worker.js','.open-next/_worker.js'); if(fs.existsSync('.open-next/_routes.json')===false) fs.writeFileSync('.open-next/_routes.json', JSON.stringify({version:1,include:['/*'],exclude:['/static/*','/_next/static/*','/favicon.ico','/robots.txt','/sitemap.xml']},null,2));\""
   },
   "dependencies": {
     "@opennextjs/cloudflare": "latest",
