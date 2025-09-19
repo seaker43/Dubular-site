@@ -9,7 +9,6 @@
     "deploy": "npx opennextjs-cloudflare build --skipWranglerConfigCheck --yes && rm -rf .open-next/static && mkdir -p .open-next/static/open-next && find .open-next -mindepth 1 -maxdepth 1 ! -name static -exec cp -R {} .open-next/static/open-next \\; && printf 'import worker from \"./open-next/worker.js\";\\nexport default { fetch: (req, env, ctx) => worker.fetch(req, env, ctx) };\\n' > .open-next/static/_worker.js"
   },
   "dependencies": {
-    "@opennextjs/cloudflare": "latest",
     "@supabase/supabase-js": "2.57.4",
     "hls.js": "1.6.12",
     "lucide-react": "^0.544.0",
@@ -18,6 +17,7 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.8.3",
     "@tailwindcss/postcss": "^4.1.13",
     "@types/node": "^24.5.0",
     "@types/react": "^19.1.13",
