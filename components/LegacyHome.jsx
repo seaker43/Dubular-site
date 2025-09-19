@@ -1,125 +1,152 @@
-/* No toggle. Header → Featured Loop Hero → Live Channels (red glow) → 3 vertical thumbs */
-const logoSrcs = ["/dubular2.v2.svg", "/dubular2.v2.png", "/dubular2.v2.webp"];
+'use client';
 
-const liveChannels = [
-  { id: "l1", title: "Pro League • Match Day", img: "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=1200" },
-  { id: "l2", title: "City News Live",        img: "https://images.unsplash.com/photo-1495020689067-958852a7765e?q=80&w=1200" },
-  { id: "l3", title: "Music Festival",         img: "https://images.unsplash.com/photo-1464375117522-1311d6a5b81f?q=80&w=1200" },
-  { id: "l4", title: "Esports Arena",          img: "https://images.unsplash.com/photo-1511629091441-ee46146481b0?q=80&w=1200" },
-];
+import Image from "next/image";
+import Link from "next/link";
+import { useMemo } from "react";
 
-const verticals = [
-  { id: "v1", title: "Drama Mini",   img: "https://images.unsplash.com/photo-1517602302552-471fe67acf66?q=80&w=800" },
-  { id: "v2", title: "Food Vibes",   img: "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=800" },
-  { id: "v3", title: "Street Dance", img: "https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=800" },
-];
-
-function Header() {
-  return (
-    <header className="w-full bg-neutral-950/80 backdrop-blur sticky top-0 z-40 border-b border-neutral-800">
-      <div className="mx-auto max-w-6xl px-4 py-3 flex items-center gap-3">
-        {logoSrcs.map((src) => (
-          <img
-            key={src}
-            src={src}
-            onError={(e) => { const el = e.currentTarget; const next = logoSrcs[logoSrcs.indexOf(src)+1]; if (next) el.src = next; }}
-            alt="dubUlar"
-            className="h-8 w-auto select-none"
-          />
-        )).slice(0,1)}
-        <span className="text-cyan-400/80 font-semibold tracking-wide ml-1">dubUlar</span>
-      </div>
-    </header>
-  );
-}
-
-function FeaturedLoopHero() {
-  return (
-    <section className="mx-auto max-w-6xl px-4 pt-6">
-      <div className="relative overflow-hidden rounded-2xl bg-neutral-900 aspect-[16/7] border border-neutral-800">
-        {/* If /hero.mp4 exists it will play; otherwise the poster keeps things pretty */}
-        <video
-          className="h-full w-full object-cover"
-          src="/hero.mp4"
-          poster="/hero.jpg"
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/70 via-neutral-950/10 to-transparent" />
-        <div className="absolute bottom-4 left-4">
-          <h1 className="text-2xl md:text-3xl font-semibold text-white drop-shadow">Featured</h1>
-          <p className="text-neutral-300 text-sm md:text-base">Hand-picked stream just for you</p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function LiveBadge() {
-  return (
-    <span className="absolute left-2 top-2 text-[11px] font-bold tracking-wide px-2 py-0.5 rounded-full
-                     bg-red-600 text-white shadow-[0_0_12px_rgba(239,68,68,0.9)]">
-      LIVE
-    </span>
-  );
-}
-
-function LiveCard({ title, img }) {
-  return (
-    <div
-      className="relative min-w-[280px] md:min-w-[340px] aspect-video rounded-xl overflow-hidden bg-neutral-900
-                 border border-neutral-800 ring-1 ring-red-500/20
-                 shadow-[0_0_30px_rgba(239,68,68,0.35)]
-                 hover:shadow-[0_0_55px_rgba(239,68,68,0.65)] transition-shadow"
-      title={title}
-    >
-      <img src={img} alt={title} className="h-full w-full object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/70 via-transparent to-transparent" />
-      <LiveBadge />
-      <div className="absolute left-3 bottom-2 text-sm font-medium text-red-200 drop-shadow">
-        {title}
-      </div>
-    </div>
-  );
-}
-
-function VerticalCard({ title, img }) {
-  return (
-    <div
-      className="relative w-[160px] md:w-[200px] aspect-[9/16] rounded-2xl overflow-hidden bg-neutral-900
-                 border border-neutral-800 hover:border-neutral-700 transition"
-      title={title}
-    >
-      <img src={img} alt={title} className="h-full w-full object-cover" />
-      <div className="absolute inset-x-0 bottom-0 p-2 bg-gradient-to-t from-neutral-950/80 to-transparent">
-        <p className="text-[12px] text-neutral-200 line-clamp-2">{title}</p>
-      </div>
-    </div>
-  );
-}
-
+/**
+ * LegacyHome
+ * - Header with logo (/public/dubular2.v2.png)
+ * - Featured hero (placeholder)
+ * - Live channel row with red glow
+ * - 3 vertical thumbnails
+ */
 export default function LegacyHome() {
+  // Handlers must be defined inside the client component
+  const handleImgError = (e) => {
+    const el = e.currentTarget;
+    // Fallback to a tiny transparent PNG to avoid infinite loops
+    el.src =
+      "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==";
+  };
+
+  const thumbs = useMemo(
+    () => [
+      { id: 1, src: "/thumbs/v1.jpg", href: "/watch/1", title: "Vertical #1" },
+      { id: 2, src: "/thumbs/v2.jpg", href: "/watch/2", title: "Vertical #2" },
+      { id: 3, src: "/thumbs/v3.jpg", href: "/watch/3", title: "Vertical #3" },
+    ],
+    []
+  );
+
   return (
-    <main className="min-h-screen bg-neutral-950 text-cyan-100">
-      <Header />
-      <FeaturedLoopHero />
+    <main className="min-h-screen bg-black text-white">
+      {/* Header */}
+      <header className="sticky top-0 z-50 flex items-center gap-3 px-4 py-3 bg-black/60 backdrop-blur">
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/dubular2.v2.png"
+            alt="Dubular"
+            width={36}
+            height={36}
+            priority
+            onError={handleImgError}
+          />
+          <span className="text-lg font-semibold tracking-wide">Dubular</span>
+        </Link>
+      </header>
 
-      {/* Live Channels row with red glow */}
-      <section className="mx-auto max-w-6xl px-4 pt-6">
-        <h2 className="text-cyan-300 font-semibold mb-3">Live Channels</h2>
-        <div className="flex gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {liveChannels.map((c) => <LiveCard key={c.id} {...c} />)}
-        </div>
-      </section>
+      <div className="mx-auto w-full max-w-6xl px-4 pt-4 space-y-8">
+        {/* Featured Loop Hero */}
+        <section aria-label="Featured">
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-zinc-900 ring-1 ring-zinc-800">
+            <Image
+              src="/featured/hero.jpg"
+              alt="Featured"
+              fill
+              sizes="100vw"
+              className="object-cover"
+              onError={handleImgError}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+              <div>
+                <h1 className="text-2xl font-bold">Featured Loop</h1>
+                <p className="text-zinc-300 text-sm">Hand-picked for you</p>
+              </div>
+              <Link
+                href="/featured"
+                className="rounded-xl border border-white/15 px-4 py-2 text-sm hover:bg-white/10"
+              >
+                View
+              </Link>
+            </div>
+          </div>
+        </section>
 
-      {/* Three vertical thumbnails */}
-      <section className="mx-auto max-w-6xl px-4 pt-6 pb-16">
-        <div className="grid grid-cols-3 max-md:grid-cols-3 gap-4 place-items-start">
-          {verticals.map((v) => <VerticalCard key={v.id} {...v} />)}
-        </div>
-      </section>
+        {/* Live Channel Row (red glow) */}
+        <section aria-label="Live now" className="space-y-3">
+          <div className="flex items-center gap-2">
+            <span className="inline-flex h-2 w-2 animate-pulse rounded-full bg-red-500 shadow-[0_0_12px_4px_rgba(239,68,68,0.7)]" />
+            <h2 className="text-lg font-semibold">Live Channels</h2>
+          </div>
+
+          <div className="relative overflow-x-auto">
+            <div className="flex gap-4">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <Link
+                  key={i}
+                  href={`/live/${i}`}
+                  className="group relative w-[280px] shrink-0 overflow-hidden rounded-xl bg-zinc-900 ring-1 ring-zinc-800 hover:ring-red-500/50"
+                >
+                  <div className="relative aspect-video">
+                    <Image
+                      src={`/live/thumb-${i}.jpg`}
+                      alt={`Live #${i}`}
+                      fill
+                      sizes="280px"
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      onError={handleImgError}
+                    />
+                    {/* red glow edge */}
+                    <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-red-500/30 shadow-[0_0_30px_6px_rgba(239,68,68,0.25)_inset]"></div>
+                    <span className="absolute left-2 top-2 rounded-md bg-red-600 px-2 py-0.5 text-[11px] font-semibold tracking-wide">
+                      LIVE
+                    </span>
+                  </div>
+                  <div className="p-3">
+                    <p className="line-clamp-2 text-sm text-zinc-200">
+                      Live Channel #{i}
+                    </p>
+                    <p className="mt-1 text-xs text-zinc-400">12.4K watching</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Three vertical thumbnails */}
+        <section aria-label="Verticals">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {thumbs.map((t) => (
+              <Link
+                key={t.id}
+                href={t.href}
+                className="group overflow-hidden rounded-2xl bg-zinc-900 ring-1 ring-zinc-800"
+              >
+                <div className="relative aspect-[9/16] w-full">
+                  <Image
+                    src={t.src}
+                    alt={t.title}
+                    fill
+                    sizes="(min-width: 640px) 33vw, 100vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    onError={handleImgError}
+                  />
+                </div>
+                <div className="p-3">
+                  <p className="line-clamp-2 text-sm text-zinc-200">{t.title}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <footer className="mx-auto mt-10 w-full max-w-6xl px-4 pb-10 text-xs text-zinc-500">
+        © {new Date().getFullYear()} Dubular
+      </footer>
     </main>
   );
 }
