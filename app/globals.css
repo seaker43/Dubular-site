@@ -1,6 +1,5 @@
-/* === Tailwind v4 core setup === */
-@tailwind base;
-@tailwind components;
+@import "tailwindcss";
+@source "../app/**/*.{js,ts,jsx,tsx,mdx}" "../components/**/*.{js,ts,jsx,tsx,mdx}";
 @tailwind utilities;
 
 /* ===== Optional: debug build stripe ===== */
