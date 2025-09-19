@@ -1,12 +1,7 @@
-export const dynamic = "force-dynamic";
-export const fetchCache = "force-no-store";
-export const revalidate = 0;
+import dynamic from "next/dynamic";
+
+const LegacyHome = dynamic(() => import("../components/LegacyHome"), { ssr: true });
 
 export default function Page() {
-  return (
-    <main style={{padding:"2rem", color:"cyan"}}>
-      <h1>🔥 Live Dubular SSR Test</h1>
-      <p>{new Date().toISOString()}</p>
-    </main>
-  );
+  return <LegacyHome />;
 }
