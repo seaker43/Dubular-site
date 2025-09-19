@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "deploy": "opennextjs-cloudflare build --skipWranglerConfigCheck --yes"
+    "deploy": "opennextjs-cloudflare build --skipWranglerConfigCheck --yes && mkdir -p .open-next/static && cp _routes.json .open-next/static/_routes.json"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "latest",
