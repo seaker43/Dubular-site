@@ -1,40 +1,30 @@
-import Link from"next/link";
+import Link from "next/link";
 
 export default function HomeHero() {
- return (
- <section className="home-hero">
- <div className="home-hero__text">
- <h1 className="glow home-hero__title">Dubular Beta</h1>
- <p className="home-hero__subtitle">
- Watch live streams, track leaderboards, and join prize pools — all in
- one place.
- </p>
- <div className="home-hero__cta">
- <Link className="btn btn--primary" href="/streams">
- Explore Streams
- </Link>
- <Link className="btn btn--ghost" href="/pools">
- Browse Pools
- </Link>
- </div>
- <p className="home-hero__deploy">
- Deployment check:&nbsp;
- <time suppressHydrationWarning>{new Date().toLocaleString()}</time>
- </p>
- </div>
- <div className="home-hero__media">
- <div className="home-hero__video-shell">
- <video
- src=""
- poster="https://images.pexels.com/photos/394533/pexels-photo-394533.jpeg?auto=compress&cs=tinysrgb&w=1600"
- aria-label="Streams preview"
- playsInline
- muted
- autoPlay
- loop
- />
- </div>
- </div>
- </section>
- );
+  return (
+    <section className="text-center py-12">
+      <div className="max-w-3xl mx-auto">
+        <h1 className="text-5xl font-extrabold text-cyan-400 drop-shadow-lg">
+          Dubular
+        </h1>
+        <p className="mt-4 text-lg text-white/70">
+          Watch live streams, track leaderboards, and join the community — all in one place.
+        </p>
+        <div className="mt-6 flex justify-center gap-4">
+          <Link
+            href="/streams"
+            className="px-6 py-3 rounded-2xl bg-cyan-500 text-black font-bold hover:bg-cyan-400 transition"
+          >
+            Explore Streams
+          </Link>
+          <Link
+            href="/rank"
+            className="px-6 py-3 rounded-2xl bg-white/10 text-white font-bold hover:bg-white/20 transition"
+          >
+            View Rankings
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
 }
