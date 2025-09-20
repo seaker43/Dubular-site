@@ -38,3 +38,4 @@ Thumbs.db
 !functions/.gitkeep
 !functions/_worker.js
 !functions
+!/.open-next/_routes.json
