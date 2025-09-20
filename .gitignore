@@ -12,7 +12,6 @@ out/
 dist/
 
 # OpenNext & Vercel build artifacts
-.open-next/
 .vercel/
 
 # Cloudflare build cache
