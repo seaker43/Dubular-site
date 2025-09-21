@@ -1,5 +1,4 @@
-// _worker.js
-import worker from './.open-next/server-functions/default/index.mjs';
+import worker from "./.open-next/server-functions/default/index.js";
 
 export default {
   async fetch(request, env, ctx) {
