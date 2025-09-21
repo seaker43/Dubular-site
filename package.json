@@ -5,8 +5,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "deploy": "npx open-next build && wrangler pages deploy .open-next --project-name=dubular-beta",
-    "build:cf": "open-next build && node scripts/make-routes.js"
+    "deploy": "npx open-next build --platform cloudflare && wrangler pages deploy .open-next --project-name=dubular-beta",
+    "build:cf": "open-next build --platform cloudflare && node scripts/make-routes.js"
   },
   "dependencies": {
     "next": "^14.2.3",
