@@ -1,9 +1,5 @@
 // _worker.js
-import { createHandler } from "open-next/server";
+// Delegate all routing/SSR/image optimization to the OpenNext-generated worker.
+import worker from "./.open-next/worker.js";
 
-export default {
-  async fetch(request, env, ctx) {
-    const handler = createHandler();
-    return handler(request, env, ctx);
-  },
-};
+export default worker;
