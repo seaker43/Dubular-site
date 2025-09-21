@@ -38,3 +38,8 @@ Thumbs.db
 !.open-next/
 !.open-next/_routes.json
 !.open-next/server-functions/**
+
+# CF Pages needs OpenNext outputs
+!.open-next/
+!.open-next/_routes.json
+!.open-next/server-functions/**
