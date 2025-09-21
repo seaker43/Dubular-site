@@ -33,3 +33,8 @@ Thumbs.db
 # Ignore accidental backups & temp files
 *.bak
 *.fixed
+
+# CF Pages needs OpenNext outputs
+!.open-next/
+!.open-next/_routes.json
+!.open-next/server-functions/**
