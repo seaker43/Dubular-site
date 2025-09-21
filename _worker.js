@@ -1,6 +1,9 @@
-import worker from "./.open-next/server-functions/default/index.js";
+// _worker.js
+import { createHandler } from "open-next/server";
+
 export default {
   async fetch(request, env, ctx) {
-    return worker.fetch(request, env, ctx);
+    const handler = createHandler();
+    return handler(request, env, ctx);
   },
 };
