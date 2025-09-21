@@ -2,8 +2,5 @@ name = "dubular-beta"
 pages_build_output_dir = ".open-next"
 compatibility_date = "2024-09-21"
 
-[site]
-bucket = ".open-next/assets"
-
-[functions]
-directory = ".open-next/functions"
+[build]
+command = "npx open-next@3.1.3 build"
