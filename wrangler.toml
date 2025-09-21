@@ -1,3 +1,5 @@
 name = "dubular-beta"
-
 compatibility_date = "2024-09-01"
+
+[pages]
+build_output_dir = "."
