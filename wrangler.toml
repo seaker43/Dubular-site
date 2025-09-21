@@ -1,4 +1,11 @@
 name = "dubular-beta"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
+
+[pages]
 pages_build_output_dir = ".open-next"
+functions = ".open-next/server-functions"
+
+[[pages.routes]]
+include = ["/*"]
+exclude = ["/_next/static/*", "/favicon.ico"]
