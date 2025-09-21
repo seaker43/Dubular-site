@@ -1,5 +1,10 @@
 // _worker.js
-// Entrypoint for Cloudflare Pages Functions, delegates to OpenNext.
-import worker from "./.open-next/worker.js";
+// Cloudflare Pages entrypoint — route all requests into OpenNext
+import { createHandler } from "open-next/server";
 
-export default worker;
+export default {
+  async fetch(request, env, ctx) {
+    const handler = createHandler();
+    return handler(request, env, ctx);
+  },
+};
