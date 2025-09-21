@@ -1,5 +1,5 @@
 // _worker.js
-// Delegate all routing/SSR/image optimization to the OpenNext-generated worker.
+// Entrypoint for Cloudflare Pages Functions, delegates to OpenNext.
 import worker from "./.open-next/worker.js";
 
 export default worker;
