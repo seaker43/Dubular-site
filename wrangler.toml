@@ -1,5 +1,7 @@
 name = "dubular-beta"
 compatibility_date = "2025-01-01"
-compatibility_flags = ["nodejs_compact"]
+compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".open-next"
 
+[pages]
+functions = ".open-next/server-functions"
