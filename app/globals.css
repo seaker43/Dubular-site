@@ -1,34 +1,9 @@
-@import "tailwindcss";
-@source "./**/*.{js,ts,jsx,tsx,mdx}";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* ===== Optional: debug build stripe ===== */
-body::before {
-  content: "build " attr(data-build);
-  display: block;
-  height: 6px;
-  font: 600 12px/1 system-ui, -apple-system;
-  background: repeating-linear-gradient(45deg, #111 0, #111 2px, transparent 2px, transparent 4px);
-  color: #111;
-  letter-spacing: .04em;
-}
-
-/* ===== Safe area + bottom bar spacing ===== */
-:root {
-  --safe-top: env(safe-area-inset-top);
-  --bottom-bar-h: 84px;
-}
-
-/* ===== Base page chrome ===== */
-html, body {
+html,body {
   min-height: 100%;
-  height: auto;
-  overflow-y: auto !important;
   background: #000;
-}
-
-/* ===== Header logo ===== */
-img[alt*="header logo" i] {
-  display: block !important;
-  height: 32px !important;
-  width: auto !important;
+  color: #fff;
 }
