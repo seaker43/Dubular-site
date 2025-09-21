@@ -40,3 +40,5 @@ Thumbs.db
 !/.open-next/_routes.json
 .open-next/
 !.open-next/_headers
+!.open-next/_headers
+!.open-next/_redirects
