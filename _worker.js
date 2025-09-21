@@ -1,2 +1,1 @@
-import worker from './.open-next/worker/index.mjs';
-export default { fetch: (req, env, ctx) => worker.fetch(req, env, ctx) };
+import worker from './.open-next/worker/index.mjs';\n\nexport default {\n  async fetch(request, env, ctx) {\n    return worker.fetch(request, env, ctx);\n  }\n};
