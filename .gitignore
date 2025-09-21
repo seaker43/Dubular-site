@@ -3,6 +3,8 @@ node_modules/
 out/
 dist/
 *.log
+.wrangler/
+.vercel/
 .open-next/*
 !.open-next/
 !.open-next/**/*
