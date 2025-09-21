@@ -33,12 +33,3 @@ Thumbs.db
 # Ignore accidental backups & temp files
 *.bak
 *.fixed
-!functions/
-!functions/.gitkeep
-!functions/_worker.js
-!functions
-!/.open-next/_routes.json
-.open-next/
-!.open-next/_headers
-!.open-next/_headers
-!.open-next/_redirects
