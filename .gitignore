@@ -8,3 +8,4 @@ dist/
 .open-next/*
 !.open-next/
 !.open-next/**/*
+package-lock.json
