@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "open-next build --target cloudflare",
     "start": "next start",
     "deploy": "npx open-next build --platform cloudflare && wrangler pages deploy .open-next --project-name=dubular-beta",
     "build:cf": "open-next build --platform cloudflare && node scripts/make-routes.js"
