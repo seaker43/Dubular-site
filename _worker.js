@@ -1,3 +1,3 @@
 console.log("⚡ Worker loaded with nodejs_compat");
-console.log(⚡
+console.log("⚡ worker loaded with nodejs_compat");
 import mod from "./.open-next/server-functions/default/index.mjs";export const config={compatibility_date:"2024-09-01",compatibility_flags:["nodejs_compat"]};function pickHandler(m){if(typeof m?.handler==="function")return m.handler;if(typeof m?.default?.fetch==="function")return m.default.fetch;if(typeof m?.default==="function")return m.default;if(typeof m?.fetch==="function")return m.fetch;return null}const h=pickHandler(mod);export default{async fetch(request,env,ctx){if(!h)return new Response("OpenNext handler not found",{status:500});const res=await h(request,env,ctx);if(res?.headers)res.headers.set("x-debug-worker","1");return res}};
