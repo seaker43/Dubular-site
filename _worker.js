@@ -1,1 +1,2 @@
-console.log("Worker started");\nexport { default } from "./.open-next/_worker.js";
+console.log("Worker started");
+export { default } from "./.open-next/_worker.js";
