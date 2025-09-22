@@ -9,7 +9,8 @@
     "lint": "eslint . --report-unused-disable-directives",
     "lint:fix": "eslint . --fix",
     "lint:src": "eslint app components lib pages scripts",
-    "build:cf": "npx open-next@latest build"
+    "build:cf": "npx open-next@latest build && npm run check-worker",
+    "check-worker": "test -f .open-next/_worker.js && echo ✅ _worker.js found || (echo ❌ _worker.js missing && exit 1)"
   },
   "dependencies": {
     "next": "^14.2.3",
