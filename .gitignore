@@ -28,3 +28,4 @@ tmp/
 .next/
 dist/
 node_modules/
+.open-next/
