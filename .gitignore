@@ -1,34 +1,12 @@
 node_modules/
 .next/
-out/
 dist/
-*.log
-.wrangler/
-.vercel/
-.open-next/*
-!.open-next/
-!.open-next/**/*
-package-lock.json
-<<<<<<< HEAD
-# build + local output
 .open-next/
-.next/
-dist/
-node_modules/
+.env
+.env.local
+.env.*.local
+*.log
+.DS_Store
+.vscode/
+.idea/
 tmp/
-*.log
-=======
-.open-next/
-.open-next/
-!/_worker.js
->>>>>>> 8bd526bc38ca482145f3b67ebdd4fed76dac9459
-
-# build outputs
-.open-next/
-.next/
-dist/
-node_modules/
-.open-next/
-.open-next/
-.open-next/
-.open-next
