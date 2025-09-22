@@ -1,13 +1,25 @@
-import * as mod from './.open-next/server-functions/default/index.mjs';
-let worker;
-if (mod.handler) { worker = { async fetch(req, env, ctx){ return mod.handler(req, env, ctx); } }; }
-else if (mod.default?.fetch) { worker = mod.default; }
-else if (mod.fetch) { worker = { fetch: mod.fetch }; }
-else { worker = { async fetch(){ return new Response('OpenNext handler not found', { status: 500 }); } }; }
+import mod from "./.open-next/server-functions/default/index.mjs";
+
+export const config = {
+  compatibility_date: "2024-09-01",
+  compatibility_flags: ["nodejs_compat"],
+};
+
+function pickHandler(m) {
+  if (typeof m?.handler === "function") return m.handler;
+  if (typeof m?.default?.fetch === "function") return m.default.fetch;
+  if (typeof m?.default === "function") return m.default;
+  if (typeof m?.fetch === "function") return m.fetch;
+  return null;
+}
+
+const h = pickHandler(mod);
+
 export default {
-  async fetch(req, env, ctx) {
-    const r = await worker.fetch(req, env, ctx);
-    r.headers.set('x-debug-worker','on');
-    return r;
-  }
+  async fetch(request, env, ctx) {
+    if (!h) return new Response("OpenNext handler not found", { status: 500 });
+    const res = await h(request, env, ctx);
+    if (res?.headers) res.headers.set("x-debug-worker", "true");
+    return res;
+  },
 };
