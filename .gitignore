@@ -11,3 +11,4 @@ dist/
 package-lock.json
 .open-next/
 .open-next/
+!/_worker.js
