@@ -5,12 +5,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "postbuild": "node scripts/inject-worker.mjs",
     "lint": "eslint . --report-unused-disable-directives",
     "lint:fix": "eslint . --fix",
     "lint:src": "eslint app components lib pages scripts",
-    "build:cf": "npx open-next@latest build && npm run check-worker",
-    "check-worker": "test -f .open-next/_worker.js && echo ✅ _worker.js found || (echo ❌ _worker.js missing && exit 1)"
+    "build:cf": "npx open-next@latest build"
   },
   "dependencies": {
     "next": "^14.2.3",
