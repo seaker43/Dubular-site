@@ -1,6 +1,6 @@
 name = "dubular-beta"
-compatibility_date = "2024-09-22"
-compatibility_flags = ["nodejs_compat"]
+compatibility_date = "2024-09-01"
+nodejs_compat = true
 
 [pages]
-pages_build_output_dir = ".open-next"
+build_output_dir = ".open-next"
