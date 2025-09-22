@@ -13,8 +13,6 @@ export default function Layout({ children }) {
  className="relative w-full overflow-x-hidden"
  style={{
  // Hard-stop any stray horizontal padding
- __: 0,
- __: 0,
  }}
  >
  {children}
