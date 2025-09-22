@@ -4,8 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "postbuild": "cp .open-next/_worker.js _worker.js || true"
+    "start": "next start"
   },
   "dependencies": {
     "next": "^14.2.3",
