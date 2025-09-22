@@ -4,34 +4,28 @@ module.exports = {
   extends: [
     "next/core-web-vitals",
     "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:react/recommended"
   ],
-  parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint", "react"],
-  settings: {
-    react: { version: "detect" }
-  },
   env: {
     browser: true,
     es2022: true,
-    node: true,
+    node: true
+  },
+  rules: {
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off"
   },
   overrides: [
     {
-      files: ["scripts/**/*.{js,mjs,ts}"],
-      env: { node: true, es2022: true },
-      rules: { "no-undef": "off" }
+      files: ["scripts/**/*.{js,mjs}", "local-worker.js"],
+      rules: {
+        "@typescript-eslint/no-var-requires": "off"
+      }
     },
     {
-      files: ["_worker.js", ".open-next/_worker.js"],
-      env: { worker: true, serviceworker: true, es2022: true },
-      globals: {
-        Headers: "readonly",
-        Request: "readonly",
-        Response: "readonly",
-        fetch: "readonly"
-      }
+      files: ["**/*.{ts,tsx}"],
+      parser: "@typescript-eslint/parser"
     }
   ]
 };
+globals: { React: "writable" }
