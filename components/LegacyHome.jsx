@@ -1,3 +1,4 @@
+import Image from "next/image";
 /* Legacy home layout: header + hero + live row + 3 vertical thumbnails (Top 5 categories) */
 export default function LegacyHome() {
   // --- Placeholder data. Replace with real data when ready. ---
@@ -30,7 +31,7 @@ export default function LegacyHome() {
       {/* Header */}
       <header className="sticky top-0 z-20 border-b border-white/10 bg-black/60 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
-          <img src="/dubular2.v2.png" alt="Dubular" className="h-7 w-auto" />
+          <Image src="/dubular2.v2.png" alt="Dubular" className="h-7 w-auto" />
           <span className="text-lg font-semibold">Dubular</span>
         </div>
       </header>
