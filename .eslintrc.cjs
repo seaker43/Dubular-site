@@ -1,20 +1,37 @@
-/** ESLint config for Next.js 14 */
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
-  extends: ["next", "next/core-web-vitals"],
-  settings: { react: { version: "detect" } },
-  rules: {
-    // Next.js with React 17+ doesn’t need React in scope for JSX
-    "react/react-in-jsx-scope": "off",
-
-    // We’re not using PropTypes; use TS or skip
-    "react/prop-types": "off",
-
-    // Don’t break builds on small nits
-    "no-unused-vars": "warn",
-
-    // (Optional) keep these as 'warn' if you want to see them without failing builds
-    "react/no-unknown-property": "warn",
-    "react/jsx-no-duplicate-props": "warn",
+  extends: [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  parser: "@typescript-eslint/parser",
+  plugins: ["@typescript-eslint", "react"],
+  settings: {
+    react: { version: "detect" }
   },
+  env: {
+    browser: true,
+    es2022: true,
+    node: true,
+  },
+  overrides: [
+    {
+      files: ["scripts/**/*.{js,mjs,ts}"],
+      env: { node: true, es2022: true },
+      rules: { "no-undef": "off" }
+    },
+    {
+      files: ["_worker.js", ".open-next/_worker.js"],
+      env: { worker: true, serviceworker: true, es2022: true },
+      globals: {
+        Headers: "readonly",
+        Request: "readonly",
+        Response: "readonly",
+        fetch: "readonly"
+      }
+    }
+  ]
 };
