@@ -1,1 +1,2 @@
-// _worker.js\ nimport worker from "server-functions/default/index.mjs";\nexport default worker;
+import worker from "./server-functions/default/index.mjs";
+export default worker;
