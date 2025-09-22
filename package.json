@@ -5,7 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "postbuild": "cp .open-next/_worker.js _worker.js || true"
+    "postbuild": "node scripts/inject-worker.mjs"
   },
   "dependencies": {
     "next": "^14.2.3",

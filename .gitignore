@@ -9,3 +9,10 @@ dist/
 !.open-next/
 !.open-next/**/*
 package-lock.json
+# build + local output
+.open-next/
+.next/
+dist/
+node_modules/
+tmp/
+*.log
