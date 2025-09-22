@@ -1,1 +1,1 @@
-import handler from "./.open-next/server-functions/default/index.mjs";export default {async fetch(req,env,ctx){const res=await handler.fetch(req,env,ctx);res.headers.set("x-debug-worker","on");return res;}};
+import handler from "./.open-next/server-functions/default/index.mjs";console.log("Worker started");export default {async fetch(req,env,ctx){const res=await handler.fetch(req,env,ctx);res.headers.set("x-debug-worker","on");return res;}};
