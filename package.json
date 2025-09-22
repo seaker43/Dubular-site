@@ -8,7 +8,8 @@
     "postbuild": "node scripts/inject-worker.mjs",
     "lint": "eslint . --report-unused-disable-directives",
     "lint:fix": "eslint . --fix",
-    "lint:src": "eslint app components lib pages scripts"
+    "lint:src": "eslint app components lib pages scripts",
+    "build:cf": "npx open-next@latest build"
   },
   "dependencies": {
     "next": "^14.2.3",
@@ -32,5 +33,9 @@
     "postcss": "^8.5.6",
     "tailwindcss": "3.4",
     "typescript": "^5.3.3"
-  }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "type": "module"
 }

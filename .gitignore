@@ -10,3 +10,6 @@ dist/
 .vscode/
 .idea/
 tmp/
+.open-next/
+.next/
+dist/
