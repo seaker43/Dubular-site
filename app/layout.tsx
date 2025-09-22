@@ -1,5 +1,5 @@
 export const runtime = "edge";
-export const runtime = "edge";
+
 import type { ReactNode } from "react";
 import "./globals.css";
 import "./globals.css";
