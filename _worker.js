@@ -1,16 +1,15 @@
-let worker;
-try {
-  const mod = await import("./.open-next/server-functions/default/index.mjs");
-  if (mod.handler) {
-    worker = { async fetch(request, env, ctx) { return mod.handler(request, env, ctx); } };
-  } else if (mod.default?.fetch) {
-    worker = mod.default;
-  } else if (mod.fetch) {
-    worker = { fetch: mod.fetch };
-  } else {
-    worker = { async fetch() { return new Response("OpenNext handler not found.", { status: 500 }); } };
+import base from "./.open-next/_worker.js";
+
+const inner = (base?.default ?? base);
+
+export default {
+  async fetch(req, env, ctx) {
+    if (!inner?.fetch) {
+      return new Response("OpenNext prebuilt worker missing.", { status: 500 });
+    }
+    const resp = await inner.fetch(req, env, ctx);
+    const h = new Headers(resp.headers);
+    h.set("x-debug-worker", "dubular-open-next");
+    return new Response(resp.body, { status: resp.status, headers: h });
   }
-} catch (e) {
-  worker = { async fetch() { return new Response("OpenNext failed to load.", { status: 500 }); } };
-}
-export default worker;
+};
