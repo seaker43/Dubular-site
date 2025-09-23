@@ -9,3 +9,6 @@
     /* --header-h: 88px;  // if you bump desktop header later */
   }
 }
+.glow-red { @apply ring-2 ring-red-500 shadow-[0_0_15px_#f00]; }
+.glow-green { @apply ring-2 ring-green-500 shadow-[0_0_15px_#0f0]; }
+.glow-cyan { @apply ring-2 ring-cyan-500 shadow-[0_0_15px_#0ff]; }
