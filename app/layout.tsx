@@ -1,26 +1,6 @@
-export const runtime = "edge";
-
+import "./globals.css";
 import type { ReactNode } from "react";
-import "../styles/globals.css";
-import "../styles/bottom-bar.css";
-
-import Header from "../components/Header";
-import BottomBar from "../components/BottomBar";
-
-export const metadata = {
-  title: "Dubular",
-  description: "Dubular site",
-};
-
-export default function RootLayout({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <body className="bg-black text-white pt-14 pb-[calc(64px+env(safe-area-inset-bottom))]">
-        <Header />
-        {/* leave room for fixed bottom bar */}
-        <main className="min-h-[calc(100dvh-64px)] pb-[calc(64px+env(safe-area-inset-bottom))]">{children}</main>
-    <BottomBar />
-      </body>
-    </html>
-  );
-}
+import Header from "@/components/Header";
+import BottomBar from "@/components/BottomBar";
+export const metadata={title:"Dubular"} as const;
+export default function RootLayout({children}:{children:ReactNode}){return(<html lang="en"><body className="flex flex-col min-h-screen bg-neutral-950 text-white"><Header/>{children}<BottomBar/></body></html>);} 
