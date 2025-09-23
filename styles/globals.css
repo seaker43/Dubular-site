@@ -6,79 +6,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* --- Global CSS variables --- */
-:root {
-  /* Header height used by header.css and content offset */
-  --header-h: 88px;
-
-  /* Optional theme variables */
-  color-scheme: dark light;
+@layer base {
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
+  ::selection { background:#00ff00; color:#000; }
 }
 
-/* --- Resets / base element styles --- */
-*, *::before, *::after { box-sizing: border-box; }
+@layer components { @import "./design-system.css"; @import "./search.css"; @import "./theme.css"; }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100%;
-  background: #000;   /* site background */
-  color: #fff;        /* default text color */
-}
-
-/* Next.js root wrapper */
-#__next { min-height: 100%; }
-
-/* Media defaults */
-img, svg, video, canvas {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-a { color: inherit; text-decoration: none; }
-
-/* --- Layout: full-bleed + header offset --- */
-/* Centralize the header offset here (so you can remove pt-[88px] in _app.js) */
-main {
-  padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  margin: 0;
-  width: 100%;
-  overflow-x: hidden; /* guard against accidental horizontal scroll */
-}
-
-/* Make all standard wrappers full-bleed */
-body, header, footer, section, article, div {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-/* If any components use Tailwind's .container, force it to full width */
-.container {
-  @apply !max-w-none !px-0;
-}
-
-/* Utility you can add to any wrapper to guarantee edge-to-edge */
-.edge {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  width: 100% !important;
-}
-
-/* Ensure the fixed header matches the global var height even if header.css forgets */
-.site-header,
-header.site-header {
-  height: var(--header-h);
-}
-
-/* --- Import your site CSS so you don’t have to remember them in components --- */
-/* Files that use @apply will still be processed by Tailwind */
-@import "./design-system.css";
-@import "./search.css";
-@import "./theme.css";
-/* NOTE: skip CSS Modules like logo.module.css here; those belong in the component */
