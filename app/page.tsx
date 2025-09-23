@@ -6,7 +6,7 @@ import LiveRow from "../components/LiveRow";
 
 export default function HomePage() {
   return (
-    <main className="page space-y-8">
+    <main className="page">
       <section aria-label="Featured" className="mb-6">
         <FeaturedHeroTabs />
       </section>
