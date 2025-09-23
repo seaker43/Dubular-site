@@ -26,3 +26,4 @@
   .bottom-bar .inner{ gap:28px; padding:10px 16px; }
   .bottom-bar a .label{ font-size:13px; }
 }
+.bottom-bar a.active{filter:drop-shadow(0 0 6px #0ff) drop-shadow(0 0 12px #0ff);color:#0ff;}
