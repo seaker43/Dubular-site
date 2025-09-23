@@ -77,7 +77,6 @@ header.site-header {
 
 /* --- Import your site CSS so you don’t have to remember them in components --- */
 /* Files that use @apply will still be processed by Tailwind */
-@import "./base.css";
 @import "./design-system.css";
 @import "./search.css";
 @import "./theme.css";
