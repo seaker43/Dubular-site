@@ -1,4 +1,3 @@
-import React from "react";
 export default function DubularCoin({ size = 36, className = "" }) {
   const accent = "var(--dubular-accent,#18e27a)";
   return (
