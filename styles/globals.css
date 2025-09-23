@@ -79,18 +79,6 @@ header.site-header {
 /* Files that use @apply will still be processed by Tailwind */
 @import "./base.css";
 @import "./design-system.css";
-@import "./grid.css";
-@import "./header.css";
-@import "./hero.css";
-@import "./layout.css";
-@import "./navbar.css";
 @import "./search.css";
-@import "./stream.css";
-@import "./thumb.css";
-@import "./favs.css";
-@import "./bottom-bar.css";
 @import "./theme.css";
-@import "./theme-overrides.css";
-@import "./beta.css";
-@import "./util.css";
 /* NOTE: skip CSS Modules like logo.module.css here; those belong in the component */
