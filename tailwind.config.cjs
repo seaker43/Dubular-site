@@ -1,6 +1,39 @@
-/** @type {import("tailwindcss").Config} */,module.exports = {,  content: [,    "./app/**/*.{js,ts,jsx,tsx}",,    "./components/**/*.{js,ts,jsx,tsx}",,    "./pages/**/*.{js,ts,jsx,tsx}",,    "./src/**/*.{js,ts,jsx,tsx}",  ],,  theme: {,    extend: {,      colors: {,        brand: {,          cyan: "#00ffff",,          dark: "#0a0a0a",,        },,      },,    },,  },,  plugins: [,    require("@tailwindcss/forms"),,    require("@tailwindcss/typography"),,  ],,};
-    function({ addUtilities }) { addUtilities({ '.text-neon': { 'text-shadow': '0 0 10px #0ff,0 0 20px #0ff,0 0 40px #0ff' }, '.border-neon-green': { 'box-shadow': '0 0 5px #0f0,0 0 15px #0f0,0 0 30px #0f0' }, '.border-neon-cyan': { 'box-shadow': '0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff' }, '.border-neon-pink': { 'box-shadow': '0 0 5px #f0f,0 0 15px #f0f,0 0 30px #f0f' }, '.border-neon-red': { 'box-shadow': '0 0 5px #f00,0 0 15px #f00,0 0 30px #f00' } }) },
-    function({ addUtilities }) { addUtilities({ '.border-neon-cyan': { 'box-shadow': '0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff' }, '.border-neon-pink': { 'box-shadow': '0 0 5px #f0f,0 0 15px #f0f,0 0 30px #f0f' }, '.border-neon-red': { 'box-shadow': '0 0 5px #f00,0 0 15px #f00,0 0 30px #f00' }, '.border-neon-green': { 'box-shadow': '0 0 5px #0f0,0 0 15px #0f0,0 0 30px #0f0' } }) },
-    function({ addUtilities }) { addUtilities({ '.text-neon-cyan': { 'text-shadow': '0 0 10px #0ff,0 0 20px #0ff,0 0 40px #0ff' }, '.text-neon-pink': { 'text-shadow': '0 0 10px #f0f,0 0 20px #f0f,0 0 40px #f0f' }, '.text-neon-red': { 'text-shadow': '0 0 10px #f00,0 0 20px #f00,0 0 40px #f00' }, '.text-neon-green': { 'text-shadow': '0 0 10px #0f0,0 0 20px #0f0,0 0 40px #0f0' } }) },
-    function({ addUtilities }) { addUtilities({ ".text-neon": { "text-shadow": "0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #0ff" } }) },
-    fontFamily: { sans: ["Anton", "sans-serif"] },
+/** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin');
+
+module.exports = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          cyan: "#00ffff",
+          dark: "#0a0a0a",
+        },
+      },
+      fontFamily: { sans: ["Anton", "sans-serif"] },
+    },
+  },
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/typography"),
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        ".text-neon":       { textShadow: "0 0 10px #0ff,0 0 20px #0ff,0 0 40px #0ff" },
+        ".text-neon-cyan":  { textShadow: "0 0 10px #0ff,0 0 20px #0ff,0 0 40px #0ff" },
+        ".text-neon-pink":  { textShadow: "0 0 10px #f0f,0 0 20px #f0f,0 0 40px #f0f" },
+        ".text-neon-red":   { textShadow: "0 0 10px #f00,0 0 20px #f00,0 0 40px #f00" },
+        ".text-neon-green": { textShadow: "0 0 10px #0f0,0 0 20px #0f0,0 0 40px #0f0" },
+        ".border-neon-cyan":  { boxShadow: "0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff" },
+        ".border-neon-pink":  { boxShadow: "0 0 5px #f0f,0 0 15px #f0f,0 0 30px #f0f" },
+        ".border-neon-red":   { boxShadow: "0 0 5px #f00,0 0 15px #f00,0 0 30px #f00" },
+        ".border-neon-green": { boxShadow: "0 0 5px #0f0,0 0 15px #0f0,0 0 30px #0f0" },
+      });
+    }),
+  ],
+};
