@@ -1,34 +1,28 @@
-.bottom-bar {
-  position: fixed;
-  left: 0; right: 0; bottom: 0;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: .25rem;
-  padding: .5rem env(safe-area-inset-left) calc(.65rem + env(safe-area-inset-bottom)) env(safe-area-inset-right);
-  background: #0b0b0b;
-  border-top: 1px solid rgba(255,255,255,.08);
-  z-index: 50;
+/* styles/bottom-bar.css */
+/* Fixed bar with safe-area support */
+.bottom-bar{
+  position:fixed; left:0; right:0;
+  bottom:0; padding-bottom:env(safe-area-inset-bottom);
+  background:#000; border-top:1px solid rgba(255,255,255,.08);
+  z-index:50;
 }
-.bottom-link {
-  color: #bdbdbd;
-  text-decoration: none;
-  padding: .5rem .25rem;
-  font-size: .8rem;
+/* Center items and keep them evenly spaced */
+.bottom-bar .inner{
+  max-width:1024px; margin:0 auto;
+  display:flex; align-items:center; justify-content:space-around;
+  gap:clamp(6px, 6vw, 40px); padding:8px 12px;
 }
-.bottom-link.active {
-  color: #fff;
-  font-weight: 600;
+/* Each link takes equal width and centers icon+label */
+.bottom-bar a{
+  flex:1; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-decoration:none; color:#fff; opacity:.95;
 }
-.main-with-bottom {
-  padding-bottom: 76px;
-}
-.header {
-  width: 100%;
-  padding: .75rem 1rem;
-  background: #0b0b0b;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+.bottom-bar a .label{ font-size:12px; margin-top:2px; }
+
+/* Desktop tweaks */
+@media (min-width:768px){
+  .bottom-bar{ height:72px; }
+  .bottom-bar .inner{ gap:28px; padding:10px 16px; }
+  .bottom-bar a .label{ font-size:13px; }
 }

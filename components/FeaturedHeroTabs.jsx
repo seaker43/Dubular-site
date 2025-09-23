@@ -1,3 +1,4 @@
+"use client";
 // components/FeaturedLoopHero.jsx
 import { useEffect, useState } from "react";
 
