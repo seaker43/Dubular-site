@@ -13,3 +13,42 @@
 .thumb-row::-webkit-scrollbar {
   display: none;
 }
+
+/* LiveRow thumbnails - red glow */
+.live-row img,
+.live-row video {
+  box-shadow: 0 0 20px 4px rgba(255,0,0,0.8);
+  border-radius: 0.5rem;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.live-row img:hover,
+.live-row video:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px 6px rgba(255,0,0,1);
+}
+
+/* TrendingRow thumbnails - cyan glow */
+.trending-row img,
+.trending-row video {
+  box-shadow: 0 0 20px 4px rgba(0,255,255,0.8);
+  border-radius: 0.5rem;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.trending-row img:hover,
+.trending-row video:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px 6px rgba(0,255,255,1);
+}
+
+/* RecommendedRow thumbnails - green glow */
+.recommended-row img,
+.recommended-row video {
+  box-shadow: 0 0 20px 4px rgba(0,255,0,0.8);
+  border-radius: 0.5rem;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.recommended-row img:hover,
+.recommended-row video:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px 6px rgba(0,255,0,1);
+}
