@@ -4,7 +4,7 @@ import { Trophy, Star, Home, Search, User } from "lucide-react";
 
 export default function BottomBar() {
   return (
-    <nav className="navbar">
+    <nav className="navbar fixed bottom-0 left-0 right-0 z-50 bg-black/90">
       <Link href="/rank" className="navbar-item">
         <Trophy size={20} />
         <span>Rank</span>
