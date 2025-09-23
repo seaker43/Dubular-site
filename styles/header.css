@@ -1,0 +1,14 @@
+header {
+  @apply fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur flex items-center justify-center;
+  height: var(--header-h);
+  border: none !important;
+}
+/* keep the logo cropping preference */
+header .logo img,
+header .logo-picture {
+  object-fit: cover;
+  object-position: top;
+}
+header {
+  overflow: visible !important;
+}

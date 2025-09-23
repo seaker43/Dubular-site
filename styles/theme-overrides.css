@@ -1,0 +1,25 @@
+:root {
+  --header-h: 80px; /* fixed header height (h-20) */
+  --bottom-h: 60px; /* fixed bottom bar height */
+}
+/* Keep content clear of fixed header/footer; no side padding */
+body {
+  padding-top: var(--header-h) !important;
+  padding-bottom: var(--bottom-h) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin: 0 !important;
+}
+
+/* === design-system safeguards === */
+main {
+  padding-top: var(--header-h) !important;
+  padding-left: var(--page-x) !important;
+  padding-right: var(--page-x) !important;
+}
+.featured-hero,
+.search-wrap,
+.thumb-row {
+  margin: 0 !important;
+  border-radius: var(--radius) !important;
+}
