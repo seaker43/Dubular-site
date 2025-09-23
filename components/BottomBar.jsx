@@ -1,42 +1,39 @@
 "use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Trophy, Star, Home, Search, User } from "lucide-react";
 
 export default function BottomBar() {
+  const pathname = usePathname();
+
+  const links = [
+    { href: "/rank", icon: <Trophy />, label: "Rank" },
+    { href: "/favorites", icon: <Star />, label: "Favs" },
+    { href: "/", icon: <Home />, label: "Home" },
+    { href: "/search", icon: <Search />, label: "Find" },
+    { href: "/account", icon: <User />, label: "Account" },
+  ];
+
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-black text-white border-t border-neutral-800 z-50">
-      <ul className="flex justify-around items-center py-2">
-        <li>
-          <Link href="/rank" className="flex flex-col items-center text-sm">
-            <Trophy size={20} />
-            <span>Rank</span>
+    <nav className="fixed bottom-0 left-0 right-0 bg-neutral-900 text-white flex justify-evenly items-center h-16 border-t border-neutral-800">
+      {links.map((link) => {
+        const active = pathname === link.href;
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={`flex flex-col items-center text-xs ${
+              active
+                ? "text-cyan-400 drop-shadow-[0_0_6px_#0ff] drop-shadow-[0_0_12px_#0ff]"
+                : "text-gray-400"
+            }`}
+          >
+            {link.icon}
+            <span>{link.label}</span>
           </Link>
-        </li>
-        <li>
-          <Link href="/favorites" className="flex flex-col items-center text-sm">
-            <Star size={20} />
-            <span>Favs</span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/" className="flex flex-col items-center text-sm">
-            <Home size={20} />
-            <span>Home</span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/search" className="flex flex-col items-center text-sm">
-            <Search size={20} />
-            <span>Find</span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/account" className="flex flex-col items-center text-sm">
-            <User size={20} />
-            <span>Account</span>
-          </Link>
-        </li>
-      </ul>
+        );
+      })}
     </nav>
   );
 }
