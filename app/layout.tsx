@@ -2,7 +2,17 @@ export const runtime = "edge";
 
 import type { ReactNode } from "react";
 import "./globals.css";
+import "../styles/bottom-bar.css";
+import Header from "../components/Header";
+import BottomBar from "../components/BottomBar";
+import "../styles/bottom-bar.css";
+import BottomBar from "../components/BottomBar";
 import "./globals.css";
+import "../styles/bottom-bar.css";
+import Header from "../components/Header";
+import BottomBar from "../components/BottomBar";
+import "../styles/bottom-bar.css";
+import BottomBar from "../components/BottomBar";
 
 export const metadata = {
   title: "Dubular",
