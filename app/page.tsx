@@ -1,3 +1,4 @@
+import LiveRow from "../components/LiveRow";
 // app/page.js
 "use client";
 
@@ -28,6 +29,7 @@ function Thumb({ item, glow = "glow-dual", live = false }) {
 export default function HomePage() {
   return (
     <main className="page">
+      <LiveRow />
       <h1 className="section-title">Trending Now</h1>
       <div className="thumb-row">
         {liveNow.map((item) => (
