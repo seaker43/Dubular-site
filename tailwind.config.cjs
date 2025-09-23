@@ -20,8 +20,6 @@ module.exports = {
     },
   },
   plugins: [
-    require("@tailwindcss/forms"),
-    require("@tailwindcss/typography"),
     plugin(function ({ addUtilities }) {
       addUtilities({
         ".text-neon":       { textShadow: "0 0 10px #0ff,0 0 20px #0ff,0 0 40px #0ff" },
