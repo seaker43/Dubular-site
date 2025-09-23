@@ -5,10 +5,35 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
-  ::selection { background:#00ff00; color:#000; }
+/* --- Global CSS variables --- */
+:root{
+  --header-h:88px;
+  color-scheme:dark light;
 }
 
-@layer components { @import "./design-system.css"; @import "./search.css"; @import "./theme.css"; }
+/* --- Resets / base element styles --- */
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0;width:100%;min-height:100%;background:#000;color:#fff}
+#__next{min-height:100%}
+img,svg,video,canvas{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
 
+/* --- Layout: full-bleed + header offset --- */
+main{padding-top:calc(var(--header-h) + env(safe-area-inset-top,0px));padding-left:0!important;padding-right:0!important;margin:0;width:100%;overflow-x:hidden}
+body,header,footer,section,article,div{margin-left:0;margin-right:0}
+.container{@apply !max-w-none !px-0}
+.edge{padding-left:0!important;padding-right:0!important;margin-left:0!important;margin-right:0!important;width:100%!important}
+.site-header,header.site-header{height:var(--header-h)}
+
+/* --- Nice-to-haves --- */
+@layer base{
+  html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
+  ::selection{background:#00ff00;color:#000}
+}
+
+/* --- Bring in site CSS under the components layer --- */
+@layer components{
+  @import "./design-system.css";
+  @import "./search.css";
+  @import "./theme.css";
+}
