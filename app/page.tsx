@@ -1,6 +1,5 @@
-import LiveRow from "../components/LiveRow";
-// app/page.js
 "use client";
+import LiveRow from "../components/LiveRow";
 
 import React from "react";
 import Link from "next/link";
