@@ -1,30 +1,42 @@
-// components/BottomBar.jsx
+"use client";
 import Link from "next/link";
 import { Trophy, Star, Home, Search, User } from "lucide-react";
 
 export default function BottomBar() {
   return (
-    <nav className="navbar fixed bottom-0 left-0 right-0 z-50 bg-black/90">
-      <Link href="/rank" className="navbar-item">
-        <Trophy size={20} />
-        <span>Rank</span>
-      </Link>
-      <Link href="/favorites" className="navbar-item">
-        <Star size={20} />
-        <span>Favs</span>
-      </Link>
-      <Link href="/" className="navbar-item">
-        <Home size={20} />
-        <span>Home</span>
-      </Link>
-      <Link href="/find" className="navbar-item">
-        <Search size={20} />
-        <span>Find</span>
-      </Link>
-      <Link href="/account" className="navbar-item">
-        <User size={20} />
-        <span>Account</span>
-      </Link>
+    <nav className="fixed bottom-0 left-0 w-full bg-black text-white border-t border-neutral-800 z-50">
+      <ul className="flex justify-around items-center py-2">
+        <li>
+          <Link href="/rank" className="flex flex-col items-center text-sm">
+            <Trophy size={20} />
+            <span>Rank</span>
+          </Link>
+        </li>
+        <li>
+          <Link href="/favorites" className="flex flex-col items-center text-sm">
+            <Star size={20} />
+            <span>Favs</span>
+          </Link>
+        </li>
+        <li>
+          <Link href="/" className="flex flex-col items-center text-sm">
+            <Home size={20} />
+            <span>Home</span>
+          </Link>
+        </li>
+        <li>
+          <Link href="/search" className="flex flex-col items-center text-sm">
+            <Search size={20} />
+            <span>Find</span>
+          </Link>
+        </li>
+        <li>
+          <Link href="/account" className="flex flex-col items-center text-sm">
+            <User size={20} />
+            <span>Account</span>
+          </Link>
+        </li>
+      </ul>
     </nav>
   );
 }
