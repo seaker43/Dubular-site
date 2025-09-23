@@ -20,6 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {/* leave room for fixed bottom bar */}
         <main className="min-h-[calc(100dvh-64px)] pb-[calc(64px+env(safe-area-inset-bottom))]">{children}</main>
         <BottomBar />
+        <BottomBar />
       </body>
     </html>
   );
