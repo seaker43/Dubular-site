@@ -1,17 +1,20 @@
 "use client";
-import FeaturedHeroTabs from "../components/FeaturedHeroTabs";
-
-import React from "react";
-import LiveRow from "../components/LiveRow";
-
-export default function HomePage() {
+import FeaturedHeroTabs from "@/components/FeaturedHeroTabs";
+import LiveRow from "@/components/LiveRow";
+import ThumbnailCard from "@/components/ThumbnailCard";
+const demo=[
+  {title:"Sample Stream 1", image:"/placeholder.svg"},
+  {title:"Sample Stream 2", image:"/placeholder.svg"},
+  {title:"Sample Stream 3", image:"/placeholder.svg"},
+  {title:"Sample Stream 4", image:"/placeholder.svg"}
+];
+export default function Page(){
   return (
-    <main className="page">
-      <section aria-label="Featured" className="mb-6">
-        <FeaturedHeroTabs />
-      </section>
-      <section aria-label="Live now" className="mt-2">
-        <LiveRow />
+    <main>
+      <FeaturedHeroTabs />
+      <section className="mt-6">
+        <h2 className="px-4 text-lg font-semibold">Trending Now</h2>
+        <LiveRow>{demo.map((d,i)=>(<ThumbnailCard key={i} data={d}/>))}</LiveRow>
       </section>
     </main>
   );

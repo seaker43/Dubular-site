@@ -1,4 +1,25 @@
 "use client";
 import Link from "next/link";
-const items=[{href:"/rank",label:"Rank"},{href:"/favorites",label:"Favs"},{href:"/",label:"Home"},{href:"/search",label:"Find"},{href:"/account",label:"Account"}];
-export default function BottomBar(){return(<nav className="fixed bottom-0 inset-x-0 bg-black text-white p-2 border-t border-neutral-800"><ul className="flex justify-around text-sm">{items.map(i=>(<li key={i.href}><Link href={i.href} className="px-2 py-1">{i.label}</Link></li>))}</ul></nav>);} 
+import HomeIcon from "@/components/icons/HomeIcon";
+import DubularCoin from "@/components/icons/DubularCoin";
+const items=[
+  {href:"/rank",label:"Rank",icon:DubularCoin},
+  {href:"/favorites",label:"Favs",icon:DubularCoin},
+  {href:"/",label:"Home",icon:HomeIcon},
+  {href:"/search",label:"Find",icon:HomeIcon},
+  {href:"/account",label:"Account",icon:HomeIcon},
+];
+export default function BottomBar(){return(
+  <nav className="fixed bottom-0 inset-x-0 bg-black/90 text-white p-2 border-t border-neutral-800 backdrop-blur">
+    <ul className="flex justify-around text-xs">
+      {items.map(({href,label,icon:Icon})=> (
+        <li key={href}>
+          <Link href={href} className="flex flex-col items-center gap-1 px-2 py-1">
+            <Icon className="h-5 w-5" />
+            <span>{label}</span>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </nav>
+);}
