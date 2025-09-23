@@ -1,6 +1,39 @@
-import LegacyHome from "../components/LegacyHome";
+// app/page.js
+"use client";
 
-export default function Page() {
-  // Server component must not pass functions or non-serializable props.
-  return <LegacyHome />;
+import React from "react";
+import Link from "next/link";
+
+/** ------- Mock data (swap later) ------- */
+const liveNow = [
+  { id: "lv1", title: "Arena Finals", img: "/thumbnails/live1.jpg", href: "/watch/lv1" },
+  { id: "lv2", title: "Night Vibes", img: "/thumbnails/live2.jpg", href: "/watch/lv2" },
+  { id: "lv3", title: "IRL Walk", img: "/thumbnails/live3.jpg", href: "/watch/lv3" },
+  { id: "lv4", title: "Music Set", img: "/thumbnails/live4.jpg", href: "/watch/lv4" },
+];
+
+/** small card using globals.css classes */
+function Thumb({ item, glow = "glow-dual", live = false }) {
+  return (
+    <Link href={item.href} className={`thumb-card ${glow}`} prefetch={false}>
+      <div className="thumb-img-wrapper">
+        <img src={item.img} alt={item.title} className="thumb-img" />
+        {live && <span className="live-badge">LIVE</span>}
+      </div>
+      <p className="thumb-title">{item.title}</p>
+    </Link>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <main className="page">
+      <h1 className="section-title">Trending Now</h1>
+      <div className="thumb-row">
+        {liveNow.map((item) => (
+          <Thumb key={item.id} item={item} live />
+        ))}
+      </div>
+    </main>
+  );
 }
