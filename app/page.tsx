@@ -8,7 +8,7 @@ export default function HomePage() {
   return (
     <main className="page pb-20">
       <FeaturedHeroTabs />
-      <LiveRow />
+      <div className="mt-6"><LiveRow /></div>
     </main>
   );
 }

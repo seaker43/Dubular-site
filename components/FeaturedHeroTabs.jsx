@@ -30,7 +30,7 @@ export default function FeaturedLoopHero() {
   const active = TABS.find((t) => t.key === tab) || TABS[0];
 
   return (
-    <section className={`featured-hero ${glow} full-bleed mt-0`}>
+    <section className="mb-6" className={`featured-hero ${glow} full-bleed mt-0`}>
       <img
         src={active.src}
         alt={active.label}
