@@ -1,7 +1,7 @@
 export const runtime = "edge";
 
 import type { ReactNode } from "react";
-import "./globals.css";
+import "../styles/globals.css";
 import "../styles/bottom-bar.css";
 
 import Header from "../components/Header";
