@@ -5,7 +5,8 @@ const featured = [
   {
     title: "Featured Stream",
     subtitle: "Now playing live on dubUlar",
-    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1600",
+    image:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1600",
   },
 ];
 
@@ -26,9 +27,7 @@ export default function FeaturedHeroTabs() {
           <h2 className="text-3xl font-extrabold text-cyan-300 drop-">
             {item.title}
           </h2>
-          <p className="text-pink-400 drop-">
-            {item.subtitle}
-          </p>
+          <p className="text-pink-400 drop-">{item.subtitle}</p>
         </div>
       </div>
     </section>
