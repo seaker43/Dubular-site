@@ -56,7 +56,7 @@ export default function LiveRow() {
     if (!el) return;
 
     let ticking = false;
-    const threshold = () => Math.max(24, cardWRef.current * 0.5);
+    const threshold = () => Math.max(24, cardWRef.current * 0.9);
 
     const onScroll = () => {
       const maxDelta = cardWRef.current * 1.2;
@@ -104,14 +104,14 @@ export default function LiveRow() {
       <h2 className="px-3 pb-2 text-white text-2xl font-bold">Live now</h2>
       <ul
         ref={listRef}
-        className="flex gap-3 overflow-x-auto px-6 p-3 snap-x snap-proximity rounded-3xl ring-1
+        className="flex gap-3 overflow-x-auto px-6 p-3 snap-x snap-proximity touch-pan-x [scroll-snap-stop:normal] rounded-3xl ring-1
                    [scrollbar-width:none] [-ms-overflow-style:none] 
                    [&::-webkit-scrollbar]:hidden"
       >
         {data.map((it, idx) => (
           <li
             key={it.uid}
-            className="shrink-0 min-w-[280px] max-w-[280px] snap-start snap-always"
+            className="shrink-0 min-w-[280px] max-w-[280px] snap-center snap-normal"
           >
             <Link
               href={`/watch/${it.id}`}
