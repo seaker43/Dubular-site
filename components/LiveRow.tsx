@@ -81,7 +81,7 @@ export default function LiveRow() {
                    [&::-webkit-scrollbar]:hidden"
       >
         {data.map((it, idx) => (
-          <li key={it.uid} className="shrink-0 min-w-[280px] max-w-[280px] snap-start">
+          <li key={it.uid} className="shrink-0 min-w-[280px] max-w-[280px] snap-start snap-always">
             <Link href={`/watch/${it.id}`} className="block group focus:outline-none">
               <div className="relative rounded-2xl overflow-hidden ring-1 ring-[#00fff5]/35 shadow-[0_0_22px_rgba(255,26,26,.30)] hover:shadow-[0_0_34px_rgba(255,26,26,.45)] transition
                               shadow-[0_0_14px_rgba(0,255,245,.18)] group-hover:shadow-[0_0_24px_rgba(255,26,255,.28)]">
