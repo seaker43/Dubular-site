@@ -85,7 +85,7 @@ export default function LiveRow() {
       <h2 className="px-3 pb-2 text-white text-2xl font-bold">Live now</h2>
       <ul
         ref={listRef}
-        className="flex gap-3 overflow-x-auto snap-x snap-mandatory p-3 scroll-smooth rounded-3xl ring-1 ring-[#ff1a1a]/25 shadow-[0_0_34px_rgba(255,26,26,.20)] bg-black/20"
+        className="flex gap-3 overflow-x-auto px-6 snap-x snap-mandatory p-3 scroll-smooth rounded-3xl ring-1 ring-[#ff1a1a]/25 shadow-[0_0_34px_rgba(255,26,26,.20)] bg-black/20"
       >
         {data.map((it, idx) => (
           <li key={`${it.id}-${idx}`} className="min-w-[280px] max-w-[280px] snap-start">
