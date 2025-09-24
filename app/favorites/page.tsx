@@ -1,7 +1,5 @@
 "use client";
-export const dynamic="force-dynamic";
 const pathname=typeof window!=="undefined"?window.location?.pathname:"";
-export const dynamic="force-dynamic";
 const pathname = typeof window!=="undefined" ? window.location?.pathname : "";
 import { useEffect,useState } from "react";
 import ThumbnailCard from "@/components/ThumbnailCard";
