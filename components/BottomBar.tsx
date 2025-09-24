@@ -10,12 +10,12 @@ const items=[
   {href:"/account",label:"Account",icon:Home},
 ];
 export default function BottomBar(){return(
-  <nav className="fixed bottom-0 inset-x-0 bg-black/90 text-white p-2 border-t border-neutral-800 backdrop-blur">
-    <ul className="mx-auto flex h-16 max-w-screen-md items-center justify-evenly px-2">
+  <nav className="flex flex-col items-center text-xs hover:text-brand-cyan active:drop-shadow-[0_0_8px_#0f0]">
+    <ul className="flex flex-col items-center text-xs hover:text-brand-cyan active:drop-shadow-[0_0_8px_#0f0]">
       {items.map(({href,label,icon:Icon})=> (
         <li key={href}>
-          <Link href={href} className="mx-auto flex h-16 max-w-screen-md items-center justify-evenly px-2">
-            <Icon className="h-5 w-5" />
+          <Link href={href} className="flex flex-col items-center text-xs hover:text-brand-cyan active:drop-shadow-[0_0_8px_#0f0]">
+            <Icon className="flex flex-col items-center text-xs hover:text-brand-cyan active:drop-shadow-[0_0_8px_#0f0]" />
             <span>{label}</span>
           </Link>
         </li>
