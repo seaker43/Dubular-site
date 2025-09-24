@@ -1,6 +1,6 @@
+"use client";
 import FeaturedHeroTabs from "@/components/FeaturedHeroTabs";
 import LiveRow from "@/components/LiveRow";
-import ThumbnailCard from "@/components/ThumbnailCard";
 const demo = [
   { title: "Sample Stream 1", image: "/placeholder.svg" },
   { title: "Sample Stream 2", image: "/placeholder.svg" },
@@ -16,7 +16,6 @@ export default function Page() {
       <section className="mt-6">
         <LiveRow>
           {demo.map((d, i) => (
-            <ThumbnailCard key={i} data={d} />
           ))}
         </LiveRow>
       </section>
