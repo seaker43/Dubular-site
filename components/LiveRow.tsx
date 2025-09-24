@@ -4,51 +4,31 @@ import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 type Item = { id: string; title: string; img: string };
-type ItemWithUid = Item & { uid: string };
-
 const seed: Item[] = [
-  {
-    id: "live-1",
-    title: "Live #1",
-    img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    id: "live-2",
-    title: "Live #2",
-    img: "https://images.unsplash.com/photo-1600855944280-818d239f5c25?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    id: "live-3",
-    title: "Live #3",
-    img: "https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    id: "live-4",
-    title: "Live #4",
-    img: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop",
-  },
+  { id: "live-1", title: "Live #1", img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" },
+  { id: "live-2", title: "Live #2", img: "https://images.unsplash.com/photo-1600855944280-818d239f5c25?q=80&w=1200&auto=format&fit=crop" },
+  { id: "live-3", title: "Live #3", img: "https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1200&auto=format&fit=crop" },
+  { id: "live-4", title: "Live #4", img: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop" },
 ];
 
 export default function LiveRow() {
-  const [data, setData] = useState<ItemWithUid[]>(() =>
-    Array.from({ length: 3 }, (_, r) =>
-      seed.map((it, i) => ({ ...it, uid: `r${r}-i${i}-${it.id}` })),
-    ).flat(),
-  );
-
+  const [data, setData] = useState<Item[]>(() => [...seed, ...seed, ...seed]);
   const listRef = useRef<HTMLUListElement>(null);
-  const cardWRef = useRef(0);
+  const cardWRef = useRef<number>(0);
+  const gapRef = useRef<number>(12);
 
   useLayoutEffect(() => {
     const el = listRef.current;
     if (!el) return;
     const first = el.querySelector("li") as HTMLElement | null;
-    if (!first) return;
-    const styles = getComputedStyle(el);
-    const gap = parseFloat(styles.columnGap || styles.gap || "12") || 12;
-    cardWRef.current = first.offsetWidth + gap;
-    const oneSetWidth = cardWRef.current * seed.length;
-    el.scrollLeft = oneSetWidth + 1;
+    if (first) {
+      const styles = getComputedStyle(el);
+      const gap = parseFloat(styles.columnGap || styles.gap || "12") || 12;
+      gapRef.current = gap;
+      cardWRef.current = first.offsetWidth + gap;
+      const oneSetWidth = cardWRef.current * seed.length;
+      el.scrollLeft = oneSetWidth + 1;
+    }
   }, []);
 
   useEffect(() => {
@@ -56,42 +36,40 @@ export default function LiveRow() {
     if (!el) return;
 
     let ticking = false;
-    const threshold = () => Math.max(24, cardWRef.current * 0.9);
+    const threshold = () => Math.max(24, cardWRef.current * 0.5);
 
     const onScroll = () => {
-    const maxDelta = cardWRef.current * 1.2;
-      const maxDelta = cardWRef.current * 1.2;
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        const left = el.scrollLeft;\n        const delta = Math.abs(left - (el as any)._lastLeft || 0);\n        if (delta > maxDelta) { el.scrollLeft = (el as any)._lastLeft + Math.sign(delta) * maxDelta; }\n        (el as any)._lastLeft = left;
+        const left = el.scrollLeft;
         const prev = (el as any)._lastLeft ?? left;
         const rawDelta = left - prev;
-        const dir = Math.sign(rawDelta) || 0;
-        const capped = Math.min(Math.abs(rawDelta), maxDelta) * dir;
-        el.scrollLeft = prev + capped;
+
+        // cap max flick speed
+        const maxDelta = Math.max(24, cardWRef.current * 1.2);
+        if (Math.abs(rawDelta) > maxDelta) {
+          el.scrollLeft = prev + Math.sign(rawDelta) * maxDelta;
+        }
         (el as any)._lastLeft = el.scrollLeft;
 
         const maxBeforeEnd = el.scrollWidth - el.clientWidth - threshold();
 
-        if (left > maxBeforeEnd) {
-          setData((prev) => {
-            const [first, ...rest] = prev;
-            requestAnimationFrame(() => {
-              el.scrollLeft -= cardWRef.current;
-            });
+        if (el.scrollLeft > maxBeforeEnd) {
+          setData(prevData => {
+            const [first, ...rest] = prevData;
+            requestAnimationFrame(() => { el.scrollLeft -= cardWRef.current; });
             return [...rest, first];
           });
-        } else if (left < threshold()) {
-          setData((prev) => {
-            const last = prev[prev.length - 1];
-            const rest = prev.slice(0, -1);
-            requestAnimationFrame(() => {
-              el.scrollLeft += cardWRef.current;
-            });
+        } else if (el.scrollLeft < threshold()) {
+          setData(prevData => {
+            const last = prevData[prevData.length - 1];
+            const rest = prevData.slice(0, -1);
+            requestAnimationFrame(() => { el.scrollLeft += cardWRef.current; });
             return [last, ...rest];
           });
         }
+
         ticking = false;
       });
     };
@@ -105,35 +83,22 @@ export default function LiveRow() {
       <h2 className="px-3 pb-2 text-white text-2xl font-bold">Live now</h2>
       <ul
         ref={listRef}
-        className="flex gap-3 overflow-x-auto px-6 p-3 snap-x snap-proximity touch-pan-x [scroll-snap-stop:normal] rounded-3xl ring-1
-                   [scrollbar-width:none] [-ms-overflow-style:none] 
-                   [&::-webkit-scrollbar]:hidden"
+        className="flex gap-3 overflow-x-auto px-6 snap-x snap-proximity p-3 scrollbar-hide"
       >
         {data.map((it, idx) => (
-          <li
-            key={it.uid}
-            className="shrink-0 min-w-[280px] max-w-[280px] snap-center snap-normal"
-          >
-            <Link
-              href={`/watch/${it.id}`}
-              className="block group focus:outline-none"
-            >
-              <div
-                className="relative rounded-2xl overflow-hidden ring-1 ring-[#00fff5]/35 shadow-[0_0_22px_rgba(255,26,26,.30)] hover:shadow-[0_0_34px_rgba(255,26,26,.45)] transition
-                              shadow-[0_0_14px_rgba(255,26,26,.22)] group-hover:shadow-[0_0_26px_rgba(255,26,26,.38)]"
-              >
+          <li key={`${it.id}-${idx}`} className="min-w-[280px] max-w-[280px] snap-start">
+            <Link href={`/watch/${it.id}`} className="block group focus:outline-none">
+              <div className="relative rounded-2xl overflow-hidden ring-1 ring-[#00fff5]/35 group-hover:ring-[#ff1aff]/70 transition shadow-[0_0_14px_rgba(0,255,245,.18)] group-hover:shadow-[0_0_24px_rgba(255,26,255,.28)]">
                 <Image
                   src={it.img}
                   alt={it.title}
                   width={560}
                   height={320}
                   className="w-full h-[160px] object-cover"
-                  loading={idx < 3 ? "eager" : "lazy"}
+                  loading="lazy"
                   sizes="(max-width: 640px) 280px, 320px"
                 />
-                <div className="px-3 py-2 text-white/90 text-sm">
-                  {it.title}
-                </div>
+                <div className="px-3 py-2 text-white/90 text-sm">{it.title}</div>
               </div>
             </Link>
           </li>
