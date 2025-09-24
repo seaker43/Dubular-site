@@ -48,6 +48,12 @@ export default function LiveRow() {
       ticking = true;
       requestAnimationFrame(() => {
         const left = el.scrollLeft;\n        const delta = Math.abs(left - (el as any)._lastLeft || 0);\n        if (delta > maxDelta) { el.scrollLeft = (el as any)._lastLeft + Math.sign(delta) * maxDelta; }\n        (el as any)._lastLeft = left;
+        const prev = (el as any)._lastLeft ?? left;
+        const rawDelta = left - prev;
+        const dir = Math.sign(rawDelta) || 0;
+        const capped = Math.min(Math.abs(rawDelta), maxDelta) * dir;
+        el.scrollLeft = prev + capped;
+        (el as any)._lastLeft = el.scrollLeft;
         const maxBeforeEnd = el.scrollWidth - el.clientWidth - threshold();
 
         if (left > maxBeforeEnd) {
