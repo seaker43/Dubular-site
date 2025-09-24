@@ -1,6 +1,4 @@
 "use client";
-const pathname=typeof window!=="undefined"?window.location?.pathname:"";
-const pathname = typeof window!=="undefined" ? window.location?.pathname : "";
 import { useEffect,useState } from "react";
 import ThumbnailCard from "@/components/ThumbnailCard";
 export default function FavoritesPage(){const [favorites,setFavorites]=useState<any[]>([]);useEffect(()=>{const s=localStorage.getItem("favorites");if(s){try{setFavorites(JSON.parse(s))}catch{setFavorites([])}}},[]);if(!favorites.length){return <div className="flex items-center justify-center h-screen text-neutral-400">No favorites yet.</div>;}
