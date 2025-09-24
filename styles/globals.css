@@ -99,3 +99,5 @@ header.site-header {
 @import "./search.css";
 @import "./theme.css";
 /* NOTE: skip CSS Modules like logo.module.css here; those belong in the component */
+
+@layer utilities{.glow-pink{box-shadow:0 0 28px 8px rgba(236,72,153,.45)}.glow-red{box-shadow:0 0 24px 6px rgba(239,68,68,.45)}}

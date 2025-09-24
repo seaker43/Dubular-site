@@ -1,6 +1,6 @@
 export default function FeaturedHeroTabs() {
   return (
-    <section className="relative h-96 flex items-end p-6 bg-gradient-to-t from-black/80 to-transparent">
+    <section className="glow-pink relative h-96 flex items-end p-6 bg-gradient-to-t from-black/80 to-transparent">
       <h2 className="text-2xl text-white">Featured</h2>
     </section>
   );

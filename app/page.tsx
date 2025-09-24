@@ -1,3 +1,5 @@
+import FeaturedHeroTabs from "@/components/FeaturedHeroTabs";
+import LiveRow from "@/components/LiveRow";
 "use client";
 import FeaturedHeroTabs from "../components/FeaturedHeroTabs";
 import LiveRow from "../components/LiveRow";
@@ -11,9 +13,10 @@ const demo = [
 export default function Page() {
   return (
     <main>
+  <FeaturedHeroTabs />
+  <LiveRow />
       <FeaturedHeroTabs />
       <section className="mt-6">
-        <h2 className="px-4 text-lg font-semibold">Trending Now</h2>
         <LiveRow>
           {demo.map((d, i) => (
             <ThumbnailCard key={i} data={d} />
