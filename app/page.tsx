@@ -7,6 +7,7 @@ export default function HomePage() {
     <main className="flex flex-col gap-8 p-4">
       <div className="rounded-lg shadow-[0_0_30px_10px_rgba(255,0,255,0.4)]">
         <FeaturedHeroTabs />
+      <div className="neon-sep my-6" />
       </div>
       <div className="rounded-lg shadow-[0_0_30px_10px_rgba(255,0,0,0.4)]">
         <LiveRow />
