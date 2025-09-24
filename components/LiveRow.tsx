@@ -76,7 +76,7 @@ export default function LiveRow() {
       <h2 className="px-3 pb-2 text-white text-2xl font-bold">Live now</h2>
       <ul
         ref={listRef}
-        className="flex gap-3 overflow-x-auto px-6 p-3 snap-x snap-proximity rounded-3xl ring-1 ring-[#ff1a1a]/25
+        className="flex gap-3 overflow-x-auto px-6 p-3 snap-x snap-proximity rounded-3xl ring-1
                    [scrollbar-width:none] [-ms-overflow-style:none] 
                    [&::-webkit-scrollbar]:hidden"
       >
@@ -84,7 +84,7 @@ export default function LiveRow() {
           <li key={it.uid} className="shrink-0 min-w-[280px] max-w-[280px] snap-start snap-always">
             <Link href={`/watch/${it.id}`} className="block group focus:outline-none">
               <div className="relative rounded-2xl overflow-hidden ring-1 ring-[#00fff5]/35 shadow-[0_0_22px_rgba(255,26,26,.30)] hover:shadow-[0_0_34px_rgba(255,26,26,.45)] transition
-                              shadow-[0_0_14px_rgba(0,255,245,.18)] group-hover:shadow-[0_0_24px_rgba(255,26,255,.28)]">
+                              shadow-[0_0_14px_rgba(255,26,26,.22)] group-hover:shadow-[0_0_26px_rgba(255,26,26,.38)]">
                 <Image
                   src={it.img}
                   alt={it.title}
