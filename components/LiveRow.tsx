@@ -43,10 +43,11 @@ export default function LiveRow() {
     const threshold = () => Math.max(24, cardWRef.current * 0.5);
 
     const onScroll = () => {
+    const maxDelta = cardWRef.current * 1.2;
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        const left = el.scrollLeft;
+        const left = el.scrollLeft;\n        const delta = Math.abs(left - (el as any)._lastLeft || 0);\n        if (delta > maxDelta) { el.scrollLeft = (el as any)._lastLeft + Math.sign(delta) * maxDelta; }\n        (el as any)._lastLeft = left;
         const maxBeforeEnd = el.scrollWidth - el.clientWidth - threshold();
 
         if (left > maxBeforeEnd) {
