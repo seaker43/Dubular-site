@@ -1,9 +1,5 @@
 import FeaturedHeroTabs from "@/components/FeaturedHeroTabs";
 import LiveRow from "@/components/LiveRow";
-"use client";
-import FeaturedHeroTabs from "../components/FeaturedHeroTabs";
-import LiveRow from "../components/LiveRow";
-import ThumbnailCard from "../components/ThumbnailCard";
 const demo = [
   { title: "Sample Stream 1", image: "/placeholder.svg" },
   { title: "Sample Stream 2", image: "/placeholder.svg" },
@@ -13,8 +9,8 @@ const demo = [
 export default function Page() {
   return (
     <main>
-  <FeaturedHeroTabs />
-  <LiveRow />
+      <FeaturedHeroTabs />
+      <LiveRow />
       <FeaturedHeroTabs />
       <section className="mt-6">
         <LiveRow>
