@@ -5,13 +5,7 @@ import HomeIcon from "@/components/icons/HomeIcon";
 import DubularCoin from "@/components/icons/DubularCoin";
 import { Home, Search, Heart, Trophy, User } from "@/components/ui/icons";
 
-const items = [
-  { href: "/", label: "Home", icon: HomeIcon }, // custom logo icon
-  { href: "/search", label: "Find", icon: Search },
-  { href: "/rank", label: "Rank", icon: Trophy },
-  { href: "/favorites", label: "Favs", icon: Heart },
-  { href: "/account", label: "You", icon: User },
-];
+const items=[{href:"/rank",label:"Rank",icon:Trophy},{href:"/favorites",label:"Favs",icon:Heart},{href:"/",label:"Home",icon:HomeIcon},{href:"/search",label:"Find",icon:Search},{href:"/account",label:"You",icon:User},];
 
 export default function BottomBar() {
   const pathname = usePathname() ?? "/";
