@@ -21,3 +21,5 @@
   transform: scale(1.05);
   box-shadow: 0 0 18px rgba(0, 255, 128, 1);
 }
+.neon-sep{height:22px;border-radius:9999px;background:radial-gradient(60% 100% at 50% 50%,rgba(255,0,255,.35),rgba(0,255,245,.15) 60%,transparent 70%);}
+.neon-sep{height:22px;border-radius:9999px;background:radial-gradient(60% 100% at 50% 50%,rgba(255,26,255,.35),rgba(0,255,245,.18) 60%,transparent 70%);}
