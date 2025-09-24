@@ -1,1 +1,17 @@
-export default function HomeIcon({className=""}:{className?:string}){return(<svg viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M9 21V12h6v9"/></svg>);}
+export default function HomeIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M3 10.5 12 3l9 7.5" />
+      <path d="M9 21V12h6v9" />
+    </svg>
+  );
+}

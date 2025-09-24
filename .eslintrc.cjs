@@ -4,29 +4,31 @@ module.exports = {
   extends: [
     "next/core-web-vitals",
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
   ],
   env: {
     browser: true,
     es2022: true,
-    node: true
+    node: true,
   },
   rules: {
-    "no-unused-vars":"off",
+    "no-unused-vars": "off",
     "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
   },
   overrides: [
     {
       files: ["scripts/**/*.{js,mjs}", "local-worker.js"],
       rules: {
-        "@typescript-eslint/no-var-requires": "off"
-      }
+        "@typescript-eslint/no-var-requires": "off",
+      },
     },
     {
       files: ["**/*.{ts,tsx}"],
-      parser: "@typescript-eslint/parser"
-    }
-  ]
+      parser: "@typescript-eslint/parser",
+    },
+  ],
 };
-globals: { React: "writable" }
+globals: {
+  React: "writable";
+}

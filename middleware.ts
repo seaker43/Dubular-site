@@ -1,2 +1,4 @@
 import { NextResponse } from "next/server";
-export function middleware(){return NextResponse.next({ headers: { "x-worker": "pages-fn" } });}
+export function middleware() {
+  return NextResponse.next({ headers: { "x-worker": "pages-fn" } });
+}

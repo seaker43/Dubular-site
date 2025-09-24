@@ -28,8 +28,8 @@ components/Thumb.tsx
 components/Thumb/index.js
 components/Thumb/Thumb.jsx
 components/VideoPlayer.js
-components/icons/DubularCoin.js
-components/icons/HomeIcon.js
+@/components/ui/icons
+@/components/ui/icons
 components/DubularLogo.js
 components/Header.js
 components/Header.tsx

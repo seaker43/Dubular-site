@@ -1,8 +1,9 @@
 export const runtime = "edge";
 
-export const dynamic="force-dynamic";
-export const fetchCache="force-no-store";
-export const revalidate=0;
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+export const revalidate = 0;
 
-
-export default function Page(){return <main className='p-6 text-white'>Rankings page</main>}
+export default function Page() {
+  return <main className="p-6 text-white">Rankings page</main>;
+}

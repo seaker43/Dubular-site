@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import HomeIcon from "@/components/icons/HomeIcon";
-import DubularCoin from "@/components/icons/DubularCoin";
+import HomeIcon from "@/components/ui/icons
+import DubularCoin from "@/components/ui/icons
 const items=[
   {href:"/rank",label:"Rank",icon:DubularCoin},
   {href:"/favorites",label:"Favs",icon:DubularCoin},
