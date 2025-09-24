@@ -1,15 +1,7 @@
 "use client";
 import Link from "next/link";
-import HomeIcon from "@/components/ui/icons";
-import DubularCoin from "@/components/ui/icons";
-const items = [
-  { href: "/rank", label: "Rank", icon: DubularCoin },
-  { href: "/favorites", label: "Favs", icon: DubularCoin },
-  { href: "/", label: "Home", icon: HomeIcon },
-  { href: "/search", label: "Find", icon: HomeIcon },
-  { href: "/account", label: "Account", icon: HomeIcon },
-];
-export default function BottomBar() {
+import HomeIcon from "@/components/icons/HomeIcon";
+import DubularCoin from "@/components/icons/DubularCoin";
   return (
     <nav className="fixed bottom-0 inset-x-0 bg-black/90 text-white p-2 border-t border-neutral-800 backdrop-blur">
       <ul className="flex justify-around text-xs">
