@@ -19,7 +19,9 @@ module.exports = {
       fontFamily: { sans: ["Anton", "sans-serif"] },
     },
   },
+  corePlugins: { preflight: true },
   plugins: [
+    function({ addVariant }) { addVariant("active-route", "&[data-active=\"true\"]") },
     plugin(function ({ addUtilities }) {
       addUtilities({
         ".text-neon":       { textShadow: "0 0 10px #0ff,0 0 20px #0ff,0 0 40px #0ff" },
