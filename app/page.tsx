@@ -1,4 +1,6 @@
 "use client";
+export const dynamic="force-dynamic";
+const pathname=typeof window!=="undefined"?window.location?.pathname:"";
 import FeaturedHeroTabs from "../components/FeaturedHeroTabs";
 import LiveRow from "../components/LiveRow";
 import ThumbnailCard from "../components/ThumbnailCard";
