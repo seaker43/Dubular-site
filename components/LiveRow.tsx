@@ -6,7 +6,7 @@ export default function LiveRow() {
   const items = Array.from({ length: 8 }).map((_, i) => ({
     id: i,
     title: `Live #${i + 1}`,
-    thumb: `https://source.unsplash.com/random/400x225?sig=${i}&live`, // placeholder thumbs
+    thumb: `https://picsum.photos/400/225?random=${i}`, // stable placeholder
   }));
 
   return (
