@@ -1,6 +1,6 @@
 "use client";
-import { FeaturedHeroTabs } from "@/components/FeaturedHeroTabs";
-import { LiveRow } from "@/components/LiveRow";
+import FeaturedHeroTabs from "@/components/FeaturedHeroTabs";
+import LiveRow from "@/components/LiveRow";
 
 export default function HomePage() {
   return (
