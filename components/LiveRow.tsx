@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 type Item = { id: string; title: string; img: string };
+type ItemWithUid = Item & { uid: string };
+
 const seed: Item[] = [
   { id: "live-1", title: "Live #1", img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" },
   { id: "live-2", title: "Live #2", img: "https://images.unsplash.com/photo-1600855944280-818d239f5c25?q=80&w=1200&auto=format&fit=crop" },
@@ -12,7 +14,13 @@ const seed: Item[] = [
 ];
 
 export default function LiveRow() {
-  const [data, setData] = useState<Item[]>(() => [...seed, ...seed, ...seed]);
+  // build 3 concatenated sets with STABLE unique uids
+  const [data, setData] = useState<ItemWithUid[]>(
+    () => Array.from({ length: 3 }, (_, r) =>
+            seed.map((it, i) => ({ ...it, uid: `r${r}-i${i}-${it.id}` }))
+          ).flat()
+  );
+
   const listRef = useRef<HTMLUListElement>(null);
   const cardWRef = useRef(0);
 
@@ -25,20 +33,24 @@ export default function LiveRow() {
     const gap = parseFloat(styles.columnGap || styles.gap || "12") || 12;
     cardWRef.current = first.offsetWidth + gap;
     const oneSetWidth = cardWRef.current * seed.length;
-    el.scrollLeft = oneSetWidth + 1;
+    el.scrollLeft = oneSetWidth + 1; // start on middle set
   }, []);
 
+  // seamless loop without jump: rotate data while compensating scrollLeft
   useEffect(() => {
     const el = listRef.current;
     if (!el) return;
+
     let ticking = false;
     const threshold = () => Math.max(24, cardWRef.current * 0.5);
+
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
         const left = el.scrollLeft;
         const maxBeforeEnd = el.scrollWidth - el.clientWidth - threshold();
+
         if (left > maxBeforeEnd) {
           setData(prev => {
             const [first, ...rest] = prev;
@@ -56,12 +68,14 @@ export default function LiveRow() {
         ticking = false;
       });
     };
+
     el.addEventListener("scroll", onScroll, { passive: true });
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <section aria-label="Live now" className="relative mt-6">
+      {/* red neon rail behind the row */}
       <div className="pointer-events-none absolute inset-x-0 -top-4 h-8 blur-2xl bg-[radial-gradient(60%_140%_at_50%_0%,rgba(255,26,26,.45),transparent_70%)]" />
       <h2 className="px-3 pb-2 text-white text-2xl font-bold">Live now</h2>
       <ul
@@ -69,7 +83,7 @@ export default function LiveRow() {
         className="flex gap-3 overflow-x-auto px-6 p-3 snap-x snap-mandatory rounded-3xl ring-1 ring-[#ff1a1a]/25 shadow-[0_0_34px_rgba(255,26,26,.20)] bg-black/20"
       >
         {data.map((it, idx) => (
-          <li key={`${it.id}-${idx}`} className="shrink-0 min-w-[280px] max-w-[280px] snap-start">
+          <li key={it.uid} className="shrink-0 min-w-[280px] max-w-[280px] snap-start">
             <Link href={`/watch/${it.id}`} className="block group focus:outline-none">
               <div className="relative rounded-2xl overflow-hidden ring-1 ring-[#00fff5]/35 group-hover:ring-[#ff1aff]/70 transition shadow-[0_0_14px_rgba(0,255,245,.18)] group-hover:shadow-[0_0_24px_rgba(255,26,255,.28)]">
                 <Image
@@ -78,7 +92,7 @@ export default function LiveRow() {
                   width={560}
                   height={320}
                   className="w-full h-[160px] object-cover"
-                  loading="lazy"
+                  loading={idx < 3 ? "eager" : "lazy"}
                   sizes="(max-width: 640px) 280px, 320px"
                 />
                 <div className="px-3 py-2 text-white/90 text-sm">{it.title}</div>
