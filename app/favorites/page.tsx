@@ -1,3 +1,4 @@
+const pathname = typeof window!=="undefined" ? window.location?.pathname : "";
 "use client";
 import { useEffect,useState } from "react";
 import ThumbnailCard from "@/components/ThumbnailCard";
