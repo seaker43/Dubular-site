@@ -73,7 +73,6 @@ export default function LiveRow() {
 
   return (
     <section aria-label="Live now" className="relative mt-6">
-      <div className="pointer-events-none absolute inset-x-0 -top-4 h-8 blur-2xl bg-[radial-gradient(60%_140%_at_50%_0%,rgba(255,26,26,.45),transparent_70%)]" />
       <h2 className="px-3 pb-2 text-white text-2xl font-bold">Live now</h2>
       <ul
         ref={listRef}
@@ -84,7 +83,7 @@ export default function LiveRow() {
         {data.map((it, idx) => (
           <li key={it.uid} className="shrink-0 min-w-[280px] max-w-[280px] snap-start">
             <Link href={`/watch/${it.id}`} className="block group focus:outline-none">
-              <div className="relative rounded-2xl overflow-hidden ring-1 ring-[#00fff5]/35 group-hover:ring-[#ff1aff]/70 transition 
+              <div className="relative rounded-2xl overflow-hidden ring-1 ring-[#00fff5]/35 shadow-[0_0_22px_rgba(255,26,26,.30)] hover:shadow-[0_0_34px_rgba(255,26,26,.45)] transition
                               shadow-[0_0_14px_rgba(0,255,245,.18)] group-hover:shadow-[0_0_24px_rgba(255,26,255,.28)]">
                 <Image
                   src={it.img}
