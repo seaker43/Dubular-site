@@ -13,7 +13,7 @@ export default function FeaturedHeroTabs() {
   const item = featured[0];
   return (
     <section className="w-full flex justify-center px-4">
-      <div className="relative w-full max-w-5xl rounded-2xl overflow-hidden shadow-[0_0_50px_20px_rgba(255,0,255,0.7),0_0_80px_40px_rgba(0,255,255,0.4)]">
+      <div className="relative w-full max-w-5xl rounded-2xl overflow-hidden ">
         <Image
           src={item.image}
           alt={item.title}
@@ -23,10 +23,10 @@ export default function FeaturedHeroTabs() {
           priority
         />
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
-          <h2 className="text-3xl font-extrabold text-cyan-300 drop-shadow-[0_0_10px_rgba(0,255,255,0.9)]">
+          <h2 className="text-3xl font-extrabold text-cyan-300 drop-">
             {item.title}
           </h2>
-          <p className="text-pink-400 drop-shadow-[0_0_8px_rgba(255,0,255,0.9)]">
+          <p className="text-pink-400 drop-">
             {item.subtitle}
           </p>
         </div>
