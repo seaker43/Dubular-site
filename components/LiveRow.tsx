@@ -46,7 +46,7 @@ export default function LiveRow() {
         const prev = (el as any)._lastLeft ?? left;
         const rawDelta = left - prev;
         const ts = performance.now(); const prevTs = (el as any)._lastTs ?? ts; (el as any)._lastTs = ts; let speed = Math.abs(rawDelta) / Math.max(1, now - prevTs); speed *= 0.85; el.style.scrollSnapType = speed > 1 ? "none" : "x proximity";
-        const ts = performance.now(); const prevTs = (el as any)._lastTs ?? ts; (el as any)._lastTs = ts; const speed = Math.abs(rawDelta) / Math.max(1, now - prevTs); el.style.scrollSnapType = speed > 1 ? "none" : "x proximity";
+        const ts2 = performance.now(); const prevTs = (el as any)._lastTs ?? ts2; (el as any)._lastTs = ts2; const speed = Math.abs(rawDelta) / Math.max(1, now - prevTs); el.style.scrollSnapType = speed > 1 ? "none" : "x proximity";
 
         // cap max flick speed
         const maxDelta = Math.max(10, cardWRef.current * 0.30);
