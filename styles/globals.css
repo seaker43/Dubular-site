@@ -112,10 +112,6 @@ header.site-header {
 /* === Neon glow utilities === */
 @layer utilities {
   /* Cyan aura for Featured section; uses pseudo so it isn’t clipped by rounded corners */
-.hero-glow {
-  position: relative;
-  box-shadow: 0 0 28px rgba(34,211,238,0.45), 0 0 60px rgba(34,211,238,0.25), 0 0 100px rgba(34,211,238,0.15);
-}
 }
 
 html, body, #__next { overflow-x: hidden; }
