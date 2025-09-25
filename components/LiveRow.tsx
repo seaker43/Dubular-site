@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
+import ThumbnailCard from '@/components/ThumbnailCard';
 
 type Item = { id: string; title: string; img: string };
 
@@ -11,8 +12,6 @@ const seed: Item[] = [
   { id: 'live-4', title: 'Live #4', img: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80' },
   { id: 'live-5', title: 'Live #5', img: 'https://images.unsplash.com/photo-1600855944280-818d239f5c25?auto=format&fit=crop&w=1200&q=80' },
 ];
-
-const FALLBACK_IMG = "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80";
 
 export default function LiveRow() {
   const [data] = useState<Item[]>(() => seed);
@@ -50,24 +49,8 @@ export default function LiveRow() {
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', overscrollBehaviorX: 'contain' }}
         >
           {items.map((item, idx) => (
-            <div
-              key={`${item.id}-${idx}`}
-              className="thumb-glow shrink-0 w-[320px] rounded-2xl overflow-hidden bg-neutral-900 ring-1 ring-neutral-800 thumb-glow"
-            >
-              <div className="relative aspect-video">
-                <img
-    src={item.img}
-    alt={item.title}
-    loading="lazy"
-    decoding="async"
-    referrerPolicy="no-referrer"
-    onError={(e)=>{const t=e.currentTarget; if(t.src!==FALLBACK_IMG){t.src=FALLBACK_IMG; t.onerror=null;}}} className="absolute inset-0 h-full w-full object-cover"
-/>
-                <span className="absolute top-2 left-2 rounded bg-red-600 px-2 py-0.5 text-[10px] font-bold">LIVE</span>
-              </div>
-              <div className="p-3">
-                <p className="text-cyan-300 text-sm font-medium">{item.title}</p>
-              </div>
+            <div key={`${item.id}-${idx}`} className="shrink-0 w-[320px]">
+              <ThumbnailCard data={{ title: item.title, image: item.img, live: true }} />
             </div>
           ))}
         </div>
