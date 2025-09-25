@@ -219,7 +219,7 @@ html, body, #__next { overflow-x: hidden; }
 .ticker{ z-index:20; margin-bottom: 24px; }
 .ticker--neon {
   display:block;
-  border:1px solid rgba(0,255,120,.5);
+  border:2px solid rgba(0,255,120,.95);
   border-radius:14px;
   padding:6px 10px;
   background:transparent;
@@ -238,7 +238,7 @@ header.site-header{background:#000;}
 }
 .ticker--neon {
   display:block;
-  border:1px solid rgba(0,255,120,.5);
+  border:2px solid rgba(0,255,120,.95);
   border-radius:14px;
   padding:6px 10px;
   background:transparent;
