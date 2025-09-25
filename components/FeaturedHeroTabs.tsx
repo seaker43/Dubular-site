@@ -30,9 +30,7 @@ export default function FeaturedHeroTabs() {
       <div className="mt-2 flex justify-center overflow-visible">
         <div className="ticker ticker--neon">
           <div className="ticker__track">{/* ticker items */}</div>
-        </div>
       </div>
-        </div>
       </div>
 
       {/* TICKER */}
