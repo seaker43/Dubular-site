@@ -213,3 +213,9 @@ html, body, #__next { overflow-x: hidden; }
   /* Center the hero title and give it a subtle white edge glow */
   .hero-title { text-align: center; text-shadow: 0 0 12px rgba(255,255,255,0.35); }
 }
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 6px rgba(255,255,255,0.6);
+  }
+}

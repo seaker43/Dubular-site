@@ -4,7 +4,7 @@ import Image from "next/image";
 const featured = [
   {
     title: "Featured Stream",
-    subtitle: "Now playing live on dubUlar",
+    subtitle: "Now playing live on dubUlar text-glow",
     image:
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1600",
   },
