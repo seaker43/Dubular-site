@@ -149,3 +149,43 @@ html, body, #__next { overflow-x: hidden; }
     0 0 48px rgba(255,0,0,0.6);
 }
 }
+
+/* --- Ticker banner --- */
+.ticker {
+  position: relative;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.6);
+  border-top: 1px solid rgba(0, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(0, 255, 255, 0.08);
+  padding: 8px 0;
+}
+.ticker::before,
+.ticker::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 24px;
+  pointer-events: none;
+  background: linear-gradient(to right, #000 0%, transparent 100%);
+}
+.ticker::after {
+  right: 0;
+  transform: scaleX(-1);
+}
+.ticker::before {
+  left: 0;
+}
+.ticker__track {
+  display: flex;
+  gap: 32px;
+  width: max-content;
+  will-change: transform;
+  animation: ticker var(--dur, 20s) linear infinite;
+  padding-left: 24px;
+}
+.ticker:hover .ticker__track { animation-play-state: paused; }
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
