@@ -7,7 +7,7 @@ export default function HomePage() {
   return (
     <main className=" relative overflow-visible  flex flex-col gap-8 p-4">
       <div className=" relative overflow-visible  rounded-lg">
-      <Ticker />
+      <Ticker className="ticker--neon" />
         <FeaturedHeroTabs />
         
         
