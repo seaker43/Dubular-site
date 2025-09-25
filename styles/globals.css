@@ -153,8 +153,8 @@ html, body, #__next { overflow-x: hidden; }
 /* --- Ticker banner --- */
 .ticker {
   position: relative;
-  overflow: hidden;
-  background: rgba(0, 0, 0, 0.6);
+  overflow: visible;
+  background:#000;
   border-top: 1px solid rgba(0, 255, 255, 0.08);
   border-bottom: 1px solid rgba(0, 255, 255, 0.08);
   padding: 8px 0;
@@ -221,3 +221,4 @@ html, body, #__next { overflow-x: hidden; }
   box-shadow: 0 0 6px rgba(0,255,120,.95), 0 0 18px rgba(0,255,120,.7), 0 0 36px rgba(0,255,120,.45), inset 0 0 6px rgba(0,255,120,.3);
 }
 
+header.site-header{background:#000;}
