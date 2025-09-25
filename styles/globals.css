@@ -219,13 +219,16 @@ html, body, #__next { overflow-x: hidden; }
 .ticker{ z-index:20; margin-bottom: 24px; }
 .ticker--neon {
   display:block;
-  border:2px solid rgba(0,255,120,.95);
+  border:3px solid #00ff66;
   border-radius:14px;
   padding:6px 10px;
   background:transparent;
-  box-shadow: 0 0 4px rgba(0,255,120,.30),
-              0 0 8px rgba(0,255,120,.25),
-              0 0 16px rgba(0,255,120,.20);
+  box-shadow:
+    0 0 4px #00ff66,
+    0 0 12px #00ff66cc,
+    0 0 24px #00ff66aa,
+    0 0 48px #00ff6680;
+}
 }
 
 header.site-header{background:#000;}
@@ -238,13 +241,16 @@ header.site-header{background:#000;}
 }
 .ticker--neon {
   display:block;
-  border:2px solid rgba(0,255,120,.95);
+  border:3px solid #00ff66;
   border-radius:14px;
   padding:6px 10px;
   background:transparent;
-  box-shadow: 0 0 4px rgba(0,255,120,.30),
-              0 0 8px rgba(0,255,120,.25),
-              0 0 16px rgba(0,255,120,.20);
+  box-shadow:
+    0 0 4px #00ff66,
+    0 0 12px #00ff66cc,
+    0 0 24px #00ff66aa,
+    0 0 48px #00ff6680;
+}
 }
 header.site-header {
   background:#000 !important;
