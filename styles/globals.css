@@ -117,3 +117,14 @@ header.site-header {
 html, body, #__next { overflow-x: hidden; }
 
 html, body, #__next { overflow-x: hidden; }
+
+@layer utilities {
+  .thumb-glow {
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.06),
+      0 10px 26px rgba(220,38,38,0.45),
+      0 0 36px rgba(220,38,38,0.55),
+      0 0 84px rgba(220,38,38,0.35);
+    filter: drop-shadow(0 0 12px rgba(220,38,38,0.35)) drop-shadow(0 0 36px rgba(220,38,38,0.25));
+  }
+}

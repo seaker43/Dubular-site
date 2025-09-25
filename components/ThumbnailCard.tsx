@@ -8,7 +8,7 @@ export default function ThumbnailCard({ data }: { data: Thumb }) {
     "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80";
 
   const card = (
-    <div className="rounded-2xl overflow-hidden bg-neutral-900 ring-1 ring-neutral-800 thumb-glow">
+    <div className="rounded-2xl overflow-hidden bg-neutral-900 thumb-glow ring-1 ring-neutral-800 thumb-glow">
       <div className="relative aspect-video">
         <img
           src={image}
