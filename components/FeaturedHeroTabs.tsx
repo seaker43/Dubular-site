@@ -25,6 +25,24 @@ export default function FeaturedHeroTabs() {
           <h1 className="mb-5 px-3 text-3xl md:text-5xl font-extrabold text-white tracking-wide text-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.75)]">Featured Content</h1>
         </div>
       </div>
+
+      {/* TICKER */}
+      <div className="mt-2 flex justify-center overflow-visible">
+        <div className="ticker ticker--neon">
+          <div className="ticker__track">{/* ticker items */}</div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      {/* TICKER */}
+      <div className="mt-2 flex justify-center overflow-visible">
+        <div className="ticker ticker--neon">
+          <div className="ticker__track">{/* ticker items */}</div>
+        </div>
+      </div>
+        </div>
+      </div>
     </section>
   );
 }
