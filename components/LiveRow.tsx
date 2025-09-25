@@ -41,7 +41,7 @@ export default function LiveRow() {
 
   return (
     <>
-      <div className="w-full overflow-hidden">
+      <div className="w-full">
         <div
           id="live-scroller"
           ref={scrollerRef}
