@@ -88,9 +88,7 @@ div {
 }
 
 /* Ensure the fixed header matches the global var height even if header.css forgets */
-.site-header,
-}
-header.site-header {
+.site-header, header.site-header {
   height: var(--header-h);
 }
 
