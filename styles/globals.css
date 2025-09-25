@@ -216,7 +216,7 @@ html, body, #__next { overflow-x: hidden; }
 }
 
 /* --- Ticker neon outline --- */
-.ticker{ z-index:20; margin-bottom:16px; }
+.ticker{ z-index:20; margin-bottom: 24px; }
 .ticker--neon{ border:2px solid rgba(0,255,120,.9); border-radius:14px;
   box-shadow: 0 0 6px rgba(0,255,120,.95), 0 0 18px rgba(0,255,120,.7), 0 0 36px rgba(0,255,120,.45), inset 0 0 6px rgba(0,255,120,.3);
 }
