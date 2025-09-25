@@ -45,8 +45,8 @@ export default function LiveRow() {
         const left = el.scrollLeft;
         const prev = (el as any)._lastLeft ?? left;
         const rawDelta = left - prev;
-        const ts = performance.now(); const prevTs = (el as any)._lastTs ?? ts; (el as any)._lastTs = ts; let speed = Math.abs(rawDelta) / Math.max(1, now - prevTs); speed *= 0.85; el.style.scrollSnapType = speed > 1 ? "none" : "x proximity";
-        const ts2 = performance.now(); const prevTs2 = (el as any)._lastTs ?? ts2; (el as any)._lastTs = ts2; speed = Math.abs(rawDelta) / Math.max(1, ts2 - prevTs2); el.style.scrollSnapType = speed > 1 ? "none" : "x proximity";
+        const ts = performance.now(); const prevTs = (el as any)._lastTs ?? ts; (el as any)._lastTs = ts; let speed = Math.abs(rawDelta) / Math.max(1, now - prevTs); speed *= 0.85; el.style.scrollSnapType = "none";
+        const ts2 = performance.now(); const prevTs2 = (el as any)._lastTs ?? ts2; (el as any)._lastTs = ts2; speed = Math.abs(rawDelta) / Math.max(1, ts2 - prevTs2); el.style.scrollSnapType = "none";
 
         // cap max flick speed
         const maxDelta = Math.max(10, cardWRef.current * 0.30);
@@ -85,12 +85,12 @@ export default function LiveRow() {
       <h2 className="px-3 pb-2 text-white text-2xl font-bold">Live now</h2>
       <ul
         ref={listRef}
-        className="flex gap-3 overflow-x-scroll no-scrollbar no-scrollbar scrollbar-hide px-6   p-3 scrollbar-hide"
+        className="flex gap-3 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [className="flex gap-3 overflow-x-scroll no-scrollbar no-scrollbar scrollbar-hide px-6   p-3 scrollbar-hide"::-webkit-scrollbar]:hidden px-6 p-3"
       >
         {data.map((it, idx) => (
           <li key={`${it.id}-${idx}`} className="min-w-[280px] max-w-[280px] ">
             <Link href={`/watch/${it.id}`} className="block group focus:outline-none">
-              <div className="relative rounded-2xl overflow-hidden  group-hover:ring-[#ff4d4d]/80 transition  group-hover:">
+              <div className="relative rounded-2xl overflow-hidden ring-1 ring-[#00fff5]/30 hover:ring-[#ff1a1a]/70 transition shadow-[0_0_14px_rgba(255,26,26,.25)] hover:shadow-[0_0_24px_rgba(255,26,26,.35)]">
                 <Image
                   src={it.img}
                   alt={it.title}
