@@ -26,7 +26,7 @@ export default function Ticker({
 
   return (
     <div
-      className="ticker w-full"
+      className={`ticker w-full ${className}`}
       role="status"
       aria-live="polite"
       style={{ ["--dur" as any]: `${durationSec}s` }}
