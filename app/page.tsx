@@ -4,8 +4,8 @@ import LiveRow from "@/components/LiveRow";
 
 export default function HomePage() {
   return (
-    <main className="flex flex-col gap-8 p-4">
-      <div className="rounded-lg">
+    <main className="hero-glow flex flex-col gap-8 p-4">
+      <div className="hero-glow rounded-lg">
         <FeaturedHeroTabs />
         
         

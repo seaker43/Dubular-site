@@ -52,7 +52,7 @@ export default function LiveRow() {
           {items.map((item, idx) => (
             <div
               key={`${item.id}-${idx}`}
-              className="shrink-0 w-[320px] rounded-2xl overflow-hidden bg-neutral-900 ring-1 ring-neutral-800 thumb-glow"
+              className="thumb-glow shrink-0 w-[320px] rounded-2xl overflow-hidden bg-neutral-900 ring-1 ring-neutral-800 thumb-glow"
             >
               <div className="relative aspect-video">
                 <img
