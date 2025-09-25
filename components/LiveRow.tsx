@@ -90,7 +90,7 @@ export default function LiveRow() {
         {data.map((it, idx) => (
           <li key={`${it.id}-${idx}`} className="min-w-[280px] max-w-[280px] ">
             <Link href={`/watch/${it.id}`} className="block group focus:outline-none">
-              <div className="relative rounded-2xl overflow-hidden  group-hover:ring-[#ff4d4d]/80 transition shadow-[0_0_18px_rgba(255,26,26,.22)] group-hover:shadow-[0_0_28px_rgba(255,26,26,.35)]">
+              <div className="relative rounded-2xl overflow-hidden  group-hover:ring-[#ff4d4d]/80 transition  group-hover:">
                 <Image
                   src={it.img}
                   alt={it.title}
