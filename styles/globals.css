@@ -112,18 +112,7 @@ header.site-header {
 /* === Neon glow utilities === */
 @layer utilities {
   /* Cyan aura for Featured section; uses pseudo so it isn’t clipped by rounded corners */
-  .hero-glow { position: relative; }
-  .hero-glow::after {
-    content: "";
-    position: absolute;
-    inset: -10px;                /* bleed outside container */
-    border-radius: inherit;
-    pointer-events: none;
-    box-shadow:
-      0 0 28px rgba(34,211,238,0.45),
-      0 0 80px rgba(34,211,238,0.25),
-      0 0 140px rgba(34,211,238,0.15);
-  }
+  .hero-glow { position: relative; filter: drop-shadow(0 0 24px rgba(34,211,238,0.45)) drop-shadow(0 0 60px rgba(34,211,238,0.25)) drop-shadow(0 0 100px rgba(34,211,238,0.15)); clip-path: inset(-10px -10px 0 -10px); contain: paint; }
 
   /* Per-thumbnail red neon glow */
   .thumb-glow {
