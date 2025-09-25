@@ -44,3 +44,7 @@
 
 .no-scrollbar{scrollbar-width:none;-ms-overflow-style:none}
 .no-scrollbar::-webkit-scrollbar{display:none}
+
+/* LiveRow: hide scrollbar on the scroller element */
+.no-scrollbar{scrollbar-width:none!important;-ms-overflow-style:none}
+.no-scrollbar::-webkit-scrollbar{width:0!important;height:0!important;display:none}
