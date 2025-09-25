@@ -49,7 +49,7 @@ export default function LiveRow() {
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', overscrollBehaviorX: 'contain' }}
         >
           {items.map((item, idx) => (
-            <div key={`${item.id}-${idx}`} className="shrink-0 w-[320px]">
+            <div key={`${item.id}-${idx}`} className="shrink-0 w-[320px] overflow-visible">
               <ThumbnailCard data={{ title: item.title, image: item.img, live: true }} />
             </div>
           ))}
