@@ -51,18 +51,17 @@ export default function LiveRow() {
           {items.map((item, idx) => (
             <div
               key={`${item.id}-${idx}`}
-              className="shrink-0 w-[320px] rounded-2xl overflow-hidden bg-neutral-900 ring-1 ring-neutral-800"
+              className="shrink-0 w-[320px] rounded-2xl overflow-hidden bg-neutral-900 ring-1 ring-neutral-800 thumb-glow"
             >
               <div className="relative aspect-video">
-                <Image
-                  unoptimized
-                  loading="lazy"
-                  decoding="async"
-                  src={item.img}
-                  alt={item.title}
-                  fill
-                  sizes="320px"
-                />
+                <img
+    src={item.img}
+    alt={item.title}
+    loading="lazy"
+    decoding="async"
+    referrerPolicy="no-referrer"
+    className="absolute inset-0 h-full w-full object-cover"
+/>
                 <span className="absolute top-2 left-2 rounded bg-red-600 px-2 py-0.5 text-[10px] font-bold">LIVE</span>
               </div>
               <div className="p-3">

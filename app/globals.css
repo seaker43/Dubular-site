@@ -2,3 +2,13 @@
 /* hide scrollbars globally */
 .no-scrollbar{scrollbar-width:none;-ms-overflow-style:none}
 .no-scrollbar::-webkit-scrollbar{display:none}
+/* Neon red glow around thumbnails */
+.thumb-glow {
+  box-shadow:
+    0 0 0 1px rgb(38 38 38),
+    0 0 24px rgba(220, 38, 38, 0.45),
+    0 0 60px rgba(220, 38, 38, 0.25);
+}
+/* (Re)hide scrollbars if any browser resurrects them */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
