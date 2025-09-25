@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 type Item = { id: string; title: string; img: string };
 
@@ -15,52 +15,53 @@ const seed: Item[] = [
 
 export default function LiveRow() {
   const [data] = useState<Item[]>(() => seed);
+  const items = useMemo(() => [...data, ...data, ...data], [data]); // 3x for seamless loop
   const scrollerRef = useRef<HTMLDivElement | null>(null);
-  const cardWRef = useRef<number>(0);
 
   useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
 
-    // measure one "set" (card width incl. gap)
-    const sample = el.querySelector<HTMLDivElement>('[data-card]');
-    cardWRef.current = sample ? sample.getBoundingClientRect().width + 16 /* gap guess */ : 320;
+    // Each cycle width = total scrollWidth / 3 (because we rendered 3 cycles)
+    const cycle = () => el.scrollWidth / 3;
 
-    let ticking = false;
-    const oneSet = cardWRef.current;
+    // Start centered (cycle #2) so user can scroll both directions immediately
+    const init = () => { el.scrollLeft = cycle() + 1; };
+    // If layout shifts, re-center
+    const ro = new ResizeObserver(() => init());
+    ro.observe(el);
 
-    const threshold = () => Math.min(oneSet, el.scrollWidth - el.clientWidth - oneSet);
+    init();
 
     const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const maxBeforeEnd = el.scrollWidth - el.clientWidth - oneSet;
-        if (el.scrollLeft > maxBeforeEnd) {
-          el.scrollLeft -= oneSet;
-        } else if (el.scrollLeft < threshold()) {
-          el.scrollLeft += oneSet;
-        }
-        ticking = false;
-      });
+      // Only adjust when the user approaches the edges (no extra speed added)
+      const c = cycle();
+      const lower = c * 0.15;        // 15% into cycle 1
+      const upper = c * 2.85;        // 15% before end of cycle 3
+      if (el.scrollLeft < lower) {
+        el.scrollLeft += c;          // jump forward one cycle
+      } else if (el.scrollLeft > upper) {
+        el.scrollLeft -= c;          // jump back one cycle
+      }
     };
 
     el.addEventListener('scroll', onScroll, { passive: true });
-    return () => { el.removeEventListener('scroll', onScroll); };
+    return () => {
+      ro.disconnect();
+      el.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   return (
     <div className="w-full overflow-hidden">
       <div
         ref={scrollerRef}
-        className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar px-4 py-2"
-        style={{ scrollSnapType: 'x mandatory' }}
+        className="flex gap-4 overflow-x-auto no-scrollbar px-4 py-2"
       >
-        {data.map((item) => (
+        {items.map((item, idx) => (
           <div
-            key={item.id}
-            data-card
-            className="shrink-0 snap-start w-[320px] rounded-2xl overflow-hidden bg-neutral-900 ring-1 ring-neutral-800"
+            key={`${item.id}-${idx}`}
+            className="shrink-0 w-[320px] rounded-2xl overflow-hidden bg-neutral-900 ring-1 ring-neutral-800"
           >
             <div className="relative aspect-video">
               <Image src={item.img} alt={item.title} fill priority sizes="320px" />
