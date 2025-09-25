@@ -214,3 +214,10 @@ html, body, #__next { overflow-x: hidden; }
       0 0 56px 12px rgba(255,255,255,0.35);
   }
 }
+
+/* --- Ticker neon outline --- */
+.ticker{ z-index:20; margin-bottom:16px; }
+.ticker--neon{ border:2px solid rgba(0,255,120,.9); border-radius:14px;
+  box-shadow: 0 0 6px rgba(0,255,120,.95), 0 0 18px rgba(0,255,120,.7), 0 0 36px rgba(0,255,120,.45), inset 0 0 6px rgba(0,255,120,.3);
+}
+

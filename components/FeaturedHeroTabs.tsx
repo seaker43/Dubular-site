@@ -11,7 +11,7 @@ const featured = [
 export default function FeaturedHeroTabs() {
   const item = featured[0];
   return (
-    <section className="stream-ring w-full flex justify-center px-4">
+    <section className="stream-ring mt-6 w-full flex justify-center px-4">
       <div className="relative w-full max-w-5xl relative relative rounded-2xl overflow-hidden feature-ring">
         <Image
           src={item.image}
