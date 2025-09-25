@@ -15,33 +15,35 @@ const seed: Item[] = [
 
 export default function LiveRow() {
   const [data] = useState<Item[]>(() => seed);
-  const items = useMemo(() => [...data, ...data, ...data], [data]); // 3x for seamless loop
+  const items = useMemo(() => [...data, ...data, ...data], [data]); // render 3x for seamless loop
   const scrollerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
 
-    // Each cycle width = total scrollWidth / 3 (because we rendered 3 cycles)
+    // start in the middle cycle (so you can scroll both directions)
     const cycle = () => el.scrollWidth / 3;
+    const init = () => { el.scrollLeft = cycle(); };
+    init();
 
-    // Start centered (cycle #2) so user can scroll both directions immediately
-    const init = () => { el.scrollLeft = cycle() + 1; };
-    // If layout shifts, re-center
+    // Re-center on layout changes (image loads, orientation, etc.)
     const ro = new ResizeObserver(() => init());
     ro.observe(el);
 
-    init();
-
     const onScroll = () => {
-      // Only adjust when the user approaches the edges (no extra speed added)
+      // compute each time so it stays correct as content sizes change
       const c = cycle();
-      const lower = c * 0.15;        // 15% into cycle 1
-      const upper = c * 2.85;        // 15% before end of cycle 3
-      if (el.scrollLeft < lower) {
-        el.scrollLeft += c;          // jump forward one cycle
-      } else if (el.scrollLeft > upper) {
-        el.scrollLeft -= c;          // jump back one cycle
+
+      // If user gets close to the left edge of cycle 1 → jump forward one cycle
+      if (el.scrollLeft <= c * 0.5) {
+        el.scrollLeft += c;
+        return;
+      }
+      // If user gets close to the right edge of cycle 3 → jump back one cycle
+      if (el.scrollLeft >= c * 2.5) {
+        el.scrollLeft -= c;
+        return;
       }
     };
 
@@ -53,26 +55,36 @@ export default function LiveRow() {
   }, []);
 
   return (
-    <div className="w-full overflow-hidden">
-      <div
-        ref={scrollerRef}
-        className="flex gap-4 overflow-x-auto no-scrollbar px-4 py-2"
-      >
-        {items.map((item, idx) => (
-          <div
-            key={`${item.id}-${idx}`}
-            className="shrink-0 w-[320px] rounded-2xl overflow-hidden bg-neutral-900 ring-1 ring-neutral-800"
-          >
-            <div className="relative aspect-video">
-              <Image src={item.img} alt={item.title} fill priority sizes="320px" />
-              <span className="absolute top-2 left-2 rounded bg-red-600 px-2 py-0.5 text-[10px] font-bold">LIVE</span>
+    <>
+      <div className="w-full overflow-hidden">
+        <div
+          id="live-scroller"
+          ref={scrollerRef}
+          // No snap; hide scrollbar via class + inline properties for Firefox/IE
+          className="flex gap-4 overflow-x-auto px-4 py-2 no-scrollbar"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {items.map((item, idx) => (
+            <div
+              key={`${item.id}-${idx}`}
+              className="shrink-0 w-[320px] rounded-2xl overflow-hidden bg-neutral-900 ring-1 ring-neutral-800"
+            >
+              <div className="relative aspect-video">
+                <Image src={item.img} alt={item.title} fill priority sizes="320px" />
+                <span className="absolute top-2 left-2 rounded bg-red-600 px-2 py-0.5 text-[10px] font-bold">LIVE</span>
+              </div>
+              <div className="p-3">
+                <p className="text-cyan-300 text-sm font-medium">{item.title}</p>
+              </div>
             </div>
-            <div className="p-3">
-              <p className="text-cyan-300 text-sm font-medium">{item.title}</p>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+
+      {/* Force-hide WebKit scrollbars without relying on global CSS */}
+      <style jsx global>{`
+        #live-scroller::-webkit-scrollbar { display: none; height: 0; width: 0; }
+      `}</style>
+    </>
   );
 }
