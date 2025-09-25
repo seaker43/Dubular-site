@@ -219,3 +219,12 @@ html, body, #__next { overflow-x: hidden; }
     text-shadow: 0 0 6px rgba(255,255,255,0.6);
   }
 }
+
+@layer utilities {
+  .feature-ring {
+    box-shadow:
+      0 0 0 2px rgba(255,255,255,1),
+      0 0 24px 6px rgba(255,255,255,0.70),
+      0 0 56px 12px rgba(255,255,255,0.35);
+  }
+}

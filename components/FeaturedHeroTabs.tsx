@@ -3,8 +3,7 @@ import Image from "next/image";
 
 const featured = [
   {
-    title: "Featured Stream",
-    subtitle: "Now playing live on dubUlar text-glow",
+    title: "Featured Content",
     image:
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1600",
   },
@@ -14,7 +13,7 @@ export default function FeaturedHeroTabs() {
   const item = featured[0];
   return (
     <section className="stream-ring w-full flex justify-center px-4">
-      <div className="relative w-full max-w-5xl rounded-2xl overflow-visible ">
+      <div className="relative w-full max-w-5xl relative rounded-2xl overflow-hidden feature-ring">
         <Image
           src={item.image}
           alt={item.title}
