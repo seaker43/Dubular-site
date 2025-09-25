@@ -60,15 +60,27 @@ export default function LiveRow() {
         const oneSet = cardWRef.current * seed.length;
         if (el.scrollLeft > maxBeforeEnd) { el.scrollLeft -= oneSet; }
         else if (el.scrollLeft < threshold()) { el.scrollLeft += oneSet; }
-            }
-    el.addEventListener("scroll", onScroll, { passive: true }); return () => el.removeEventListener("scroll", onScroll); }, []);
+            return [last, ...rest];
+  el.addEventListener("scroll", onScroll, { passive: true });
+
+  return () => {
+    el.removeEventListener("scroll", onScroll);
+  };
         }
 
         ticking = false;
-        }; el.addEventListener("scroll", onScroll, { passive: true }); return () => el.removeEventListener("scroll", onScroll); }, []);
+  el.addEventListener("scroll", onScroll, { passive: true });
+
+  return () => {
+    el.removeEventListener("scroll", onScroll);
+  };
     };
 
-    el.addEventListener("scroll", onScroll, { passive: true   }; el.addEventListener("scroll", onScroll, { passive: true }); return () => el.removeEventListener("scroll", onScroll); }, []);
+  el.addEventListener("scroll", onScroll, { passive: true });
+
+  return () => {
+    el.removeEventListener("scroll", onScroll);
+  };
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
 
