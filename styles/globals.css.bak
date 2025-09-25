@@ -216,26 +216,12 @@ html, body, #__next { overflow-x: hidden; }
 
 /* --- Ticker neon outline --- */
 .ticker{ z-index:20; margin-bottom: 24px; }
-.ticker--neon{display:block;border:4px solid #00ff66;border-radius:16px;padding:6px 10px;background:transparent;box-shadow:0 0 2px #00ff66,0 0 10px rgba(0,255,102,.35);} 
-header.site-header{background:#000;}
 
 /* --- ticker + header hard overrides --- */
 .ticker {
   background:#000 !important;
   border-top:0 !important;
   border-bottom:0 !important;
-}
-.ticker--neon {
-  display:block;
-  border:3px solid #00ff66;
-  border-radius:14px;
-  padding:6px 10px;
-  background:transparent;
-  box-shadow:
-    0 0 4px  #00ff66,
-    0 0 12px #00ff66cc,
-    0 0 24px #00ff66aa,
-    0 0 48px #00ff6680;
 }
 header.site-header {
   background:#000 !important;
@@ -244,7 +230,3 @@ header.site-header {
 /* --- ticker neon outline (forced) --- */
 
 /* ticker override: match hero thickness, softer glow */
-.ticker.ticker--neon{display:block;border:4px solid #00ff66!important;border-radius:16px!important;padding:6px 10px!important;background:transparent!important;box-shadow:0 0 2px #00ff66,0 0 10px rgba(0,255,102,.35)!important;}
-
-/* ticker: match hero border thickness + softer halo */
-.ticker.ticker--neon{display:block;border:4px solid #00ff66!important;border-radius:18px!important;padding:6px 10px!important;background:transparent!important;box-shadow:0 0 3px #00ff66,0 0 6px rgba(0,255,102,.4)!important;}
