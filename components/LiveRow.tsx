@@ -12,7 +12,7 @@ const seed: Item[] = [
 ];
 
 export default function LiveRow() {
-  const [data, setData] = useState<Item[]>(() => Array(24).fill(seed).flat());
+  const [data, setData] = useState<Item[]>(() => [...seed, ...seed, ...seed]);
   const listRef = useRef<HTMLUListElement>(null);
   const cardWRef = useRef<number>(0);
   const gapRef = useRef<number>(12);
@@ -45,8 +45,8 @@ export default function LiveRow() {
         const left = el.scrollLeft;
         const prev = (el as any)._lastLeft ?? left;
         const rawDelta = left - prev;
-        const ts = performance.now(); const prevTs = (el as any)._lastTs ?? ts; (el as any)._lastTs = ts; let speed = Math.abs(rawDelta) / Math.max(1, now - prevTs); speed *= 0.85; el.style.scrollSnapType = "none";
-        const ts2 = performance.now(); const prevTs2 = (el as any)._lastTs ?? ts2; (el as any)._lastTs = ts2; speed = Math.abs(rawDelta) / Math.max(1, ts2 - prevTs2); el.style.scrollSnapType = "none";
+        const ts = performance.now(); const prevTs = (el as any)._lastTs ?? ts; (el as any)._lastTs = ts; let speed = Math.abs(rawDelta) / Math.max(1, now - prevTs); speed *= 0.85; el.style.scrollSnapType="none";
+        const ts2 = performance.now(); const prevTs2 = (el as any)._lastTs ?? ts2; (el as any)._lastTs = ts2; speed = Math.abs(rawDelta) / Math.max(1, ts2 - prevTs2); el.style.scrollSnapType="none";
 
         // cap max flick speed
         const maxDelta = Math.max(10, cardWRef.current * 0.30);
@@ -57,17 +57,9 @@ export default function LiveRow() {
 
         const maxBeforeEnd = el.scrollWidth - el.clientWidth - threshold();
 
-        if (el.scrollLeft > maxBeforeEnd) {
-          setData(prevData => {
-            const [first, ...rest] = prevData;
-            requestAnimationFrame(() => { el.scrollLeft -= cardWRef.current; });
-            return [...rest, first];
-          });
-        } else if (el.scrollLeft < threshold()) {
-          setData(prevData => {
-            const last = prevData[prevData.length - 1];
-            const rest = prevData.slice(0, -1);
-            requestAnimationFrame(() => { el.scrollLeft += cardWRef.current; });
+        const oneSet = cardWRef.current * seed.length;
+        if (el.scrollLeft > maxBeforeEnd) { el.scrollLeft -= oneSet; }
+        else if (el.scrollLeft < threshold()) { el.scrollLeft += oneSet; });
             return [last, ...rest];
           });
         }
@@ -85,7 +77,7 @@ export default function LiveRow() {
       <h2 className="px-3 pb-2 text-white text-2xl font-bold">Live now</h2>
       <ul
         ref={listRef}
-        className="flex gap-3 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [className="flex gap-3 overflow-x-scroll no-scrollbar no-scrollbar scrollbar-hide px-6   p-3 scrollbar-hide"::-webkit-scrollbar]:hidden px-6 p-3"
+        className="flex gap-3 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden px-6 p-3"flex gap-3 overflow-x-scroll no-scrollbar no-scrollbar scrollbar-hide px-6   p-3 scrollbar-hide"::-webkit-scrollbar]:hidden px-6 p-3"
       >
         {data.map((it, idx) => (
           <li key={`${it.id}-${idx}`} className="min-w-[280px] max-w-[280px] ">
