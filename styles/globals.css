@@ -89,6 +89,7 @@ div {
 
 /* Ensure the fixed header matches the global var height even if header.css forgets */
 .site-header,
+}
 header.site-header {
   height: var(--header-h);
 }
@@ -228,7 +229,7 @@ html, body, #__next { overflow-x: hidden; }
     0 0 12px #00ff66cc,
     0 0 24px #00ff66aa,
     0 0 48px #00ff6680;
-
+}
 header.site-header{background:#000;}
 
 /* --- ticker + header hard overrides --- */
@@ -249,7 +250,6 @@ header.site-header{background:#000;}
     0 0 24px #00ff66aa,
     0 0 48px #00ff6680;
 }
-
 header.site-header {
   background:#000 !important;
 }
