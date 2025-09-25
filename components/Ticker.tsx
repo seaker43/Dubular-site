@@ -2,24 +2,27 @@
 
 type Props = {
   messages?: string[];
-  durationSec?: number; // full loop duration
+  durationSec?: number; // full loop duration (seconds)
+  className?: string;
 };
 
 export default function Ticker({
-  messages = [
-    "Welcome to dubUlar 🔥",
+  messages,
+  durationSec = 20,
+  className = "",
+}: Props) {
+  const defaults = [
+    "welcome to dubUlar 🔥",
     "Creators are live right now",
     "Tap a thumbnail to join the stream",
     "Follow for early access updates",
-  ],
-  durationSec = 20,
-}: Props) {
+  ];
+  const items = messages?.length ? messages : defaults;
+
   const row = (
     <ul className="flex items-center gap-8 shrink-0">
-      {messages.map((m, i) => (
-        <li key={i} className="text-cyan-300 text-sm whitespace-nowrap">
-          {m}
-        </li>
+      {items.map((m, i) => (
+        <li key={i} className="text-cyan-300 text-sm whitespace-nowrap">{m}</li>
       ))}
     </ul>
   );
