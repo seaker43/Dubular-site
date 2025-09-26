@@ -308,3 +308,4 @@ header.site-header {
 .ticker .ticker__track {
   padding-left: 0 !important;
 }
+/* DEFINITIVE TICKER — rectangular 2px neon, no side fades */ .ticker{position:relative;overflow:visible;background:#000!important;margin:12px 0!important}.ticker::before,.ticker::after{content:none!important;display:none!important}.ticker.ticker--neon{display:block!important;border:2px solid #00ff66!important;border-radius:0!important;padding:6px 10px!important;background:transparent!important;box-shadow:0 0 2px #00ff66,0 0 6px rgba(0,255,102,.35)!important}.ticker .ticker__track{padding-left:0!important}
