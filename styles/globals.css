@@ -10,6 +10,8 @@
   /* Header height used by header.css and content offset */
   --header-h: 100px;
   --bottombar-h: 64px;
+  --vvh: 100vh;
+  --bottombar-h: 64px;
 
   /* Optional theme variables */
   color-scheme: dark light;
