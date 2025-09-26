@@ -150,100 +150,10 @@ html, body, #__next { overflow-x: hidden; }
 }
 
 /* --- Ticker banner --- */
-.ticker {
-  position: relative;
-  overflow: visible;
-  background:#000;
-  border-top: 1px solid rgba(0, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(0, 255, 255, 0.08);
-  padding: 8px 0;
-}
-.ticker::before,
-.ticker::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 24px;
-  pointer-events: none;
-  background: linear-gradient(to right, #000 0%, transparent 100%);
-}
-.ticker::after {
-  right: 0;
-  transform: scaleX(-1);
-}
-.ticker::before {
-  left: 0;
-}
-.ticker__track {
-  display: flex;
-  gap: 32px;
-  width: max-content;
-  will-change: transform;
-  animation: ticker var(--dur, 20s) linear infinite;
-  padding-left: 24px;
-}
-.ticker:hover .ticker__track { animation-play-state: paused; }
-@keyframes ticker {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-/* --- FeaturedHero ring-light + centered title --- */
-@layer utilities {
-  /* Big soft white "ring light" glow around the featured block */
-  .stream-ring { position: relative; isolation: isolate; }
-.stream-ring::after { content: none; }
-
-  /* Center the hero title and give it a subtle white edge glow */
-  .hero-title { text-align: center; text-shadow: 0 0 12px rgba(255,255,255,0.35); }
-}
-
-@layer utilities {
-  .text-glow {
-    text-shadow: 0 0 6px rgba(255,255,255,0.6);
-  }
-}
-
-@layer utilities {
-  .feature-ring {
-    box-shadow:
-      0 0 0 2px rgba(255,255,255,1),
-      0 0 24px 6px rgba(255,255,255,0.70),
-      0 0 56px 12px rgba(255,255,255,0.35);
-  }
-}
-
-/* --- Ticker neon outline --- */
-.ticker{ z-index:20; margin-bottom: 24px; }
-
-/* --- ticker + header hard overrides --- */
-.ticker {
-  background:#000 !important;
-  border-top:0 !important;
-  border-bottom:0 !important;
-}
-header.site-header {
-  background:#000 !important;
-}
-
-/* --- ticker neon outline (forced) --- */
-
-/* ticker override: match hero thickness, softer glow */
-/* ticker: match hero border thickness + radius + subtle halo */
-/* ticker: rounded border, square glow */
-.ticker.ticker--neon{position:relative!important;display:block!important;border:2px solid #00ff66!important;border-radius:16px!important;padding:6px 10px!important;margin:24px 0!important;background:transparent!important;z-index:1;}
-.ticker.ticker--neon::before{content:""!important;position:absolute!important;inset:0!important;border:2px solid transparent;border-radius:0!important;box-shadow:0 0 2px #00ff66,0 0 8px rgba(0,255,102,.35)!important;z-index:-1;}
-/* ticker: rectangular border + rectangular glow */
-.ticker.ticker--neon{display:block!important;border:4px solid #00ff66!important;border-radius:0!important;padding:6px 10px!important;background:transparent!important;box-shadow:0 0 2px #00ff66,0 0 10px rgba(0,255,102,.35)!important;}
-/* ticker: thin rectangular neon border + subtle glow */
-.ticker.ticker--neon{display:block!important;border:2px solid #00ff66!important;border-radius:0!important;padding:6px 10px!important;background:transparent!important;box-shadow:0 0 2px #00ff66,0 0 6px rgba(0,255,102,.35)!important;}
-
-/* ticker: rectangular 2px neon + no fades */
-.ticker.ticker--neon{display:block!important;border:2px solid #00ff66!important;border-radius:0!important;padding:6px 10px!important;background:transparent!important;box-shadow:0 0 2px #00ff66,0 0 6px rgba(0,255,102,.35)!important;}
-.ticker.ticker--neon::before,.ticker.ticker--neon::after{content:none!important;display:none!important;}
-.ticker.ticker--neon .ticker__track{padding-left:0!important;}
-
-/* soften featured hero ring glow */
-.feature-ring{box-shadow:0 0 0 2px rgba(255,255,255,.9),0 0 12px 3px rgba(255,255,255,.35),0 0 24px 6px rgba(255,255,255,.2)!important;}
-.ticker.ticker--neon{position:relative;display:block!important;border:2px solid #00ff66!important;border-radius:0!important;background:transparent!important;box-shadow:0 0 2px #00ff66,0 0 8px rgba(0,255,102,.25)!important}.ticker.ticker--neon::before,.ticker.ticker--neon::after{content:none!important;display:none!important}
+/* --- Ticker banner --- */
+.ticker{position:relative;overflow:visible;background:#000!important;margin:12px 0!important}
+.ticker::before,.ticker::after{content:none!important;display:none!important}
+.ticker__track{display:flex;gap:32px;width:max-content;will-change:transform;animation:ticker var(--dur,20s) linear infinite;padding-left:0!important}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* --- Ticker neon outline (rectangular, thin, soft) --- */
+.ticker.ticker--neon{display:block!important;border:2px solid #00ff66!important;border-radius:0!important;padding:6px 10px!important;background:transparent!important;box-shadow:0 0 2px #00ff66,0 0 6px rgba(0,255,102,.35)!important}
