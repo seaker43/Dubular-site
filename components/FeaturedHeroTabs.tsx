@@ -42,6 +42,7 @@ export default function FeaturedHeroTabs() {
     setDragX(0);
   };
 
+  // keyboard left/right
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight") setIdx((i) => clamp(i + 1));
@@ -51,11 +52,13 @@ export default function FeaturedHeroTabs() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  // faster autoplay (3.5s) and always-on title
   useEffect(() => {
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
     const id = setInterval(() => {
       if (hoverRef.current || dragging) return;
       setIdx((i) => (i + 1) % len);
-    }, 5000);
+    }, 3500);
     return () => clearInterval(id);
   }, [dragging, len]);
 
@@ -74,28 +77,38 @@ export default function FeaturedHeroTabs() {
         onPointerUp={onUp}
         onPointerCancel={onUp}
       >
+        {/* sliding track */}
         <div
           className="flex h-full"
           style={{
             width: `${len * 100}%`,
             transform: `translateX(${-(idx * 100) + (dragging ? dragPct : 0)}%)`,
-            transition: dragging ? "none" : "transform 500ms ease",
+            transition: dragging ? "none" : "transform 400ms ease",
           }}
         >
           {slides.map((s, i) => (
             <div key={s.image} className="relative h-full w-full shrink-0 basis-full">
               <Image src={s.image} alt={s.title || "Featured"} fill priority={i === 0} className="object-cover" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center">
-                <h1 className="mb-5 px-3 text-3xl md:text-5xl font-extrabold text-white tracking-wide text-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.75)]">
-                  {s.title || "Featured"}
-                </h1>
-              </div>
             </div>
           ))}
         </div>
-        <div className="absolute bottom-3 left-0 right-0 z-20 flex justify-center gap-2">
+
+        {/* always-visible title overlay (not inside the moving track) */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 flex justify-center">
+          <h1 className="mb-5 px-3 text-3xl md:text-5xl font-extrabold text-white tracking-wide text-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.75)]">
+            {slides[idx].title || "Featured"}
+          </h1>
+        </div>
+
+        {/* dots */}
+        <div className="absolute bottom-3 left-0 right-0 z-30 flex justify-center gap-2">
           {slides.map((_, i) => (
-            <button key={i} aria-label={`Go to slide ${i + 1}`} className={`h-2 w-2 rounded-full ${i === idx ? "bg-white" : "bg-white/40"}`} onClick={() => setIdx(i)} />
+            <button
+              key={i}
+              aria-label={`Go to slide ${i + 1}`}
+              className={`h-2 w-2 rounded-full ${i === idx ? "bg-white" : "bg-white/40"}`}
+              onClick={() => setIdx(i)}
+            />
           ))}
         </div>
       </div>
