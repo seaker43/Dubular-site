@@ -1,4 +1,5 @@
 "use client";
+import LiveRow from "@/components/LiveRow";
 import SearchBar from "@/components/SearchBar";
 
 export default function SearchPage() {
@@ -13,6 +14,7 @@ export default function SearchPage() {
       <section className="text-center text-neutral-400">
         <p>Start typing above to search content…</p>
       </section>
-    </main>
+      <section className="mt-8"><LiveRow /></section>
+</main>
   );
 }
