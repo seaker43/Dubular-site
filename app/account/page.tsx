@@ -57,7 +57,7 @@ export default function AccountLoginPage() {
               Sign in
             </button>
           </form>
-          <div className="mt-4 flex items-center justify-between text-xs text-white/60">
+          <div className="mt-8 flex items-center justify-between text-xs text-white/60">
             <Link href="/forgot" className="hover:text-white/90">
               Forgot password?
             </Link>
@@ -65,7 +65,7 @@ export default function AccountLoginPage() {
               Create account
             </Link>
           </div>
-          <div className="mt-6 grid gap-3">
+          <div className="mt-8 grid gap-3">
             <button className="w-full rounded-xl border border-white/10 bg-zinc-900/60 py-2 text-white/90 hover:bg-zinc-900">
               Continue with Google
             </button>
@@ -74,7 +74,7 @@ export default function AccountLoginPage() {
             </button>
           </div>
         </div>
-        <p className="text-center text-xs text-white/40 mt-4">
+        <p className="text-center text-xs text-white/40 mt-8">
           By continuing you agree to our{" "}
           <Link href="/terms" className="text-white/60 hover:text-white/80">Terms</Link>{" "}
           and{" "}
