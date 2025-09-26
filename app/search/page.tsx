@@ -12,7 +12,6 @@ export default function SearchPage() {
 
       {/* Results placeholder */}
       <section className="text-center text-neutral-400">
-        <p>Start typing above to search content…</p>
       </section>
       <section className="mt-8"><LiveRow /></section>
 </main>
