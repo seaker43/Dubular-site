@@ -7,7 +7,7 @@ export default function Header() {
         <Image
           src="/logo.png"
           alt="Dubular Logo"
-          width={160}
+          width={260}
           height={60}
           priority
         />
