@@ -1,10 +1,18 @@
-export const runtime = "edge";
-import { useState } from "react"; import { useRouter, useSearchParams } from "next/navigation";
+"use client";
+import SearchBar from "@/components/SearchBar";
 
-export const dynamic = "force-dynamic";
-export const fetchCache = "force-no-store";
-export const revalidate = 0;
+export default function SearchPage() {
+  return (
+    <main className="px-4 py-6">
+      {/* Search bar pinned under header */}
+      <div className="mb-6">
+        <SearchBar />
+      </div>
 
-export default function Page() {
-  return <main className="p-6 text-white">Search page</main>;
+      {/* Results placeholder */}
+      <section className="text-center text-neutral-400">
+        <p>Start typing above to search content…</p>
+      </section>
+    </main>
+  );
 }
