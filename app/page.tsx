@@ -1,6 +1,7 @@
 "use client";
-import 
-import VerticalThumbs from "@/components/VerticalThumbs";Ticker from "@/components/Ticker";
+
+import Ticker from "@/components/Ticker";
+import VerticalThumbs from "@/components/VerticalThumbs";
 import FeaturedHeroTabs from "@/components/FeaturedHeroTabs";
 import LiveRow from "@/components/LiveRow";
 
