@@ -3,7 +3,6 @@
 import Ticker from "@/components/Ticker";
 import VerticalThumbs from "@/components/VerticalThumbs";
 import FeaturedHeroTabs from "@/components/FeaturedHeroTabs";
-import LiveRow from "@/components/LiveRow";
 
 export default function HomePage() {
   return (
@@ -15,7 +14,6 @@ export default function HomePage() {
         
       </div>
       <div className="rounded-lg">
-        <LiveRow />
       </div>
       <VerticalThumbs/>
     </main>
