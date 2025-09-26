@@ -1,5 +1,6 @@
 "use client";
-import Ticker from "@/components/Ticker";
+import 
+import VerticalThumbs from "@/components/VerticalThumbs";Ticker from "@/components/Ticker";
 import FeaturedHeroTabs from "@/components/FeaturedHeroTabs";
 import LiveRow from "@/components/LiveRow";
 
@@ -15,6 +16,7 @@ export default function HomePage() {
       <div className="rounded-lg">
         <LiveRow />
       </div>
+      <VerticalThumbs/>
     </main>
   );
 }
