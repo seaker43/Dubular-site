@@ -54,7 +54,7 @@ a {
 /* --- Layout: full-bleed + header offset --- */
 /* Centralize the header offset here (so you can remove pt-[88px] in _app.js) */
 main {
-  padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
   padding-left: 0 !important;
   padding-right: 0 !important;
   margin: 0;
