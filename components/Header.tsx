@@ -8,7 +8,7 @@ export default function Header() {
           src="/logo.png"
           alt="Dubular Logo"
           width={260}
-          height={20}
+          height={60}
           priority
         />
       </Link>
