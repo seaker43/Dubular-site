@@ -28,14 +28,14 @@ export default function FeaturedHeroTabs() {
 
       {/* TICKER */}
       <div className="mt-2 flex justify-center overflow-visible">
-        <div className="ticker ticker--neon">
+        <div className="ticker ticker--neon v2">
           <div className="ticker__track">{/* ticker items */}</div>
       </div>
       </div>
 
       {/* TICKER */}
       <div className="mt-2 flex justify-center overflow-visible">
-        <div className="ticker ticker--neon">
+        <div className="ticker ticker--neon v2">
           <div className="ticker__track">{/* ticker items */}</div>
       </div>
       </div>
