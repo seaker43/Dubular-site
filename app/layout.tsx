@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import AutoCenter from "@/components/AutoCenter";
 import type { ReactNode } from "react";
 import Header from "@/components/Header";
 import BottomBar from "@/components/BottomBar";
@@ -8,7 +9,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className="flex flex-col min-h-screen bg-neutral-950 text-white">
         <Header />
-        {children}
+        <AutoCenter>{children}</AutoCenter>
         <BottomBar />
       </body>
     </html>
