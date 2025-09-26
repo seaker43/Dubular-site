@@ -74,7 +74,7 @@ export default function AccountLoginPage() {
             </button>
           </div>
         </div>
-        <p className="text-center text-xs text-white/40 mt-8">
+        <p className="text-center text-xs text-white/40 mt-4">
           By continuing you agree to our{" "}
           <Link href="/terms" className="text-white/60 hover:text-white/80">Terms</Link>{" "}
           and{" "}
