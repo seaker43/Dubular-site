@@ -3,17 +3,31 @@ import LiveRow from "@/components/LiveRow";
 import SearchBar from "@/components/SearchBar";
 
 export default function SearchPage() {
+  const sections = [
+    { title: "Live" },
+    { title: "Gaming" },
+    { title: "Music" },
+    { title: "Chit Chat" },
+    { title: "Reality" },
+    { title: "Podcast" },
+    { title: "Inde Media" },
+    { title: "Influencers" },
+  ];
+
   return (
-    <main className="px-4 py-6">
+    <main className="px-4 py-6 pb-[var(--bottombar-h)] min-h-[calc(100dvh-var(--header-h)-var(--bottombar-h))]">
       {/* Search bar pinned under header */}
       <div className="mb-6">
         <SearchBar />
       </div>
 
-      {/* Results placeholder */}
-      <section className="text-center text-neutral-400">
-      </section>
-      <section className="mt-8"><LiveRow /></section>
-</main>
+      {/* Category sections */}
+      {sections.map((s) => (
+        <section key={s.title} className="mt-8">
+          <h2 className="mb-3 text-lg font-bold text-white/90">{s.title}</h2>
+          <LiveRow />
+        </section>
+      ))}
+    </main>
   );
 }
