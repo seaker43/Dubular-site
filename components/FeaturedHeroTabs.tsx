@@ -21,33 +21,34 @@ export default function FeaturedHeroTabs() {
     return () => clearInterval(id);
   }, []);
 
-  const s = slides[i];
-
   return (
     <section
       className="stream-ring mt-6 w-full flex flex-col items-center px-4"
       onMouseEnter={() => (hoverRef.current = true)}
       onMouseLeave={() => (hoverRef.current = false)}
     >
-      <div className="relative w-full max-w-5xl rounded-2xl overflow-hidden feature-ring">
-        {slides.map((slide, idx) => (
+      {/* Fixed aspect ratio wrapper prevents layout jump */}
+      <div className="relative w-full max-w-5xl rounded-2xl overflow-hidden feature-ring" style={{ aspectRatio: "16 / 9" }}>
+        {slides.map((s, idx) => (
           <Image
-            key={slide.image}
-            src={slide.image}
-            alt={slide.title || "Featured"}
-            width={1600}
-            height={900}
+            key={s.image}
+            src={s.image}
+            alt={s.title || "Featured"}
+            fill
             priority={idx === i}
-            className={`w-full h-auto object-cover transition-opacity duration-500 ${idx === i ? "opacity-100" : "opacity-0 absolute inset-0"}`}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${idx === i ? "opacity-100" : "opacity-0"}`}
           />
         ))}
+
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center">
           <h1 className="mb-5 px-3 text-3xl md:text-5xl font-extrabold text-white tracking-wide text-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.75)]">
-            {s.title || "Featured"}
+            {slides[i].title || "Featured"}
           </h1>
         </div>
+
         <button aria-label="Previous" onClick={prev} className="absolute left-2 top-1/2 -translate-y-1/2 rounded-xl bg-black/50 px-3 py-2 text-white hover:bg-black/70">‹</button>
         <button aria-label="Next" onClick={next} className="absolute right-2 top-1/2 -translate-y-1/2 rounded-xl bg-black/50 px-3 py-2 text-white hover:bg-black/70">›</button>
+
         <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
           {slides.map((_, idx) => (
             <button key={idx} aria-label={`Go to slide ${idx + 1}`} onClick={() => setI(idx)} className={`h-2 w-2 rounded-full ${idx === i ? "bg-white" : "bg-white/40"}`} />
