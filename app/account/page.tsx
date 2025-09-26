@@ -57,7 +57,7 @@ export default function AccountLoginPage() {
               Sign in
             </button>
           </form>
-          <div className="mt-8 flex items-center justify-between text-xs text-white/60">
+          <div className="mt-6 flex items-center justify-between text-xs text-white/60">
             <Link href="/forgot" className="hover:text-white/90">
               Forgot password?
             </Link>
