@@ -8,7 +8,7 @@
 /* --- Global CSS variables --- */
 :root {
   /* Header height used by header.css and content offset */
-  --header-h: 89px;
+  --header-h: 112px;
 
   /* Optional theme variables */
   color-scheme: dark light;
