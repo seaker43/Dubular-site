@@ -7,14 +7,9 @@
 
 /* --- Global CSS variables --- */
 :root {
-  /* Header height used by header.css and content offset */
+  --bottombar-h: 64px;
+  --vvh: 100dvh;
   --header-h: 100px;
-  --bottombar-h: 64px;
-  --bottombar-h: 64px;
-  --vvh: 100vh;
-  --bottombar-h: 64px;
-
-  /* Optional theme variables */
   color-scheme: dark light;
 }
 
@@ -64,6 +59,7 @@ main {
   margin: 0;
   width: 100%;
   overflow-x: hidden; /* guard against accidental horizontal scroll */
+  padding-bottom: var(--bottombar-h);
 }
 
 /* Make all standard wrappers full-bleed */
@@ -117,9 +113,7 @@ div {
   /* Cyan aura for Featured section; uses pseudo so it isn’t clipped by rounded corners */
 }
 
-html, body, #__next { overflow-x: hidden; }
 
-html, body, #__next { overflow-x: hidden; }
 
 @layer utilities {
 @keyframes neon-pulse {
@@ -247,3 +241,5 @@ header.site-header {
 
 /* kill universal top gap under header */
 main>:first-child{margin-top:0!important;padding-top:0!important}
+
+html, body, #__next { overflow-x: hidden; }
