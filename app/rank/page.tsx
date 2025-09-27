@@ -99,7 +99,7 @@ export default function RankPage() {
           </div>
 
           {/* Leaderboard card */}
-          <div className="glow-red/0 relative w-full grow overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-none backdrop-blur">
+          <div className="glow-red/0 relative w-full grow overflow-hidden rounded-2xl border border-white/10 bg-black shadow-none backdrop-blur">
             {/* header row */}
             <div className="flex items-center justify-between px-4 py-3">
               <div className="text-sm text-white/70">
