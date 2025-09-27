@@ -82,7 +82,7 @@ export default function RankPage() {
           </div>
 
           {/* Metric chips */}
-          <div className="mb-5 flex w-full snap-x items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+          <div className="mt-3 mb-5 flex w-full snap-x items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
             {METRICS[group].map(m => (
               <button
                 key={m.key}
