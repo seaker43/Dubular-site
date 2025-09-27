@@ -237,7 +237,7 @@ header.site-header {
 
 /* soften featured hero ring glow */
 .feature-ring{box-shadow:0 0 0 2px rgba(255,255,255,.9),0 0 12px 3px rgba(255,255,255,.35),0 0 24px 6px rgba(255,255,255,.2)!important;}
-/* Final override: rectangular 2px neon, no side fades */ .ticker.ticker--neon{border:2px solid #00ff66!important;border-radius:0!important;padding:6px 10px!important;background:transparent!important;box-shadow:0 0 2px #00ff66,0 0 6px rgba(0,255,102,.35)!important}.ticker.ticker--neon::before,.ticker.ticker--neon::after{content:none!important;display:none!important}.ticker.ticker--neon .ticker__track{padding-left:0!important}.ticker.v2{}
+/* Final override: rectangular 2px neon, no side fades */ .ticker.ticker--neon{border:2px solid #39FF14!important;border-radius:0!important;padding:6px 10px!important;background:transparent!important;box-shadow:0 0 2px #39FF14,0 0 6px rgba(0,255,102,.35)!important}.ticker.ticker--neon::before,.ticker.ticker--neon::after{content:none!important;display:none!important}.ticker.ticker--neon .ticker__track{padding-left:0!important}.ticker.v2{}
 
 /* kill universal top gap under header */
 main>:first-child{margin-top:0!important;padding-top:0!important}
