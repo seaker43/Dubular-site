@@ -28,7 +28,7 @@ const METRICS: Record<GroupKey, { key: MetricKey; label: string }[]> = {
 };
 
 // TEMP seed data (replace with real API later)
-const seed = Array.from({ length: 20 }).map((_, i) => ({
+const seed = Array.from({ length: 25 }).map((_, i) => ({
   id: i + 1,
   name: `User ${i + 1}`,
   value: Math.round(1000 - i * 37),
