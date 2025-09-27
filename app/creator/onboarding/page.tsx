@@ -1,1 +1,87 @@
-"use client"; import { useState } from "react"; import { normalizeHandle, isValidHandle } from "../../../lib/handles"; export default function CreatorOnboarding(){ const [step,setStep]=useState(1); const [title,setTitle]=useState(""); const [handle,setHandle]=useState(""); const [category,setCategory]=useState("IRL"); const [language,setLanguage]=useState("en"); const submit=async()=>{ const h=normalizeHandle(handle); if(!isValidHandle(h)) return alert("Bad handle"); const res=await fetch("/api/channel.upsert",{ method:"POST", headers:{ "content-type":"application/json","x-user-id":"demo-user-1" }, body:JSON.stringify({ title, handle:h, category, language })}); if(res.ok) setStep(3); else alert(await res.text()); }; return (<div className="max-w-xl mx-auto p-4 text-white"> <h1 className="text-2xl font-semibold mb-4">Creator Onboarding</h1> {step===1&&(<div className="space-y-4"> <input className="w-full rounded bg-neutral-900 p-3" value={title} onChange={e=>setTitle(e.target.value)} placeholder="Channel title" /> <input className="w-full rounded bg-neutral-900 p-3" value={handle} onChange={e=>setHandle(e.target.value)} placeholder="Channel handle" /> <div className="grid grid-cols-2 gap-3"> <select className="w-full rounded bg-neutral-900 p-3" value={category} onChange={e=>setCategory(e.target.value)}><option>IRL</option><option>Gaming</option><option>Music</option><option>Sports</option></select> <select className="w-full rounded bg-neutral-900 p-3" value={language} onChange={e=>setLanguage(e.target.value)}><option value="en">English</option><option value="es">Spanish</option></select> </div> <div className="flex gap-3"> <button onClick={()=>setStep(2)} className="rounded-2xl px-4 py-2 bg-neutral-800">Branding</button> <button onClick={submit} className="rounded-2xl px-4 py-2 bg-cyan-600 hover:bg-cyan-500">Save & Continue</button> </div> </div>)} {step===3&&<p>Done! Your channel has been created.</p>} </div> ); }
+"use client";
+import { useState } from "react";
+import { normalizeHandle, isValidHandle } from "../../../lib/handles";
+
+export default function CreatorOnboarding() {
+  const [step, setStep] = useState(1);
+  const [title, setTitle] = useState("");
+  const [handle, setHandle] = useState("");
+  const [category, setCategory] = useState("IRL");
+  const [language, setLanguage] = useState("en");
+
+  const submit = async () => {
+    const h = normalizeHandle(handle);
+    if (!isValidHandle(h)) return alert("Bad handle");
+    const res = await fetch("/api/channel.upsert", {
+      method: "POST",
+      headers: { "content-type": "application/json", "x-user-id": "demo-user-1" },
+      body: JSON.stringify({ title, handle: h, category, language }),
+    });
+    if (res.ok) setStep(3);
+    else alert(await res.text());
+  };
+
+  return (
+    <div className="max-w-xl mx-auto p-4 text-white">
+      <h1 className="text-2xl font-semibold mb-4">Creator Onboarding</h1>
+
+      {step === 1 && (
+        <div className="space-y-4">
+          <input
+            className="w-full rounded bg-neutral-900 p-3"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Channel title"
+          />
+          <input
+            className="w-full rounded bg-neutral-900 p-3"
+            value={handle}
+            onChange={(e) => setHandle(e.target.value)}
+            placeholder="Channel handle"
+          />
+          <div className="grid grid-cols-2 gap-3">
+            <select
+              className="w-full rounded bg-neutral-900 p-3"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option>IRL</option>
+              <option>Gaming</option>
+              <option>Music</option>
+              <option>Sports</option>
+            </select>
+            <select
+              className="w-full rounded bg-neutral-900 p-3"
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+            >
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+            </select>
+          </div>
+          <div className="flex gap-3">
+            <button
+              onClick={() => setStep(2)}
+              className="rounded-2xl px-4 py-2 bg-neutral-800"
+            >
+              Branding
+            </button>
+            <button
+              onClick={submit}
+              className="rounded-2xl px-4 py-2 bg-cyan-600 hover:bg-cyan-500"
+            >
+              Save & Continue
+            </button>
+          </div>
+        </div>
+      )}
+
+      {step === 3 && (
+        <p>
+          Done! Visit your channel at{" "}
+          <span className="font-mono">/@{handle}</span>
+        </p>
+      )}
+    </div>
+  );
+}
