@@ -261,3 +261,7 @@ body, main{ padding-bottom: var(--bottombar-h) !important; }
 }
 html{ scroll-padding-bottom: var(--bottombar-h); }
 body, main{ padding-bottom: var(--bottombar-h) !important; }
+
+/* Search page: recolor non-live rows */
+.search-page section:nth-of-type(2n) .glow-red{box-shadow:0 0 24px 6px rgba(34,211,238,.45) !important;}
+.search-page section:nth-of-type(2n+1):not(:first-of-type) .glow-red{box-shadow:0 0 28px 8px rgba(236,72,153,.45) !important;}
