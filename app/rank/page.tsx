@@ -43,7 +43,7 @@ export default function RankPage() {
   const list = useMemo(() => seed.slice().sort((a, b) => b.value - a.value), [group, metric]);
 
   return (
-    <main className="min-h-[calc(var(--vvh)-var(--header-h))] !pb-0">
+    <main className="min-h-[calc(var(--vvh)-var(--header-h))] pb-0">
       <section className="relative min-h-[calc(var(--vvh)-var(--header-h))] w-full overflow-visible">
         {/* Background thumbnail */}
         <div className="absolute inset-0">
@@ -99,9 +99,9 @@ export default function RankPage() {
           </div>
 
           {/* Leaderboard card */}
-          <div className="glow-red/0 relative w-full grow overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_0_0_2px_rgba(255,255,255,0.06),0_10px_40px_rgba(0,0,0,0.6)] backdrop-blur">
+          <div className="glow-red/0 relative w-full grow overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-none backdrop-blur">
             {/* header row */}
-            <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+            <div className="flex items-center justify-between px-4 py-3">
               <div className="text-sm text-white/70">
                 {GROUPS.find(g => g.key === group)?.label} • {METRICS[group].find(m => m.key === metric)?.label}
               </div>
