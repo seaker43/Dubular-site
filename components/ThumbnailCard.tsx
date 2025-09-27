@@ -2,6 +2,8 @@
 
 type Thumb = { title?: string; image?: string; href?: string; live?: boolean };
 
+type Thumb = { title?: string; image?: string; href?: string; live?: boolean; glowRed?: boolean };
+
 export default function ThumbnailCard({ data }: { data: Thumb }) {
   const { title = "", image = "/placeholder.svg", href, live = true } = data || {};
   const FALLBACK_IMG =

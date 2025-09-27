@@ -13,7 +13,7 @@ const seed: Item[] = [
   { id: 'live-5', title: 'Live #5', img: 'https://images.unsplash.com/photo-1600855944280-818d239f5c25?auto=format&fit=crop&w=1200&q=80' },
 ];
 
-export default function LiveRow() {
+export default function LiveRow({ glowRed = false, showLiveBadge = false }: { glowRed?: boolean; showLiveBadge?: boolean })) {
   const [data] = useState<Item[]>(() => seed);
   const items = useMemo(() => [...data, ...data, ...data], [data]); // 3x for seamless loop
   const scrollerRef = useRef<HTMLDivElement | null>(null);
