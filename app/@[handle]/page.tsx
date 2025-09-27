@@ -1,1 +1,1 @@
-export default function ChannelPage({ params }: { params: { handle: string } }) { return ( <div className="p-4 text-white"> <h1 className="text-2xl font-semibold">Channel /@{params.handle}</h1> <p className="opacity-70 mt-2">Public channel page placeholder.</p> </div> ); }
+export default function ChannelPage(){return(<div className="p-4 text-white"><h1 className="text-2xl font-semibold">Channel</h1><p className="opacity-70 mt-2">Public channel page placeholder.</p></div>);}
