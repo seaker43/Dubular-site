@@ -63,7 +63,7 @@ export default function RankPage() {
           </h1>
 
           {/* Group tabs */}
-          <div className="sticky top-[calc(var(--header-h)+8px)] z-30 mx-auto mb-4 flex items-center gap-2 rounded-full bg-black/40 backdrop-blur p-1">
+          <div className="sticky top-[calc(var(--header-h)+8px)] z-30 mx-auto mt-3 mb-3 flex items-center gap-2 rounded-full bg-black/40 backdrop-blur p-1">
             {GROUPS.map(g => (
               <button
                 key={g.key}
