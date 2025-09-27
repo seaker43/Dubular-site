@@ -43,8 +43,8 @@ export default function RankPage() {
   const list = useMemo(() => seed.slice().sort((a, b) => b.value - a.value), [group, metric]);
 
   return (
-    <main className="min-h-[calc(var(--vvh)-var(--header-h)-var(--bottombar-h))] pb-[var(--bottombar-h)] px-4 overflow-x-hidden">
-      <section className="relative min-h-[calc(var(--vvh)-var(--header-h)-var(--bottombar-h))] w-full overflow-hidden pt-[calc(var(--header-h)+8px)]">
+    <main className="min-h-[calc(100dvh-var(--header-h)-var(--bottombar-h))] pb-[var(--bottombar-h)]">
+      <section className="relative h-[calc(100dvh-var(--header-h)-var(--bottombar-h))] w-full overflow-hidden">
         {/* Background thumbnail */}
         <div className="absolute inset-0">
           <img
@@ -63,7 +63,7 @@ export default function RankPage() {
           </h1>
 
           {/* Group tabs */}
-          <div className="sticky top-[calc(var(--header-h)+8px)] z-30 mx-auto mt-3 mb-3 flex items-center gap-2 rounded-full bg-black/40 backdrop-blur p-1">
+          <div className="mx-auto mb-4 flex items-center gap-2 rounded-full bg-white/10 p-1">
             {GROUPS.map(g => (
               <button
                 key={g.key}
@@ -72,7 +72,7 @@ export default function RankPage() {
                   // snap to first metric of the group
                   setMetric(METRICS[g.key][0].key);
                 }}
-                className={`px-5 py-2 rounded-full text-sm font-semibold transition ${
+                className={`px-4 py-2 rounded-full text-sm font-medium transition ${
                   group === g.key ? "bg-emerald-500 text-black" : "text-white/80 hover:text-white"
                 }`}
               >
@@ -82,7 +82,7 @@ export default function RankPage() {
           </div>
 
           {/* Metric chips */}
-          <div className="mt-3 mb-5 flex w-full snap-x items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+          <div className="mb-5 flex w-full snap-x items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
             {METRICS[group].map(m => (
               <button
                 key={m.key}
@@ -116,7 +116,7 @@ export default function RankPage() {
                   className="group flex items-center gap-3 rounded-xl px-2 py-2 hover:bg-white/5"
                 >
                   <div className="w-8 text-center text-white/70">{i + 1}</div>
-                  <div className="h-full w-full bg-black" />
+                  <img src={u.avatar} alt="" className="h-10 w-10 rounded-full object-cover" />
                   <div className="min-w-0 grow">
                     <div className="truncate text-white/90">{u.name}</div>
                     <div className="text-xs text-white/50">
