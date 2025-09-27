@@ -109,7 +109,7 @@ export default function RankPage() {
             </div>
 
             {/* list */}
-            <ol className="h-full overflow-y-auto p-2 pr-3">
+            <ol className="h-full overflow-y-auto no-scrollbar p-2 pr-3">
               {list.map((u, i) => (
                 <li
                   key={u.id}
