@@ -52,7 +52,6 @@ export default function RankPage() {
             alt=""
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-black" />
         </div>
 
         {/* Foreground content */}
