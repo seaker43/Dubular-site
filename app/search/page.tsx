@@ -15,16 +15,16 @@ export default function SearchPage() {
   ];
 
   return (
-    <main className="px-4 py-6 pb-[var(--bottombar-h)] min-h-[calc(100dvh-var(--header-h)-var(--bottombar-h))]">
+    <main className="pl-6 px-4 py-6 pb-[var(--bottombar-h)] min-h-[calc(100dvh-var(--header-h)-var(--bottombar-h))]">
       {/* Search bar pinned under header */}
-      <div className="mb-6">
+      <div className="pl-6 mb-6">
         <SearchBar />
       </div>
 
       {/* Category sections */}
       {sections.map((s) => (
-        <section key={s.title} className="mt-8">
-          <h2 className="mb-3 text-lg font-bold text-white/90">{s.title}</h2>
+        <section key={s.title} className="pl-6 mt-8">
+          <h2 className="pl-6 mb-3 text-lg font-bold text-white/90">{s.title}</h2>
           <LiveRow />
         </section>
       ))}
