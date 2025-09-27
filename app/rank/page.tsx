@@ -43,7 +43,7 @@ export default function RankPage() {
   const list = useMemo(() => seed.slice().sort((a, b) => b.value - a.value), [group, metric]);
 
   return (
-    <main className="min-h-[calc(var(--vvh)-var(--header-h)-var(--bottombar-h))] pb-[var(--bottombar-h)]">
+    <main className="min-h-[calc(var(--vvh)-var(--header-h)-var(--bottombar-h))] ">
       <section className="relative min-h-[calc(var(--vvh)-var(--header-h)-var(--bottombar-h))] w-full overflow-visible">
         {/* Background thumbnail */}
         <div className="absolute inset-0">
