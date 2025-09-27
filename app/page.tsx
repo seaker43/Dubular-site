@@ -1,8 +1,8 @@
 "use client";
 
-import Ticker from "@{"{""}"}components{"{""}"}Ticker";
-import VerticalThumbs from "@{"{""}"}components{"{""}"}VerticalThumbs";
-import FeaturedHeroTabs from "@{"{""}"}components{"{""}"}FeaturedHeroTabs";
+import Ticker from "@/components/Ticker";
+import VerticalThumbs from "@/components/VerticalThumbs";
+import FeaturedHeroTabs from "@/components/FeaturedHeroTabs";
 
 export default function HomePage() {
   return (
