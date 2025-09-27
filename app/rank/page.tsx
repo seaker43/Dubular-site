@@ -72,7 +72,7 @@ export default function RankPage() {
                   // snap to first metric of the group
                   setMetric(METRICS[g.key][0].key);
                 }}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition ${
                   group === g.key ? "bg-emerald-500 text-black" : "text-white/80 hover:text-white"
                 }`}
               >
