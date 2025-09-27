@@ -24,7 +24,7 @@ export default function BottomBar() {
             <li key={href} className="min-w-[56px] text-center">
               <Link
                 href={href}
-                className={`flex flex-col items-center gap-1 px-2 ${active ? "text-green-400 drop-shadow-[0_0_8px_#22c55e]" : "text-white/80 hover:text-white"}`}
+                className={`flex flex-col items-center gap-1 px-2 ${active ? "text-[var(--laser-green)] drop-shadow-[0_0_8px_var(--laser-green)]" : "text-white/80 hover:text-white"}`}
               >
                 <Icon className={`h-6 w-6 ${href === "/" ? "mx-auto" : ""}`} />
                 <span>{label}</span>
