@@ -268,3 +268,8 @@ body, main{ padding-bottom: var(--bottombar-h) !important; }
 
 /* search: only Live row glows red */
 .search-page section:not(:first-of-type) [class*="glow-red"]{box-shadow:none !important;}
+
+@layer utilities{
+  .no-scrollbar::-webkit-scrollbar{display:none}
+  .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+}
