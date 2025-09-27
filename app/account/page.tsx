@@ -38,7 +38,7 @@ export default function AccountLoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword((s) => !s)}
-                  className="text-xs text-dubular-green hover:text-emerald-300"
+                  className="text-xs text-dubular-green hover:text-[var(--laser-green)]"
                 >
                   {showPassword ? "Hide" : "Show"}
                 </button>
@@ -61,7 +61,7 @@ export default function AccountLoginPage() {
             <Link href="/forgot" className="hover:text-white/90">
               Forgot password?
             </Link>
-            <Link href="/signup" className="text-dubular-green hover:text-emerald-300">
+            <Link href="/signup" className="text-dubular-green hover:text-[var(--laser-green)]">
               Create account
             </Link>
           </div>
