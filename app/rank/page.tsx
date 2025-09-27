@@ -47,13 +47,7 @@ export default function RankPage() {
       <section className="relative h-[calc(100dvh-var(--header-h)-var(--bottombar-h))] w-full overflow-hidden">
         {/* Background thumbnail */}
         <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?q=80&w=1800"
-            alt=""
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/55" />
-        </div>
+  <div className="absolute inset-0 bg-black" />
 
         {/* Foreground content */}
         <div className="relative z-10 mx-auto flex h-full w-full max-w-5xl flex-col px-4 py-6">
@@ -116,9 +110,7 @@ export default function RankPage() {
                   className="group flex items-center gap-3 rounded-xl px-2 py-2 hover:bg-white/5"
                 >
                   <div className="w-8 text-center text-white/70">{i + 1}</div>
-                  <img src={u.avatar} alt="" className="h-10 w-10 rounded-full object-cover" />
-                  <div className="min-w-0 grow">
-                    <div className="truncate text-white/90">{u.name}</div>
+  <div className="absolute inset-0 bg-black" />
                     <div className="text-xs text-white/50">
                       {METRICS[group].find(m => m.key === metric)?.label}
                     </div>
