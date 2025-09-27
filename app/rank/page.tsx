@@ -116,7 +116,7 @@ export default function RankPage() {
                   className="group flex items-center gap-3 rounded-xl px-2 py-2 hover:bg-white/5"
                 >
                   <div className="w-8 text-center text-white/70">{i + 1}</div>
-                  <img src={u.avatar} alt="" className="h-10 w-10 rounded-full object-cover" />
+                  <div className="h-full w-full bg-black" />
                   <div className="min-w-0 grow">
                     <div className="truncate text-white/90">{u.name}</div>
                     <div className="text-xs text-white/50">
