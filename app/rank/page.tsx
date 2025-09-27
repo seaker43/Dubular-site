@@ -43,8 +43,8 @@ export default function RankPage() {
   const list = useMemo(() => seed.slice().sort((a, b) => b.value - a.value), [group, metric]);
 
   return (
-    <main className="min-h-[calc(var(--vvh)-var(--header-h)-var(--bottombar-h))] pb-[var(--bottombar-h)] pb-[var(--bottombar-h)]">
-      <section className="relative h-[calc(100dvh-var(--header-h)-var(--bottombar-h))] w-full overflow-hidden">
+    <main className="min-h-[calc(var(--vvh)-var(--header-h)-var(--bottombar-h))] pb-[var(--bottombar-h)] px-4 overflow-x-hidden">
+      <section className="relative min-h-[calc(var(--vvh)-var(--header-h)-var(--bottombar-h))] w-full overflow-hidden pt-[calc(var(--header-h)+8px)]">
         {/* Background thumbnail */}
         <div className="absolute inset-0">
           <img
@@ -63,7 +63,7 @@ export default function RankPage() {
           </h1>
 
           {/* Group tabs */}
-          <div className="mx-auto mb-4 flex items-center gap-2 rounded-full bg-white/10 p-1">
+          <div className="sticky top-[calc(var(--header-h)+8px)] z-30 mx-auto mb-4 flex items-center gap-2 rounded-full bg-black/40 backdrop-blur p-1">
             {GROUPS.map(g => (
               <button
                 key={g.key}
