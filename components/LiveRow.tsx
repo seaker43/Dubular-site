@@ -49,7 +49,7 @@ export default function LiveRow({ glowRed = false, showLiveBadge = false }: { gl
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', overscrollBehaviorX: 'contain' }}
         >
           {items.map((item, idx) => (
-            <div key={`${item.id}-${idx}`} className="shrink-0 w-[220px] overflow-visible thumb-glow">
+            <div key={`${item.id}-${idx}`} className={`shrink-0 w-[220px] overflow-visible ${glowRed ? "thumb-glow" : ""}`}>
               <ThumbnailCard data={{ title: item.title, image: item.img, live: true }} />
             </div>
           ))}
