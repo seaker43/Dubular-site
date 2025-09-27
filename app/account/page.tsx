@@ -38,7 +38,7 @@ export default function AccountLoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword((s) => !s)}
-                  className="text-xs text-emerald-400 hover:text-emerald-300"
+                  className="text-xs text-dubular-green hover:text-emerald-300"
                 >
                   {showPassword ? "Hide" : "Show"}
                 </button>
@@ -52,7 +52,7 @@ export default function AccountLoginPage() {
             </label>
             <button
               type="submit"
-              className="w-full rounded-xl bg-emerald-500/90 hover:bg-emerald-400 text-black font-semibold py-2 transition"
+              className="w-full rounded-xl bg-dubular-green/90 hover:bg-dubular-green text-black font-semibold py-2 transition"
             >
               Sign in
             </button>
@@ -61,7 +61,7 @@ export default function AccountLoginPage() {
             <Link href="/forgot" className="hover:text-white/90">
               Forgot password?
             </Link>
-            <Link href="/signup" className="text-emerald-400 hover:text-emerald-300">
+            <Link href="/signup" className="text-dubular-green hover:text-emerald-300">
               Create account
             </Link>
           </div>

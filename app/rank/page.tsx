@@ -73,7 +73,7 @@ export default function RankPage() {
                   setMetric(METRICS[g.key][0].key);
                 }}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-                  group === g.key ? "bg-emerald-500 text-black" : "text-white/80 hover:text-white"
+                  group === g.key ? "bg-dubular-green text-black" : "text-white/80 hover:text-white"
                 }`}
               >
                 {g.label}
@@ -89,7 +89,7 @@ export default function RankPage() {
                 onClick={() => setMetric(m.key)}
                 className={`whitespace-nowrap rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
                   metric === m.key
-                    ? "border-emerald-400 bg-emerald-400 text-black"
+                    ? "border-dubular-green bg-dubular-green text-black"
                     : "border-white/15 bg-black/30 text-white/80 hover:text-white"
                 }`}
               >
@@ -123,7 +123,7 @@ export default function RankPage() {
                       {METRICS[group].find(m => m.key === metric)?.label}
                     </div>
                   </div>
-                  <div className="text-right text-emerald-400 font-semibold tabular-nums">{u.value}</div>
+                  <div className="text-right text-dubular-green font-semibold tabular-nums">{u.value}</div>
                 </li>
               ))}
             </ol>
