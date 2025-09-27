@@ -7,7 +7,7 @@
 
 /* --- Global CSS variables --- */
 :root {
-  --laser-green:var(--laser-green);
+  --laser-green:#39FF14;
   --bottombar-h: 64px;
   --vvh: 100dvh;
   --header-h: 100px;
