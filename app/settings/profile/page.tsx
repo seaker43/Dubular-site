@@ -40,13 +40,11 @@ export default function ProfileSettingsPage() {
 
       <label className="block mb-2 text-sm opacity-80">Handle</label>
       <input
-        className="w-full rounded bg-neutral-900 p-3 mb-1"
+        className="w-full rounded bg-neutral-900 p-3 mb-4"
         value={handle}
         onChange={(e) => setHandle(e.target.value)}
+        placeholder="your_handle"
       />
-      <p className="text-xs opacity-60 mb-4">
-        Your public profile: <span className="font-mono">/u/{handle || "handle"}</span>
-      </p>
 
       <label className="block mb-2 text-sm opacity-80">Bio</label>
       <textarea

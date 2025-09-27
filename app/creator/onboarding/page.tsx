@@ -76,12 +76,7 @@ export default function CreatorOnboarding() {
         </div>
       )}
 
-      {step === 3 && (
-        <p>
-          Done! Visit your channel at{" "}
-          <span className="font-mono">/@{handle}</span>
-        </p>
-      )}
+      {step === 3 && <p>Done! Your channel has been created.</p>}
     </div>
   );
 }
