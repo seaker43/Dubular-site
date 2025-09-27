@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 export default function UserPublicPage({ params }: { params: { handle: string } }) {
   return (
     <div className="p-4 text-white">
