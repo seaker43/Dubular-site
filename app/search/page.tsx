@@ -15,7 +15,7 @@ export default function SearchPage() {
   ];
 
   return (
-    <main className="search-page px-4 py-6 pb-[var(--bottombar-h)] min-h-[calc(100dvh-var(--header-h)-var(--bottombar-h))]">
+    <main className="search-page search-page px-4 py-6 pb-[var(--bottombar-h)] min-h-[calc(100dvh-var(--header-h)-var(--bottombar-h))]">
       {/* Search bar pinned under header */}
       <div className="mb-6">
         <SearchBar />
