@@ -1,17 +1,8 @@
-"use client";
+import ClientUserPage from "./ClientUserPage";
 
-import { useParams } from "next/navigation";
+// Keep server file minimal to avoid "handle is not defined" during data collection.
+export const dynamic = "force-dynamic";
 
 export default function UserPublicPage() {
-  const params = useParams<{ handle: string }>();
-  const handle = params?.handle ?? "user";
-
-  return (
-    <div className="p-4 text-white">
-      <h1 className="text-2xl font-semibold">
-        User <span className="font-mono">/u/{handle}</span>
-      </h1>
-      <p className="opacity-70 mt-2">Viewer profile page placeholder.</p>
-    </div>
-  );
+  return <ClientUserPage />;
 }
