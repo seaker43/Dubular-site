@@ -22,3 +22,6 @@ dist/
 .next/
 .vercel/
 tsconfig.tsbuildinfo
+
+# local backups
+package.json.bak
