@@ -7,12 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postbuild": "node scripts/write-version.js "postbuild": "node scripts/write-version.js","postbuild": "node scripts/write-version.js", node scripts/write-pages-metadata.js",
     "db:gen": "drizzle-kit generate",
     "db:apply": "tsx scripts/migrate.ts",
     "db:up": "npm run db:gen && npm run db:apply",
     "db:apply:d1": "DB_TARGET=d1 tsx scripts/migrate.ts",
-    "db:apply:pg": "DB_TARGET=pg tsx scripts/migrate.ts"
+    "db:apply:pg": "DB_TARGET=pg tsx scripts/migrate.ts",
+    "postbuild": "node scripts/write-version.js && node scripts/write-pages-metadata.js"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.1",
