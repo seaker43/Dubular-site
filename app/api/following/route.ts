@@ -1,1 +1,2 @@
-export const runtime="edge";\nexport * from "../follow/route";
+export const runtime = "edge";
+export { GET, POST, DELETE } from "../follow/route";
