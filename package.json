@@ -7,24 +7,37 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postbuild": "node scripts/write-version.js"
+    "postbuild": "node scripts/write-version.js",
+    "db:gen": "drizzle-kit generate",
+    "db:apply": "tsx scripts/migrate.ts",
+    "db:up": "npm run db:gen && npm run db:apply",
+    "db:apply:d1": "DB_TARGET=d1 tsx scripts/migrate.ts",
+    "db:apply:pg": "DB_TARGET=pg tsx scripts/migrate.ts"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.0.1",
+    "drizzle-orm": "^0.44.5",
     "lucide-react": "0.544.0",
     "next": "15.5.2",
+    "pg": "^8.16.3",
+    "postgres": "^3.4.7",
     "react": "18.3.1",
     "react-dom": "18.3.1"
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.13.16",
+    "@cloudflare/workers-types": "^4.20250927.0",
     "@types/node": "^20.14.9",
     "@types/react": "^18.3.3",
     "autoprefixer": "^10.4.21",
+    "drizzle-kit": "^0.31.5",
     "eslint": "^8.57.0",
     "eslint-config-next": "15.5.2",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.10",
-    "typescript": "^5.6.3"
+    "tsx": "^4.20.6",
+    "typescript": "^5.6.3",
+    "wrangler": "^4.40.2"
   },
   "description": "",
   "main": "index.js",
