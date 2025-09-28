@@ -8,7 +8,7 @@ const bad = (msg: string, status = 400) => ok({ error: msg }, status);
 
 function db() {
   // Binding name must match wrangler.toml [[d1_databases]].binding (we use "D1")
-  const d1 = (getRequestContext().env as any).D1 as D1Database;
+  const d1 = (getRequestContext().env as any).DB as D1Database;
   if (!d1) throw new Error("D1 binding not found (check wrangler.toml [[d1_databases]])");
   return d1;
 }
