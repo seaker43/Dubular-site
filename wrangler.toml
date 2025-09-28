@@ -1,6 +1,6 @@
+name = "dubular-site"
+pages_build_output_dir = ".vercel/output/static"
 
-[[d1_databases]]
-binding = "D1"
-database_name = "dubular_db"
-database_id = "81b9c120-8439-432f-a513-374157df2d49"
+[env.production]
+compatibility_date = "2025-09-28"
 
