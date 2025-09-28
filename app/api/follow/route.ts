@@ -4,7 +4,7 @@ import { getRequestContext } from "@cloudflare/next-on-pages";
 
 // tiny helpers
 const ok = (b: any, init: number | ResponseInit = 200) => NextResponse.json(b, typeof init === "number" ? { status: init } : init);
-const bad = (msg: string, status = 400) => ok({ error: msg }, status);
+const bad = (msg: string, status = 400) => new Response(JSON.stringify({ ok: false, error: msg }), { status, headers: { "content-type": "application/json" } });
 
 function db() {
   // Binding name must match wrangler.toml [[d1_databases]].binding (we use "D1")
