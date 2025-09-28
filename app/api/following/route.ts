@@ -1,1 +1,1 @@
-export * from "../follow/route";
+export const runtime="edge";\nexport * from "../follow/route";
