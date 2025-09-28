@@ -36,7 +36,7 @@ export async function GET(req: Request) {
       const id = Number(follower);
       if (!Number.isFinite(id)) return bad("follower_id must be a number");
       const q = await db()
-        .prepare("SELECT creator_id FROM follows WHERE follower_id = ? ORDER BY creator_id")
+        .prepare("SELECT creator_id FROM follows WHERE user_id = ?? ORDER BY creator_id")
         .bind(id)
         .all();
       return ok({ ok: true, follower_id: id, creators: (q.results ?? []).map((r: any) => r.creator_id) });
@@ -51,7 +51,7 @@ export async function GET(req: Request) {
                (SELECT COUNT(*) FROM follows f2 WHERE f2.creator_id = c.id) AS followers
         FROM creators c
         WHERE EXISTS (
-          SELECT 1 FROM follows f WHERE f.follower_id = ? AND f.creator_id = c.id
+          SELECT 1 FROM follows f WHERE f.user_id = ?? AND f.creator_id = c.id
         )
         ${cursor ? "AND c.id > ?" : ""}
         ORDER BY followers DESC, c.id ASC
@@ -80,7 +80,7 @@ export async function POST(req: Request) {
       return bad("follower_id and creator_id must be numbers");
 
     const r = await db()
-      .prepare("INSERT OR IGNORE INTO follows (follower_id, creator_id) VALUES (?, ?)")
+      .prepare("INSERT OR IGNORE INTO follows (user_id, creator_id) VALUES (?, ?)")
       .bind(follower_id, creator_id)
       .run();
 
@@ -97,7 +97,7 @@ export async function DELETE(req: Request) {
       return bad("follower_id and creator_id must be numbers");
 
     const r = await db()
-      .prepare("DELETE FROM follows WHERE follower_id = ? AND creator_id = ?")
+      .prepare("DELETE FROM follows WHERE user_id = ?? AND creator_id = ?")
       .bind(follower_id, creator_id)
       .run();
 
