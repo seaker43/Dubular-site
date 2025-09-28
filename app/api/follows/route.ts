@@ -51,7 +51,8 @@ export async function GET(req: Request) {
     if (!Number.isFinite(user_id)) return bad("user_id must be a number");
 
     let sql = `
-      SELECT c.id, c.handle, c.display_name, c.thumbnail_url
+      SELECT c.id, c.handle, c.display_name, c.thumbnail_url,
+      (SELECT COUNT(*) FROM follows f2 WHERE f2.creator_id = c.id) AS followers
       FROM follows f
       JOIN creators c ON c.id = f.creator_id
       WHERE f.user_id = ?
