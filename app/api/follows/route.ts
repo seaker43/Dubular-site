@@ -52,7 +52,7 @@ export async function GET(req: Request) {
 
     let sql = `
       SELECT c.id, c.handle, c.display_name, c.thumbnail_url,
-      (SELECT COUNT(*) FROM follows f2 WHERE f2.creator_id = c.id) AS followers_count
+      (SELECT COUNT(*) FROM follows f2 WHERE f2.creator_id = c.id) AS followers_count_count
       FROM follows f
       JOIN creators c ON c.id = f.creator_id
       WHERE f.user_id = ?
