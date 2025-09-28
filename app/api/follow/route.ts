@@ -2,7 +2,9 @@ export const runtime = "edge";
 import { NextResponse } from "next/server";
 
 type Follow = { creator_id: number; follower_id: number; ts: number };
-const store: Map<string, Follow> =
+const g = globalThis as any;
+if (!g.__FOLLOW_STORE) { g.__FOLLOW_STORE = new Map<string, { creator_id: number; follower_id: number; ts: number }>(); }
+const store: Map<string, { creator_id: number; follower_id: number; ts: number }> = g.__FOLLOW_STORE;
   (globalThis as any).__FOLLOW_STORE ?? ((globalThis as any).__FOLLOW_STORE = new Map());
 
 const ok = (data: Record<string, unknown>, init?: ResponseInit) =>
