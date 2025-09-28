@@ -41,8 +41,8 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   try {
-    const { follower_id, creator_id } = await req.json();
-    if (typeof follower_id !== "number" || typeof creator_id !== "number") return bad("follower_id and creator_id must be numbers");
+    const { user_id, creator_id } = await req.json();
+    if (typeof user_id !== "number" || typeof creator_id !== "number") return bad("user_id and creator_id must be numbers");
     await db().prepare("INSERT OR IGNORE INTO follows (follower_id, creator_id) VALUES (?, ?)").bind(follower_id, creator_id).run();
     return ok({ ok: true, status: "following", follower_id, creator_id });
   } catch (err: any) {
@@ -52,8 +52,8 @@ export async function POST(req: Request) {
 
 export async function DELETE(req: Request) {
   try {
-    const { follower_id, creator_id } = await req.json();
-    if (typeof follower_id !== "number" || typeof creator_id !== "number") return bad("follower_id and creator_id must be numbers");
+    const { user_id, creator_id } = await req.json();
+    if (typeof user_id !== "number" || typeof creator_id !== "number") return bad("user_id and creator_id must be numbers");
     const r = await db().prepare("DELETE FROM follows WHERE follower_id = ? AND creator_id = ?").bind(follower_id, creator_id).run();
     return ok({ ok: true, status: r.meta.changes ? "unfollowed" : "noop", follower_id, creator_id });
   } catch (err: any) {
