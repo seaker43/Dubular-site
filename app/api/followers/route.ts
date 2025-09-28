@@ -1,2 +1,1 @@
-export const runtime = 'edge';
-export { GET } from "../follows/route";
+export * from "../follow/route";
