@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postbuild": "node scripts/write-version.js",
+    "postbuild": "node scripts/write-version.js "postbuild": "node scripts/write-version.js","postbuild": "node scripts/write-version.js", node scripts/write-pages-metadata.js",
     "db:gen": "drizzle-kit generate",
     "db:apply": "tsx scripts/migrate.ts",
     "db:up": "npm run db:gen && npm run db:apply",
