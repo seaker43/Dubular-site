@@ -2,8 +2,10 @@ export const runtime = "edge";
 import { NextResponse } from "next/server";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 
-const ok  = (b: any, init = 200) => NextResponse.json(b, init);
-const isProd = process.env.NODE_ENV === "production"; const fmt=(e:any)=> isProd ? (e?.message ?? String(e)) : (e?.stack ?? JSON.stringify(e)); const bad = (e:any, status = 400) => ok({ ok:false, error: fmt(e) }, status);
+const ok = (b: any, init: number | ResponseInit = 200) =>
+  NextResponse.json(b, typeof init === "number" ? { status: init } : init);
+const bad = (msg: string, status = 400) =>
+  NextResponse.json({ ok: false, error: msg }, { status });
 
 function db() {
   const d1 = (getRequestContext().env as any).DB as D1Database;
@@ -13,63 +15,94 @@ function db() {
 
 export async function GET(req: Request) {
   try {
-    const url      = new URL(req.url);
-    const creatorQ = url.searchParams.get("creator_id");
-    const userQ    = url.searchParams.get("user_id");
-    const limit    = Math.min(Math.max(Number(url.searchParams.get("limit") ?? "20"), 1), 50);
-    const cursor   = Number(url.searchParams.get("cursor") ?? "0");
+    const url = new URL(req.url);
+    const creator = url.searchParams.get("creator_id");
+    const follower = url.searchParams.get("follower_id");
+    const userId = url.searchParams.get("user_id");
+    const limit = Math.min(Number(url.searchParams.get("limit") ?? 20), 50);
+    const cursor = url.searchParams.get("cursor");
 
-    if (!!creatorQ === !!userQ) {
-      return bad("Pass exactly one of ?creator_id or ?user_id");
+    if (creator) {
+      const id = Number(creator);
+      if (!Number.isFinite(id)) return bad("creator_id must be a number");
+      const q = await db()
+        .prepare("SELECT follower_id FROM follows WHERE creator_id = ? ORDER BY follower_id")
+        .bind(id)
+        .all();
+      return ok({ ok: true, creator_id: id, followers: (q.results ?? []).map((r: any) => r.follower_id) });
     }
 
-    if (creatorQ) {
-      const creator_id = Number(creatorQ);
-      if (!Number.isFinite(creator_id)) return bad("creator_id must be a number");
-
-      let sql = `
-        SELECT u.id, u.username
-        FROM follows f
-        JOIN users u ON u.id = f.user_id
-        WHERE f.creator_id = ?
-      `;
-      const args: any[] = [creator_id];
-
-      if (cursor > 0) { sql += " AND u.id > ?"; args.push(cursor); }
-      sql += " ORDER BY u.id ASC LIMIT ?";
-
-      const rs = await db().prepare(sql).bind(...args, limit + 1).all();
-      const list = (rs.results ?? []) as any[];
-      const hasMore = list.length > limit;
-      const followers = hasMore ? list.slice(0, limit) : list;
-      const nextCursor = hasMore ? followers[followers.length - 1].id : undefined;
-
-      return ok({ creator_id, followers, nextCursor });
+    if (follower) {
+      const id = Number(follower);
+      if (!Number.isFinite(id)) return bad("follower_id must be a number");
+      const q = await db()
+        .prepare("SELECT creator_id FROM follows WHERE follower_id = ? ORDER BY creator_id")
+        .bind(id)
+        .all();
+      return ok({ ok: true, follower_id: id, creators: (q.results ?? []).map((r: any) => r.creator_id) });
     }
 
-    const user_id = Number(userQ);
-    if (!Number.isFinite(user_id)) return bad("user_id must be a number");
+    if (userId) {
+      const id = Number(userId);
+      if (!Number.isFinite(id)) return bad("user_id must be a number");
 
-    let sql = `
-      SELECT c.id, c.handle, c.display_name, c.thumbnail_url,
-      (SELECT COUNT(*) FROM follows f2 WHERE f2.creator_id = c.id) AS followers_count_count
-      FROM follows f
-      JOIN creators c ON c.id = f.creator_id
-      WHERE f.user_id = ?
-    `;
-    const args: any[] = [user_id];
+      const sql = `
+        SELECT c.id, c.handle, c.display_name, c.thumbnail_url,
+               (SELECT COUNT(*) FROM follows f2 WHERE f2.creator_id = c.id) AS followers
+        FROM creators c
+        WHERE EXISTS (
+          SELECT 1 FROM follows f WHERE f.follower_id = ? AND f.creator_id = c.id
+        )
+        ${cursor ? "AND c.id > ?" : ""}
+        ORDER BY followers DESC, c.id ASC
+        LIMIT ?`;
+      const stmt = cursor
+        ? db().prepare(sql).bind(id, Number(cursor), limit)
+        : db().prepare(sql).bind(id, limit);
 
-    if (cursor > 0) { sql += " AND c.id > ?"; args.push(cursor); }
-    sql += " ORDER BY c.id ASC LIMIT ?";
+      const q = await stmt.all();
+      const rows = (q.results ?? []) as any[];
+      const next_cursor = rows.length === limit ? rows[rows.length - 1].id : null;
 
-    const rs = await db().prepare(sql).bind(...args, limit + 1).all();
-    const list = (rs.results ?? []) as any[];
-    const hasMore = list.length > limit;
-    const creators = hasMore ? list.slice(0, limit) : list;
-    const nextCursor = hasMore ? creators[creators.length - 1].id : undefined;
+      return ok({ ok: true, user_id: id, creators: rows, next_cursor });
+    }
 
-    return ok({ user_id, creators, nextCursor });
+    return bad("missing query: pass ?creator_id=… or ?follower_id=… or ?user_id=…");
   } catch (err: any) {
-    return bad(err?.message ?? "GET /follows failed", 500);
+    return bad(err?.message ?? "GET failed", 500);
+  }
+}
+
+export async function POST(req: Request) {
+  try {
+    const { follower_id, creator_id } = await req.json();
+    if (typeof follower_id !== "number" || typeof creator_id !== "number")
+      return bad("follower_id and creator_id must be numbers");
+
+    const r = await db()
+      .prepare("INSERT OR IGNORE INTO follows (follower_id, creator_id) VALUES (?, ?)")
+      .bind(follower_id, creator_id)
+      .run();
+
+    return ok({ ok: true, status: "following", follower_id, creator_id, inserted: r.meta.changes ?? 0 });
+  } catch (err: any) {
+    return bad(err?.message ?? "POST failed", 500);
+  }
+}
+
+export async function DELETE(req: Request) {
+  try {
+    const { follower_id, creator_id } = await req.json();
+    if (typeof follower_id !== "number" || typeof creator_id !== "number")
+      return bad("follower_id and creator_id must be numbers");
+
+    const r = await db()
+      .prepare("DELETE FROM follows WHERE follower_id = ? AND creator_id = ?")
+      .bind(follower_id, creator_id)
+      .run();
+
+    return ok({ ok: true, status: r.meta.changes ? "unfollowed" : "noop", follower_id, creator_id });
+  } catch (err: any) {
+    return bad(err?.message ?? "DELETE failed", 500);
   }
 }
