@@ -1,7 +1,6 @@
 export const runtime = "edge";
 import { NextResponse } from "next/server";
 
-// simple in-memory store that persists across requests on the same worker
 type Follow = { creator_id: number; follower_id: number; ts: number };
 const store: Map<string, Follow> =
   (globalThis as any).__FOLLOW_STORE ?? ((globalThis as any).__FOLLOW_STORE = new Map());
@@ -21,26 +20,27 @@ const key = (c: number, f: number) => `${c}:${f}`;
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
+
   const creator = searchParams.get("creator_id");
   const follower = searchParams.get("follower_id");
-
-  if (!creator && !follower) {
-    return bad("pass ?creator_id=… to list followers, or ?follower_id=… to list creators");
-  }
 
   if (creator) {
     const cid = Number(creator);
     const followers = [...store.values()]
       .filter((f) => f.creator_id === cid)
       .map((f) => f.follower_id);
-    return ok({ creator_id: cid, followers });
-  } else {
+    return ok({ ok: true, creator_id: cid, followers });
+  }
+
+  if (follower) {
     const fid = Number(follower);
     const creators = [...store.values()]
       .filter((f) => f.follower_id === fid)
       .map((f) => f.creator_id);
-    return ok({ follower_id: fid, creators });
+    return ok({ ok: true, follower_id: fid, creators });
   }
+
+  return bad("Must pass either ?creator_id=… or ?follower_id=…");
 }
 
 export async function POST(req: Request) {
