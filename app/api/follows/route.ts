@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 
 const ok  = (b: any, init = 200) => NextResponse.json(b, init);
-const bad = (msg: string, status = 400) => ok({ error: msg }, status);
+const isProd = process.env.NODE_ENV === "production"; const fmt=(e:any)=> isProd ? (e?.message ?? String(e)) : (e?.stack ?? JSON.stringify(e)); const bad = (e:any, status = 400) => ok({ ok:false, error: fmt(e) }, status);
 
 function db() {
   const d1 = (getRequestContext().env as any).DB as D1Database;
