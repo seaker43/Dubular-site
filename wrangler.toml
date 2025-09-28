@@ -6,7 +6,8 @@ compatibility_date = "2025-09-28"
 
 compatibility_flags = ["nodejs_compat"]
 
+
 [[d1_databases]]
-binding = "dubular_db"
+binding = "DB"
 database_name = "dubular-db"
 database_id = "e26195c7-2b3b-4804-9c78-298daf52dda9"
