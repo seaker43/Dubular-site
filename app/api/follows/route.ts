@@ -1,27 +1,14 @@
-import { getDB } from "@/lib/db";
+import { NextResponse } from 'next/server';
+export const runtime = 'edge';
 
-export async function GET(req: Request) {
+export async function GET(req: Request, ctx: { env: { DB: D1Database } }) {
   try {
-    const { searchParams } = new URL(req.url);
-    const limit = Number(searchParams.get("limit") || 10);
-
-    const db = getDB();
-    const { results } = await db
-      .prepare("SELECT id, follower_id, creator_id, created_at FROM follows LIMIT ?")
-      .bind(limit)
-      .all();
-
-    return new Response(JSON.stringify(results), {
-      headers: { "Content-Type": "application/json" },
-      status: 200,
-    });
+    const url = new URL(req.url);
+    const limit = Number(url.searchParams.get('limit') || 10);
+    const { results } = await ctx.env.DB.prepare('SELECT * FROM follows LIMIT ?').bind(limit).all();
+    return NextResponse.json(results);
   } catch (err) {
-    console.error("Error fetching follows:", err);
-    return new Response(JSON.stringify({ error: "Failed to fetch follows" }), {
-      headers: { "Content-Type": "application/json" },
-      status: 500,
-    });
+    console.error('Error fetching follows:', err);
+    return NextResponse.json({ error: 'Failed to fetch follows' }, { status: 500 });
   }
 }
-
-export const runtime = 'edge';
