@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 export const runtime = 'edge';
 
 
-export async function GET(req: Request, ctx: any) {
+async function GET(req: Request, ctx: any) {
   const { searchParams } = new URL(req.url);
   const handle = searchParams.get("handle");
   if (!handle) return NextResponse.json({ error: "Missing handle" }, { status: 400 });

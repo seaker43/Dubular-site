@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 export const runtime = 'edge';
 
 
-export async function GET(req: Request, ctx: any) {
+async function GET(req: Request, ctx: any) {
   try {
     const { results: creators } = await ctx.env.DB.prepare("SELECT id, handle, display_name, bio, created_at FROM creators").all();
     const enriched = [];
