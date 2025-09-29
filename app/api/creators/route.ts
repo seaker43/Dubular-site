@@ -15,6 +15,6 @@ export async function GET(req: Request, ctx: any) {
 
     return NextResponse.json({ ok: true, creators: results ?? [] });
   } catch (_err) {
-    console.error("API error:", e); return NextResponse.json({ error: e.message }, { status: 500 });
+    console.error("API error:", _err); return NextResponse.json({ error: String(_err?.message || _err) }, { status: 500 });
   }
 }
