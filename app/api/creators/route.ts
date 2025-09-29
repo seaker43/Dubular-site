@@ -8,13 +8,13 @@ export async function GET(req: Request, ctx: any) {
     const limitNum = Number(limitRaw ?? 5);
     const limit = Number.isFinite(limitNum) ? Math.min(Math.max(limitNum, 1), 50) : 5;
 
-    const { results } = await ctx.env.DB
+    const { results } = await db
       .prepare('SELECT id, handle, display_name, bio, created_at FROM creators LIMIT ?')
       .bind(limit)
       .all();
 
     return NextResponse.json({ ok: true, creators: results ?? [] });
   } catch (_err) {
-    console.error("API error:", _err); return NextResponse.json({ error: String(_err?.message || _err) }, { status: 500 });
+    console.error("API error:", e); return NextResponse.json({ error: String(e?.message || e) }, { status: 500 });
   }
 }

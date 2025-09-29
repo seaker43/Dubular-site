@@ -5,14 +5,14 @@ export async function GET(req: Request, ctx: any) {
   try {
     const url = new URL(req.url);
     const handle = url.searchParams.get('handle');
-    if (!handle) console.error("API error:", _err); return NextResponse.json({ error: String(_err?.message || _err) }, { status: 500 });
+    if (!handle) console.error("API error:", e); return NextResponse.json({ error: String(e?.message || e) }, { status: 500 });
 
-    const followingQ = await ctx.env.DB
+    const followingQ = await db
       .prepare('SELECT following_handle AS handle, created_at FROM follows WHERE follower_handle = ? ORDER BY created_at DESC LIMIT 100')
       .bind(handle)
       .all();
 
-    const followersQ = await ctx.env.DB
+    const followersQ = await db
       .prepare('SELECT follower_handle AS handle, created_at FROM follows WHERE following_handle = ? ORDER BY created_at DESC LIMIT 100')
       .bind(handle)
       .all();
@@ -28,6 +28,6 @@ export async function GET(req: Request, ctx: any) {
       followers,
     });
   } catch (_err) {
-    console.error("API error:", _err); return NextResponse.json({ error: String(_err?.message || _err) }, { status: 500 });
+    console.error("API error:", e); return NextResponse.json({ error: String(e?.message || e) }, { status: 500 });
   }
 }
