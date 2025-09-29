@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
+export const runtime = 'edge';
 
-export const runtime = "edge";
 
 export async function GET(req: Request, ctx: any) {
   const { searchParams } = new URL(req.url);
@@ -14,8 +14,6 @@ export async function GET(req: Request, ctx: any) {
     return NextResponse.json({ error: "Failed to fetch follows", detail: err.message }, { status: 500 });
   }
 }
-import { NextResponse } from 'next/server';
-export const runtime = 'edge';
 
 export async function GET(req: Request, ctx: { env: { DB: D1Database } }) {
   try {
