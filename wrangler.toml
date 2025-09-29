@@ -1,11 +1,9 @@
 name = "dubular-site"
 pages_build_output_dir = ".vercel/output/static"
-
-[env.production]
 compatibility_date = "2025-09-28"
 compatibility_flags = ["nodejs_compat"]
 
-  [[env.production.d1_databases]]
-  binding = "DB"
-  database_name = "dubular-db"
-  database_id = "e26195c7-2b3b-4804-9c78-298daf52dda9"
+[[d1_databases]]
+binding = "DB"
+database_name = "dubular-db"
+database_id = "e26195c7-2b3b-4804-9c78-298daf52dda9"
