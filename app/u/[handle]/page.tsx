@@ -1,4 +1,5 @@
 "use client";
+export const runtime = 'edge';
 
 import FollowButton from "@/components/FollowButton";
 import { useParams } from "next/navigation";
