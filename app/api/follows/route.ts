@@ -5,7 +5,7 @@ export async function GET(req: Request, ctx: any) {
   try {
     const url = new URL(req.url);
     const handle = url.searchParams.get('handle');
-    if (!handle) return NextResponse.json({ error: 'Missing handle' }, { status: 400 });
+    if (!handle) return NextResponse.json({ error: e.message });
 
     const followingQ = await ctx.env.DB
       .prepare('SELECT following_handle AS handle, created_at FROM follows WHERE follower_handle = ? ORDER BY created_at DESC LIMIT 100')
@@ -28,6 +28,6 @@ export async function GET(req: Request, ctx: any) {
       followers,
     });
   } catch (_err) {
-    return NextResponse.json({ error: 'Failed to fetch follows' }, { status: 500 });
+    return NextResponse.json({ error: e.message });
   }
 }

@@ -15,6 +15,6 @@ export async function GET(req: Request, ctx: any) {
 
     return NextResponse.json({ ok: true, creators: results ?? [] });
   } catch (_err) {
-    return NextResponse.json({ error: 'Failed to fetch creators' }, { status: 500 });
+    return NextResponse.json({ error: e.message });
   }
 }
