@@ -9,9 +9,11 @@ export const dynamic = "force-dynamic";
 import { useParams } from "next/navigation";
 
 export default function UserPublicPage() {
-  const params = useParams<{ handle: string }>();
+  const params = useParams<{ handle: string }>(</>
+);
   const handle = typeof params?.handle === "string" ? params.handle : "";
-  return (
+  return (<>
+<>
     <FollowButton />
     <div className="p-4 text-white">
       <h1 className="text-2xl font-semibold">
