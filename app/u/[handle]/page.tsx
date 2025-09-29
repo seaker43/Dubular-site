@@ -12,8 +12,6 @@ export default function UserPublicPage() {
   const params = useParams<{ handle: string }>();
   const handle = typeof params?.handle === "string" ? params.handle : "";
   return (
-    <FollowButton creatorId={creator.id} />
-    <FollowButton creatorId={creator.id} />
     <FollowButton />
     <div className="p-4 text-white">
       <h1 className="text-2xl font-semibold">
