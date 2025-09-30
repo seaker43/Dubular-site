@@ -1,4 +1,6 @@
 import { NextResponse } from 'next/server';
+import { env } from 'cloudflare:workers';
+
 export const runtime = 'edge';
 
 export async function GET(req: Request) {
@@ -8,7 +10,7 @@ export async function GET(req: Request) {
     const limitNum = Number(limitRaw ?? 5);
     const limit = Number.isFinite(limitNum) ? Math.min(Math.max(limitNum, 1), 50) : 5;
 
-    const { results } = await (globalThis as any).DB
+    const { results } = await env.DB
       .prepare('SELECT id, handle, display_name, bio, created_at FROM creators LIMIT ?')
       .bind(limit)
       .all();
