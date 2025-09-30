@@ -1,4 +1,64 @@
-import { NextResponse } from "next/server";
-import { getRequestContext } from "@cloudflare/next-on-pages";
-export const runtime="edge";
-export async function POST(req:Request){try{const env=getRequestContext().env as any;const db=env.DB;const { follower_id, following_id, action }=await req.json();if(!follower_id||!following_id||!action)return NextResponse.json({ok:false,error:"missing fields"},{status:400});if(action==="follow"){await db.prepare("INSERT OR IGNORE INTO follows (follower_id,following_id) VALUES (?,?)").bind(follower_id,following_id).run();return NextResponse.json({ok:true,action:"follow"})}if(action==="unfollow"){await db.prepare("DELETE FROM follows WHERE follower_id=? AND following_id=?").bind(follower_id,following_id).run();return NextResponse.json({ok:true,action:"unfollow"})}return NextResponse.json({ok:false,error:"invalid action"},{status:400})}catch(e:any){console.error("API /follow:",e);return NextResponse.json({ok:false,error:e?.message??String(e)},{status:500})}}
+import { NextResponse } from 'next/server';
+import { getRequestContext } from 'next/server';
+export const runtime = 'edge';
+
+async function resolveId(handle: string, db: D1Database): Promise<number|null> {
+  const row = await db.prepare('SELECT id FROM creators WHERE handle=?').bind(handle).first() as any;
+  return row?.id ?? null;
+}
+
+export async function POST(req: Request) {
+  try {
+    const env = getRequestContext().env as { DB: D1Database };
+    const db = env.DB;
+
+    const body = await req.json().catch(() => ({}));
+    const followerHandle = body?.follower_handle as string | undefined;
+    const followingHandle = body?.following_handle as string | undefined;
+    const action = (body?.action as string | undefined)?.toLowerCase();
+
+    if (!followerHandle || !followingHandle || !action) {
+      return NextResponse.json({ ok:false, error:'missing fields' }, { status:400 });
+    }
+
+    const [followerId, followingId] = await Promise.all([
+      resolveId(followerHandle, db),
+      resolveId(followingHandle, db),
+    ]);
+    if (!followerId || !followingId) {
+      return NextResponse.json({ ok:false, error:'unknown handle(s)' }, { status:400 });
+    }
+    if (followerId === followingId) {
+      return NextResponse.json({ ok:false, error:'cannot follow self' }, { status:400 });
+    }
+
+    if (action === 'follow') {
+      const res = await db
+        .prepare('INSERT OR IGNORE INTO follows (follower_id, following_id) VALUES (?,?)')
+        .bind(followerId, followingId)
+        .run();
+      const changes = (res as any)?.meta?.changes ?? 0;
+      return NextResponse.json({
+        ok: true,
+        action: changes > 0 ? 'followed' : 'already_following',
+      });
+    }
+
+    if (action === 'unfollow') {
+      const res = await db
+        .prepare('DELETE FROM follows WHERE follower_id=? AND following_id=?')
+        .bind(followerId, followingId)
+        .run();
+      const changes = (res as any)?.meta?.changes ?? 0;
+      return NextResponse.json({
+        ok: true,
+        action: changes > 0 ? 'unfollowed' : 'not_following',
+      });
+    }
+
+    return NextResponse.json({ ok:false, error:'invalid action' }, { status:400 });
+  } catch (e:any) {
+    console.error('API /api/follow error:', e);
+    return NextResponse.json({ ok:false, error: e?.message ?? String(e) }, { status:500 });
+  }
+}
