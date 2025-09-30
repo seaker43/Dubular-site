@@ -1,5 +1,10 @@
-import { NextResponse,getRequestContext } from "next/server"; export const runtime="edge";
-
-function DB(){ return (getRequestContext() as any).DB() as D1Database }
-async function resolveId(qs:URLSearchParams,db:any){const id=qs.get("creator_id");if(id&&/^\d+$/.test(id))return +id;const h=qs.get("handle");if(!h)return null;return (await db.prepare("SELECT id FROM creators WHERE handle=?").bind(h).first() as any)?.id??null;}
-export async function GET(req:Request){try{const db=(getRequestContext() as any).DB() as any;const url=new URL(req.url);const id=await resolveId(url.searchParams,db);if(!id)return NextResponse.json({ok:false,error:"missing query: pass ?creator_id=… or ?handle=…"});const {results}=await db.prepare("SELECT f.id, c1.handle AS follower_handle, c1.display_name AS follower_name, f.created_at FROM follows f JOIN creators c1 ON f.follower_id=c1.id WHERE f.following_id=? ORDER BY f.created_at DESC").bind(id).all();return NextResponse.json({ok:true,followers:results??[]});}catch(e:any){console.error("/api/followers",e);return NextResponse.json({ok:false,error:e.message??String(e)},{status:500});}}
+import { NextResponse, getRequestContext } from "next/server";
+export const runtime="edge";
+type Row={id:number}; type D1Database=any;
+async function resolveId(qs:URLSearchParams,db:D1Database){const id=qs.get("creator_id");if(id&&/^[0-9]+$/.test(id))return +id;const h=qs.get("handle");if(!h)return null;const r=await db.prepare("SELECT id FROM creators WHERE handle=?").bind(h).first<Row>();return r?.id??null;}
+export async function GET(req:Request){try{const {env}=getRequestContext() as any;const db=env.DB as D1Database;const url=new URL(req.url);const creatorId=await resolveId(url.searchParams,db);if(!creatorId)return NextResponse.json({ok:false,error:"missing query: pass ?creator_id=… or ?handle=…"}, {status:400});const {results}=await db.prepare(`SELECT c.handle AS follower_handle, c.display_name AS follower_name, f.created_at
+FROM follows f
+JOIN creators c ON c.id = f.follower_id
+WHERE f.following_id = ?
+ORDER BY f.created_at DESC
+LIMIT 100`).bind(creatorId).all();return NextResponse.json({ok:true, followers:results??[]});}catch(e:any){console.error("API /followers:",e);return NextResponse.json({ok:false,error:e?.message??String(e)},{status:500});}}
