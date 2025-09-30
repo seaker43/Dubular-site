@@ -7,9 +7,9 @@ async function resolveId(handle: string, db: D1Database): Promise<number|null> {
   return row?.id ?? null;
 }
 
-export async function POST(req: Request, ctx: { env: { DB: D1Database } }) {
+export async function POST(req: Request, env: { DB: D1Database }) {
   try {
-    const db = ctx.env.DB;
+    const db = env.DB;
     const body = await req.json();
     const followerHandle = body?.follower_handle?.trim();
     const followingHandle = body?.following_handle?.trim();
