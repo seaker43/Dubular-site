@@ -1,1 +1,3 @@
 CREATE TABLE streams (id INTEGER PRIMARY KEY AUTOINCREMENT, creator_id INTEGER NOT NULL REFERENCES creators(id), title TEXT NOT NULL, thumbnail_url TEXT, is_live BOOLEAN DEFAULT 0, started_at DATETIME, ended_at DATETIME, created_at DATETIME DEFAULT CURRENT_TIMESTAMP);
+INSERT INTO streams (creator_id, title, thumbnail_url, is_live, started_at) VALUES (1, "Test Stream A", "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600", 1, CURRENT_TIMESTAMP);
+INSERT INTO streams (creator_id, title, thumbnail_url, is_live, started_at) VALUES (2, "Test Stream B", "https://images.unsplash.com/photo-1600855944280-818d239f5c25?w=600", 0, NULL);
