@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { env } from 'cloudflare:workers';
+import { getRequestContext } from '@cloudflare/next-on-pages';
 
 export const runtime = 'edge';
 
@@ -7,17 +7,18 @@ export async function GET(req: Request) {
   try {
     const url = new URL(req.url);
     const limitRaw = url.searchParams.get('limit');
-    const limitNum = Number(limitRaw ?? 5);
-    const limit = Number.isFinite(limitNum) ? Math.min(Math.max(limitNum, 1), 50) : 5;
+    const n = Number(limitRaw ?? 5);
+    const limit = Number.isFinite(n) ? Math.min(Math.max(n, 1), 50) : 5;
 
+    const { env } = getRequestContext();
     const { results } = await env.DB
       .prepare('SELECT id, handle, display_name, bio, created_at FROM creators LIMIT ?')
       .bind(limit)
       .all();
 
     return NextResponse.json({ ok: true, creators: results ?? [] });
-  } catch (err) {
-    console.error("API error /creators:", err);
-    return NextResponse.json({ error: (err as any).message ?? String(err) }, { status: 500 });
+  } catch (e) {
+    console.error('API error /creators:', e);
+    return NextResponse.json({ error: (e as any)?.message ?? String(e) }, { status: 500 });
   }
 }
