@@ -1,4 +1,6 @@
 import { NextResponse } from 'next/server';
+import { env } from 'cloudflare:workers';
+
 export const runtime = 'edge';
 
 export async function GET(req: Request) {
@@ -9,7 +11,7 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: "Missing handle param" }, { status: 400 });
     }
 
-    const { results } = await (globalThis as any).DB
+    const { results } = await env.DB
       .prepare('SELECT follower_handle, following_handle, created_at FROM follows WHERE follower_handle = ?')
       .bind(handle)
       .all();
