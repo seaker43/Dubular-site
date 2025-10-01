@@ -25,3 +25,5 @@ tsconfig.tsbuildinfo
 
 # local backups
 package.json.bak
+
+.env.local
