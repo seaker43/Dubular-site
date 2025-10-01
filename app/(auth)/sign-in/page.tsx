@@ -8,7 +8,7 @@ export default function Page() {
         appearance={{
           layout: {
             logoPlacement: "none",
-            socialButtonsPlacement: "bottom",
+            socialButtonsPlacement: "top",
             socialButtonsVariant: "blockButton",
           },
           variables: {
@@ -29,7 +29,6 @@ export default function Page() {
             formFieldInput:
               "w-full bg-neutral-900 border border-neutral-700 text-white placeholder:text-neutral-500 focus:ring-2 focus:ring-[var(--laser-green)] rounded-lg py-2 px-3",
             footer: "hidden",
-            footerActionLink: "text-[var(--laser-green)] hover:opacity-80",
             dividerText: "text-neutral-400",
           },
         }}
