@@ -7,13 +7,12 @@ export default function Page() {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    // TODO: replace with real sign-in action (Clerk/next-auth/custom)
-    window.location.href = "/"; // go home on success
+    window.location.href = "/";
   };
 
   return (
     <main className="min-h-[100svh] bg-neutral-950 text-white flex">
-      <div className="w-full flex flex-col justify-center items-center px-6 py-8">
+      <div className="w-full flex flex-col items-center px-6 pt-8 pb-12">
         <div className="w-full max-w-md">
           <h1 className="text-3xl font-bold text-center">Sign in to Dubular</h1>
           <p className="text-neutral-400 text-center mt-3">Welcome back!</p>
