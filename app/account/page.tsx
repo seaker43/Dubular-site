@@ -1,11 +1,7 @@
 "use client";
-
-import { useState } from "react";
 import Link from "next/link";
 
 export default function AccountLoginPage() {
-  const [showPassword, setShowPassword] = useState(false);
-
   return (
     <main className="min-h-[calc(100dvh-var(--header-h)-var(--bottombar-h))] w-full grid place-items-center px-4 pb-[var(--bottombar-h)]">
       <div className="w-full max-w-md">
@@ -14,72 +10,47 @@ export default function AccountLoginPage() {
             Sign in to Dubular
           </h1>
           <p className="text-white/60 text-sm text-center mb-6">
-            Welcome back! Enter your details to continue.
+            Welcome back! Use the buttons below to continue.
           </p>
-          <form
-            className="space-y-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert("Submit login");
-            }}
-          >
-            <label className="block">
-              <span className="block text-sm text-white/70 mb-1">Email</span>
-              <input
-                type="email"
-                required
-                placeholder="you@example.com"
-                className="w-full rounded-xl bg-zinc-900/70 border border-white/10 px-3 py-2 text-white outline-none focus:border-white/30"
-              />
-            </label>
-            <label className="block">
-              <div className="flex items-center justify-between">
-                <span className="block text-sm text-white/70 mb-1">Password</span>
-                <button
-                  type="button"
-                  onClick={() => setShowPassword((s) => !s)}
-                  className="text-xs text-dubular-green hover:text-[var(--laser-green)]"
-                >
-                  {showPassword ? "Hide" : "Show"}
-                </button>
-              </div>
-              <input
-                type={showPassword ? "text" : "password"}
-                required
-                placeholder="••••••••"
-                className="w-full rounded-xl bg-zinc-900/70 border border-white/10 px-3 py-2 text-white outline-none focus:border-white/30"
-              />
-            </label>
-            <button
-              type="submit"
-              className="w-full rounded-xl bg-dubular-green/90 hover:bg-dubular-green text-black font-semibold py-2 transition"
+
+          <div className="grid gap-3">
+            <Link
+              href="/sign-in"
+              className="w-full text-center rounded-xl bg-dubular-green/90 hover:bg-dubular-green text-black font-semibold py-2 transition"
             >
-              Sign in
-            </button>
-          </form>
-          <div className="mt-6 flex items-center justify-between text-xs text-white/60">
-            <Link href="/forgot" className="hover:text-white/90">
-              Forgot password?
+              Continue to Sign In
             </Link>
-            <Link href="/signup" className="text-dubular-green hover:text-[var(--laser-green)]">
-              Create account
+
+            <Link
+              href="/sign-up"
+              className="w-full text-center rounded-xl border border-white/10 bg-zinc-900/60 py-2 text-white/90 hover:bg-zinc-900 transition"
+            >
+              Create Account
             </Link>
           </div>
-          <div className="mt-8 grid gap-3">
-            <button className="w-full rounded-xl border border-white/10 bg-zinc-900/60 py-2 text-white/90 hover:bg-zinc-900">
+
+          <div className="mt-6 grid gap-3">
+            <Link
+              href="/sign-in"
+              className="w-full text-center rounded-xl border border-white/10 bg-zinc-900/60 py-2 text-white/90 hover:bg-zinc-900 transition"
+            >
               Continue with Google
-            </button>
-            <button className="w-full rounded-xl border border-white/10 bg-zinc-900/60 py-2 text-white/90 hover:bg-zinc-900">
+            </Link>
+            <Link
+              href="/sign-in"
+              className="w-full text-center rounded-xl border border-white/10 bg-zinc-900/60 py-2 text-white/90 hover:bg-zinc-900 transition"
+            >
               Continue with GitHub
-            </button>
+            </Link>
           </div>
+
+          <p className="text-center text-xs text-white/40 mt-4">
+            By continuing you agree to our{" "}
+            <Link href="/terms" className="text-white/60 hover:text-white/80">Terms</Link>{" "}
+            and{" "}
+            <Link href="/privacy" className="text-white/60 hover:text-white/80">Privacy Policy</Link>.
+          </p>
         </div>
-        <p className="text-center text-xs text-white/40 mt-4">
-          By continuing you agree to our{" "}
-          <Link href="/terms" className="text-white/60 hover:text-white/80">Terms</Link>{" "}
-          and{" "}
-          <Link href="/privacy" className="text-white/60 hover:text-white/80">Privacy Policy</Link>.
-        </p>
       </div>
     </main>
   );
