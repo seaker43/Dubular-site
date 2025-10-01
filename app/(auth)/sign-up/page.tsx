@@ -1,121 +1,125 @@
 "use client";
-export const runtime = "edge";
 
-import { useState } from "react";
-import { useSignUp } from "@clerk/nextjs";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function SignUpPage() {
-  const { isLoaded, signUp, setActive } = useSignUp();
-  const router = useRouter();
-  const qp = useSearchParams();
-  const redirectTo = qp.get("redirect_url") || "/";
+  const [pending, setPending] = useState<null | "email" | "google" | "github">(null);
+  const [redirectTo, setRedirectTo] = useState("/account");
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [code, setCode] = useState("");
-  const [pending, setPending] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [awaitingCode, setAwaitingCode] = useState(false);
-
-  if (!isLoaded) return null;
-
-  async function start(e: React.FormEvent) {
-    e.preventDefault();
-    setPending(true); setError(null);
+  useEffect(() => {
     try {
-      await signUp!.create({ emailAddress: email, password });
-      await signUp!.prepareEmailAddressVerification({ strategy: "email_code" });
-      setAwaitingCode(true);
-    } catch (err: any) {
-      setError(err?.errors?.[0]?.longMessage || err?.message || "Sign up failed");
+      const url = new URL(window.location.href);
+      const r = url.searchParams.get("redirect_url");
+      if (r) setRedirectTo(r);
+    } catch {}
+  }, []);
+
+  async function handleEmailSignUp(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setPending("email");
+    try {
+      // TODO: replace with your real sign-up action
+      alert("Create account (stub). Replace with your sign-up action.");
     } finally {
-      setPending(false);
+      setPending(null);
     }
   }
 
-  async function verify(e: React.FormEvent) {
-    e.preventDefault();
-    setPending(true); setError(null);
+  async function oauth(provider: "google" | "github") {
+    setPending(provider);
     try {
-      const res = await signUp!.attemptEmailAddressVerification({ code });
-      if (res.status === "complete") {
-        await setActive!({ session: res.createdSessionId });
-        router.replace(redirectTo);
-      } else {
-        setError("Additional verification required.");
-      }
-    } catch (err: any) {
-      setError(err?.errors?.[0]?.longMessage || err?.message || "Verification failed");
+      // TODO: replace with your OAuth start action
+      alert(`Start ${provider} OAuth (stub). Replace with your OAuth action.`);
     } finally {
-      setPending(false);
+      setPending(null);
     }
   }
 
   return (
-    <main className="mx-auto max-w-sm p-6">
-      <h1 className="text-2xl font-semibold mb-4">Create account</h1>
+    <main className="min-h-[calc(100dvh-var(--header-h)-var(--bottombar-h))] w-full grid place-items-start px-4 pb-[var(--bottombar-h)]">
+      <div className="w-full max-w-md mt-2">
+        <div className="rounded-2xl border border-white/10 bg-black/40 p-6 shadow-[0_0_0_2px_rgba(255,255,255,0.06),0_10px_40px_rgba(0,0,0,0.6)] backdrop-blur">
+          <h1 className="text-3xl font-extrabold tracking-wide text-white mb-1">
+            Create account
+          </h1>
 
-      {!awaitingCode ? (
-        <form onSubmit={start} className="space-y-3">
-          <input
-            className="w-full rounded-xl border px-3 py-2"
-            placeholder="Email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            autoComplete="email"
-            required
-          />
-          <input
-            className="w-full rounded-xl border px-3 py-2"
-            placeholder="Password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="new-password"
-            required
-          />
-          {error && <p className="text-sm text-red-600">{error}</p>}
-          <button
-            type="submit"
-            disabled={pending}
-            className="w-full rounded-xl bg-black text-white py-2 font-medium disabled:opacity-60"
-            aria-busy={pending}
-          >
-            {pending ? "Creating…" : "Create account"}
-          </button>
-        </form>
-      ) : (
-        <form onSubmit={verify} className="space-y-3">
-          <p className="text-sm">We sent a 6-digit code to <strong>{email}</strong></p>
-          <input
-            className="w-full rounded-xl border px-3 py-2 text-center tracking-widest"
-            placeholder="123456"
-            inputMode="numeric"
-            maxLength={6}
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            required
-          />
-          {error && <p className="text-sm text-red-600">{error}</p>}
-          <button
-            type="submit"
-            disabled={pending}
-            className="w-full rounded-xl bg-black text-white py-2 font-medium disabled:opacity-60"
-            aria-busy={pending}
-          >
-            {pending ? "Verifying…" : "Verify & continue"}
-          </button>
-        </form>
-      )}
+          <form className="mt-4 space-y-4" onSubmit={handleEmailSignUp}>
+            <label className="block">
+              <span className="block text-sm text-white/70 mb-1">Email</span>
+              <input
+                name="email"
+                type="email"
+                required
+                placeholder="you@example.com"
+                className="w-full rounded-xl bg-zinc-900/70 border border-white/10 px-3 py-2 text-white outline-none focus:border-white/30"
+              />
+            </label>
 
-      <p className="mt-4 text-sm">
-        Already have an account?{" "}
-        <a className="underline" href={`/sign-in?redirect_url=${encodeURIComponent(redirectTo)}`}>
-          Sign in
-        </a>
-      </p>
+            <label className="block">
+              <span className="block text-sm text-white/70 mb-1">Password</span>
+              <input
+                name="password"
+                type="password"
+                required
+                placeholder="••••••••"
+                className="w-full rounded-xl bg-zinc-900/70 border border-white/10 px-3 py-2 text-white outline-none focus:border-white/30"
+              />
+            </label>
+
+            <button
+              type="submit"
+              disabled={pending !== null}
+              className="w-full rounded-xl bg-dubular-green/90 hover:bg-dubular-green text-black font-semibold py-2 transition disabled:opacity-60"
+            >
+              {pending === "email" ? "Creating..." : "Create account"}
+            </button>
+          </form>
+
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-white/10" />
+            </div>
+            <div className="relative flex justify-center">
+              <span className="bg-black/40 px-3 text-xs text-white/50">or continue with</span>
+            </div>
+          </div>
+
+          <div className="grid gap-3">
+            <button
+              onClick={() => oauth("google")}
+              disabled={pending !== null}
+              className="w-full rounded-xl border border-white/10 bg-zinc-900/60 py-2 text-white/90 hover:bg-zinc-900 disabled:opacity-60"
+            >
+              {pending === "google" ? "Connecting Google…" : "Continue with Google"}
+            </button>
+            <button
+              onClick={() => oauth("github")}
+              disabled={pending !== null}
+              className="w-full rounded-xl border border-white/10 bg-zinc-900/60 py-2 text-white/90 hover:bg-zinc-900 disabled:opacity-60"
+            >
+              {pending === "github" ? "Connecting GitHub…" : "Continue with GitHub"}
+            </button>
+          </div>
+
+          <p className="mt-6 text-sm text-white/60">
+            Already have an account?{" "}
+            <Link
+              href={`/sign-in?redirect_url=${encodeURIComponent(redirectTo)}`}
+              className="text-dubular-green hover:text-[var(--laser-green)]"
+            >
+              Sign in
+            </Link>
+          </p>
+        </div>
+
+        <p className="text-center text-xs text-white/40 mt-4">
+          By continuing you agree to our{" "}
+          <Link href="/terms" className="text-white/60 hover:text-white/80">Terms</Link>{" "}
+          and{" "}
+          <Link href="/privacy" className="text-white/60 hover:text-white/80">Privacy Policy</Link>.
+        </p>
+      </div>
     </main>
   );
 }

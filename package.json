@@ -15,7 +15,7 @@
     "postbuild": "node scripts/write-version.js && node scripts/write-pages-metadata.js"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6",
+    "@clerk/nextjs": "^6.33.1",
     "@neondatabase/serverless": "^1.0.1",
     "drizzle-orm": "^0.44.5",
     "lucide-react": "0.544.0",
