@@ -1,19 +1,17 @@
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { currentUser } from "@clerk/nextjs/server";
 import { SignOutButton } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
 import AccountClerkPanel from "@/components/AccountClerkPanel";
 
 export const runtime = "edge";
 export const dynamic = "force-dynamic";
 
 export default async function AccountPage() {
-  const { userId } = auth();
-  if (!userId) redirect("/sign-in?redirect_url=/account");
-
   const user = await currentUser();
-  const email = user?.primaryEmailAddress?.emailAddress ?? "—";
-  const username = user?.username ?? user?.firstName ?? "You";
-  const avatar = user?.imageUrl;
+  if (!user) return null; // middleware guarantees auth; this avoids client flash
+
+  const email = user.primaryEmailAddress?.emailAddress ?? "—";
+  const username = user.username ?? user.firstName ?? "You";
+  const avatar = user.imageUrl;
 
   return (
     <main className="min-h-[calc(100dvh-var(--header-h)-var(--bottombar-h))] px-4 pb-[var(--bottombar-h)]">
