@@ -36,7 +36,7 @@ export default function AccountPage() {
       </SignedIn>
 
       <SignedOut>
-        <RedirectToSignIn />
+        <RedirectToSignIn redirectUrl="/sign-in" afterSignInUrl="/account" />
       </SignedOut>
     </>
   );
