@@ -1,35 +1,62 @@
 "use client";
-import { SignIn } from "@clerk/nextjs";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function Page() {
+  const [loading, setLoading] = useState(false);
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    // TODO: replace with real sign-in action (Clerk/next-auth/custom)
+    window.location.href = "/"; // go home on success
+  };
+
   return (
-    <main className="min-h-[calc(100svh-128px)] flex items-center justify-center bg-neutral-950">
-      <SignIn
-        appearance={{
-          layout: {
-            logoPlacement: "none",
-            socialButtonsPlacement: "top",
-            socialButtonsVariant: "blockButton",
-          },
-          variables: {
-            colorPrimary: "#00ff00",
-            colorText: "#ffffff",
-            colorBackground: "#0a0a0a",
-          },
-          elements: {
-            card: "w-full h-full rounded-none bg-neutral-900 text-white border border-neutral-800 shadow-[0_0_30px_#00ff00]",
-            formButtonPrimary:
-              "w-full bg-[var(--laser-green,#00ff00)] text-black font-semibold py-3 rounded-lg hover:opacity-90 transition",
-            formFieldInput:
-              "w-full bg-neutral-800 border border-neutral-700 text-white placeholder:text-neutral-500 focus:ring-[var(--laser-green,#00ff00)] focus:border-[var(--laser-green,#00ff00)] rounded-lg px-3 py-2",
-            footerActionLink:
-              "text-[var(--laser-green,#00ff00)] hover:underline",
-          },
-        }}
-        routing="hash"
-        signUpUrl="/sign-up"
-        afterSignInUrl="/"
-      />
+    <main className="min-h-[100svh] bg-neutral-950 text-white flex">
+      <div className="w-full flex flex-col justify-center items-center px-6 py-8">
+        <div className="w-full max-w-md">
+          <h1 className="text-3xl font-bold text-center">Sign in to Dubular</h1>
+          <p className="text-neutral-400 text-center mt-3">Welcome back!</p>
+
+          <a
+            href="#"
+            className="block w-full rounded-lg bg-[var(--laser-green,#00ff00)] text-black font-semibold py-3 mt-6 shadow hover:opacity-95 active:opacity-90 text-center"
+          >
+            Continue with Google
+          </a>
+
+          <div className="text-center text-neutral-400 my-4">or</div>
+
+          <form className="space-y-3" onSubmit={(e) => onSubmit(e)}>
+            <input
+              type="email"
+              placeholder="Email address"
+              className="w-full rounded-lg bg-neutral-800 border border-neutral-700 text-white p-3 focus:ring-2 focus:ring-[var(--laser-green,#00ff00)]/70"
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              className="w-full rounded-lg bg-neutral-800 border border-neutral-700 text-white p-3 focus:ring-2 focus:ring-[var(--laser-green,#00ff00)]/70"
+              required
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full rounded-lg bg-[var(--laser-green,#00ff00)] text-black font-semibold py-3 shadow hover:opacity-90 disabled:opacity-60"
+            >
+              {loading ? "Signing in..." : "Sign in"}
+            </button>
+          </form>
+
+          <p className="mt-6 text-center text-sm text-neutral-400">
+            Don&apos;t have an account?{" "}
+            <Link href="/sign-up" className="font-medium hover:opacity-90">
+              Create one
+            </Link>
+          </p>
+        </div>
+      </div>
     </main>
   );
 }
