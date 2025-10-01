@@ -17,6 +17,7 @@ export default function AccountLoginPage() {
             <Link
               href="/sign-in"
               className="w-full text-center rounded-xl bg-dubular-green/90 hover:bg-dubular-green text-black font-semibold py-2 transition"
+              aria-label="Continue to Sign In"
             >
               Continue to Sign In
             </Link>
@@ -24,21 +25,23 @@ export default function AccountLoginPage() {
             <Link
               href="/sign-up"
               className="w-full text-center rounded-xl border border-white/10 bg-zinc-900/60 py-2 text-white/90 hover:bg-zinc-900 transition"
+              aria-label="Create Account"
             >
               Create Account
             </Link>
-          </div>
 
-          <div className="mt-6 grid gap-3">
             <Link
               href="/sign-in"
               className="w-full text-center rounded-xl border border-white/10 bg-zinc-900/60 py-2 text-white/90 hover:bg-zinc-900 transition"
+              aria-label="Continue with Google"
             >
               Continue with Google
             </Link>
+
             <Link
               href="/sign-in"
               className="w-full text-center rounded-xl border border-white/10 bg-zinc-900/60 py-2 text-white/90 hover:bg-zinc-900 transition"
+              aria-label="Continue with GitHub"
             >
               Continue with GitHub
             </Link>
