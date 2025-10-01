@@ -1,17 +1,13 @@
 "use client";
-import { useEffect } from "react";
-import { useUser, SignedIn, SignedOut, SignOutButton, UserProfile, redirectToSignIn } from "@clerk/nextjs";
+import { SignedIn, SignedOut, RedirectToSignIn, SignOutButton, UserProfile, useUser } from "@clerk/nextjs";
+
+export const runtime = "edge";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default function AccountPage() {
-  const { user, isSignedIn, isLoaded } = useUser();
-
-  // On client, send unauthenticated users to sign-in (no SSR loops)
-  useEffect(() => {
-    if (isLoaded && !isSignedIn) redirectToSignIn({ redirectUrl: "/account" });
-  }, [isLoaded, isSignedIn]);
-
-  if (!isLoaded) return null; // avoid flash
-  if (!isSignedIn) return null; // Redirect happening
+  const { user, isLoaded } = useUser();
+  if (!isLoaded) return null;
 
   const email = user?.primaryEmailAddress?.emailAddress ?? "—";
   const username = user?.username ?? user?.firstName ?? "You";
@@ -19,6 +15,9 @@ export default function AccountPage() {
 
   return (
     <main className="min-h-[calc(100dvh-var(--header-h)-var(--bottombar-h))] px-4 pb-[var(--bottombar-h)]">
+      {/* If signed out, client-redirect without SSR loops */}
+      <SignedOut><RedirectToSignIn redirectUrl="/account" /></SignedOut>
+
       <SignedIn>
         <div className="mx-auto max-w-6xl pt-6 md:pt-10">
           <div className="mb-6 flex items-center gap-4">
@@ -47,31 +46,26 @@ export default function AccountPage() {
             </section>
 
             <section className="md:col-span-2 rounded-2xl bg-zinc-900/70 p-2 ring-1 ring-white/10 backdrop-blur">
-              <UserProfile
-                appearance={{
-                  baseTheme: "dark",
-                  variables: { colorPrimary: "#22f37a" },
-                  elements: {
-                    card: "rounded-2xl bg-black/70 text-white drop-blur border border-white/10 shadow-xl",
-                    headerTitle: "text-white",
-                    headerSubtitle: "text-white/70",
-                    formFieldLabel: "text-white/70",
-                    formFieldInput: "bg-zinc-900/80 border border-white/10 text-white placeholder:text-white/40 focus:border-white/30",
-                    formButtonPrimary: "rounded-xl bg-[var(--laser-green,#22f37a)] text-black hover:opacity-90",
-                    socialButtonsBlockButton: "rounded-xl bg-zinc-900/80 hover:bg-zinc-900 text-white border border-white/10",
-                    dividerRow: "text-white/50 my-6",
-                    footerActionText: "text-white/70 text-center",
-                    footerActionLink: "text-[var(--laser-green)] hover:text-[var(--laser-green)]",
-                  },
-                }}
-              />
+              <UserProfile appearance={{
+                baseTheme: "dark",
+                variables: { colorPrimary: "#22f37a" },
+                elements: {
+                  card: "rounded-2xl bg-black/70 text-white drop-blur border border-white/10 shadow-xl",
+                  headerTitle: "text-white",
+                  headerSubtitle: "text-white/70",
+                  formFieldLabel: "text-white/70",
+                  formFieldInput: "bg-zinc-900/80 border border-white/10 text-white placeholder:text-white/40 focus:border-white/30",
+                  formButtonPrimary: "rounded-xl bg-[var(--laser-green,#22f37a)] text-black hover:opacity-90",
+                  socialButtonsBlockButton: "rounded-xl bg-zinc-900/80 hover:bg-zinc-900 text-white border border-white/10",
+                  dividerRow: "text-white/50 my-6",
+                  footerActionText: "text-white/70 text-center",
+                  footerActionLink: "text-[var(--laser-green)] hover:text-[var(--laser-green)]",
+                },
+              }} />
             </section>
           </div>
         </div>
       </SignedIn>
-
-      {/* Safety: if Clerk renders SignedOut for a moment, we trigger redirect in useEffect */}
-      <SignedOut />
     </main>
   );
 }
