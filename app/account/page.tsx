@@ -1,13 +1,12 @@
 import { currentUser } from "@clerk/nextjs/server";
-import { SignOutButton } from "@clerk/nextjs";
-import AccountClerkPanel from "@/components/AccountClerkPanel";
+import { SignOutButton, UserProfile } from "@clerk/nextjs";
 
 export const runtime = "edge";
 export const dynamic = "force-dynamic";
 
 export default async function AccountPage() {
   const user = await currentUser();
-  if (!user) return null; // middleware guarantees auth; this avoids client flash
+  if (!user) return null; // middleware handles redirect
 
   const email = user.primaryEmailAddress?.emailAddress ?? "—";
   const username = user.username ?? user.firstName ?? "You";
@@ -42,7 +41,24 @@ export default async function AccountPage() {
           </section>
 
           <section className="md:col-span-2 rounded-2xl bg-zinc-900/70 p-2 ring-1 ring-white/10 backdrop-blur">
-            <AccountClerkPanel />
+            <UserProfile
+              appearance={{
+                baseTheme: "dark",
+                variables: { colorPrimary: "#22f37a" },
+                elements: {
+                  card: "rounded-2xl bg-black/70 text-white drop-blur border border-white/10 shadow-xl",
+                  headerTitle: "text-white",
+                  headerSubtitle: "text-white/70",
+                  formFieldLabel: "text-white/70",
+                  formFieldInput: "bg-zinc-900/80 border border-white/10 text-white placeholder:text-white/40 focus:border-white/30",
+                  formButtonPrimary: "rounded-xl bg-[var(--laser-green,#22f37a)] text-black hover:opacity-90",
+                  socialButtonsBlockButton: "rounded-xl bg-zinc-900/80 hover:bg-zinc-900 text-white border border-white/10",
+                  dividerRow: "text-white/50 my-6",
+                  footerActionText: "text-white/70 text-center",
+                  footerActionLink: "text-[var(--laser-green)] hover:text-[var(--laser-green)]",
+                },
+              }}
+            />
           </section>
         </div>
       </div>
