@@ -1,11 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useSignIn } from "@clerk/nextjs";
 
+export const runtime = "edge";
+export const dynamic = "force-dynamic";
+
 export default function SignInPage() {
+  return (
+    <Suspense fallback={<div className="px-4 pt-6 text-white/70">Loading…</div>}>
+      <SignInInner />
+    </Suspense>
+  );
+}
+
+function SignInInner() {
   const { isLoaded, signIn, setActive } = useSignIn();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,10 +36,9 @@ export default function SignInPage() {
       const res = await signIn.create({
         identifier: email.trim(),
         password,
-        redirectUrl: "/sign-in",             // where Clerk posts back mid-flow
-        redirectUrlComplete: redirectTo,     // final destination
+        redirectUrl: "/sign-in",
+        redirectUrlComplete: redirectTo,
       });
-
       if (res.status === "complete" && res.createdSessionId) {
         await setActive?.({ session: res.createdSessionId });
         router.push(redirectTo);
@@ -56,9 +66,7 @@ export default function SignInPage() {
       });
     } catch (err: any) {
       const msg =
-        err?.errors?.[0]?.longMessage ||
-        err?.message ||
-        "Could not start OAuth.";
+        err?.errors?.[0]?.longMessage || err?.message || "Could not start OAuth.";
       setError(msg);
       setPending(false);
     }
