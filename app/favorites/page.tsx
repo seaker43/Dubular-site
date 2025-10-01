@@ -14,7 +14,7 @@ export default function FavoritesPage() {
   return (
     <>
       <SignedOut>
-        <RedirectToSignIn redirectUrl="/sign-in" />
+        <RedirectToSignIn redirectUrl="/sign-in" afterSignInUrl="/favorites" />
       </SignedOut>
 
       <SignedIn>
