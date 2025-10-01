@@ -1,3 +1,4 @@
+export const revalidate = 0;
 export default async function FollowCounts({ handle, className = "" }: { handle: string; className?: string }) {
   // fetch both lists in parallel; avoid caching so UI updates right after a follow/unfollow
   const [followersRes, followingRes] = await Promise.all([

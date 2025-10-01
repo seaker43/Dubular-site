@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import FollowCounts from "@/components/FollowCounts"
 "use client";
 export const runtime = 'edge';
