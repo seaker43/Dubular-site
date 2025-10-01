@@ -3,7 +3,6 @@ import { UserProfile, SignedIn } from "@clerk/nextjs";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
-export const metadata = { title: "Account · Dubular" };
 
 export default function AccountPage() {
   return (
