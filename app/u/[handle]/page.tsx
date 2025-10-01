@@ -1,7 +1,5 @@
-export const dynamic = "force-dynamic";
-import FollowCounts from "@/components/FollowCounts"
 "use client";
-export const runtime = 'edge';
+import FollowCounts from "@/components/FollowCounts"
 
 import FollowButton from "@/components/FollowButton";
     {/* counts */}
