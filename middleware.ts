@@ -1,8 +1,8 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-// Public routes (everything else requires auth; notably /favorites is NOT here)
+// Public routes: homepage, browse pages, and full auth trees (/sign-in/*, /sign-up/*)
 const isPublicRoute = createRouteMatcher([
-  "/",                 // home
+  "/",
   "/search(.*)",
   "/rank(.*)",
   "/streams(.*)",
@@ -14,13 +14,12 @@ const isPublicRoute = createRouteMatcher([
 export default clerkMiddleware((auth, req) => {
   // Allow public routes
   if (isPublicRoute(req)) return;
-  // All others will be protected by Clerk; unauthed users get redirected to /sign-in
+  // All others require auth; unauthenticated users are redirected by Clerk
 });
 
 // Cloudflare Pages–safe matcher:
-// - excludes _next/* (static & image optimizer)
-// - excludes any URL that looks like a file (has an extension)
-// - still applies to root, app routes, and /api|/trpc paths
+// - excludes _next/* (static & image optimizer) and files with extensions
+// - applies to app routes and /api|/trpc
 export const config = {
   matcher: [
     "/((?!(?:_next/|.*\\.(?:png|jpg|jpeg|gif|svg|ico|webp|avif|css|js|map|txt|xml|json|woff2?|ttf))|_next).*)",
