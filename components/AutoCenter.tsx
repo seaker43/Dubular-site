@@ -1,9 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
-export default function AutoCenter({ children }: { children: React.ReactNode }) {
+export default function AutoCenter({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [center, setCenter] = useState(false);
   useEffect(() => {
-    const getH = () => (window.visualViewport?.height ?? window.innerHeight);
+    const getH = () => window.visualViewport?.height ?? window.innerHeight;
     const update = () => {
       const css = getComputedStyle(document.documentElement);
       const h = parseInt(css.getPropertyValue("--header-h")) || 100;
@@ -25,7 +29,9 @@ export default function AutoCenter({ children }: { children: React.ReactNode }) 
     };
   }, []);
   return (
-    <div className={`min-h-[calc(var(--vvh)-var(--header-h)-var(--bottombar-h,64px))] ${center ? "grid place-items-center" : "block"}`}>
+    <div
+      className={`min-h-[calc(var(--vvh)-var(--header-h)-var(--bottombar-h,64px))] ${center ? "grid place-items-center" : "block"}`}
+    >
       {children}
     </div>
   );

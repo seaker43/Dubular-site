@@ -22,8 +22,11 @@ export default function OnboardingForm() {
     setMsg(null);
     const res = await fetch("/api/channel.upsert", {
       method: "POST",
-      headers: { "content-type": "application/json", "x-user-id": "demo-user-1" },
-      body: JSON.stringify({ title, handle: h, category, language })
+      headers: {
+        "content-type": "application/json",
+        "x-user-id": "demo-user-1",
+      },
+      body: JSON.stringify({ title, handle: h, category, language }),
     });
     if (res.ok) {
       setStep(3);

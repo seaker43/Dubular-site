@@ -2,10 +2,21 @@
 
 type Thumb = { title?: string; image?: string; href?: string; live?: boolean };
 
-type Thumb = { title?: string; image?: string; href?: string; live?: boolean; glowRed?: boolean };
+type Thumb = {
+  title?: string;
+  image?: string;
+  href?: string;
+  live?: boolean;
+  glowRed?: boolean;
+};
 
 export default function ThumbnailCard({ data }: { data: Thumb }) {
-  const { title = "", image = "/placeholder.svg", href, live = true } = data || {};
+  const {
+    title = "",
+    image = "/placeholder.svg",
+    href,
+    live = true,
+  } = data || {};
   const FALLBACK_IMG =
     "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80";
 

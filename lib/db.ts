@@ -1,1 +1,12 @@
-import {getRuntimeEnv} from './runtime-env';export function db(){const env=getRuntimeEnv();if(!env.DB)throw new Error('D1 binding DB not found.');return env.DB;}export async function one<T=unknown>(stmt:D1PreparedStatement):Promise<T|null>{const r=await stmt.first<T>();return(r??null)as T|null;}
+import { getRuntimeEnv } from "./runtime-env";
+export function db() {
+  const env = getRuntimeEnv();
+  if (!env.DB) throw new Error("D1 binding DB not found.");
+  return env.DB;
+}
+export async function one<T = unknown>(
+  stmt: D1PreparedStatement,
+): Promise<T | null> {
+  const r = await stmt.first<T>();
+  return (r ?? null) as T | null;
+}

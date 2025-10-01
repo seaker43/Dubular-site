@@ -1,1 +1,14 @@
-import { kvGetJson } from "../../lib/kv"; import type { Channel } from "../../lib/types"; export const onRequestGet: PagesFunction<{ KV: KVNamespace }> = async (ctx) => { const kv=ctx.env.KV; const url=new URL(ctx.request.url); const handle=url.searchParams.get("handle"); if(!handle) return new Response("Missing handle",{status:400}); const ownerId=await kv.get(`channel-handle:${handle}`); if(!ownerId) return new Response("Not found",{status:404}); const ch=await kvGetJson<Channel>(kv,`channel:${ownerId}`); return new Response(JSON.stringify(ch),{headers:{"content-type":"application/json"}}); };
+import { kvGetJson } from "../../lib/kv";
+import type { Channel } from "../../lib/types";
+export const onRequestGet: PagesFunction<{ KV: KVNamespace }> = async (ctx) => {
+  const kv = ctx.env.KV;
+  const url = new URL(ctx.request.url);
+  const handle = url.searchParams.get("handle");
+  if (!handle) return new Response("Missing handle", { status: 400 });
+  const ownerId = await kv.get(`channel-handle:${handle}`);
+  if (!ownerId) return new Response("Not found", { status: 404 });
+  const ch = await kvGetJson<Channel>(kv, `channel:${ownerId}`);
+  return new Response(JSON.stringify(ch), {
+    headers: { "content-type": "application/json" },
+  });
+};

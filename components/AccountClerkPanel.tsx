@@ -12,12 +12,16 @@ export default function AccountClerkPanel() {
           headerTitle: "text-white",
           headerSubtitle: "text-white/70",
           formFieldLabel: "text-white/70",
-          formFieldInput: "bg-zinc-900/80 border border-white/10 text-white placeholder:text-white/40 focus:border-white/30",
-          formButtonPrimary: "rounded-xl bg-[var(--laser-green,#22f37a)] text-black hover:opacity-90",
-          socialButtonsBlockButton: "rounded-xl bg-zinc-900/80 hover:bg-zinc-900 text-white border border-white/10",
+          formFieldInput:
+            "bg-zinc-900/80 border border-white/10 text-white placeholder:text-white/40 focus:border-white/30",
+          formButtonPrimary:
+            "rounded-xl bg-[var(--laser-green,#22f37a)] text-black hover:opacity-90",
+          socialButtonsBlockButton:
+            "rounded-xl bg-zinc-900/80 hover:bg-zinc-900 text-white border border-white/10",
           dividerRow: "text-white/50 my-6",
           footerActionText: "text-white/70 text-center",
-          footerActionLink: "text-[var(--laser-green)] hover:text-[var(--laser-green)]",
+          footerActionLink:
+            "text-[var(--laser-green)] hover:text-[var(--laser-green)]",
         },
       }}
     />

@@ -1,7 +1,11 @@
-
 /* hide scrollbars globally */
-.no-scrollbar{scrollbar-width:none;-ms-overflow-style:none}
-.no-scrollbar::-webkit-scrollbar{display:none}
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 /* Neon red glow around thumbnails */
 .thumb-glow {
   box-shadow:
@@ -10,28 +14,35 @@
     0 0 60px rgba(220, 38, 38, 0.25);
 }
 /* (Re)hide scrollbars if any browser resurrects them */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 /* === Glow utilities === */
 /* Featured hero: cyan neon aura (uses pseudo so overflow/rounded clipping doesn't kill the glow) */
-.hero-glow { position: relative; }
+.hero-glow {
+  position: relative;
+}
 .hero-glow::after {
   content: "";
   position: absolute;
-  inset: -6px;               /* bleed outside the rounded container */
+  inset: -6px; /* bleed outside the rounded container */
   border-radius: inherit;
   pointer-events: none;
   box-shadow:
-    0 0 24px rgba(34,211,238,0.45),   /* cyan-400 */
-    0 0 80px rgba(34,211,238,0.25),
-    0 0 140px rgba(34,211,238,0.15);
+    0 0 24px rgba(34, 211, 238, 0.45),
+    /* cyan-400 */ 0 0 80px rgba(34, 211, 238, 0.25),
+    0 0 140px rgba(34, 211, 238, 0.15);
 }
 
 /* Per-thumbnail red neon glow */
 .thumb-glow {
   box-shadow:
-    0 0 0 1px rgba(255,255,255,0.04),
-    0 0 26px rgba(220,38,38,0.55),    /* red-600 */
-    0 0 64px rgba(220,38,38,0.35);
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 0 26px rgba(220, 38, 38, 0.55),
+    /* red-600 */ 0 0 64px rgba(220, 38, 38, 0.35);
 }

@@ -1,1 +1,26 @@
-export const onRequestPost: PagesFunction<{ KV: KVNamespace }> = async (ctx) => { const kv=ctx.env.KV; const userId=ctx.request.headers.get("x-user-id"); if(!userId) return new Response("Unauthorized",{status:401}); const { channelId } = await ctx.request.json(); if(!channelId) return new Response("Missing channelId",{status:400}); const keyFollowers=`followers:${channelId}`; const keyFollowing=`following:${userId}`; const followers=JSON.parse((await kv.get(keyFollowers))||"[]"); const following=JSON.parse((await kv.get(keyFollowing))||"[]"); if(!followers.includes(userId)) followers.push(userId); if(!following.includes(channelId)) following.push(channelId); await kv.put(keyFollowers,JSON.stringify(followers)); await kv.put(keyFollowing,JSON.stringify(following)); const ch=JSON.parse((await kv.get(channelId))||"null"); if(ch){ ch.followers=followers.length; await kv.put(channelId,JSON.stringify(ch)); } return new Response(JSON.stringify({ok:true,followers:followers.length}),{headers:{"content-type":"application/json"}}); };
+export const onRequestPost: PagesFunction<{ KV: KVNamespace }> = async (
+  ctx,
+) => {
+  const kv = ctx.env.KV;
+  const userId = ctx.request.headers.get("x-user-id");
+  if (!userId) return new Response("Unauthorized", { status: 401 });
+  const { channelId } = await ctx.request.json();
+  if (!channelId) return new Response("Missing channelId", { status: 400 });
+  const keyFollowers = `followers:${channelId}`;
+  const keyFollowing = `following:${userId}`;
+  const followers = JSON.parse((await kv.get(keyFollowers)) || "[]");
+  const following = JSON.parse((await kv.get(keyFollowing)) || "[]");
+  if (!followers.includes(userId)) followers.push(userId);
+  if (!following.includes(channelId)) following.push(channelId);
+  await kv.put(keyFollowers, JSON.stringify(followers));
+  await kv.put(keyFollowing, JSON.stringify(following));
+  const ch = JSON.parse((await kv.get(channelId)) || "null");
+  if (ch) {
+    ch.followers = followers.length;
+    await kv.put(channelId, JSON.stringify(ch));
+  }
+  return new Response(
+    JSON.stringify({ ok: true, followers: followers.length }),
+    { headers: { "content-type": "application/json" } },
+  );
+};

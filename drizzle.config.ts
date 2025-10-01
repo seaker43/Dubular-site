@@ -4,5 +4,8 @@ export default {
   schema: "./drizzle/schema.ts",
   out: "./drizzle/migrations",
   dialect: target === "pg" ? "postgresql" : "sqlite",
-  dbCredentials: target === "pg" ? { url: process.env.DATABASE_URL! } : { url: "file:local.sqlite" },
+  dbCredentials:
+    target === "pg"
+      ? { url: process.env.DATABASE_URL! }
+      : { url: "file:local.sqlite" },
 } satisfies Config;

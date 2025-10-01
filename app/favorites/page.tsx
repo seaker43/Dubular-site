@@ -4,10 +4,30 @@ import Image from "next/image";
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
 
 const DEMO = [
-  { id: "1", title: "Streamer One",  thumb: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800" },
-  { id: "2", title: "Streamer Two",  thumb: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800" },
-  { id: "3", title: "Streamer Three",thumb: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800" },
-  { id: "4", title: "Streamer Four", thumb: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800" },
+  {
+    id: "1",
+    title: "Streamer One",
+    thumb:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800",
+  },
+  {
+    id: "2",
+    title: "Streamer Two",
+    thumb:
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800",
+  },
+  {
+    id: "3",
+    title: "Streamer Three",
+    thumb:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800",
+  },
+  {
+    id: "4",
+    title: "Streamer Four",
+    thumb:
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800",
+  },
 ];
 
 export default function FavoritesPage() {

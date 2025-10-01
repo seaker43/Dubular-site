@@ -1,6 +1,11 @@
 "use client";
 
-import { UserProfile, SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
+import {
+  UserProfile,
+  SignedIn,
+  SignedOut,
+  RedirectToSignIn,
+} from "@clerk/nextjs";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 

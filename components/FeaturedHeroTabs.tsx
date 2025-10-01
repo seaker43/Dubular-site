@@ -4,9 +4,21 @@ import { useRef, useState, useEffect } from "react";
 
 type Slide = { image: string; title?: string };
 const slides: Slide[] = [
-  { image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1600", title: "Featured Content" },
-  { image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600", title: "Community Events" },
-  { image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600", title: "Creator Highlights" },
+  {
+    image:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1600",
+    title: "Featured Content",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600",
+    title: "Community Events",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600",
+    title: "Creator Highlights",
+  },
 ];
 
 export default function FeaturedHeroTabs() {
@@ -41,14 +53,16 @@ export default function FeaturedHeroTabs() {
     setDragging(true);
     setDragX(0);
   };
-  const onTouchMove = (e: React.TouchEvent) => setDragX(e.touches[0].clientX - startX.current);
+  const onTouchMove = (e: React.TouchEvent) =>
+    setDragX(e.touches[0].clientX - startX.current);
   const onTouchEnd = () => decide();
 
   const decide = () => {
     if (!dragging) return;
     const threshold = Math.min(80, widthPx() * 0.12); // 12% or 80px
     if (dragX <= -threshold) setIdx((i) => (i + 1) % slides.length);
-    else if (dragX >= threshold) setIdx((i) => (i - 1 + slides.length) % slides.length);
+    else if (dragX >= threshold)
+      setIdx((i) => (i - 1 + slides.length) % slides.length);
     setDragging(false);
     setDragX(0);
   };
@@ -63,9 +77,17 @@ export default function FeaturedHeroTabs() {
       }, 2200);
     };
     start();
-    const vis = () => { if (!document.hidden) { clearInterval(id); start(); } };
+    const vis = () => {
+      if (!document.hidden) {
+        clearInterval(id);
+        start();
+      }
+    };
     document.addEventListener("visibilitychange", vis);
-    return () => { clearInterval(id); document.removeEventListener("visibilitychange", vis); };
+    return () => {
+      clearInterval(id);
+      document.removeEventListener("visibilitychange", vis);
+    };
   }, [dragging]);
 
   return (

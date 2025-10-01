@@ -2,8 +2,13 @@
 import { useMemo, useState } from "react";
 
 type MetricKey =
-  | "mostGifted" | "mostViewed" | "mostLiked" | "mostFollowed"
-  | "mostViewingHours" | "totalHoursStreamed" | "mostConsecHours";
+  | "mostGifted"
+  | "mostViewed"
+  | "mostLiked"
+  | "mostFollowed"
+  | "mostViewingHours"
+  | "totalHoursStreamed"
+  | "mostConsecHours";
 type GroupKey = "creators" | "viewers";
 
 const GROUPS: { key: GroupKey; label: string }[] = [
@@ -37,7 +42,10 @@ const seed = Array.from({ length: 25 }).map((_, i) => ({
 export default function RankPage() {
   const [group, setGroup] = useState<GroupKey>("creators");
   const [metric, setMetric] = useState<MetricKey>("mostGifted");
-  const list = useMemo(() => seed.slice().sort((a, b) => b.value - a.value), [group, metric]);
+  const list = useMemo(
+    () => seed.slice().sort((a, b) => b.value - a.value),
+    [group, metric],
+  );
 
   return (
     <main className="min-h-[calc(var(--vvh)-var(--header-h))] pb-0 bg-black">
@@ -59,7 +67,9 @@ export default function RankPage() {
                   setMetric(METRICS[g.key][0].key);
                 }}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-                  group === g.key ? "bg-[var(--laser-green)] text-black" : "text-white/80 hover:text-white"
+                  group === g.key
+                    ? "bg-[var(--laser-green)] text-black"
+                    : "text-white/80 hover:text-white"
                 }`}
               >
                 {g.label}
@@ -89,7 +99,8 @@ export default function RankPage() {
             {/* header row */}
             <div className="flex items-center justify-between px-4 py-3">
               <div className="text-sm text-white/70">
-                {GROUPS.find((g) => g.key === group)?.label} • {METRICS[group].find((m) => m.key === metric)?.label}
+                {GROUPS.find((g) => g.key === group)?.label} •{" "}
+                {METRICS[group].find((m) => m.key === metric)?.label}
               </div>
               <div className="text-xs text-white/50">Top 20</div>
             </div>
@@ -102,14 +113,20 @@ export default function RankPage() {
                   className="group flex items-center gap-3 rounded-xl px-2 py-2 hover:bg-white/5"
                 >
                   <div className="w-8 text-center text-white/70">{i + 1}</div>
-                  <img src={u.avatar} alt="" className="h-10 w-10 rounded-full object-cover" />
+                  <img
+                    src={u.avatar}
+                    alt=""
+                    className="h-10 w-10 rounded-full object-cover"
+                  />
                   <div className="min-w-0 grow">
                     <div className="truncate text-white/90">{u.name}</div>
                     <div className="text-xs text-white/50">
                       {METRICS[group].find((m) => m.key === metric)?.label}
                     </div>
                   </div>
-                  <div className="text-right text-[var(--laser-green)] font-semibold tabular-nums">{u.value}</div>
+                  <div className="text-right text-[var(--laser-green)] font-semibold tabular-nums">
+                    {u.value}
+                  </div>
                 </li>
               ))}
             </ol>

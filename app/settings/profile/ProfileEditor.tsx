@@ -19,7 +19,10 @@ export default function ProfileEditor() {
     setMsg(null);
     const res = await fetch("/api/profile.upsert", {
       method: "POST",
-      headers: { "content-type": "application/json", "x-user-id": "demo-user-1" },
+      headers: {
+        "content-type": "application/json",
+        "x-user-id": "demo-user-1",
+      },
       body: JSON.stringify({ displayName, handle: h, bio }),
     });
     if (res.ok) setMsg("Saved!");

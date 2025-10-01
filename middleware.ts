@@ -24,6 +24,6 @@ export const config = {
   matcher: [
     "/((?!(?:_next/|.*\\.(?:png|jpg|jpeg|gif|svg|ico|webp|avif|css|js|map|txt|xml|json|woff2?|ttf))|_next).*)",
     "/",
-    "/(api|trpc)(.*)"
+    "/(api|trpc)(.*)",
   ],
 };

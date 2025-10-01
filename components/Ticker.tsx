@@ -22,7 +22,9 @@ export default function Ticker({
   const row = (
     <ul className="flex items-center gap-8 shrink-0">
       {items.map((m, i) => (
-        <li key={i} className="text-cyan-300 text-sm whitespace-nowrap">{m}</li>
+        <li key={i} className="text-cyan-300 text-sm whitespace-nowrap">
+          {m}
+        </li>
       ))}
     </ul>
   );

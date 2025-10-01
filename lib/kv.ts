@@ -1,1 +1,6 @@
-export const kvGetJson = async <T>(kv: KVNamespace, key: string): Promise<T | null> => JSON.parse((await kv.get(key)) || "null"); export const kvPutJson = async (kv: KVNamespace, key: string, val: unknown) => kv.put(key, JSON.stringify(val));
+export const kvGetJson = async <T>(
+  kv: KVNamespace,
+  key: string,
+): Promise<T | null> => JSON.parse((await kv.get(key)) || "null");
+export const kvPutJson = async (kv: KVNamespace, key: string, val: unknown) =>
+  kv.put(key, JSON.stringify(val));

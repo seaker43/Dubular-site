@@ -17,7 +17,10 @@ export default function SetupPage() {
       const res = await fetch("/api/profiles", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ handle: handle.trim(), display_name: display.trim() }),
+        body: JSON.stringify({
+          handle: handle.trim(),
+          display_name: display.trim(),
+        }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -49,7 +52,11 @@ export default function SetupPage() {
                 <span className="text-white/50">@</span>
                 <input
                   value={handle}
-                  onChange={(e) => setHandle(e.target.value.replace(/[^a-z0-9_]/gi, "").toLowerCase())}
+                  onChange={(e) =>
+                    setHandle(
+                      e.target.value.replace(/[^a-z0-9_]/gi, "").toLowerCase(),
+                    )
+                  }
                   minLength={3}
                   maxLength={20}
                   required
@@ -57,11 +64,15 @@ export default function SetupPage() {
                   className="w-full rounded-xl bg-zinc-900/70 border border-white/10 px-3 py-2 text-white outline-none focus:border-white/30"
                 />
               </div>
-              <p className="text-[11px] text-white/40 mt-1">a–z, 0–9, underscores; 3–20 chars</p>
+              <p className="text-[11px] text-white/40 mt-1">
+                a–z, 0–9, underscores; 3–20 chars
+              </p>
             </label>
 
             <label className="block">
-              <span className="block text-sm text-white/70 mb-1">Display name</span>
+              <span className="block text-sm text-white/70 mb-1">
+                Display name
+              </span>
               <input
                 value={display}
                 onChange={(e) => setDisplay(e.target.value)}
