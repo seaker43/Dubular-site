@@ -1,13 +1,13 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { UserProfile, SignOutButton } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 export const runtime = "edge";
-export const dynamic = "force-dynamic"; // avoid caching that can cause flip/flop
+export const dynamic = "force-dynamic";
 
 export default async function AccountPage() {
-  // Server-side gate: Clerk handles redirect without client flicker
-  const { userId, redirectToSignIn } = auth();
-  if (!userId) return redirectToSignIn({ returnBackUrl: "/account" });
+  const { userId } = auth();
+  if (!userId) redirect("/sign-in?redirect_url=/account");
 
   const user = await currentUser();
   const email = user?.primaryEmailAddress?.emailAddress ?? "—";
