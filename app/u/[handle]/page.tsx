@@ -1,7 +1,10 @@
+import FollowCounts from "@/components/FollowCounts"
 "use client";
 export const runtime = 'edge';
 
 import FollowButton from "@/components/FollowButton";
+    {/* counts */}
+    <FollowCounts handle={handle} className="mt-2" />
 import { useParams } from "next/navigation";
 
 export default function UserPublicPage() {
@@ -11,6 +14,8 @@ export default function UserPublicPage() {
   return (
     <>
       <FollowButton />
+    {/* counts */}
+    <FollowCounts handle={handle} className="mt-2" />
       <div className="p-4 text-white">
         <h1 className="text-2xl font-semibold">
           User <span className="font-mono">/u/{handle}</span>
@@ -19,3 +24,6 @@ export default function UserPublicPage() {
     </>
   );
 }
+
+{/* counts (fallback append) */}
+<FollowCounts handle={handle} className='mt-2' />
