@@ -287,34 +287,6 @@ body,
   overflow-x: hidden;
 }
 
-/* --- BottomBar safe padding (global override) --- */
-:root {
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --bottombar-h: calc(64px + var(--safe-bottom));
-  --vvh: 100dvh;
-}
-html {
-  scroll-padding-bottom: var(--bottombar-h);
-}
-body,
-main {
-  padding-bottom: var(--bottombar-h) !important;
-}
-
-/* --- BottomBar safe padding (global override) --- */
-:root {
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --bottombar-h: calc(64px + var(--safe-bottom));
-  --vvh: 100dvh;
-}
-html {
-  scroll-padding-bottom: var(--bottombar-h);
-}
-body,
-main {
-  padding-bottom: var(--bottombar-h) !important;
-}
-
 /* Search page: recolor non-live rows */
 .search-page section:nth-of-type(2n) .glow-red {
   box-shadow: 0 0 24px 6px rgba(34, 211, 238, 0.45) !important;
@@ -360,4 +332,26 @@ header.site-header,
 }
 .card-surface {
   background: var(--bg-surface);
+}
+
+/* --- Bottom bar helpers (opt-in, not global) --- */
+:root {
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --bottombar-h: calc(64px + var(--safe-bottom));
+}
+
+/* Use on pages/sections that should leave room for the bottom bar */
+.pad-for-bottombar {
+  padding-bottom: var(--bottombar-h) !important;
+}
+
+/* Use when a section should auto-size but never exceed the viewport gap */
+.min-h-viewport-gap {
+  min-height: calc(100dvh - var(--header-h) - var(--bottombar-h));
+}
+
+/* If you need internal scroll only inside a block up to the gap */
+.max-h-viewport-gap {
+  max-height: calc(100dvh - var(--header-h) - var(--bottombar-h));
+  overflow-y: auto;
 }
