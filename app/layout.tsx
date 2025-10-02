@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className="flex flex-col min-h-screen bg-neutral-950 text-white">
+        <body className="flex flex-col  bg-neutral-950 text-white">
           <AppProviders>
             <Header />
             <AutoCenter>{children}</AutoCenter>
