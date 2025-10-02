@@ -9,17 +9,17 @@ import { ClerkProvider } from "@clerk/nextjs";
 export const metadata = { title: "Dubular" } as const;
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className="flex flex-col  bg-neutral-950 text-white">
-          <AppProviders>
-            <Header />
-            <AutoCenter>{children}</AutoCenter>
-            <BottomBar />
-          </AppProviders>
-        </body>
-      </html>
-    </ClerkProvider>
-  );
+ return (
+ <ClerkProvider>
+ <html lang="en">
+ <body className="flex flex-col text-white">
+ <AppProviders>
+ <Header />
+ <AutoCenter>{children}</AutoCenter>
+ <BottomBar />
+ </AppProviders>
+ </body>
+ </html>
+ </ClerkProvider>
+ );
 }
