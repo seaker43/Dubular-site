@@ -26,14 +26,14 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  min-height: 100%;
+  min-height: auto;
   background: var(--bg-root); /* site background */
   color: #fff; /* default text color */
 }
 
 /* Next.js root wrapper */
 #__next {
-  min-height: 100%;
+  min-height: auto;
 }
 
 /* Media defaults */
@@ -60,7 +60,6 @@ main {
   margin: 0;
   width: 100%;
   overflow-x: hidden; /* guard against accidental horizontal scroll */
-  padding-bottom: var(--bottombar-h);
 }
 
 /* Make all standard wrappers full-bleed */
@@ -342,6 +341,7 @@ header.site-header,
 
 /* Use on pages/sections that should leave room for the bottom bar */
 .pad-for-bottombar {
+  padding-bottom: calc(var(--bottombar-h) + var(--safe-bottom)) !important;
 }
 
 /* Use when a section should auto-size but never exceed the viewport gap */
