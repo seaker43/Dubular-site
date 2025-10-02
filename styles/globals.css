@@ -27,7 +27,7 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100%;
-  background: #000; /* site background */
+  background: var(--bg-root); /* site background */
   color: #fff; /* default text color */
 }
 
@@ -90,8 +90,9 @@ div {
 
 /* Ensure the fixed header matches the global var height even if header.css forgets */
 .site-header,
-header.site-header {
-  height: var(--header-h);
+header.site-header,
+.site-header {
+  background: var(--bg-header) !important;
 }
 
 /* --- Import your site CSS so you don’t have to remember them in components --- */
@@ -150,12 +151,7 @@ header.site-header {
 
 /* --- Ticker banner --- */
 .ticker {
-  position: relative;
-  overflow: visible;
-  background: #000;
-  border-top: 1px solid rgba(0, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(0, 255, 255, 0.08);
-  padding: 8px 0;
+  background: var(--bg-ticker) !important;
 }
 .ticker::before,
 .ticker::after {
@@ -229,18 +225,16 @@ header.site-header {
 
 /* --- Ticker neon outline --- */
 .ticker {
-  z-index: 20;
-  margin-bottom: 24px;
+  background: var(--bg-ticker) !important;
 }
 
 /* --- ticker + header hard overrides --- */
 .ticker {
-  background: #000 !important;
-  border-top: 0 !important;
-  border-bottom: 0 !important;
+  background: var(--bg-ticker) !important;
 }
-header.site-header {
-  background: #000 !important;
+header.site-header,
+.site-header {
+  background: var(--bg-header) !important;
 }
 
 /* --- ticker neon outline (forced) --- */
@@ -342,4 +336,28 @@ main {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+}
+
+/* === Global Background System === */
+:root {
+  --bg-root: #000;
+  --bg-surface: #0b0b0b;
+  --bg-header: var(--bg-root);
+  --bg-ticker: var(--bg-root);
+}
+
+html,
+body {
+  background: var(--bg-root);
+  color: #fff;
+}
+header.site-header,
+.site-header {
+  background: var(--bg-header) !important;
+}
+.ticker {
+  background: var(--bg-ticker) !important;
+}
+.card-surface {
+  background: var(--bg-surface);
 }
