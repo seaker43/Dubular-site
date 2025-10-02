@@ -342,7 +342,6 @@ header.site-header,
 
 /* Use on pages/sections that should leave room for the bottom bar */
 .pad-for-bottombar {
-  padding-bottom: var(--bottombar-h) !important;
 }
 
 /* Use when a section should auto-size but never exceed the viewport gap */
