@@ -48,7 +48,7 @@ export default function Page() {
         </form>
 
         <p className="mt-6 text-center text-sm text-neutral-400">
-          Don\u0027t have an account?{" "}
+          Don’t have an account?{" "}
           <Link href="/sign-up" className="font-medium hover:opacity-90">
             Create one
           </Link>
