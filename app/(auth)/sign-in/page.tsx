@@ -25,7 +25,7 @@ export default function Page() {
 
         <div className="text-center text-neutral-400 my-4">or</div>
 
-        <form className="space-y-3" onSubmit={(e) => onSubmit(e)}>
+        <form className="space-y-3" onSubmit={onSubmit}>
           <input
             type="email"
             placeholder="Email address"

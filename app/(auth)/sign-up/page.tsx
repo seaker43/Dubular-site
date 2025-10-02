@@ -7,7 +7,7 @@ export default function Page() {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    window.location.href = "/account";
+    window.location.href = "/"; // route where you’ll finish sign-up
   };
 
   return (
@@ -17,7 +17,7 @@ export default function Page() {
           Create your Dubular account
         </h1>
         <p className="text-neutral-400 text-center mt-3">
-          Join in seconds with Google or email
+          Join the community and start streaming.
         </p>
 
         <a
@@ -29,7 +29,13 @@ export default function Page() {
 
         <div className="text-center text-neutral-400 my-4">or</div>
 
-        <form className="space-y-3" onSubmit={(e) => onSubmit(e)}>
+        <form className="space-y-3" onSubmit={onSubmit}>
+          <input
+            type="text"
+            placeholder="Username"
+            className="w-full rounded-lg bg-neutral-800 border border-neutral-700 text-white p-3 focus:ring-2 focus:ring-[var(--laser-green,#00ff00)]/70"
+            required
+          />
           <input
             type="email"
             placeholder="Email address"
@@ -47,13 +53,16 @@ export default function Page() {
             disabled={loading}
             className="w-full rounded-lg bg-[var(--laser-green,#00ff00)] text-black font-semibold py-3 shadow hover:opacity-90 disabled:opacity-60"
           >
-            {loading ? "Creating..." : "Create account"}
+            {loading ? "Creating account..." : "Create account"}
           </button>
         </form>
 
         <p className="mt-6 text-center text-sm text-neutral-400">
           Already have an account?{" "}
-          <Link href="/sign-in" className="font-medium hover:opacity-90">
+          <Link
+            href="/sign-in"
+            className="font-medium text-[var(--laser-green,#00ff00)] hover:opacity-90"
+          >
             Sign in
           </Link>
         </p>
