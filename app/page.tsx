@@ -6,7 +6,7 @@ import FeaturedHeroTabs from "@/components/FeaturedHeroTabs";
 
 export default function HomePage() {
   return (
-    <main className="page relative overflow-visible flex flex-col gap-8 p-4 page">
+    <main className="page relative overflow-visible gap-8 p-4">
       <div className=" relative overflow-visible  rounded-lg">
         <Ticker className="ticker--neon" />
         <FeaturedHeroTabs />
