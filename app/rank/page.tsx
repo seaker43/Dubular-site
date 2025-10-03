@@ -48,7 +48,7 @@ export default function RankPage() {
   );
 
   return (
-    <main className="min-h-[calc(var(--vvh)-var(--header-h))] bg-black page">
+    <main className="))] bg-black page">
       <section className="relative min-h-[calc(var(--vvh)-var(--header-h))] w-full overflow-visible bg-black">
         {/* Foreground content */}
         <div className="relative z-10 mx-auto flex h-full w-full max-w-5xl flex-col px-4 py-6">
