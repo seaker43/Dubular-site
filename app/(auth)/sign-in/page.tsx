@@ -11,7 +11,7 @@ export default function Page() {
   };
 
   return (
-    <main className="bg-neutral-950 text-white flex flex-col items-center page">
+    <main className="page text-white flex flex-col items-center page">
       <div className="w-full max-w-md bg-neutral-900 rounded-xl shadow-lg p-6 flex flex-col justify-center h-auto max-h-[calc(100dvh-var(--header-h)-var(--bottombar-h))] overflow-y-auto">
         <h1 className="text-3xl font-bold text-center">Sign in to Dubular</h1>
         <p className="text-neutral-400 text-center mt-3">Welcome back!</p>
