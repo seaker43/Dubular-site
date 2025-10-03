@@ -354,4 +354,31 @@ header.site-header,
   max-height: calc(100dvh - var(--header-h) - var(--bottombar-h));
   overflow-y: auto;
 }
-main{padding-top:24px;background:#000;}
+main {
+  padding-top: 24px;
+  background: #000;
+}
+
+/* --- Page primitives (auto, edge-to-edge) --- */
+:root {
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --bottombar-h: 64px;
+  --header-h: 100px;
+  --header-gap: 24px;
+}
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100dvh - var(--header-h));
+  padding: var(--header-gap) 0 calc(var(--bottombar-h) + var(--safe-bottom));
+  background: var(--bg-root);
+}
+.stack > * + * {
+  margin-top: 16px;
+}
+.card {
+  background: var(--bg-surface);
+  border: 1px solid rgb(38 38 38 / 1);
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
