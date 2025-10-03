@@ -354,3 +354,4 @@ header.site-header,
   max-height: calc(100dvh - var(--header-h) - var(--bottombar-h));
   overflow-y: auto;
 }
+main{padding-top:24px;background:#000;}
