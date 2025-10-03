@@ -15,7 +15,7 @@ export default function SearchPage() {
   ];
 
   return (
-    <main className="page search-page px-4 py-6 )] ))]">
+    <main className="page search-page px-4 py-6 )] ))] stack">
       {/* Search bar pinned under header */}
       <div className="mb-6">
         <SearchBar />

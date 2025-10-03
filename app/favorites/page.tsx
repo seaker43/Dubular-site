@@ -38,7 +38,7 @@ export default function FavoritesPage() {
       </SignedOut>
 
       <SignedIn>
-        <main className="page px-4 py-6">
+        <main className="page px-4 py-6 stack">
           <h1 className="text-4xl font-extrabold text-cyan-400 text-center mb-6">
             Your Favorites
           </h1>

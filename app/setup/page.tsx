@@ -35,8 +35,8 @@ export default function SetupPage() {
   }
 
   return (
-    <main className="page ))] w-full grid place-items-center px-4 )]">
-      <div className="w-full max-w-md">
+    <main className="page ))] w-full grid place-items-center px-4 )] stack">
+      <div className="card w-full max-w-md p-6 max-h-viewport-gap overflow-y-auto">
         <div className="rounded-2xl border border-white/10 bg-black/40 p-6 shadow-[0_0_0_2px_rgba(255,255,255,0.06),_0_10px_40px_rgba(0,0,0,0.6)] backdrop-blur">
           <h1 className="text-2xl font-extrabold tracking-wide text-white mb-1 text-center">
             Set up your Dubular profile
