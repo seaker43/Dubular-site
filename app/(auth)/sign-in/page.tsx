@@ -13,8 +13,8 @@ export default function Page() {
   };
 
   return (
-    <main className="page stack">
-      <div className="card w-full max-w-md p-6 max-h-viewport-gap overflow-y-auto">
+    <main className="min-h-viewport-gap flex items-stretch justify-center">
+      <div className="card w-full max-w-md p-6 flex flex-col justify-center">
         <h1 className="text-3xl font-bold text-center">Sign in to Dubular</h1>
         <p className="text-neutral-400 text-center mt-3">Welcome back!</p>
 
