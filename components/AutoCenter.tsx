@@ -30,7 +30,7 @@ export default function AutoCenter({
   }, []);
   return (
     <div
-      className={`min-h-[calc(var(--vvh)-var(--header-h)-var(--bottombar-h,64px))] ${center ? "grid place-items-center" : "block"}`}
+      className={`min-h-[calc(var(--vvh)-var(--header-h)-var(--bottombar-h,64px))] ${center ? "block" : "block"}`}
     >
       {children}
     </div>
