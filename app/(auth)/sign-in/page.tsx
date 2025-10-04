@@ -22,7 +22,11 @@ export default function Page() {
           type="button"
           className="block w-full rounded-lg bg-[var(--laser-green,#00ff00)] text-black font-semibold py-3 mt-6 shadow hover:opacity-95 active:opacity-90 text-center"
           onClick={() =>
-            signIn.authenticateWithRedirect({ strategy: "oauth_google" })
+            signIn.authenticateWithRedirect({
+              strategy: "oauth_google",
+              redirectUrl: "/sso-callback",
+              redirectUrlComplete: "/",
+            })
           }
         >
           Continue with Google
