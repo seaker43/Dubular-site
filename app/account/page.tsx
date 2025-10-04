@@ -9,15 +9,7 @@ export default function AccountPage() {
   const { signOut } = useClerk();
   const router = useRouter();
 
-  const handleSignOut = async () => {
-    const to = (typeof window !== "undefined" ? window.location.origin : "") + "/";
-    try { await signOut({ redirectUrl:"/", afterSignOutUrl:"/", forceRedirectUrl:"/" }); }
-    finally {
-      // extra belt-and-suspenders in case the above redirect is ignored
-      try { router.replace("/"); } catch {}
-      window.location.assign(to);
-    }
-  };
+  const handleSignOut = async () => {try{await signOut({redirectUrl:"/"});setTimeout(()=>window.location.replace("/"),150);}catch{window.location.replace("/");}};
 
   return (
     <>
