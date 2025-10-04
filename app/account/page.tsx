@@ -1,3 +1,4 @@
+import { SignedIn, SignOutButton } from "@clerk/nextjs";
 "use client";
 
 import {
