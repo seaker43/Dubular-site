@@ -11,7 +11,7 @@ export default function AccountPage() {
 
   const handleSignOut = async () => {
     const to = (typeof window !== "undefined" ? window.location.origin : "") + "/";
-    try { await signOut({ redirectUrl: to }); }
+    try { await signOut({ redirectUrl:"/", afterSignOutUrl:"/", forceRedirectUrl:"/" }); }
     finally {
       // extra belt-and-suspenders in case the above redirect is ignored
       try { router.replace("/"); } catch {}
