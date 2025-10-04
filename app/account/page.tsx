@@ -1,5 +1,5 @@
-"use client"
-import { SignedIn, SignOutButton } from "@clerk/nextjs";
+"use client";
+import { SignOutButton, SignedIn } from "@clerk/nextjs";
 import {
   UserProfile,
   SignedIn,
