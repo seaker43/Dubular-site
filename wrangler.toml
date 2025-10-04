@@ -10,7 +10,6 @@ database_name="dubular-db"
 database_id="e26195c7-2b3b-4804-9c78-298daf52dda9"
 [vars]
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_live_xxx"
-CLERK_SECRET_KEY="sk_live_xxx"
 
 NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
 NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
