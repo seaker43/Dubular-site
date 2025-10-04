@@ -1,9 +1,9 @@
 "use client";
-import { SignedIn, SignedOut, RedirectToSignIn, useUser, useClerk } from "@clerk/nextjs";
+import { SignedIn, SignedOut, RedirectToSignIn, useUser } from "@clerk/nextjs";
+import ServerSignOut from "@/components/auth/ServerSignOut";
 
 export default function AccountPage() {
   const { user } = useUser();
-  const { signOut } = useClerk();
 
   return (
     <>
@@ -32,9 +32,14 @@ export default function AccountPage() {
             </div>
 
             <div className="mt-8 text-center">
-              <button
-                type="button"
-                type="submit" className="text-sm text-neutral-400 hover:text-white underline">Sign out</button></form>
+              <form action={ServerSignOut}>
+                <button
+                  type="submit"
+                  className="text-sm text-neutral-400 hover:text-white underline"
+                >
+                  Sign out
+                </button>
+              </form>
             </div>
           </div>
         </div>
