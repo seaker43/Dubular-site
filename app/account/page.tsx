@@ -10,7 +10,13 @@ export default function AccountPage() {
   const router = useRouter();
 
   const handleSignOut = async () => {
-    try { await signOut(); } finally { router.replace("/"); }
+    const to = (typeof window !== "undefined" ? window.location.origin : "") + "/";
+    try { await signOut({ redirectUrl: to }); }
+    finally {
+      // extra belt-and-suspenders in case the above redirect is ignored
+      try { router.replace("/"); } catch {}
+      window.location.assign(to);
+    }
   };
 
   return (
