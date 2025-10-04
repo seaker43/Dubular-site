@@ -19,18 +19,12 @@ export default function AccountPage() {
             <h1 className="text-2xl font-semibold">Account</h1>
           </div>
 
-          <UserProfile
-            appearance={{
-              layout: { socialButtonsPlacement: "bottom" },
-              variables: {
-                colorBackground: "rgb(10,10,10)",
-                colorText: "rgb(229,229,229)",
-                colorInputBackground: "rgb(23,23,23)",
-                borderRadius: "16px",
-              },
-            }}
-            routing="hash"
-          />
+          
+          <div className="mt-8 text-center">
+            <SignOutButton signOutOptions={{ redirectUrl: "/" }}>
+              <button className="text-sm text-neutral-400 hover:text-white underline">Sign out</button>
+            </SignOutButton>
+          </div>
         </div>
       </SignedIn>
 
