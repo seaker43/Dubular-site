@@ -34,15 +34,7 @@ export default function AccountPage() {
             <div className="mt-8 text-center">
               <button
                 type="button"
-                onClick={async () => {
-                  try { await signOut({ redirectUrl: "/" }); } 
-                  catch {}
-                  finally { window.location.assign("/"); }
-                }}
-                className="text-sm text-neutral-400 hover:text-white underline"
-              >
-                Sign out
-              </button>
+                type="submit" className="text-sm text-neutral-400 hover:text-white underline">Sign out</button></form>
             </div>
           </div>
         </div>
