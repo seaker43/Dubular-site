@@ -1,11 +1,17 @@
 "use client";
 import { SignedIn, SignedOut, RedirectToSignIn, useUser, useClerk } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 export default function AccountPage() {
   const { user } = useUser();
   const { signOut } = useClerk();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    try { await signOut(); } finally { router.replace("/"); }
+  };
 
   return (
     <>
@@ -29,13 +35,7 @@ export default function AccountPage() {
             </div>
 
             <div className="mt-8 text-center">
-              <button
-                type="button"
-                onClick={() => signOut({ redirectUrl: "/" })}
-                className="text-sm text-neutral-400 hover:text-white underline"
-              >
-                Sign out
-              </button>
+              <button type="button" onClick={handleSignOut} className="text-sm text-neutral-400 hover:text-white underline">Sign out</button>
             </div>
           </div>
         </div>
