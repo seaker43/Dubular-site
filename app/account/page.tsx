@@ -1,6 +1,6 @@
-"use client";
+export const dynamic="force-dynamic";
 import { SignedIn, SignedOut, RedirectToSignIn, useUser } from "@clerk/nextjs";
-import ServerSignOut from "@/components/auth/ServerSignOut";
+import SignOutBtn from "@/components/SignOutButton";
 
 export default function AccountPage() {
   const { user } = useUser();
@@ -32,14 +32,7 @@ export default function AccountPage() {
             </div>
 
             <div className="mt-8 text-center">
-              <form action={ServerSignOut}>
-                <button
-                  type="submit"
-                  className="text-sm text-neutral-400 hover:text-white underline"
-                >
-                  Sign out
-                </button>
-              </form>
+              <SignOutBtn />
             </div>
           </div>
         </div>
