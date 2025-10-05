@@ -21,9 +21,5 @@ export default clerkMiddleware((auth, req) => {
 // - excludes _next/* (static & image optimizer) and files with extensions
 // - applies to app routes and /api|/trpc
 export const config = {
-  matcher: [
-    "/((?!(?:_next/|.*\\.(?:png|jpg|jpeg|gif|svg|ico|webp|avif|css|js|map|txt|xml|json|woff2?|ttf))|_next).*)",
-    "/",
-    "/(api|trpc)(.*)",
-  ],
+  matcher: ["/(?!api)(?!_next)(?!favicon.ico).*",],
 };
