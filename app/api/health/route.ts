@@ -1,23 +1,19 @@
+import { NextResponse } from 'next/server';
 export const runtime = 'edge';
 
 export async function GET() {
-  const body = {
-    ok: true,
-    service: 'health',
-    env: {
-      NEXT_PUBLIC_CLERK_FRONTEND_API: process.env.NEXT_PUBLIC_CLERK_FRONTEND_API,
-      NEXT_PUBLIC_CLERK_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
-      NEXT_PUBLIC_CLERK_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
-      NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL,
-      NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,
-      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
-    },
+  const envs = {
+    FRONTEND_API: process.env.NEXT_PUBLIC_CLERK_FRONTEND_API,
+    SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
+    SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
+    AFTER_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL,
+    AFTER_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,
+    PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
   };
-  return new Response(JSON.stringify(body, null, 2), {
+  return NextResponse.json({ ok: true, route: '/api/health', envs }, {
     headers: {
-      'content-type': 'application/json',
+      'content-type': 'application/json; charset=utf-8',
       'Cache-Control': 'no-store',
-      'CDN-Cache-Control': 'no-store',
-    },
+    }
   });
 }
