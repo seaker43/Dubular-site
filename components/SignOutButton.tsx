@@ -1,18 +1,21 @@
-'use client';
-import { SignOutButton } from '@clerk/nextjs';
+"use client";
+import { useClerk, ClerkLoaded } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 export default function SignOutBtn() {
+  const { signOut } = useClerk();
+  const router = useRouter();
+
   return (
-    <div className="flex justify-center mt-6">
-      <SignOutButton redirectUrl="/sign-in">
-        <button
-          type="button"
-          className="px-5 py-2 rounded-lg text-sm font-medium bg-[var(--laser-green,#00ff00)] text-black hover:opacity-80 transition"
-          data-testid="signout-btn"
-        >
-          Sign out
-        </button>
-      </SignOutButton>
-    </div>
+    <ClerkLoaded>
+      <button
+        type="button"
+        data-testid="signout-btn"
+        className="mt-4 rounded-lg px-4 py-2 text-sm"
+        onClick={() => signOut(() => router.push("/sign-in"))}
+      >
+        Sign out
+      </button>
+    </ClerkLoaded>
   );
 }
