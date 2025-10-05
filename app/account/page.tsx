@@ -1,3 +1,4 @@
+"use client"
 export const dynamic="force-dynamic";
 import { SignedIn, SignedOut, RedirectToSignIn, useUser } from "@clerk/nextjs";
 import SignOutBtn from "@/components/SignOutButton";
