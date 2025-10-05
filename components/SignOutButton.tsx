@@ -1,6 +1,6 @@
-"use client";
-import { useClerk, ClerkLoaded } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
+'use client';
+import { useClerk, ClerkLoaded } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
 
 export default function SignOutBtn() {
   const { signOut } = useClerk();
@@ -9,10 +9,9 @@ export default function SignOutBtn() {
   return (
     <ClerkLoaded>
       <button
-        type="button"
-        data-testid="signout-btn"
-        className="mt-4 rounded-lg px-4 py-2 text-sm"
-        onClick={() => signOut(() => router.push("/sign-in"))}
+        onClick={() => signOut(() => router.push('/sign-in'))}
+        className='mt-4 rounded-lg bg-[var(--laser-green,#00ff00)]/10 px-4 py-2 text-sm'
+        type='button'
       >
         Sign out
       </button>
