@@ -1,16 +1,18 @@
-"use client";
-import { SignOutButton } from "@clerk/nextjs";
+'use client';
+import { SignOutButton } from '@clerk/nextjs';
 
 export default function SignOutBtn() {
   return (
-    <SignOutButton redirectUrl="/sign-in">
-      <button
-        className="mt-4 rounded-lg bg-[var(--laser-green,#00ff00)]/10 px-4 py-2 text-sm"
-        type="button"
-        data-testid="signout-btn"
-      >
-        Sign out
-      </button>
-    </SignOutButton>
+    <div className="flex justify-center mt-6">
+      <SignOutButton redirectUrl="/sign-in">
+        <button
+          type="button"
+          className="px-5 py-2 rounded-lg text-sm font-medium bg-[var(--laser-green,#00ff00)] text-black hover:opacity-80 transition"
+          data-testid="signout-btn"
+        >
+          Sign out
+        </button>
+      </SignOutButton>
+    </div>
   );
 }
