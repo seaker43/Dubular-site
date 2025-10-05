@@ -9,6 +9,7 @@ binding="DB"
 database_name="dubular-db"
 database_id="e26195c7-2b3b-4804-9c78-298daf52dda9"
 [vars]
+# Cloudflare overrides wrangler vars at deploy (safe to keep local baseline)
 CLERK_SECRET_KEY="sk_test_0udQEXkq5UYa7joi8FQ1RWCk1gUXLPIj26SSx5rUl4"
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_test_ZmluZXItZWZ0LTE2LmNsZXJrLmFjY291bnRzLmRldiQ"
 
