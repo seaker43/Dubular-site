@@ -1,1 +1,20 @@
-export const runtime="edge";export const dynamic="force-dynamic";import RequireAuth from "@/components/RequireAuth";export default function Page(){return(<RequireAuth><div className="mx-auto w-full max-w-2xl p-6 text-white"><h1 className="text-2xl font-semibold mb-4">Edit profile</h1><form method="post" action="/api/profile" className="space-y-4"><input name="displayName" placeholder="Display name" className="w-full rounded-lg bg-neutral-900/60 border border-neutral-800 px-3 py-2"/><textarea name="bio" placeholder="Bio" className="w-full rounded-lg bg-neutral-900/60 border border-neutral-800 px-3 py-2 h-28"></textarea><button className="rounded-lg bg-[var(--laser-green,#00ff00)]/10 border border-[var(--laser-green,#00ff00)] px-4 py-2">Save</button></form></div></RequireAuth>);}
+export const runtime = "edge";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
+
+import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
+import ProfileClient from "./page.client";
+
+export default function Page() {
+  return (
+    <>
+      <SignedIn>
+        <ProfileClient />
+      </SignedIn>
+      <SignedOut>
+        <RedirectToSignIn redirectUrl="/sign-in" afterSignInUrl="/settings/profile" />
+      </SignedOut>
+    </>
+  );
+}

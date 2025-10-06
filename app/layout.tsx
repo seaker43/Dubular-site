@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import BottomBar from "@/components/BottomBar";
 import AppProviders from "@/components/AppProviders";
 import ClientProviders from "@/components/ClientProviders";
+import Analytics from "@/components/Analytics";
 
 export const metadata = { title: "Dubular" } as const;
 
@@ -18,8 +19,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <BottomBar />
           </AppProviders>
         </ClientProviders>
-      <script async defer data-website-id="YOUR-UMAMI-ID" src="https://your-umami-domain/script.js"></script>
-</body>
+        <Analytics />
+      </body>
     </html>
   );
 }
