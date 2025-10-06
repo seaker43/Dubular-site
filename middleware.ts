@@ -20,8 +20,4 @@ export default clerkMiddleware((auth, req) => {
 // Cloudflare Pages–safe matcher:
 // - excludes _next/* (static & image optimizer) and files with extensions
 // - applies to app routes and /api|/trpc
-export const config = {
-  matcher: [
-    '/((?!api|_next|favicon\.ico|.*\..*).*)'
-  ],
-};
+export const config = { matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"], };
