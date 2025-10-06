@@ -2,20 +2,38 @@ export const runtime = "edge";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
+import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
+import { getDB } from "@/lib/db";
+
+const ensureTableSQL = `
+CREATE TABLE IF NOT EXISTS profiles (
+  user_id TEXT PRIMARY KEY,
+  display_name TEXT,
+  bio TEXT,
+  updated_at INTEGER
+)`;
+
+export async function GET() {
+  const { userId } = await auth();
+  if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const db = getDB();
+  await db.prepare(ensureTableSQL).run();
+  const row = await db.prepare("SELECT user_id, display_name, bio, updated_at FROM profiles WHERE user_id = ?1").bind(userId).first();
+  return NextResponse.json(row ?? { user_id: userId, display_name: null, bio: null, updated_at: null });
+}
 
 export async function POST(req: Request) {
-  const { userId } = auth();
-  if (!userId) return new Response("Unauthorized", { status: 401 });
-
+  const { userId } = await auth();
+  if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const { displayName, bio } = await req.json().catch(() => ({}));
-  // TODO: Persist to D1. Example (when binding available as globalThis.DB):
-  // const stmt = (globalThis as any).DB
-  //   .prepare(`CREATE TABLE IF NOT EXISTS profiles(userId TEXT PRIMARY KEY, displayName TEXT, bio TEXT, updatedAt INTEGER);
-  //             INSERT INTO profiles(userId, displayName, bio, updatedAt)
-  //             VALUES (?1, ?2, ?3, ?4)
-  //             ON CONFLICT(userId) DO UPDATE SET displayName=excluded.displayName, bio=excluded.bio, updatedAt=excluded.updatedAt;`);
-  // await stmt.bind(userId, displayName ?? "", bio ?? "", Date.now()).run();
-
-  return Response.json({ ok: true, userId, displayName, bio, ts: Date.now() });
+  const db = getDB();
+  await db.prepare(ensureTableSQL).run();
+  const now = Date.now();
+  await db.prepare(
+    "INSERT INTO profiles (user_id, display_name, bio, updated_at) VALUES (?1, ?2, ?3, ?4) " +
+    "ON CONFLICT(user_id) DO UPDATE SET display_name=excluded.display_name, bio=excluded.bio, updated_at=excluded.updated_at"
+  ).bind(userId, displayName ?? null, bio ?? null, now).run();
+  const row = await db.prepare("SELECT user_id, display_name, bio, updated_at FROM profiles WHERE user_id = ?1").bind(userId).first();
+  return NextResponse.json(row);
 }
