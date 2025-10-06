@@ -1,1 +1,1 @@
-import { useParams } from "next/navigation";export default function Page(){const { handle }=useParams();return(<div className="p-6 text-white"><h1 className="text-2xl font-bold mb-4">Profile: {handle}</h1><p>User profile page placeholder.</p></div>)}
+export const runtime='edge'; export const dynamic='force-dynamic'; export default function Page({ params }:{ params:{ handle:string } }){ const { handle }=params; return (<div className='p-6 text-white'><h1 className='text-2xl font-bold mb-4'>Profile: {handle}</h1><p>User profile page placeholder.</p></div>); }
