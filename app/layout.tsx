@@ -18,7 +18,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <BottomBar />
           </AppProviders>
         </ClientProviders>
-      </body>
+      <script async defer data-website-id="YOUR-UMAMI-ID" src="https://your-umami-domain/script.js"></script>
+</body>
     </html>
   );
 }
