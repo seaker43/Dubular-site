@@ -1,1 +1,19 @@
-export const dynamic='force-dynamic';\nexport const revalidate=0;\nexport const fetchCache='force-no-store';\nimport { SignedIn,SignedOut,RedirectToSignIn } from '@clerk/nextjs';\nimport AccountClient from './page.client';\nexport default function AccountPage(){return(<>\n<SignedIn><AccountClient/></SignedIn>\n<SignedOut><RedirectToSignIn redirectUrl='/sign-in' afterSignInUrl='/account'/></SignedOut>\n</>);}
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
+
+import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
+import AccountClient from "./page.client";
+
+export default function AccountPage() {
+  return (
+    <>
+      <SignedIn>
+        <AccountClient />
+      </SignedIn>
+      <SignedOut>
+        <RedirectToSignIn redirectUrl="/sign-in" afterSignInUrl="/account" />
+      </SignedOut>
+    </>
+  );
+}
