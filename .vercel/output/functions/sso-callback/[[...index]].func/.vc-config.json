@@ -1,0 +1,18 @@
+{
+  "runtime": "edge",
+  "name": "sso-callback/[[...index]]",
+  "deploymentTarget": "v8-worker",
+  "entrypoint": "index.js",
+  "assets": [],
+  "framework": {
+    "slug": "nextjs",
+    "version": "15.5.2"
+  },
+  "environment": {
+    "__NEXT_BUILD_ID": "V82RGwzI6kg1THSufPxVR",
+    "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "5xMZKj1oRbtGNjsuI/iQe1h9uSWyALArV3FBM7GCU3g=",
+    "__NEXT_PREVIEW_MODE_ID": "77fbf83968883e1086028b1af68369e3",
+    "__NEXT_PREVIEW_MODE_SIGNING_KEY": "4dd493a71c7bcebce6a6fe49c2fcd139ef184109d9faf9d8f30152fa3410154b",
+    "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "24ef5dfa1058299b65ca3ac6691212fa1bed44806b50613cac98dbba447665e6"
+  }
+}
