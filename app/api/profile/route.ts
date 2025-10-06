@@ -14,24 +14,25 @@ export async function POST(req: Request) {
   if (!userId) return new Response("Unauthorized", { status: 401 });
 
   const { handle, displayName, bio, avatarUrl } = (await req.json()) as Body;
+
   const env: any = getRequestContext().env;
   const db = env?.DB;
   if (!db) return new Response("DB missing", { status: 500 });
 
-  // What does the user already have?
+  // Current record (if any)
   const existing = await db
     .prepare("SELECT handle FROM profiles WHERE user_id = ?")
     .bind(userId)
     .first<{ handle?: string }>();
 
-  // Choose the handle to use
-  let finalHandle = handle?.trim() || existing?.handle || "";
-  const re = /^[a-z0-9_\.~-]{2,32}$/i;
+  // Decide final handle: posted -> existing -> invalid
+  let finalHandle = (handle ?? "").trim() || existing?.handle || "";
+  const re = /^[a-z0-9_.~-]{2,32}$/i;
   if (!finalHandle || !re.test(finalHandle)) {
     return new Response("Invalid handle", { status: 400 });
   }
 
-  // If user is changing the handle, ensure uniqueness
+  // If changing handle, ensure uniqueness
   if (!existing?.handle || existing.handle.toLowerCase() !== finalHandle.toLowerCase()) {
     const taken = await db
       .prepare("SELECT user_id FROM profiles WHERE handle = ?")
@@ -45,7 +46,7 @@ export async function POST(req: Request) {
   const now = Date.now();
   await db
     .prepare(
-      `INSERT INTO profiles (user_id, handle, display_name, bio, avatar_url, updated_at)
+      `INSERT INTO profiles (user_id,handle,display_name,bio,avatar_url,updated_at)
        VALUES (?, ?, ?, ?, ?, ?)
        ON CONFLICT(user_id) DO UPDATE SET
          handle=excluded.handle,
