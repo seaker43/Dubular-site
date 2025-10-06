@@ -1,1 +1,74 @@
-"use client";import {useState} from "react";import Link from "next/link";import {useUser} from "@clerk/nextjs";import SignOutBtn from "@/components/SignOutButton";function Toggle({label,checked,onChange}){return(<label className="flex items-center justify-between py-2"><span className="text-sm text-neutral-300">{label}</span><input type="checkbox" className="h-5 w-5 accent-[var(--laser-green,#00ff00)]" checked={checked} onChange={e=>onChange(e.target.checked)}/></label>);}export default function SettingsClient(){const {user,isLoaded}=useUser();const[dark,setDark]=useState(true);const[push,setPush]=useState(false);const[email,setEmail]=useState(true);if(!isLoaded)return(<p className="p-6 text-neutral-400">Loading...</p>);return(<div className="mx-auto w-full max-w-3xl px-4 pb-24 pt-6 text-white"><h1 className="text-2xl font-semibold mb-6">Settings</h1><div className="space-y-6"><section className="rounded-2xl bg-neutral-900/60 p-6 border border-neutral-800 shadow-lg"><h2 className="text-lg font-semibold mb-4">Account</h2><div className="flex items-center gap-4">{user?.imageUrl&&(<img src={user.imageUrl} alt="Avatar" className="w-12 h-12 rounded-full ring-2 ring-[var(--laser-green,#00ff00)]"/>)}<div className="text-sm"><p className="font-medium">{user?.fullName}</p><p className="text-neutral-400">{user?.primaryEmailAddress?.emailAddress}</p></div><div className="ml-auto"><SignOutBtn/></div></div></section><section className="rounded-2xl bg-neutral-900/60 p-6 border border-neutral-800 shadow-lg"><h2 className="text-lg font-semibold mb-4">Profile</h2><p className="text-sm text-neutral-300 mb-4">Edit your public profile details.</p><div className="flex gap-3"><Link href="/u/me" className="rounded-lg px-4 py-2 text-sm bg-[var(--laser-green,#00ff00)]/10 border border-[var(--laser-green,#00ff00)] text-[var(--laser-green,#00ff00)]">View public profile</Link></div></section><section className="rounded-2xl bg-neutral-900/60 p-6 border border-neutral-800 shadow-lg"><h2 className="text-lg font-semibold mb-4">Appearance</h2><Toggle label="Dark theme" checked={dark} onChange={setDark}/><p className="text-xs text-neutral-500 mt-2">Placeholder toggle (theme integration can be wired later).</p></section><section className="rounded-2xl bg-neutral-900/60 p-6 border border-neutral-800 shadow-lg"><h2 className="text-lg font-semibold mb-4">Notifications</h2><div className="space-y-1"><Toggle label="Email notifications" checked={email} onChange={setEmail}/><Toggle label="Push notifications" checked={push} onChange={setPush}/></div><p className="text-xs text-neutral-500 mt-2">Placeholders — hook to your API/D1 later.</p></section></div></div>);}
+'use client';
+import { useEffect, useState } from 'react';
+
+type Status = 'idle' | 'saving' | 'saved' | 'error' | 'unauth';
+
+export default function SettingsClient() {
+  const [dark, setDark] = useState(false);
+  const [email, setEmail] = useState(true);
+  const [push, setPush] = useState(false);
+  const [status, setStatus] = useState<Status>('idle');
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const r = await fetch('/api/settings', { cache: 'no-store', credentials: 'include' });
+        if (r.status === 401) { setStatus('unauth'); return; }
+        if (r.ok) {
+          const s = await r.json();
+          setDark(!!s.dark); setEmail(!!s.email); setPush(!!s.push);
+        }
+      } catch { /* ignore */ }
+    })();
+  }, []);
+
+  async function save() {
+    setStatus('saving');
+    const prefs = { dark, email, push };
+    localStorage.setItem('prefs', JSON.stringify(prefs));
+    try {
+      const res = await fetch('/api/settings', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(prefs),
+        credentials: 'include',
+      });
+      if (res.status === 401) { setStatus('unauth'); return; }
+      if (!res.ok) { setStatus('error'); return; }
+      setStatus('saved');
+      setTimeout(() => setStatus('idle'), 1200);
+    } catch {
+      setStatus('error');
+    }
+  }
+
+  return (
+    <div className="mx-auto max-w-3xl p-6 text-white">
+      <h1 className="text-2xl font-semibold mb-6">Settings</h1>
+      <div className="space-y-4">
+        <label className="flex items-center gap-3">
+          <input type="checkbox" checked={dark} onChange={e=>setDark(e.target.checked)} />
+          <span>Dark theme</span>
+        </label>
+        <label className="flex items-center gap-3">
+          <input type="checkbox" checked={email} onChange={e=>setEmail(e.target.checked)} />
+          <span>Email notifications</span>
+        </label>
+        <label className="flex items-center gap-3">
+          <input type="checkbox" checked={push} onChange={e=>setPush(e.target.checked)} />
+          <span>Push notifications</span>
+        </label>
+
+        <button onClick={save} disabled={status==='saving'} className="rounded-lg border px-4 py-2">
+          {status==='saving' ? 'Saving…' : 'Save'}
+        </button>
+
+        <div className="text-sm mt-2 text-neutral-400">
+          {status==='saved' && 'Saved!'}
+          {status==='error' && 'Error saving settings.'}
+          {status==='unauth' && <span>Sign in required. <a className="underline" href="/sign-in">Sign in</a></span>}
+        </div>
+      </div>
+    </div>
+  );
+}
