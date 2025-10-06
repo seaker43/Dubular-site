@@ -12,7 +12,7 @@ export default function Settings() {
   useEffect(() => {
     (async () => {
       try {
-        const r = await fetch('/api/settings', { cache: 'no-store' });
+        const r = await fetch('/api/settings', { cache: 'no-store', credentials: 'include' });
         if (r.status === 401) { setStatus('unauth'); return; }
         if (r.ok) {
           const s = await r.json();
@@ -31,6 +31,7 @@ export default function Settings() {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(prefs),
+        credentials: 'include',
       });
       if (res.status === 401) { setStatus('unauth'); return; }
       if (!res.ok) { setStatus('error'); return; }
