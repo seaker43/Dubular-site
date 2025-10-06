@@ -1,1 +1,29 @@
-import { NextResponse } from "next/server";export const config={matcher:["/api/:path*"]};const hits=new Map<string,{n:number,t:number}>();export default function middleware(req:Request){const ip=(req.headers.get("cf-connecting-ip")||"") as string;const now=Date.now(),win=60_000,limit=60;const h=hits.get(ip)||{n:0,t:now};if(now-h.t>win){h.n=0;h.t=now;}h.n++;hits.set(ip,h);if(h.n>limit)return NextResponse.json({error:"Too Many Requests"},{status:429});return NextResponse.next();}
+import { NextResponse } from 'next/server';
+
+export const config = { matcher: ['/api/:path*'] };
+
+// 60 requests per 60s per IP (in-memory, per instance)
+const WINDOW_MS = 60_000;
+const LIMIT = 60;
+type Bucket = Map<string, number[]>;
+
+const store: Bucket =
+  (globalThis as any).__rl_store || ((globalThis as any).__rl_store = new Map());
+
+export default function middleware(req: Request) {
+  const ipHeader =
+    req.headers.get('cf-connecting-ip') ||
+    req.headers.get('x-forwarded-for') ||
+    'unknown';
+  const ip = ipHeader.split(',')[0].trim();
+
+  const now = Date.now();
+  const hits = store.get(ip)?.filter((t) => now - t < WINDOW_MS) ?? [];
+  hits.push(now);
+  store.set(ip, hits);
+
+  if (hits.length > LIMIT) {
+    return new NextResponse('Too Many Requests', { status: 429 });
+  }
+  return NextResponse.next();
+}
