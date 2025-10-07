@@ -1,0 +1,1 @@
+export const runtime="edge";\nexport const dynamic="force-dynamic";\nimport { auth } from "@clerk/nextjs/server";\nexport async function GET(){const {userId}=auth();return new Response(JSON.stringify({userId}),{headers:{"content-type":"application/json"}});}
