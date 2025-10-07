@@ -1,3 +1,4 @@
-import { NextResponse } from 'next/server';
-export const config={matcher:['/account','/settings/:path*','/u/me']};
-export default function m(){return NextResponse.next();}
+import { clerkMiddleware } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
+export default clerkMiddleware();
+export const config={matcher:["/account","/settings/:path*","/u/me","/api/:path*"]};
