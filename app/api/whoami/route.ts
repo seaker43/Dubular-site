@@ -1,11 +1,10 @@
-export const runtime = 'edge';
-export const dynamic = 'force-dynamic';
+export const runtime = "edge";
+export const dynamic = "force-dynamic";
 
-import { auth } from '@clerk/nextjs/server';
+import { auth } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 export async function GET() {
-  const { userId } = auth();
-  return new Response(JSON.stringify({ userId }), {
-    headers: { 'content-type': 'application/json' },
-  });
+  const { userId, sessionId } = auth();
+  return NextResponse.json({ userId: userId ?? null, sessionId: sessionId ?? null });
 }
