@@ -6,20 +6,28 @@ import { getRequestContext } from '@cloudflare/next-on-pages';
 
 type Body = { dark?: boolean; email?: boolean; push?: boolean };
 
-const INIT_SQL = `CREATE TABLE IF NOT EXISTS user_settings (
-  user_id TEXT PRIMARY KEY,
-  dark INTEGER,
-  email_notifs INTEGER,
-  push_notifs INTEGER,
-  updated_at INTEGER
-)`;
+async function ensureSchema(env: any) {
+  // Create table if it doesn't exist
+  await env.DB.exec(`CREATE TABLE IF NOT EXISTS user_settings (
+    user_id TEXT PRIMARY KEY,
+    dark INTEGER,
+    email_notifs INTEGER,
+    push_notifs INTEGER
+  )`);
+  // Try to add column if it's missing (safe to ignore if it already exists)
+  try {
+    await env.DB.exec(`ALTER TABLE user_settings ADD COLUMN updated_at INTEGER`);
+  } catch (e) {
+    // ignore "duplicate column name" or similar
+  }
+}
 
 export async function GET(req: Request) {
   const { userId } = getAuth(req);
   if (!userId) return new Response('Unauthorized', { status: 401 });
 
   const env: any = getRequestContext().env;
-  await env.DB.exec(INIT_SQL);
+  await ensureSchema(env);
 
   const row = await env.DB
     .prepare('SELECT dark,email_notifs,push_notifs FROM user_settings WHERE user_id=?')
@@ -41,7 +49,7 @@ export async function POST(req: Request) {
     const { dark = false, email = true, push = false } = (await req.json()) as Body;
 
     const env: any = getRequestContext().env;
-    await env.DB.exec(INIT_SQL);
+    await ensureSchema(env);
 
     const now = Date.now();
     await env.DB
@@ -54,8 +62,8 @@ export async function POST(req: Request) {
       .run();
 
     return Response.json({ ok: true });
-  } catch (e) {
-    console.error('Settings save error', e);
+  } catch (e: any) {
+    console.error('Settings save error:', e?.message || e, e?.stack);
     return new Response('Error saving settings', { status: 500 });
   }
 }
