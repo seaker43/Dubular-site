@@ -1,7 +1,7 @@
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
-import { getAuth } from '@clerk/nextjs/server';
+import { auth } from "@clerk/nextjs/server";
 import { getRequestContext } from '@cloudflare/next-on-pages';
 
 type Body = { dark?: boolean; email?: boolean; push?: boolean };
@@ -23,7 +23,7 @@ async function ensureSchema(env: any) {
 }
 
 export async function GET(req: Request) {
-  const { userId } = getAuth(req);
+  const { userId } = auth();
   if (!userId) return new Response('Unauthorized', { status: 401 });
 
   const env: any = getRequestContext().env;
@@ -42,7 +42,7 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-  const { userId } = getAuth(req);
+  const { userId } = auth();
   if (!userId) return new Response('Unauthorized', { status: 401 });
 
   try {
