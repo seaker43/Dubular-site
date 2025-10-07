@@ -27,6 +27,6 @@ export async function POST(req:Request){
     return Response.json({ok:true});
   }catch(err){
     console.error('Settings save error',err);
-    return new Response('Error saving settings',{status:500});
+    return new Response(JSON.stringify({ ok:false, error:String(err), stack:(err&&err.stack)||null }), { status:500, headers:{'content-type':'application/json'} });
   }
 }
