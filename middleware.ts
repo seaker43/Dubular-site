@@ -1,10 +1,10 @@
-import { clerkMiddleware } from '@clerk/nextjs/server';
+import { clerkMiddleware } from "@clerk/nextjs/server";
 
-undefined
+export default clerkMiddleware({
+  authorizedParties: ["https://beta.dubular.live","https://dubular-site.pages.dev"],
+  publicRoutes: ["/","/api/diag/keys","/api/whoami","/api/health","/api/ping","/robots.txt","/sitemap.xml"],
+});
 
 export const config = {
-  matcher: [
-    '/((?!_next|_vercel|.*\\..*).*)',
-    '/api/:path*',
-  ],
+  matcher: ["/((?!_next|_vercel|.*\\..*).*)"],
 };
