@@ -8,7 +8,7 @@ type Row = { user_id: string; display_name: string | null; bio: string | null; c
 function db() {
   const ctx = getRequestContext();
   // @ts-ignore - running on Cloudflare Pages, D1 binding exists at env.DB
-  return ctx.env?.DB | as D1Database;
+  return ctx.env?.DB as D1Database;
 }
 
 async function ensureTable() {
