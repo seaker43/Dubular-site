@@ -1,7 +1,7 @@
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 import { auth } from '@clerk/nextjs/server';
-import { getRequestContext } from '@cloudflare/next--on-pages';
+import { getRequestContext } from '@cloudflare/next-on-pages';
 
 type Row = { user_id: string; display_name: string | null; bio: string | null; created_at: number };
 
