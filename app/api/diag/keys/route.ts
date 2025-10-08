@@ -1,18 +1,16 @@
-export const runtime = "edge";
-export async function GET() {
-  const body = {
-    NEXT_PUBLIC_CLERK_FRONTEND_API: process.env.NEXT_PUBLIC_CLERK_FRONTEND_API,
-    NEXT_PUBLIC_CLERK_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
-    NEXT_PUBLIC_CLERK_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL,
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
-  };
-  return new Response(JSON.stringify(body, null, 2), {
-    headers: {
-      "content-type": "application/json",
-      "Cache-Control": "no-store",
-      "CDN-Cache-Control": "no-store",
-    },
-  });
-}// redeploy Sun Oct  5 08:05:12 PM UTC 2025
+export const runtime="edge";
+export const dynamic="force-dynamic";
+import { getRequestContext } from "@cloudflare/next-on-pages";
+export async function GET(){
+ try {
+   const env = getRequestContext().env;
+   return new Response(JSON.stringify({
+     hasPublishableKey: !!env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+     hasSecretKey: !!env.CLERK_SECRET_KEY,
+     frontendApi: env.NEXT_PUBLIC_CLERK_FRONTEND_API || null,
+     cookieDomain: env.CLERK_COOKIE_DOMAIN || null
+   }), { headers: { "content-type": "application/json" } });
+ } catch(e) {
+   return new Response(JSON.stringify({ error: e?.message || "diag failed" }), { status: 500, headers: { "content-type": "application/json" } });
+ }
+}
