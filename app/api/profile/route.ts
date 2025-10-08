@@ -1,62 +1,67 @@
-export const runtime = "edge";
-import { auth } from "@clerk/nextjs/server";
-import { getRequestContext } from "@cloudflare/next-on-pages";
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
+import { auth } from '@clerk/nextjs/server';
+import { getRequestContext } from '@cloudflare/next--on-pages';
 
-type Body = {
-  handle?: string;
-  displayName?: string | null;
-  bio?: string | null;
-  avatarUrl?: string | null;
-};
+type Row = { user_id: string; display_name: string | null; bio: string | null; created_at: number };
 
+function db() {
+  const ctx = getRequestContext();
+  // @ts-ignore - running on Cloudflare Pages, D1 binding exists at env.DB
+  return ctx.env?.DB | as D1Database;
+}
+
+async function ensureTable() {
+  await db()
+    .prepare(
+      `CREATE TABLE IF NOT EXISTS profiles (
+        user_id TEXT PRIMARY KEY,
+        display_name TEXT,
+        bio TEXT,
+        created_at INTEGER DEFAULT (strftime('%s', 'now'))
+      )`
+    )
+    .run();
+}
+
+export async function GET() {
+  const { userId, sessionId } = auth();
+  if (!userId) {
+    return new Response('Unauthorized', { status: 401 });
+  }
+  await ensureTable();
+  const row = await db()
+    .prepare('SELECT user_id, display_name, bio, created_at FROM profiles WHERE user_id = ?')
+    .bind(userId)
+    .first<Row>();
+  return Response.json({ userId, sessionId, profile: row || null });
+}
+
+// [upsert]
 export async function POST(req: Request) {
   const { userId } = auth();
-  if (!userId) return new Response("Unauthorized", { status: 401 });
-
-  const { handle, displayName, bio, avatarUrl } = (await req.json()) as Body;
-
-  const env: any = getRequestContext().env;
-  const db = env?.DB;
-  if (!db) return new Response("DB missing", { status: 500 });
-
-  // Current record (if any)
-  const existing = await db
-    .prepare("SELECT handle FROM profiles WHERE user_id = ?")
-    .bind(userId)
-    .first<{ handle?: string }>();
-
-  // Decide final handle: posted -> existing -> invalid
-  let finalHandle = (handle ?? "").trim() || existing?.handle || "";
-  const re = /^[a-z0-9_.~-]{2,32}$/i;
-  if (!finalHandle || !re.test(finalHandle)) {
-    return new Response("Invalid handle", { status: 400 });
+  if (!userId) {
+    return new Response('Unauthorized', { status: 401 });
   }
+  const { displayName = null, bio = null } = (await req.json().catch(() => ({}))) as {
+    displayName?: string | null;
+    bio?: string | null;
+  };
 
-  // If changing handle, ensure uniqueness
-  if (!existing?.handle || existing.handle.toLowerCase() !== finalHandle.toLowerCase()) {
-    const taken = await db
-      .prepare("SELECT user_id FROM profiles WHERE handle = ?")
-      .bind(finalHandle)
-      .first<{ user_id: string }>();
-    if (taken && taken.user_id !== userId) {
-      return new Response("Handle already taken", { status: 409 });
-    }
-  }
+  await ensureTable();
 
-  const now = Date.now();
-  await db
+  await db()
     .prepare(
-      `INSERT INTO profiles (user_id,handle,display_name,bio,avatar_url,updated_at)
-       VALUES (?, ?, ?, ?, ?, ?)
-       ON CONFLICT(user_id) DO UPDATE SET
-         handle=excluded.handle,
-         display_name=excluded.display_name,
-         bio=excluded.bio,
-         avatar_url=excluded.avatar_url,
-         updated_at=excluded.updated_at`
-    )
-    .bind(userId, finalHandle, displayName ?? null, bio ?? null, avatarUrl ?? null, now)
+      `INSERT INTO profiles (user_id, display_name, bio)
+      VALUES (?1, ?2, ?3)`
+      )
+    .bind(userId, displayName, bio)
     .run();
 
-  return Response.json({ ok: true, handle: finalHandle });
+  const saved = await db()
+    .prepare('SELECT user_id, display_name, bio, created_at FROM profiles WHERE user_id = ?')
+    .bind(userId)
+    .first<Row()>;
+
+  return Response.json({ profile: saved });
 }
