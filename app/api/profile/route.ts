@@ -61,7 +61,7 @@ export async function POST(req: Request) {
   const saved = await db()
     .prepare('SELECT user_id, display_name, bio, created_at FROM profiles WHERE user_id = ?')
     .bind(userId)
-    .first<Row()>;
+    .first<Row>();
 
   return Response.json({ profile: saved });
 }
