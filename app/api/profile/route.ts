@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 
 undefined
 import { auth } from '@clerk/nextjs/server';
