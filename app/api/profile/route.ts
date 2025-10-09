@@ -25,7 +25,9 @@ async function ensureTable() {
 }
 
 console.log("[Auth Headers Debug]", Object.fromEntries(req.headers.entries()));
-export async function GET() {
+export async function GET(req: Request) {
+  console.log('[Auth Headers Debug]', Object.fromEntries(req.headers.entries()));
+
   const { userId, sessionId } = auth();
   if (!userId) {
     return new Response('Unauthorized', { status: 401 });
