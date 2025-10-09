@@ -1,35 +1,58 @@
 export const runtime = 'edge';
+
 import { auth, getAuth } from '@clerk/nextjs/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
 
-type Row = { user_id: string; display_name: string | null; bio: string | null; created_at: number };
-
-function db(): any {
-  return (getRequestContext().env as any).DB;
-}
-
 export async function GET(req: Request) {
-  // debug: confirm cookies/headers arrive
-  console.log('[Auth Headers Debug]', Object.fromEntries(req.headers.entries()));
+  try {
+    // ----- gather auth -----
+    let { userId, sessionId } = auth();
+    if (!userId) {
+      const a = getAuth(req as any);
+      userId = a.userId ?? null;
+      sessionId = a.sessionId ?? null;
+    }
 
-  // try auth(); fall back to getAuth(req) for environments where auth() doesn't bind
-  let { userId, sessionId } = auth();
-  if (!userId) {
-    const a = getAuth(req as any);
-    userId = a.userId || null;
-    sessionId = a.sessionId || null;
+    // ----- gather env (don’t touch DB yet) -----
+    let hasCtx = false, hasEnv = false, hasD1 = false, cookieDomain = null as null | string;
+    let frontendApi = null as null | string;
+
+    try {
+      const ctx = getRequestContext();
+      hasCtx = !!ctx;
+      // @ts-ignore
+      const env = ctx?.env;
+      hasEnv = !!env;
+      // @ts-ignore
+      hasD1 = !!env?.DB;
+      // @ts-ignore
+      frontendApi = env?.CLERK_PUBLISHABLE_KEY ? 'via env key' : null;
+      // @ts-ignore
+      cookieDomain = env?.CLERK_JWT_KEY ? '.dubular.live' : null;
+    } catch (_) {}
+
+    // ----- echo headers/cookies so we see what arrives at the edge -----
+    const headers = Object.fromEntries(req.headers.entries());
+    const cookies = headers['cookie'] ?? '';
+
+    return Response.json({
+      ok: true,
+      userId,
+      sessionId,
+      hasCtx,
+      hasEnv,
+      hasD1,
+      cookieDomain,
+      frontendApi,
+      headersSample: {
+        host: headers['host'],
+        cfRay: headers['cf-ray'],
+        secFetchSite: headers['sec-fetch-site'],
+      },
+      hasCookieHeader: Boolean(cookies),
+      cookiesPreview: cookies.slice(0, 200),
+    });
+  } catch (err: any) {
+    return new Response(`Route error: ${err?.message || String(err)}`, { status: 500 });
   }
-
-  if (!userId) return new Response('Unauthorized', { status: 401 });
-
-  await db().exec(
-    "CREATE TABLE IF NOT EXISTS profiles (user_id TEXT PRIMARY KEY, display_name TEXT, bio TEXT, created_at INTEGER DEFAULT (strftime('%s','now')))"
-  );
-
-  const row = await db()
-    .prepare("SELECT user_id, display_name, bio, created_at FROM profiles WHERE user_id = ?")
-    .bind(userId)
-    .first<Row>();
-
-  return Response.json({ userId, sessionId, profile: row ?? null });
 }
