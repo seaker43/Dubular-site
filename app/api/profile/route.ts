@@ -24,6 +24,7 @@ async function ensureTable() {
     .run();
 }
 
+console.log("[Auth Headers Debug]", Object.fromEntries(req.headers.entries()));
 export async function GET() {
   const { userId, sessionId } = auth();
   if (!userId) {
