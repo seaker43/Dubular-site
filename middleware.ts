@@ -6,11 +6,13 @@ const isPublicRoute = createRouteMatcher([
   "/sitemap.xml",
   "/sign-in(.*)",
   "/sign-up(.*)",
+  "/sso-callback(.*)}",
   "/api/health",
   "/api/ping",
   "/api/diag/keys",
   "/api/whoami",
 ]);
+
 
 export default clerkMiddleware((auth, req) => {
   if (isPublicRoute(req)) return;
@@ -19,7 +21,7 @@ export default clerkMiddleware((auth, req) => {
 
 export const config = {
   matcher: [
-    "/((?!.+\\.[\\w]+$|_next).*)",
+    "/((?!.+(\\.??:[\\w]+$|_next)).*",
     "/",
     "/(api|trpc)(.*)",
   ],
