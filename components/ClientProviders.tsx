@@ -7,7 +7,7 @@ export default function ClientProviders({ children }: { children: React.ReactNod
   return (
     <ClerkProvider
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
-      frontendApi={process.env.NEXT_PUBLIC_CLERK_FRONTEND_API}
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
     >
       {children}
     </ClerkProvider>
