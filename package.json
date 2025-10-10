@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250927.0",
+    "@opennextjs/cloudflare": "^1.10.0",
     "@types/node": "^20.14.9",
     "@types/react": "^18.3.3",
     "autoprefixer": "^10.4.21",

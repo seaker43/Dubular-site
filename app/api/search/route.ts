@@ -1,6 +1,6 @@
 export const runtime = "edge";
 import { NextResponse } from "next/server";
-import { getRequestContext } from "@cloudflare/next-on-pages";
+import { getRequestContext } from "@opennextjs/cloudflare";
 
 const ok = (b: any, init = 200) =>
   NextResponse.json(b, typeof init === "number" ? { status: init } : init);

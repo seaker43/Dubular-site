@@ -1,5 +1,5 @@
 export const runtime="edge"; export const dynamic="force-dynamic";
-import { getRequestContext } from "@cloudflare/next-on-pages";
+import { getRequestContext } from "@opennextjs/cloudflare";
 export async function GET(){
   try{
     const ctx = getRequestContext?.();
