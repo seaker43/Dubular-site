@@ -17,7 +17,7 @@ export default clerkMiddleware(async (auth, req) => {
   await auth.protect();
 });
 
-export const runtime = 'edge';
+// no runtime export here
 
 export const config = {
   matcher: [
