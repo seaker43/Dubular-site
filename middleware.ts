@@ -1,29 +1,26 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 const isPublicRoute = createRouteMatcher([
-  '/',
-  '/robots.txt',
-  '/sitemap.xml',
-  '/api/health',
-  '/api/ping',
-  '/api/diag/keys',
-  '/api/whoami',
-  '/sign-in(.*)',
-  '/sign-up(.*)',
+  "/",
+  "/robots.txt",
+  "/sitemap.xml",
+  "/sign-in(.*)",
+  "/sign-up(.*)",
+  "/api/health",
+  "/api/ping",
+  "/api/diag/keys",
+  "/api/whoami",
 ]);
 
-// Satellite-aware Clerk middleware (turn on debug so we can see which domain config is used)
-const clerkConfig = { debug: true };
-
-export default clerkMiddleware(async (auth, req) => {
+export default clerkMiddleware((auth, req) => {
   if (isPublicRoute(req)) return;
-  await auth.protect();
-}, clerkConfig);
+  auth().protect();
+}, { debug: true });
 
 export const config = {
   matcher: [
-  '/settings(.*)',
-    '/((?!_next|_vercel|.*\\..*).*)',
-    '/(api|trpc)(.*)',
+    "/((?!.+\\.[\\w]+$|_next).*)",
+    "/",
+    "/(api|trpc)(.*)",
   ],
 };
