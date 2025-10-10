@@ -11,7 +11,7 @@ export default function Settings(){
 
   // Load existing settings (silently skip if signed out)
   useEffect(()=>{(async()=>{try{
-    const r=await fetch("/api/settings",{credentials:"include"});
+    const r=await fetch("/api/settings",{credentials:'include'});
     if(r.status===401||!r.ok) return;
     const j=await r.json();
     setDark(!!j.dark); setEmail(!!j.email); setPush(!!j.push);
@@ -23,7 +23,7 @@ export default function Settings(){
       const r=await fetch("/api/settings",{
         method:"POST",
         headers:{"content-type":"application/json"},
-        credentials:"include",
+        credentials:'include',
         body:JSON.stringify({dark,email,push})
       });
       if(r.status===401){ setStatus("unauth"); return; }
