@@ -13,7 +13,7 @@
     "db:apply:d1": "DB_TARGET=d1 tsx scripts/migrate.ts",
     "db:apply:pg": "DB_TARGET=pg tsx scripts/migrate.ts",
     "postbuild": "node scripts/write-version.js && node scripts/write-pages-metadata.js",
-    "build:cf": "npx -y open-next@latest build --adapter=@opennextjs/cloudflare"
+    "build:cf": "npx -y open-next@latest build --adapter=@cloudflare/next-on-pages"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.33.1",
@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250927.0",
-    "@opennextjs/cloudflare": "^1.10.0",
+    "@cloudflare/next-on-pages": "^1.10.0",
     "@types/node": "^20.14.9",
     "@types/react": "^18.3.3",
     "autoprefixer": "^10.4.21",
