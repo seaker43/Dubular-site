@@ -9,7 +9,7 @@ const isPublicRoute = createRouteMatcher([
   '/api/diag/keys',
   '/api/whoami',
   '/sign-in(.*)',
-  '/sign-up(.*)'
+  '/sign-up(.*)',
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
@@ -17,9 +17,11 @@ export default clerkMiddleware(async (auth, req) => {
   await auth.protect();
 });
 
+export const runtime = 'edge';
+
 export const config = {
   matcher: [
     '/((?!_next|_vercel|.*\\..*).*)',
-    '/(api|trpc)(.*)'
-  ]
+    '/(api|trpc)(.*)',
+  ],
 };
