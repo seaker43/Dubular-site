@@ -1,0 +1,5 @@
+/login    /sign-in    301
+/register    /sign-up    301
+/logout    /sign-in    302
+/signin    /sign-in    301
+/signup    /sign-up    301
