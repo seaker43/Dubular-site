@@ -1,1 +1,1 @@
-export const runtime='edge';export const dynamic='force-dynamic';export async function GET(req){const u=new URL(req.url);const upstream=`https://clerk.dubular.live${u.pathname}${u.search}`;const res=await fetch(upstream,{headers:req.headers});return new Response(res.body,{status:res.status,headers:res.headers});}
+export { runtime, dynamic, GET } from '../route';
