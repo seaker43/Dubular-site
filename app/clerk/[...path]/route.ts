@@ -1,37 +1,27 @@
+
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
-const FAPI = 'https://clerk.dubular.live';
+const CLERK_FAPI = 'https://clerk.dubular.live';
 
-function stripClerkPrefix(path: string) {
-  return path.replace(/^\/clerk(?=\/|$)/, '');
-}
-
-async function proxy(req: Request) {
+async function handler(req) {
   const url = new URL(req.url);
-  const path = stripClerkPrefix(url.pathname) + url.search;
-  const upstream = FAPI + path;
+  const path = url.pathname.replace(/^\/clerk(?=\/|$)/, '') + url.search;
+  const upstream = CLERK_FAPI + path;
 
-  const h = new Headers(req.headers);
-  // Ensure Clerk sees the correct host + forwarding info
-  h.set('Host', 'clerk.dubular.live');
-  h.set('X-Forwarded-Host', url.host);
-  h.set('X-Forwarded-Proto', url.protocol.replace(':',''));
-  h.set('X-Forwarded-For', (req.headers.get('x-forwarded-for') ?? ''));
+  const headers = new Headers(req.headers);
+  headers.set('Host', 'clerk.dubular.live');
+  headers.set('X-Forwarded-Host', url.host);
+  headers.set('X-Forwarded-Proto', url.protocol.replace(':',''));
+  headers.set('X-Forwarded-For', req.headers.get('x-forwarded-for') || '');
 
   const res = await fetch(upstream, {
     method: req.method,
-    headers: h,
-    body: (req.method === 'GET' || req.method === 'HEAD') ? undefined : (req as any).body,
+    headers,
+    body: (req.method === 'GET' || req.method === 'HEAD') ? undefined : req.body,
   });
 
   return new Response(res.body, { status: res.status, headers: res.headers });
 }
 
-export const GET     = proxy;
-export const POST    = proxy;
-export const PUT     = proxy;
-export const DELETE  = proxy;
-export const PATCH   = proxy;
-export const OPTIONS = proxy;
-export const HEAD    = proxy;
+export { handler as GET, handler as POST, handler as PUT, handler as DELETE, handler as PATCH, handler as OPTIONS, handler as HEAD };
