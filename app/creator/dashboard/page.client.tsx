@@ -1,5 +1,5 @@
+"use client";
 export const runtime = 'edge';
-'use client';
 import { useUser } from "@clerk/nextjs";
 
 export default function DashboardClient() {
