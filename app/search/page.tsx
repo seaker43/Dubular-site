@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 "use client";
 import LiveRow from "@/components/LiveRow";
 import SearchBar from "@/components/SearchBar";

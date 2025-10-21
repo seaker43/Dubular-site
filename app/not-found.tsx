@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 export default function NotFound() {
   return (
     <div className="min-h-dvh grid place-items-center bg-black text-white p-6">
