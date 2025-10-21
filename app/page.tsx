@@ -1,5 +1,5 @@
-export const runtime = 'edge';
 "use client";
+export const runtime = 'edge';
 
 import Ticker from "@/components/Ticker";
 import VerticalThumbs from "@/components/VerticalThumbs";
