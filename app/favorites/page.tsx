@@ -1,5 +1,5 @@
-export const runtime = 'edge';
 "use client";
+export const runtime = 'edge';
 
 import Image from "next/image";
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
