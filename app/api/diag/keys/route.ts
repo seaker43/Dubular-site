@@ -1,4 +1,4 @@
-export const runtime="edge"; export const dynamic="force-dynamic";
+export const runtime = 'edge';
 import { getRequestContext } from "@cloudflare/next-on-pages";
 export async function GET(){
   try{

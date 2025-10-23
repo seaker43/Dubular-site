@@ -1,4 +1,4 @@
-export const runtime = "edge";
+export const runtime = 'edge';
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import { db, one } from "@/lib/db";

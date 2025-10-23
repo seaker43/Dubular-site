@@ -1,1 +1,1 @@
-export const runtime='edge';function parseCookie(h){const o={};if(!h)return o;for(const p of h.split(/;s*/)){const i=p.indexOf('=');if(i>0)o[p.slice(0,i)]=p.slice(i+1)}return o;}export async function GET(req){const c=req.headers.get('cookie');return new Response(JSON.stringify({cookieHeader:c,parsed:parseCookie(c)},null,2),{headers:{'content-type':'application/json'}})}
+export const runtime = 'edge';

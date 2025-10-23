@@ -1,4 +1,4 @@
-export const runtime = "edge";
+export const runtime = 'edge';
 async function resolveId(qs: URLSearchParams, db: any) {
   const id = qs.get("creator_id");
   if (id && /^\d+$/.test(id)) return +id;

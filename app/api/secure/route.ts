@@ -1,1 +1,1 @@
-export const runtime="edge";import { auth } from "@clerk/nextjs/server";export async function GET(req:Request){const { userId }=auth();if(!userId)return new Response("Unauthorized",{status:401});return Response.json({ok:true,ts:Date.now()});}
+export const runtime = 'edge';

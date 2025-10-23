@@ -1,6 +1,5 @@
+export const runtime = 'edge';
 import { auth } from "@clerk/nextjs/server";
-
-export const runtime = "edge";
 
 export async function GET() {
   const { userId, sessionId } = auth();

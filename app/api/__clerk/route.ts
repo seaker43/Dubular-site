@@ -1,1 +1,1 @@
-export const runtime='edge';export async function GET(req){const u=new URL(req.url);const upstream=`https://clerk.dubular.live${u.pathname.replace('/api','')}${u.search}`;const res=await fetch(upstream);return new Response(res.body,{status:res.status,headers:res.headers});}
+export const runtime = 'edge';
