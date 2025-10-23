@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 export default function NotFound() {
   return (
     <div className="p-6 text-white text-center">
@@ -9,3 +10,4 @@ export default function NotFound() {
     </div>
   );
 }
+
