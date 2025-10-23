@@ -1,3 +1,5 @@
+export const dynamic = 'force-static';
+export const runtime = 'edge';
 export const runtime = 'edge';
 export function GET() {
   return new Response(
