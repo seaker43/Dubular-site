@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 export const dynamic='force-dynamic';
 import "../styles/globals.css";
 import type { ReactNode } from "react";
