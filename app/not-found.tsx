@@ -1,0 +1,1 @@
+export default function NotFound(){return(<div className='min-h-[var(--vvh)] flex items-center justify-center p-8 text-center'><div><h1 className='text-2xl font-bold'>404</h1><p className='opacity-80'>This page could not be found.</p></div></div>);} 
