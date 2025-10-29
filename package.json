@@ -13,7 +13,11 @@
     "db:apply:d1": "DB_TARGET=d1 tsx scripts/migrate.ts",
     "db:apply:pg": "DB_TARGET=pg tsx scripts/migrate.ts",
     "postbuild": "node scripts/write-version.js && node scripts/write-pages-metadata.js",
-    "build:cf": "npx -y open-next@latest build --adapter=@cloudflare/next-on-pages"
+    "build:cf": "npx -y open-next@latest build --adapter=@cloudflare/next-on-pages",
+    "build:worker": "opennextjs-cloudflare",
+    "dev:worker": "wrangler dev --port 8771",
+    "preview": "npm run build:worker && npm run dev:worker",
+    "deploy": "npm run build:worker && wrangler deploy"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.33.1",
@@ -28,7 +32,6 @@
     "react-dom": "18.3.1"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.16",
     "@cloudflare/workers-types": "^4.20250927.0",
     "@types/node": "^20.14.9",
     "@types/react": "^18.3.3",
