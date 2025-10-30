@@ -1,6 +1,5 @@
 export const runtime = 'edge';
 import { NextResponse } from "next/server";
-import { getRequestContext } from 'cloudflare:env';
 
 export async function GET(req: Request) {
   try {

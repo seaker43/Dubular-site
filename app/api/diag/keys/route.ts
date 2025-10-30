@@ -1,5 +1,5 @@
 export const runtime = 'edge';
-import { getRequestContext } from 'cloudflare:env';
+
 export async function GET(){
   try{
     const ctx = getRequestContext?.();

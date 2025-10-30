@@ -1,6 +1,5 @@
 export const runtime = 'edge';
 import { notFound } from "next/navigation";
-import { getRequestContext } from 'cloudflare:env';
 
 export default async function Page({ params }: { params: { handle: string } }) {
   const env: any = env;

@@ -2,7 +2,6 @@ export const runtime = 'edge';
 
 undefined
 import { auth } from '@clerk/nextjs/server';
-import { getRequestContext } from 'cloudflare:env';
 
 type Row = { uid: string; handle: string | null; display_name: string | null; created_at: number };
 

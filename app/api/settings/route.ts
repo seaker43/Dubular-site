@@ -2,7 +2,6 @@ export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
 import { auth } from "@clerk/nextjs/server";
-import { getRequestContext } from 'cloudflare:env';
 
 type Body = { dark?: boolean; email?: boolean; push?: boolean };
 
