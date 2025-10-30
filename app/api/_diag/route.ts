@@ -4,7 +4,7 @@ import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const env: any = getRequestContext().env || {};
+  const env: any = env || {};
   const hasDB = !!env.DB;
   let d1_ok = false, table_ok = false, sample:any = null, d1_err: string | null = null;
 

@@ -26,7 +26,7 @@ export async function GET(req: Request) {
   const { userId } = auth();
   if (!userId) return new Response('Unauthorized', { status: 401 });
 
-  const env: any = getRequestContext().env;
+  const env: any = env;
   await ensureSchema(env);
 
   const row = await env.DB
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
   try {
     const { dark = false, email = true, push = false } = (await req.json()) as Body;
 
-    const env: any = getRequestContext().env;
+    const env: any = env;
     await ensureSchema(env);
 
     const now = Date.now();

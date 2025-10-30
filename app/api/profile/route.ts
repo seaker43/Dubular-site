@@ -6,7 +6,7 @@ import { getRequestContext } from 'cloudflare:env';
 
 type Row = { uid: string; handle: string | null; display_name: string | null; created_at: number };
 
-function d1(){return (getRequestContext().env).DB;}
+function d1(){return (env).DB;}
 
 async function ensureTable(){
     await d1().prepare("CREATE TABLE IF NOT EXISTS profiles(uid TEXT PRIMARY KEY,handle TEXT,display_name TEXT,created_at INTEGER DEFAULT (strftime('%s','now')))").run();

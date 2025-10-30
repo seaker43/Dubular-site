@@ -1,13 +1,13 @@
 export const runtime = 'edge';
 import { NextResponse } from "next/server";
-import { getRequestContext } from "@cloudflare/next-on-pages";
+import { getRequestContext } from 'cloudflare:env';
 
 const ok = (b: any, init = 200) =>
   NextResponse.json(b, typeof init === "number" ? { status: init } : init);
 const bad = (m: string, s = 400) => ok({ error: m }, s);
 
 function db() {
-  const d1 = (getRequestContext().env as any).DB as D1Database;
+  const d1 = (env as any).DB as D1Database;
   if (!d1)
     throw new Error(
       "D1 binding not found (check wrangler.toml [[env.production.d1_databases]])",

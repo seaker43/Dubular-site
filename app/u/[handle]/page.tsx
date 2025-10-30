@@ -1,9 +1,9 @@
 export const runtime = 'edge';
 import { notFound } from "next/navigation";
-import { getRequestContext } from "@cloudflare/next-on-pages";
+import { getRequestContext } from 'cloudflare:env';
 
 export default async function Page({ params }: { params: { handle: string } }) {
-  const env: any = getRequestContext().env;
+  const env: any = env;
   const { handle } = params;
 
   const row = await env.DB
