@@ -1,5 +1,5 @@
 export const runtime = 'edge';
-import { getRequestContext } from '@cloudflare/next-on-pages';
+import { getRequestContext } from 'cloudflare:env';
 import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
