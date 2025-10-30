@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+export const runtime="nodejs";
 import { auth } from "@clerk/nextjs/server";
 
 export async function POST(req: Request) {

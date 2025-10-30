@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+export const runtime="nodejs";
 import { notFound } from "next/navigation";
 
 export default async function Page({ params }: { params: { handle: string } }) {

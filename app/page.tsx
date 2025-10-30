@@ -1,7 +1,7 @@
 "use client";
 
 
-export const runtime = 'edge';
+export const runtime="nodejs";
 import Ticker from "@/components/Ticker";
 import VerticalThumbs from "@/components/VerticalThumbs";
 import FeaturedHeroTabs from "@/components/FeaturedHeroTabs";

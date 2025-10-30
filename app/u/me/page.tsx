@@ -1,5 +1,5 @@
 "use client";
-export const runtime = 'edge';
+export const runtime="nodejs";
 import { useUser } from "@clerk/nextjs";
 
 export default function MePage() {

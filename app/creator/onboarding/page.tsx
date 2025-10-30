@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+export const runtime="nodejs";
 import OnboardingForm from "./OnboardingForm";
 
 export default function CreatorOnboardingPage() {

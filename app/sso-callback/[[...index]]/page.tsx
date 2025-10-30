@@ -1,5 +1,5 @@
 "use client"
-export const runtime = 'edge';
+export const runtime="nodejs";
 import { AuthenticateWithRedirectCallback } from "@clerk/nextjs";
 export default function Page(){
   return <AuthenticateWithRedirectCallback />;

@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+export const runtime="nodejs";
 import { NextResponse } from "next/server";
 import { db, one } from "@/lib/db";
 export async function GET(req: Request) {
