@@ -10,6 +10,5 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
-  "buildCommand": "npx --yes opennext@latest build",
   "pages_build_output_dir": ".open-next"
 }
