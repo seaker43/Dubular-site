@@ -13,7 +13,7 @@
     "db:apply:d1": "DB_TARGET=d1 tsx scripts/migrate.ts",
     "db:apply:pg": "DB_TARGET=pg tsx scripts/migrate.ts",
     "postbuild": "node scripts/write-version.js && node scripts/write-pages-metadata.js",
-    "build:cf": "npx @opennextjs/opennext@latest build --platform cloudflare-pages",
+    "build:cf": "npx open-next@latest build --target cloudflare-pages",
     "build:worker": "opennextjs-cloudflare",
     "dev:worker": "wrangler dev --port 8771",
     "preview": "npm run build:worker && npm run dev:worker",
