@@ -1,9 +1,10 @@
 // @ts-ignore
-import { env } from 'cloudflare:env'
+
 export const runtime="nodejs";
 import { NextResponse } from "next/server";
 import { db, one } from "@/lib/db";
 export async function GET(req: Request) {
+  const { env } = await import("cloudflare:env");
   const url = new URL(req.url);
   const creatorId = url.searchParams.get("creatorId");
   if (!creatorId)

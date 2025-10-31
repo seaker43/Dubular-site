@@ -1,9 +1,10 @@
 // @ts-ignore
-import { env } from 'cloudflare:env'
+
 export const runtime="nodejs";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
+  const { env } = await import("cloudflare:env");
   try {
     const url = new URL(req.url);
     const limitRaw = url.searchParams.get("limit");

@@ -1,9 +1,10 @@
 // @ts-ignore
-import { env } from 'cloudflare:env'
+
 export const runtime="nodejs";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
+  const { env } = await import("cloudflare:env");
   try {
     const { uid, handle, display_name } = await req.json();
     const _uid =
@@ -23,6 +24,7 @@ export async function POST(req: Request) {
 }
 
 export async function GET() {
+  const { env } = await import("cloudflare:env");
   try {
     const rows = await (globalThis as any).DB.prepare(
       "SELECT uid, handle, display_name, created_at FROM profiles",

@@ -1,10 +1,11 @@
 // @ts-ignore
-import { env } from 'cloudflare:env'
+
 export const runtime="nodejs";
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
 export async function POST(req: Request) {
+  const { env } = await import("cloudflare:env");
   const { userId } = auth();
   if (!userId)
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
@@ -20,6 +21,7 @@ export async function POST(req: Request) {
   return NextResponse.json({ ok: true });
 }
 export async function DELETE(req: Request) {
+  const { env } = await import("cloudflare:env");
   const { userId } = auth();
   if (!userId)
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });

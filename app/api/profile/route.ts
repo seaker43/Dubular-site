@@ -1,5 +1,5 @@
 // @ts-ignore
-import { env } from 'cloudflare:env'
+
 export const runtime="nodejs";
 
 undefined
@@ -14,6 +14,7 @@ async function ensureTable(){
 }
 
 export async function GET(){
+  const { env } = await import("cloudflare:env");
   const { userId } = auth();
   if(!userId) return new Response('Unauthorized',{status:401});
   try{
@@ -24,6 +25,7 @@ export async function GET(){
 }
 
 export async function POST(req:Request){
+  const { env } = await import("cloudflare:env");
   const { userId } = auth();
   if(!userId) return new Response('Unauthorized',{status:401});
   try{
