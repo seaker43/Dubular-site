@@ -1,21 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  poweredByHeader: false,
-  images: {
-    unoptimized: true,
-    remotePatterns: [{ protocol: "https", hostname: "**" }],
-  },
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
-  webpack: (config) => {
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      fs: false,
-      net: false,
-      tls: false,
-    };
-    return config;
+const config = {
+  webpack: (cfg) => {
+    cfg.externals = cfg.externals || [];
+    // Prevent Webpack from trying to bundle the virtual module
+    if (!cfg.externals.includes('cloudflare:env')) {
+      cfg.externals.push('cloudflare:env');
+    }
+    return cfg;
   },
 };
-export default nextConfig;
+
+export default config;
