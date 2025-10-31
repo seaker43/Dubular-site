@@ -1,3 +1,5 @@
+// @ts-ignore
+import { env } from 'cloudflare:env'
 export const runtime="nodejs";
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";

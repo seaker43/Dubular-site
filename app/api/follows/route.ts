@@ -1,3 +1,5 @@
+// @ts-ignore
+import { env } from 'cloudflare:env'
 export const runtime="nodejs";
 async function resolveId(qs: URLSearchParams, db: any) {
   const id = qs.get("creator_id");
