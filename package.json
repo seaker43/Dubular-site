@@ -17,7 +17,8 @@
     "build:worker": "opennextjs-cloudflare",
     "dev:worker": "wrangler dev --port 8771",
     "preview": "npm run build:worker && npm run dev:worker",
-    "deploy": "npm run build:worker && wrangler deploy"
+    "deploy": "npm run build:worker && wrangler deploy",
+    "postbuild:cf": "mkdir -p .open-next && cp -f _routes.json .open-next/_routes.json"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.33.1",
