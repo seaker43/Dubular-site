@@ -7,8 +7,8 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   const { env } = await import("cloudflare:env");
-  const { env } = await import("cloudflare:env");
-  const env: any = env || {};
+
+const env: any = env || {};
   const hasDB = !!env.DB;
   let d1_ok = false, table_ok = false, sample:any = null, d1_err: string | null = null;
 

@@ -5,8 +5,8 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
   const { env } = await import("cloudflare:env");
-  const { env } = await import("cloudflare:env");
-  try {
+
+try {
     const url = new URL(req.url);
     const limitRaw = url.searchParams.get("limit");
     const n = Number(limitRaw ?? 5);

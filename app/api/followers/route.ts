@@ -5,8 +5,8 @@ import { NextResponse } from "next/server";
 import { db, one } from "@/lib/db";
 export async function GET(req: Request) {
   const { env } = await import("cloudflare:env");
-  const { env } = await import("cloudflare:env");
-  const url = new URL(req.url);
+
+const url = new URL(req.url);
   const creatorId = url.searchParams.get("creatorId");
   if (!creatorId)
     return NextResponse.json({ error: "creatorId required" }, { status: 400 });

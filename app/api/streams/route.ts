@@ -18,8 +18,8 @@ function db() {
 
 export async function GET(req: Request) {
   const { env } = await import("cloudflare:env");
-  const { env } = await import("cloudflare:env");
-  try {
+
+try {
     const url = new URL(req.url);
     const onlyLive = url.searchParams.get("live") === "1";
     const creator_id = url.searchParams.get("creator_id");
