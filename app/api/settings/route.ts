@@ -25,6 +25,7 @@ async function ensureSchema(env: any) {
 
 export async function GET(req: Request) {
   const { env } = await import("cloudflare:env");
+  const { env } = await import("cloudflare:env");
   const { userId } = auth();
   if (!userId) return new Response('Unauthorized', { status: 401 });
 
@@ -44,6 +45,7 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  const { env } = await import("cloudflare:env");
   const { env } = await import("cloudflare:env");
   const { userId } = auth();
   if (!userId) return new Response('Unauthorized', { status: 401 });
