@@ -28,8 +28,6 @@ export async function GET(req: Request) {
 
 const { userId } = auth();
   if (!userId) return new Response('Unauthorized', { status: 401 });
-
-  const env: any = env;
   await ensureSchema(env);
 
   const row = await env.DB
