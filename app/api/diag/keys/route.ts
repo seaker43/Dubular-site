@@ -1,6 +1,7 @@
 export const runtime="nodejs";
 
 export async function GET(){
+  const { env } = await import("cloudflare:env");
   try{
     const ctx = getRequestContext?.();
     const env:any = ctx?.env || {};
