@@ -13,12 +13,11 @@
     "db:apply:d1": "DB_TARGET=d1 tsx scripts/migrate.ts",
     "db:apply:pg": "DB_TARGET=pg tsx scripts/migrate.ts",
     "postbuild": "node scripts/write-version.js && node scripts/write-pages-metadata.js",
-    "build:cf": "npx open-next@latest build --target cloudflare-pages && node scripts/fix-routes.js",
+    "build:cf": "next build && npx open-next@latest build --target cloudflare-pages && mv .open-next open-next",
     "build:worker": "opennextjs-cloudflare",
     "dev:worker": "wrangler dev --port 8771",
     "preview": "npm run build:worker && npm run dev:worker",
-    "deploy": "npm run build:worker && wrangler deploy",
-    "postbuild:cf": "mkdir -p .open-next && cp -f _routes.json .open-next/_routes.json"
+    "deploy": "npm run build:worker && wrangler deploy"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.33.1",
