@@ -18,7 +18,6 @@ function db() {
 
 export async function GET(req: Request) {
   const { env } = await import("cloudflare:env");
-
 try {
     const url = new URL(req.url);
     const onlyLive = url.searchParams.get("live") === "1";

@@ -6,7 +6,6 @@ import { auth } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
 export async function POST(req: Request) {
   const { env } = await import("cloudflare:env");
-
 const { userId } = auth();
   if (!userId)
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
@@ -23,7 +22,6 @@ const { userId } = auth();
 }
 export async function DELETE(req: Request) {
   const { env } = await import("cloudflare:env");
-
 const { userId } = auth();
   if (!userId)
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });

@@ -6,7 +6,6 @@ import { auth } from "@clerk/nextjs/server";
 import { db, one } from "@/lib/db";
 export async function GET() {
   const { env } = await import("cloudflare:env");
-
 const { userId } = auth();
   if (!userId)
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });

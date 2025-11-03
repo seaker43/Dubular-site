@@ -5,7 +5,6 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   const { env } = await import("cloudflare:env");
-
 const envs = {
     FRONTEND_API: process.env.NEXT_PUBLIC_CLERK_FRONTEND_API,
     SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
