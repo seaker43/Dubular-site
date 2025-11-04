@@ -1,0 +1,64 @@
+{
+  "name": "dubular-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:gen": "drizzle-kit generate",
+    "db:apply": "tsx scripts/migrate.ts",
+    "db:up": "npm run db:gen && npm run db:apply",
+    "db:apply:d1": "DB_TARGET=d1 tsx scripts/migrate.ts",
+    "db:apply:pg": "DB_TARGET=pg tsx scripts/migrate.ts",
+    "postbuild": "node scripts/write-version.js && node scripts/write-pages-metadata.js",
+    "build:cf": "next build && npx open-next@latest build --target cloudflare-pages && mkdir -p open-next && cp -r .open-next/* open-next/ && cp -f _routes.json open-next/_routes.json",
+    "build:worker": "opennextjs-cloudflare",
+    "dev:worker": "wrangler dev --port 8771",
+    "preview": "npm run build:worker && npm run dev:worker",
+    "deploy": "npm run build:worker && wrangler deploy"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "^6.34.2",
+    "@neondatabase/serverless": "^1.0.1",
+    "@sentry/nextjs": "^10.17.0",
+    "drizzle-orm": "^0.44.5",
+    "lucide-react": "0.544.0",
+    "next": "15.5.2",
+    "pg": "^8.16.3",
+    "postgres": "^3.4.7",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250927.0",
+    "@types/node": "^20.14.9",
+    "@types/react": "^18.3.3",
+    "autoprefixer": "^10.4.21",
+    "drizzle-kit": "^0.31.5",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "15.5.2",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.10",
+    "tsx": "^4.20.6",
+    "typescript": "^5.6.3",
+    "wrangler": "^4.40.2"
+  },
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seaker43/Dubular-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seaker43/Dubular-site/issues"
+  },
+  "homepage": "https://github.com/seaker43/Dubular-site#readme"
+}
