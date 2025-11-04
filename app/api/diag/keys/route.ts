@@ -4,11 +4,8 @@ export const runtime="nodejs";
 
 export async function GET(){
   const { env } = await import("cloudflare:env");
-<<<<<<< Updated upstream
-  try{
-=======
+
 try{
->>>>>>> Stashed changes
     const ctx = getRequestContext?.();
     const env:any = ctx?.env || {};
     const result = {
