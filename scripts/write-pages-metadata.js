@@ -37,5 +37,4 @@ const path = require("path");
     path.join(out, "_routes.json"),
     JSON.stringify(routes, null, 2)
   );
-  console.log("✅ Wrote _routes.json (catch-all to Worker)");
-})();
+  console.log("✅ fs.writeFileSync(path.join(process.cwd(),"_routes.json"),JSON.stringify({version:1,include:[],exclude:["/*"]},null,2)); fs.writeFileSync(path.join(process.cwd(),"open-next","_routes.json"),JSON.stringify({version:1,include:[],exclude:["/*"]},null,2));
