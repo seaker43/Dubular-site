@@ -1,9 +1,15 @@
+// @ts-ignore
+
 export const runtime="nodejs";
 import { auth } from "@clerk/nextjs/server";
 
 export async function POST(req: Request) {
   const { env } = await import("cloudflare:env");
+<<<<<<< Updated upstream
   const { userId } = auth();
+=======
+const { userId } = auth();
+>>>>>>> Stashed changes
   if (!userId) return new Response("Unauthorized", { status: 401 });
 
   // In a real app you'd persist this to your DB:

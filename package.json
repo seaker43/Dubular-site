@@ -20,7 +20,7 @@
     "deploy": "npm run build:worker && wrangler deploy"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.33.1",
+    "@clerk/nextjs": "^6.34.2",
     "@neondatabase/serverless": "^1.0.1",
     "@sentry/nextjs": "^10.17.0",
     "drizzle-orm": "^0.44.5",
