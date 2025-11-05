@@ -12,7 +12,7 @@
     "db:up": "npm run db:gen && npm run db:apply",
     "db:apply:d1": "DB_TARGET=d1 tsx scripts/migrate.ts",
     "db:apply:pg": "DB_TARGET=pg tsx scripts/migrate.ts",
-    "postbuild": "node scripts/write-version.js && node scripts/write-pages-metadata.js",
+    "postbuild": "node scripts/write-version.js && node scripts/write-pages-metadata.js && cp -f _routes.json open-next/_routes.json",
     "build:cf": "rm -f middleware.ts && next build && npx open-next@latest build --target cloudflare-pages && mkdir -p open-next && cp -r .open-next/* open-next/ && cp -f _routes.json open-next/_routes.json",
     "build:worker": "opennextjs-cloudflare",
     "dev:worker": "wrangler dev --port 8771",
