@@ -1,9 +1,5 @@
 {
   "version": 1,
-  "include": [
-    "/*"
-  ],
-  "exclude": [
-    "/_worker.js"
-  ]
+  "include": ["/*"],
+  "exclude": ["/_worker.js"]
 }
