@@ -1,1 +1,14 @@
-const fs=require("fs");const path=require("path");const routes={version:1,include:["/*"],exclude:[]};fs.writeFileSync(path.join(process.cwd(),"_routes.json"),JSON.stringify(routes,null,2));fs.mkdirSync(path.join(process.cwd(),"open-next"),{recursive:true});fs.writeFileSync(path.join(process.cwd(),"open-next","_routes.json"),JSON.stringify(routes,null,2));console.log("wrote pages.json and _routes.json");
+const fs=require('fs');
+const routes={
+  "version": 1,
+  "include": [
+    "/*"
+  ],
+  "exclude": [
+    "/_worker.js"
+  ]
+};
+fs.writeFileSync('_routes.json',JSON.stringify(routes,null,2));
+const pages={generatedAt:new Date().toISOString()};
+fs.writeFileSync('pages.json',JSON.stringify(pages,null,2));
+console.log('wrote pages.json and _routes.json');
